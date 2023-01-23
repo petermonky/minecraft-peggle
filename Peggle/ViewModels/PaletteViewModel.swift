@@ -12,12 +12,19 @@ extension PaletteView {
     class ViewModel: ObservableObject {
         @Published var mode: PaletteButtonType
         @Published var pegFactory: PegFactory?
-        @Published private var pegButtons: [PegPaletteButton] = [BluePegPaletteButton(), OrangePegPaletteButton()]
-        @Published private var deleteButton: PaletteButton = DeletePegPaletteButton()
+        @Published private var pegButtons: [PegPaletteButton]
+        @Published private var deleteButton: PaletteButton
 
-        init(mode: PaletteButtonType = .bluePeg, pegFactory: PegFactory? = BluePegFactory()) {
+        init(
+            mode: PaletteButtonType = .bluePeg,
+            pegFactory: PegFactory? = BluePegFactory(),
+            pegButtons: [PegPaletteButton] = [BluePegPaletteButton(), OrangePegPaletteButton()],
+            deleteButton: PaletteButton = DeletePegPaletteButton()
+        ) {
             self.mode = mode
             self.pegFactory = pegFactory
+            self.pegButtons = pegButtons
+            self.deleteButton = deleteButton
         }
 
         var pegButtonViewModels: [PaletteButtonView.ViewModel] {

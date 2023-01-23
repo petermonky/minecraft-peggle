@@ -7,15 +7,15 @@
 //
 
 import Foundation
-import SwiftUI
 
 extension BoardView {
     class ViewModel: ObservableObject {
         @Published private var pegs: Set<Peg>
-        @Published var boardSize = CGSize.zero
+        @Published var boardSize: CGSize
 
-        init(pegs: Set<Peg> = []) {
+        init(pegs: Set<Peg> = [], boardSize: CGSize = CGSize.zero) {
             self.pegs = pegs
+            self.boardSize = boardSize
         }
 
         var pegViewModels: [PegView.ViewModel] {

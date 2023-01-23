@@ -10,6 +10,7 @@ import SwiftUI
 struct PegView: View {
     @EnvironmentObject var levelDesigner: LevelDesignerView.ViewModel
     @StateObject var viewModel: ViewModel
+    @State var zIndex: Double = 0
 
     init(viewModel: ViewModel = .init()) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -49,15 +50,18 @@ struct PegView: View {
                     DragGesture()
                         .onChanged { value in
                             viewModel.dragOffset = value.translation
+                            zIndex = Double.infinity
                         }
                         .onEnded { value in
                             let pegSuccessfullyTranslated = board.translatePeg(peg, translation: value.translation)
                             if !pegSuccessfullyTranslated {
                                 viewModel.dragOffset = CGSize.zero
                             }
+                            zIndex = 0
                         }
                 )
         }
+        .zIndex(zIndex)
     }
 }
 

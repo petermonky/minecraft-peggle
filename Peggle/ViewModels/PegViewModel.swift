@@ -7,15 +7,15 @@
 //
 
 import Foundation
-import SwiftUI
 
 extension PegView {
     class ViewModel: ObservableObject {
         @Published var peg: Peg
-        @Published var dragOffset = CGSize.zero
+        @Published var dragOffset: CGSize
 
-        init(peg: Peg = BluePeg()) {
+        init(peg: Peg = BluePeg(), dragOffset: CGSize = CGSize.zero) {
             self.peg = peg
+            self.dragOffset = dragOffset
         }
     }
 }
