@@ -41,7 +41,6 @@ struct BoardView: View {
             .onAppear {
                 viewModel.boardSize = geometry.size
             }
-            // TODO: onChange
         }
         .environmentObject(viewModel)
     }

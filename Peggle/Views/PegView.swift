@@ -18,8 +18,11 @@ struct PegView: View {
     func renderBaseImage(isAfterImage: Bool) -> some View {
         Image(viewModel.peg.imageName)
             .resizable()
-            .overlay(Color.white.opacity(isAfterImage ? 0.5 : 0.0))
-            .frame(width: 80, height: 80)
+            .overlay(Color.white.opacity(isAfterImage
+                                         ? Constants.Peg.afterImageOpacity
+                                         : 0.0))
+            .frame(width: 2 * Constants.Peg.radius,
+                   height: 2 * Constants.Peg.radius)
             .clipShape(Circle())
             .position(viewModel.peg.position)
     }
@@ -27,6 +30,7 @@ struct PegView: View {
     var body: some View {
         let palette = levelDesigner.paletteViewModel
         let board = levelDesigner.boardViewModel
+        let peg = viewModel.peg
         
         ZStack {
             renderBaseImage(isAfterImage: true)
@@ -35,11 +39,11 @@ struct PegView: View {
                 .offset(viewModel.dragOffset)
                 .onTapGesture {
                     if palette.mode == .deletePeg {
-                        _ = board.removePeg(viewModel.peg)
+                        _ = board.removePeg(peg)
                     }
                 }
                 .onLongPressGesture {
-                    _ = board.removePeg(viewModel.peg)
+                    _ = board.removePeg(peg)
                 }
                 .gesture(
                     DragGesture()
@@ -47,7 +51,7 @@ struct PegView: View {
                             viewModel.dragOffset = value.translation
                         }
                         .onEnded { value in
-                            let pegSuccessfullyTranslated = board.translatePeg(viewModel.peg, translation: value.translation)
+                            let pegSuccessfullyTranslated = board.translatePeg(peg, translation: value.translation)
                             if !pegSuccessfullyTranslated {
                                 viewModel.dragOffset = CGSizeZero
                             }

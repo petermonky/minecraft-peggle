@@ -9,20 +9,24 @@ import Foundation
 import SwiftUI
 
 extension PegView {
-    class ViewModel: ObservableObject, Hashable {
+    class ViewModel: ObservableObject {
         @Published var peg: Peg
         @Published var dragOffset = CGSizeZero
         
         init(peg: Peg = BluePeg()) {
             self.peg = peg
         }
-        
-        static func == (lhs: ViewModel, rhs: ViewModel) -> Bool {
-            lhs.peg == rhs.peg
-        }
-        
-        public func hash(into hasher: inout Hasher) {
-            hasher.combine(peg)
-        }
+    }
+}
+
+// MARK: Hashable
+
+extension PegView.ViewModel: Hashable {
+    static func == (lhs: PegView.ViewModel, rhs: PegView.ViewModel) -> Bool {
+        lhs.peg == rhs.peg
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(peg)
     }
 }

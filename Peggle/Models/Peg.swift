@@ -19,7 +19,7 @@ class Peg: Hashable, Identifiable {
     }
     
     func overlapsWith(peg: Peg) -> Bool {
-        return self.position.distance(to: peg.position) <= 80
+        return self.position.distance(to: peg.position) <= 2 * Constants.Peg.radius
     }
     
     func translateBy(_ value: CGSize) {

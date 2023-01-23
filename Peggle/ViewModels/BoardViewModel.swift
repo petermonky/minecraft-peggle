@@ -10,7 +10,7 @@ import SwiftUI
 
 extension BoardView {
     class ViewModel: ObservableObject {
-        @Published var pegs: Set<Peg>
+        @Published private var pegs: Set<Peg>
         @Published var boardSize = CGSizeZero
         
         init(pegs: Set<Peg> = []) {
@@ -22,10 +22,10 @@ extension BoardView {
         }
         
         func addPeg(_ peg: Peg) -> Bool {
-            guard !checkOverlap(peg: peg) else {
+            guard !hasOverlappingPeg(peg) else {
                 return false
             }
-            guard checkOverflow(peg: peg) else {
+            guard isOverflowingPeg(peg) else {
                 return false
             }
             return pegs.insert(peg).inserted
@@ -49,23 +49,23 @@ extension BoardView {
             return true
         }
         
-        func checkOverlap(peg newPeg: Peg) -> Bool { // TODO: rename method to be more clear
-            for peg in pegs {
-                if newPeg.overlapsWith(peg: peg) {
+        func hasOverlappingPeg(_ peg: Peg) -> Bool {
+            for existingPeg in pegs {
+                if existingPeg.overlapsWith(peg: peg) {
                     return true
                 }
             }
             return false
         }
         
-        func checkOverflow(peg: Peg) -> Bool {
+        func isOverflowingPeg(_ peg: Peg) -> Bool {
             let pegX = peg.position.x
             let pegY = peg.position.y
             let boardWidth = boardSize.width
             let boardHeight = boardSize.height
             
-            let isWithinHorizontally = pegX > 40 && pegX < boardWidth - 40
-            let isWithinVertically = pegY > 40 && pegY < boardHeight - 40
+            let isWithinHorizontally = pegX > Constants.Peg.radius && pegX < boardWidth - Constants.Peg.radius
+            let isWithinVertically = pegY > Constants.Peg.radius && pegY < boardHeight - Constants.Peg.radius
             
             return isWithinHorizontally && isWithinVertically
         }
