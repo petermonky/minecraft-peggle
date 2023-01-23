@@ -7,13 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D01E45A7297E6777003E28A8 /* PegView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01E45A6297E6777003E28A8 /* PegView.swift */; };
+		D01E45A9297E6789003E28A8 /* PegViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01E45A8297E6789003E28A8 /* PegViewModel.swift */; };
 		D03FFCAF29783B9000EFAD04 /* PeggleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03FFCAE29783B9000EFAD04 /* PeggleApp.swift */; };
-		D03FFCB129783B9000EFAD04 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03FFCB029783B9000EFAD04 /* ContentView.swift */; };
 		D03FFCB329783B9300EFAD04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03FFCB229783B9300EFAD04 /* Assets.xcassets */; };
 		D03FFCB629783B9300EFAD04 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03FFCB529783B9300EFAD04 /* Preview Assets.xcassets */; };
 		D03FFCC029783B9300EFAD04 /* PeggleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03FFCBF29783B9300EFAD04 /* PeggleTests.swift */; };
 		D03FFCCA29783B9300EFAD04 /* PeggleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03FFCC929783B9300EFAD04 /* PeggleUITests.swift */; };
 		D03FFCCC29783B9300EFAD04 /* PeggleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03FFCCB29783B9300EFAD04 /* PeggleUITestsLaunchTests.swift */; };
+		D08AEB792979672C00EA1590 /* LevelDesignerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08AEB782979672C00EA1590 /* LevelDesignerView.swift */; };
+		D08AEB7B2979682E00EA1590 /* LevelDesignerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08AEB7A2979682E00EA1590 /* LevelDesignerViewModel.swift */; };
+		D08AEB7D29796A6D00EA1590 /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08AEB7C29796A6D00EA1590 /* PaletteView.swift */; };
+		D08AEB7F29796AD300EA1590 /* PaletteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08AEB7E29796AD300EA1590 /* PaletteViewModel.swift */; };
+		D0BF3F04297BC6C800354272 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF3F03297BC6C800354272 /* BoardView.swift */; };
+		D0BF3F08297D6F3400354272 /* Peg.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF3F07297D6F3400354272 /* Peg.swift */; };
+		D0BF3F0A297D6FB200354272 /* CGPoint+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF3F09297D6FB200354272 /* CGPoint+Hashable.swift */; };
+		D0BF3F0C297D70FC00354272 /* CGPoint+Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF3F0B297D70FC00354272 /* CGPoint+Distance.swift */; };
+		D0BF3F10297D713100354272 /* BoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF3F0F297D713100354272 /* BoardViewModel.swift */; };
+		D0BF3F14297D750200354272 /* PaletteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF3F13297D750200354272 /* PaletteButton.swift */; };
+		D0BF3F16297D902E00354272 /* PegFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF3F15297D902E00354272 /* PegFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +46,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D01E45A6297E6777003E28A8 /* PegView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegView.swift; sourceTree = "<group>"; };
+		D01E45A8297E6789003E28A8 /* PegViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegViewModel.swift; sourceTree = "<group>"; };
 		D03FFCAB29783B9000EFAD04 /* Peggle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peggle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D03FFCAE29783B9000EFAD04 /* PeggleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeggleApp.swift; sourceTree = "<group>"; };
-		D03FFCB029783B9000EFAD04 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D03FFCB229783B9300EFAD04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D03FFCB529783B9300EFAD04 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D03FFCBB29783B9300EFAD04 /* PeggleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeggleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +57,17 @@
 		D03FFCC529783B9300EFAD04 /* PeggleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeggleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D03FFCC929783B9300EFAD04 /* PeggleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeggleUITests.swift; sourceTree = "<group>"; };
 		D03FFCCB29783B9300EFAD04 /* PeggleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeggleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D08AEB782979672C00EA1590 /* LevelDesignerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerView.swift; sourceTree = "<group>"; };
+		D08AEB7A2979682E00EA1590 /* LevelDesignerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerViewModel.swift; sourceTree = "<group>"; };
+		D08AEB7C29796A6D00EA1590 /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
+		D08AEB7E29796AD300EA1590 /* PaletteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteViewModel.swift; sourceTree = "<group>"; };
+		D0BF3F03297BC6C800354272 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		D0BF3F07297D6F3400354272 /* Peg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Peg.swift; sourceTree = "<group>"; };
+		D0BF3F09297D6FB200354272 /* CGPoint+Hashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Hashable.swift"; sourceTree = "<group>"; };
+		D0BF3F0B297D70FC00354272 /* CGPoint+Distance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Distance.swift"; sourceTree = "<group>"; };
+		D0BF3F0F297D713100354272 /* BoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewModel.swift; sourceTree = "<group>"; };
+		D0BF3F13297D750200354272 /* PaletteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteButton.swift; sourceTree = "<group>"; };
+		D0BF3F15297D902E00354272 /* PegFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,9 +119,21 @@
 			isa = PBXGroup;
 			children = (
 				D03FFCAE29783B9000EFAD04 /* PeggleApp.swift */,
-				D03FFCB029783B9000EFAD04 /* ContentView.swift */,
 				D03FFCB229783B9300EFAD04 /* Assets.xcassets */,
 				D03FFCB429783B9300EFAD04 /* Preview Content */,
+				D08AEB782979672C00EA1590 /* LevelDesignerView.swift */,
+				D08AEB7A2979682E00EA1590 /* LevelDesignerViewModel.swift */,
+				D08AEB7C29796A6D00EA1590 /* PaletteView.swift */,
+				D08AEB7E29796AD300EA1590 /* PaletteViewModel.swift */,
+				D0BF3F13297D750200354272 /* PaletteButton.swift */,
+				D0BF3F03297BC6C800354272 /* BoardView.swift */,
+				D0BF3F0F297D713100354272 /* BoardViewModel.swift */,
+				D01E45A6297E6777003E28A8 /* PegView.swift */,
+				D01E45A8297E6789003E28A8 /* PegViewModel.swift */,
+				D0BF3F07297D6F3400354272 /* Peg.swift */,
+				D0BF3F09297D6FB200354272 /* CGPoint+Hashable.swift */,
+				D0BF3F0B297D70FC00354272 /* CGPoint+Distance.swift */,
+				D0BF3F15297D902E00354272 /* PegFactory.swift */,
 			);
 			path = Peggle;
 			sourceTree = "<group>";
@@ -257,8 +293,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D03FFCB129783B9000EFAD04 /* ContentView.swift in Sources */,
+				D08AEB7F29796AD300EA1590 /* PaletteViewModel.swift in Sources */,
+				D08AEB7B2979682E00EA1590 /* LevelDesignerViewModel.swift in Sources */,
+				D08AEB792979672C00EA1590 /* LevelDesignerView.swift in Sources */,
+				D0BF3F08297D6F3400354272 /* Peg.swift in Sources */,
+				D0BF3F0A297D6FB200354272 /* CGPoint+Hashable.swift in Sources */,
+				D01E45A9297E6789003E28A8 /* PegViewModel.swift in Sources */,
+				D0BF3F0C297D70FC00354272 /* CGPoint+Distance.swift in Sources */,
+				D08AEB7D29796A6D00EA1590 /* PaletteView.swift in Sources */,
+				D0BF3F16297D902E00354272 /* PegFactory.swift in Sources */,
 				D03FFCAF29783B9000EFAD04 /* PeggleApp.swift in Sources */,
+				D01E45A7297E6777003E28A8 /* PegView.swift in Sources */,
+				D0BF3F04297BC6C800354272 /* BoardView.swift in Sources */,
+				D0BF3F14297D750200354272 /* PaletteButton.swift in Sources */,
+				D0BF3F10297D713100354272 /* BoardViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,8 +471,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -452,8 +499,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
