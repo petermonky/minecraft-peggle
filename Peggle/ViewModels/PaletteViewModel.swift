@@ -1,3 +1,4 @@
+//  swiftlint:disable:this file_name
 //
 //  PaletteViewModel.swift
 //  Peggle
@@ -13,25 +14,25 @@ extension PaletteView {
         @Published var pegFactory: PegFactory?
         @Published private var pegButtons: [PegPaletteButton] = [BluePegPaletteButton(), OrangePegPaletteButton()]
         @Published private var deleteButton: PaletteButton = DeletePegPaletteButton()
-        
+
         init(mode: PaletteButtonType = .bluePeg, pegFactory: PegFactory? = BluePegFactory()) {
             self.mode = mode
             self.pegFactory = pegFactory
         }
-        
+
         var pegButtonViewModels: [PaletteButtonView.ViewModel] {
-            pegButtons.map{ PaletteButtonView.ViewModel(paletteButton: $0) }
+            pegButtons.map { PaletteButtonView.ViewModel(paletteButton: $0) }
         }
-        
+
         var deleteButtonViewModel: PaletteButtonView.ViewModel {
             PaletteButtonView.ViewModel(paletteButton: deleteButton)
         }
-        
+
         func onPegButtonSelect(pegButton: PegPaletteButton) {
             mode = pegButton.type
             pegFactory = pegButton.factory
         }
-        
+
         func onDeleteButtonSelect() {
             mode = .deletePeg
             pegFactory = nil

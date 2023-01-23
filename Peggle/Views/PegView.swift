@@ -10,11 +10,11 @@ import SwiftUI
 struct PegView: View {
     @EnvironmentObject var levelDesigner: LevelDesignerView.ViewModel
     @StateObject var viewModel: ViewModel
-    
+
     init(viewModel: ViewModel = .init()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
-    
+
     func renderBaseImage(isAfterImage: Bool) -> some View {
         Image(viewModel.peg.imageName)
             .resizable()
@@ -26,15 +26,15 @@ struct PegView: View {
             .clipShape(Circle())
             .position(viewModel.peg.position)
     }
-    
+
     var body: some View {
         let palette = levelDesigner.paletteViewModel
         let board = levelDesigner.boardViewModel
         let peg = viewModel.peg
-        
+
         ZStack {
             renderBaseImage(isAfterImage: true)
-            
+
             renderBaseImage(isAfterImage: false)
                 .offset(viewModel.dragOffset)
                 .onTapGesture {
@@ -53,7 +53,7 @@ struct PegView: View {
                         .onEnded { value in
                             let pegSuccessfullyTranslated = board.translatePeg(peg, translation: value.translation)
                             if !pegSuccessfullyTranslated {
-                                viewModel.dragOffset = CGSizeZero
+                                viewModel.dragOffset = CGSize.zero
                             }
                         }
                 )

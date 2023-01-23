@@ -14,15 +14,15 @@ struct PaletteView: View {
     init(viewModel: ViewModel = .init()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
-    
+
     var body: some View {
         HStack {
             ForEach(viewModel.pegButtonViewModels) { pegButtonViewModel in
                 PaletteButtonView(viewModel: pegButtonViewModel)
             }
-            
+
             Spacer()
-            
+
             PaletteButtonView(viewModel: viewModel.deleteButtonViewModel)
         }
         .padding()
@@ -37,4 +37,3 @@ struct PaletteView_Previews: PreviewProvider {
             .environmentObject(LevelDesignerView.ViewModel())
     }
 }
-

@@ -1,3 +1,4 @@
+//  swiftlint:disable:this file_name
 //
 //  PaletteButtonViewModel.swift
 //  Peggle
@@ -10,7 +11,7 @@ import Foundation
 extension PaletteButtonView {
     class ViewModel: ObservableObject {
         @Published var paletteButton: PaletteButton
-        
+
         init(paletteButton: PaletteButton = BluePegPaletteButton()) {
             self.paletteButton = paletteButton
         }

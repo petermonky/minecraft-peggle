@@ -11,14 +11,12 @@
 		D0078960297E8A8500EB5AAE /* PaletteButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D007895F297E8A8500EB5AAE /* PaletteButtonViewModel.swift */; };
 		D0078967297E961100EB5AAE /* PegFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0078966297E961100EB5AAE /* PegFactory.swift */; };
 		D007896F297E9C6300EB5AAE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D007896E297E9C6300EB5AAE /* Constants.swift */; };
+		D0078971297EA11400EB5AAE /* ActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0078970297EA11400EB5AAE /* ActionView.swift */; };
 		D01E45A7297E6777003E28A8 /* PegView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01E45A6297E6777003E28A8 /* PegView.swift */; };
 		D01E45A9297E6789003E28A8 /* PegViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01E45A8297E6789003E28A8 /* PegViewModel.swift */; };
 		D03FFCAF29783B9000EFAD04 /* PeggleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03FFCAE29783B9000EFAD04 /* PeggleApp.swift */; };
 		D03FFCB329783B9300EFAD04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03FFCB229783B9300EFAD04 /* Assets.xcassets */; };
 		D03FFCB629783B9300EFAD04 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03FFCB529783B9300EFAD04 /* Preview Assets.xcassets */; };
-		D03FFCC029783B9300EFAD04 /* PeggleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03FFCBF29783B9300EFAD04 /* PeggleTests.swift */; };
-		D03FFCCA29783B9300EFAD04 /* PeggleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03FFCC929783B9300EFAD04 /* PeggleUITests.swift */; };
-		D03FFCCC29783B9300EFAD04 /* PeggleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03FFCCB29783B9300EFAD04 /* PeggleUITestsLaunchTests.swift */; };
 		D08AEB792979672C00EA1590 /* LevelDesignerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08AEB782979672C00EA1590 /* LevelDesignerView.swift */; };
 		D08AEB7B2979682E00EA1590 /* LevelDesignerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08AEB7A2979682E00EA1590 /* LevelDesignerViewModel.swift */; };
 		D08AEB7D29796A6D00EA1590 /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08AEB7C29796A6D00EA1590 /* PaletteView.swift */; };
@@ -53,6 +51,7 @@
 		D007895F297E8A8500EB5AAE /* PaletteButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteButtonViewModel.swift; sourceTree = "<group>"; };
 		D0078966297E961100EB5AAE /* PegFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegFactory.swift; sourceTree = "<group>"; };
 		D007896E297E9C6300EB5AAE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D0078970297EA11400EB5AAE /* ActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionView.swift; sourceTree = "<group>"; };
 		D01E45A6297E6777003E28A8 /* PegView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegView.swift; sourceTree = "<group>"; };
 		D01E45A8297E6789003E28A8 /* PegViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegViewModel.swift; sourceTree = "<group>"; };
 		D03FFCAB29783B9000EFAD04 /* Peggle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peggle.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,10 +59,7 @@
 		D03FFCB229783B9300EFAD04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D03FFCB529783B9300EFAD04 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D03FFCBB29783B9300EFAD04 /* PeggleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeggleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D03FFCBF29783B9300EFAD04 /* PeggleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeggleTests.swift; sourceTree = "<group>"; };
 		D03FFCC529783B9300EFAD04 /* PeggleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeggleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D03FFCC929783B9300EFAD04 /* PeggleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeggleUITests.swift; sourceTree = "<group>"; };
-		D03FFCCB29783B9300EFAD04 /* PeggleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeggleUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D08AEB782979672C00EA1590 /* LevelDesignerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerView.swift; sourceTree = "<group>"; };
 		D08AEB7A2979682E00EA1590 /* LevelDesignerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerViewModel.swift; sourceTree = "<group>"; };
 		D08AEB7C29796A6D00EA1590 /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
@@ -109,6 +105,7 @@
 				D007895D297E89C900EB5AAE /* PaletteButtonView.swift */,
 				D0BF3F03297BC6C800354272 /* BoardView.swift */,
 				D01E45A6297E6777003E28A8 /* PegView.swift */,
+				D0078970297EA11400EB5AAE /* ActionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -171,8 +168,6 @@
 			isa = PBXGroup;
 			children = (
 				D03FFCAD29783B9000EFAD04 /* Peggle */,
-				D03FFCBE29783B9300EFAD04 /* PeggleTests */,
-				D03FFCC829783B9300EFAD04 /* PeggleUITests */,
 				D03FFCAC29783B9000EFAD04 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -211,23 +206,6 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		D03FFCBE29783B9300EFAD04 /* PeggleTests */ = {
-			isa = PBXGroup;
-			children = (
-				D03FFCBF29783B9300EFAD04 /* PeggleTests.swift */,
-			);
-			path = PeggleTests;
-			sourceTree = "<group>";
-		};
-		D03FFCC829783B9300EFAD04 /* PeggleUITests */ = {
-			isa = PBXGroup;
-			children = (
-				D03FFCC929783B9300EFAD04 /* PeggleUITests.swift */,
-				D03FFCCB29783B9300EFAD04 /* PeggleUITestsLaunchTests.swift */,
-			);
-			path = PeggleUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -235,6 +213,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D03FFCCF29783B9300EFAD04 /* Build configuration list for PBXNativeTarget "Peggle" */;
 			buildPhases = (
+				D0078972297EA64A00EB5AAE /* Run SwiftLint */,
 				D03FFCA729783B9000EFAD04 /* Sources */,
 				D03FFCA829783B9000EFAD04 /* Frameworks */,
 				D03FFCA929783B9000EFAD04 /* Resources */,
@@ -353,6 +332,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D0078972297EA64A00EB5AAE /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint >/dev/null; then\n  swiftlint --fix && swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D03FFCA729783B9000EFAD04 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -370,6 +371,7 @@
 				D03FFCAF29783B9000EFAD04 /* PeggleApp.swift in Sources */,
 				D01E45A7297E6777003E28A8 /* PegView.swift in Sources */,
 				D0BF3F04297BC6C800354272 /* BoardView.swift in Sources */,
+				D0078971297EA11400EB5AAE /* ActionView.swift in Sources */,
 				D0BF3F14297D750200354272 /* PaletteButton.swift in Sources */,
 				D0078960297E8A8500EB5AAE /* PaletteButtonViewModel.swift in Sources */,
 				D0BF3F10297D713100354272 /* BoardViewModel.swift in Sources */,
@@ -382,7 +384,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D03FFCC029783B9300EFAD04 /* PeggleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,8 +391,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D03FFCCC29783B9300EFAD04 /* PeggleUITestsLaunchTests.swift in Sources */,
-				D03FFCCA29783B9300EFAD04 /* PeggleUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

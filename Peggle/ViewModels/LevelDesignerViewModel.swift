@@ -1,3 +1,4 @@
+//  swiftlint:disable:this file_name
 //
 //  LevelDesignerViewModel.swift
 //  Peggle
@@ -11,7 +12,7 @@ extension LevelDesignerView {
     class ViewModel: ObservableObject {
         @Published var paletteViewModel: PaletteView.ViewModel
         @Published var boardViewModel: BoardView.ViewModel
-        
+
         init(paletteViewModel: PaletteView.ViewModel = .init(),
              boardViewModel: BoardView.ViewModel = .init()) {
             self.paletteViewModel = paletteViewModel

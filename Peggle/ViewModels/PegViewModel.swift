@@ -1,3 +1,4 @@
+//  swiftlint:disable:this file_name
 //
 //  PegViewModel.swift
 //  Peggle
@@ -11,8 +12,8 @@ import SwiftUI
 extension PegView {
     class ViewModel: ObservableObject {
         @Published var peg: Peg
-        @Published var dragOffset = CGSizeZero
-        
+        @Published var dragOffset = CGSize.zero
+
         init(peg: Peg = BluePeg()) {
             self.peg = peg
         }
@@ -25,7 +26,7 @@ extension PegView.ViewModel: Hashable {
     static func == (lhs: PegView.ViewModel, rhs: PegView.ViewModel) -> Bool {
         lhs.peg == rhs.peg
     }
-    
+
     public func hash(into hasher: inout Hasher) {
         hasher.combine(peg)
     }

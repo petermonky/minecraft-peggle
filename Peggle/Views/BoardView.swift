@@ -10,14 +10,14 @@ import SwiftUI
 struct BoardView: View {
     @EnvironmentObject var levelDesigner: LevelDesignerView.ViewModel
     @StateObject var viewModel: ViewModel
-    
+
     init(viewModel: ViewModel = .init()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
-    
+
     var body: some View {
         let palette = levelDesigner.paletteViewModel
-        
+
         GeometryReader { geometry in
             ZStack {
                 ForEach(viewModel.pegViewModels, id: \.self) { pegViewModel in

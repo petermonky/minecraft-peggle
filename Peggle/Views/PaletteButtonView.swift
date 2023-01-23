@@ -10,15 +10,15 @@ import SwiftUI
 struct PaletteButtonView: View {
     @EnvironmentObject var levelDesigner: LevelDesignerView.ViewModel
     @StateObject var viewModel: ViewModel
-    
+
     init(viewModel: ViewModel = .init()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
-    
+
     var body: some View {
         let palette = levelDesigner.paletteViewModel
         let paletteButton = viewModel.paletteButton
-        
+
         Button(action: {
             paletteButton.updatePalette(palette)
         }) {

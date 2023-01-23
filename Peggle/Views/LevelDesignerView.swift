@@ -9,11 +9,11 @@ import SwiftUI
 
 struct LevelDesignerView: View {
     @StateObject var viewModel: ViewModel
-    
+
     init(viewModel: ViewModel = .init()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
-    
+
     var body: some View {
         VStack(spacing: 0) {
             BoardView(viewModel: viewModel.boardViewModel)
@@ -26,6 +26,6 @@ struct LevelDesignerView: View {
 
 struct LevelDesignerView_Previews: PreviewProvider {
     static var previews: some View {
-        return LevelDesignerView()
+        LevelDesignerView()
     }
 }
