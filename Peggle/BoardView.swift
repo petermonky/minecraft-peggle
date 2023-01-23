@@ -31,7 +31,7 @@ struct BoardView: View {
                     .aspectRatio(contentMode: .fill)
             )
             .onTapGesture { location in
-                if palette.mode != .delete {
+                if palette.mode != .deletePeg {
                     let pegFactory = palette.pegFactory
                     if let peg = pegFactory?.createPegAtPosition(location) {
                         _ = viewModel.addPeg(peg)

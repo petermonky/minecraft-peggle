@@ -15,26 +15,26 @@ struct PegView: View {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     
+    func renderBaseImage(isAfterImage: Bool) -> some View {
+        Image(viewModel.peg.imageName)
+            .resizable()
+            .overlay(Color.white.opacity(isAfterImage ? 0.5 : 0.0))
+            .frame(width: 80, height: 80)
+            .clipShape(Circle())
+            .position(viewModel.peg.position)
+    }
+    
     var body: some View {
         let palette = levelDesigner.paletteViewModel
         let board = levelDesigner.boardViewModel
         
         ZStack {
-            Image(viewModel.peg.imageName)
-                .resizable()
-                .overlay(Color.white.opacity(0.5))
-                .frame(width: 80, height: 80)
-                .clipShape(Circle())
-                .position(viewModel.peg.position)
+            renderBaseImage(isAfterImage: true)
             
-            Image(viewModel.peg.imageName)
-                .resizable()
-                .frame(width: 80, height: 80)
-                .clipShape(Circle())
-                .position(viewModel.peg.position)
+            renderBaseImage(isAfterImage: false)
                 .offset(viewModel.dragOffset)
                 .onTapGesture {
-                    if palette.mode == .delete {
+                    if palette.mode == .deletePeg {
                         _ = board.removePeg(viewModel.peg)
                     }
                 }

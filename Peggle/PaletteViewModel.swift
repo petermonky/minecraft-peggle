@@ -9,10 +9,15 @@ import Foundation
 
 extension PaletteView {
     class ViewModel: ObservableObject {
-        @Published var mode: PaletteButtonType = .bluePeg
-        @Published var pegFactory: PegFactory? = BluePegFactory()
+        @Published var mode: PaletteButtonType
+        @Published var pegFactory: PegFactory?
         @Published var pegButtons: [PegPaletteButton] = [BluePegPaletteButton(), OrangePegPaletteButton()]
         @Published var deleteButton: PaletteButton = DeletePegPaletteButton()
+        
+        init(mode: PaletteButtonType = .bluePeg, pegFactory: PegFactory? = BluePegFactory()) {
+            self.mode = mode
+            self.pegFactory = pegFactory
+        }
         
         func onPegButtonSelect(pegButton: PegPaletteButton) {
             mode = pegButton.type
@@ -20,7 +25,7 @@ extension PaletteView {
         }
         
         func onDeleteButtonSelect() {
-            mode = .delete
+            mode = .deletePeg
             pegFactory = nil
         }
     }

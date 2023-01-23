@@ -10,7 +10,7 @@ import Foundation
 enum PaletteButtonType {
     case bluePeg
     case orangePeg
-    case delete
+    case deletePeg
 }
 
 protocol PaletteButton {
@@ -35,6 +35,6 @@ struct OrangePegPaletteButton: PegPaletteButton {
 }
 
 struct DeletePegPaletteButton: PaletteButton {
-    var type: PaletteButtonType = .delete
+    var type: PaletteButtonType = .deletePeg
     var imageName = "delete"
 }

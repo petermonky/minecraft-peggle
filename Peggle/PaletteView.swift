@@ -43,7 +43,6 @@ struct PaletteView: View {
             }.padding()
         }
         .background(Color.white)
-        .environmentObject(viewModel)
     }
 }
 
