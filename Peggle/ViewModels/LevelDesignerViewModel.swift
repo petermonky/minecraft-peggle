@@ -1,5 +1,3 @@
-//  swiftlint:disable:this file_name
-//
 //  LevelDesignerViewModel.swift
 //  Peggle
 //
@@ -8,15 +6,55 @@
 
 import Foundation
 
+typealias LevelDesignerViewModel = LevelDesignerView.ViewModel
+
 extension LevelDesignerView {
     class ViewModel: ObservableObject {
-        @Published var paletteViewModel: PaletteView.ViewModel
-        @Published var boardViewModel: BoardView.ViewModel
+        @Published var paletteViewModel: PaletteViewModel
+        @Published var boardViewModel: BoardViewModel
+        @Published var actionViewModel: ActionViewModel
+        @Published var levelListViewModel: LevelListViewModel
+        var currentLevelId: UUID?
 
-        init(paletteViewModel: PaletteView.ViewModel = .init(),
-             boardViewModel: BoardView.ViewModel = .init()) {
+        init(paletteViewModel: PaletteViewModel = .init(),
+             boardViewModel: BoardViewModel = .init(),
+             actionViewModel: ActionViewModel = .init(),
+             levelListViewModel: LevelListViewModel = .init()) {
             self.paletteViewModel = paletteViewModel
             self.boardViewModel = boardViewModel
+            self.actionViewModel = actionViewModel
+            self.levelListViewModel = levelListViewModel
+        }
+
+        func resetLevel() {
+            currentLevelId = nil
+            actionViewModel.resetTitle()
+            boardViewModel.resetPegs()
+        }
+
+        func loadLevel(_ level: Level) {
+            currentLevelId = level.id
+            boardViewModel.loadPegs(level.pegs.map { PegViewModel(peg: $0) })
+            actionViewModel.loadTitle(level.title)
+        }
+
+        func saveLevel() async throws {
+            let level = Level(id: currentLevelId,
+                              title: actionViewModel.title,
+                              createdAt: Date.now,
+                              pegs: Set(boardViewModel.pegArray))
+            currentLevelId = level.id
+            levelListViewModel.addLevel(level)
+            try await saveData()
+        }
+
+        func loadData() async throws {
+            let levels = try await PersistenceController.load()
+            levelListViewModel.loadLevels(Set(levels))
+        }
+
+        func saveData() async throws {
+            try await PersistenceController.save(levels: Array(levelListViewModel.levels))
         }
     }
 }

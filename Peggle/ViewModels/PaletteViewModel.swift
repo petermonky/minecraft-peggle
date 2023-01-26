@@ -1,5 +1,3 @@
-//  swiftlint:disable:this file_name
-//
 //  PaletteViewModel.swift
 //  Peggle
 //
@@ -7,6 +5,8 @@
 //
 
 import Foundation
+
+typealias PaletteViewModel = PaletteView.ViewModel
 
 extension PaletteView {
     class ViewModel: ObservableObject {
@@ -27,11 +27,11 @@ extension PaletteView {
             self.deleteButton = deleteButton
         }
 
-        var pegButtonViewModels: [PaletteButtonView.ViewModel] {
+        var pegButtonViewModels: [PaletteButtonViewModel] {
             pegButtons.map { PaletteButtonView.ViewModel(paletteButton: $0) }
         }
 
-        var deleteButtonViewModel: PaletteButtonView.ViewModel {
+        var deleteButtonViewModel: PaletteButtonViewModel {
             PaletteButtonView.ViewModel(paletteButton: deleteButton)
         }
 

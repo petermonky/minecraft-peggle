@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PaletteButtonView: View {
-    @EnvironmentObject var levelDesigner: LevelDesignerView.ViewModel
+    @EnvironmentObject var levelDesigner: LevelDesignerViewModel
     @StateObject var viewModel: ViewModel
 
     init(viewModel: ViewModel = .init()) {
@@ -37,6 +37,6 @@ struct PaletteButtonView: View {
 struct PaletteButtonView_Previews: PreviewProvider {
     static var previews: some View {
         PaletteButtonView()
-            .environmentObject(LevelDesignerView.ViewModel())
+            .environmentObject(LevelDesignerViewModel())
     }
 }

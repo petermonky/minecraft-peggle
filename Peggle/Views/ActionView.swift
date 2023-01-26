@@ -8,29 +8,52 @@
 import SwiftUI
 
 struct ActionView: View {
-    @EnvironmentObject var levelDesigner: LevelDesignerView.ViewModel
+    @EnvironmentObject var levelDesigner: LevelDesignerViewModel
+    @StateObject var viewModel: ViewModel
+
+    init(viewModel: ViewModel = .init()) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
 
     var body: some View {
-        HStack {
-            Button(action: {
-                // action for button 1
-            }) {
-                Text("Button 1")
+        let board = levelDesigner.boardViewModel
+        let levelList = levelDesigner.levelListViewModel
+
+        HStack(spacing: 24) {
+            HStack {
+                NavigationLink(destination: LevelListView(viewModel: levelList)) {
+                    Text("LOAD")
+                }
+                .simultaneousGesture(TapGesture().onEnded {
+                    hideKeyboard()
+                })
+
+                Button(action: {
+                    Task {
+                        do {
+                            try await levelDesigner.saveLevel()
+                        } catch {
+                            // TODO: proper error handling
+                            print("Error saving levels.")
+                        }
+                    }
+                }) {
+                    Text("SAVE")
+                }
+
+                Button(action: {
+                    board.resetPegs()
+                }) {
+                    Text("RESET")
+                }
             }
+
+            TextField("Enter level title", text: $viewModel.title)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+
             Button(action: {
-                // action for button 2
             }) {
-                Text("Button 2")
-            }
-            Button(action: {
-                // action for button 3
-            }) {
-                Text("Button 3")
-            }
-            Button(action: {
-                // action for button 4
-            }) {
-                Text("Button 4")
+                Text("START")
             }
         }
     }
@@ -39,6 +62,6 @@ struct ActionView: View {
 struct ActionView_Previews: PreviewProvider {
     static var previews: some View {
         ActionView()
-            .environmentObject(LevelDesignerView.ViewModel())
+            .environmentObject(LevelDesignerViewModel())
     }
 }

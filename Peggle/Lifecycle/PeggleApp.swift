@@ -12,6 +12,7 @@ struct PeggleApp: App {
     var body: some Scene {
         WindowGroup {
             LevelDesignerView()
+                .environment(\.colorScheme, .light)
         }
     }
 }

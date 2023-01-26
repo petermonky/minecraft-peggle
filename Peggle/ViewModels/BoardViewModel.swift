@@ -1,5 +1,3 @@
-//  swiftlint:disable:this file_name
-//
 //  BoardViewModel.swift
 //  Peggle
 //
@@ -8,60 +6,88 @@
 
 import Foundation
 
+typealias BoardViewModel = BoardView.ViewModel
+
 extension BoardView {
     class ViewModel: ObservableObject {
-        @Published private var pegs: Set<Peg>
-        @Published var boardSize: CGSize
+        @Published var pegViewModels: Set<PegViewModel>
+        @Published var initialBoardSize: CGSize?
+        @Published var currentBoardSize: CGSize?
 
-        init(pegs: Set<Peg> = [], boardSize: CGSize = CGSize.zero) {
-            self.pegs = pegs
-            self.boardSize = boardSize
+        init(pegs: Set<PegViewModel> = []) {
+            self.pegViewModels = pegs
         }
 
-        var pegViewModels: [PegView.ViewModel] {
-            Array(pegs).map { PegView.ViewModel(peg: $0) }
+        var pegArray: [Peg] {
+            Array(pegViewModels).map { $0.peg }
         }
 
-        func addPeg(_ peg: Peg) -> Bool {
-            guard !hasOverlappingPeg(peg) else {
+        var sizeScale: Double {
+            guard let initialBoardSize = initialBoardSize,
+                  let currentBoardSize = currentBoardSize else {
+                return 1
+            }
+            return currentBoardSize.height / initialBoardSize.height
+        }
+
+        func initialiseBoardSize(boardSize: CGSize) {
+            self.initialBoardSize = boardSize
+            self.currentBoardSize = boardSize
+        }
+
+        func updateBoardSize(boardSize: CGSize) {
+            self.currentBoardSize = boardSize
+        }
+
+        func loadPegs(_ pegViewModels: [PegViewModel]) {
+            self.pegViewModels = Set(pegViewModels)
+        }
+
+        func addPeg(_ pegViewModel: PegViewModel) -> Bool {
+            guard !hasOverlappingPeg(pegViewModel) else {
                 return false
             }
-            guard isOverflowingPeg(peg) else {
+            guard isOverflowingPeg(pegViewModel) else {
                 return false
             }
-            return pegs.insert(peg).inserted
+            return pegViewModels.insert(pegViewModel).inserted
         }
 
-        func removePeg(_ peg: Peg) -> Bool {
-            pegs.remove(peg) != nil
+        func removePeg(_ pegViewModel: PegViewModel) -> Bool {
+            pegViewModels.remove(pegViewModel) != nil
         }
 
-        func translatePeg(_ peg: Peg, translation: CGSize) -> Bool {
-            let newPeg = peg.clone()
-            newPeg.translateBy(translation)
+        func translatePeg(_ pegViewModel: PegViewModel, translation: CGSize) -> Bool {
+            let newPegViewModel = pegViewModel.clone()
+            newPegViewModel.translateBy(translation)
 
-            guard removePeg(peg) else {
+            guard removePeg(pegViewModel) else {
                 return false
             }
-            guard addPeg(newPeg) else {
-                _ = addPeg(peg)
+            guard addPeg(newPegViewModel) else {
+                _ = addPeg(pegViewModel)
                 return false
             }
             return true
         }
 
-        func hasOverlappingPeg(_ peg: Peg) -> Bool {
-            for existingPeg in pegs where existingPeg.overlapsWith(peg: peg) {
+        func resetPegs() {
+            pegViewModels = []
+        }
+
+        func hasOverlappingPeg(_ pegViewModel: PegViewModel) -> Bool {
+            for oldPegViewModel in pegViewModels where oldPegViewModel.overlapsWith(peg: pegViewModel) {
                 return true
             }
             return false
         }
 
-        func isOverflowingPeg(_ peg: Peg) -> Bool {
-            let pegX = peg.position.x
-            let pegY = peg.position.y
-            let boardWidth = boardSize.width
-            let boardHeight = boardSize.height
+        func isOverflowingPeg(_ pegViewModel: PegViewModel) -> Bool {
+            guard let boardWidth = currentBoardSize?.width, let boardHeight = currentBoardSize?.height else {
+                return false
+            }
+            let pegX = pegViewModel.peg.position.x
+            let pegY = pegViewModel.peg.position.y
 
             let isWithinHorizontally = pegX > Constants.Peg.radius && pegX < boardWidth - Constants.Peg.radius
             let isWithinVertically = pegY > Constants.Peg.radius && pegY < boardHeight - Constants.Peg.radius

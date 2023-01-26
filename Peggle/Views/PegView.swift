@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct PegView: View {
-    @EnvironmentObject var levelDesigner: LevelDesignerView.ViewModel
+    @EnvironmentObject var levelDesigner: LevelDesignerViewModel
     @StateObject var viewModel: ViewModel
-    @State var zIndex: Double = 0
 
     init(viewModel: ViewModel = .init()) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -31,7 +30,6 @@ struct PegView: View {
     var body: some View {
         let palette = levelDesigner.paletteViewModel
         let board = levelDesigner.boardViewModel
-        let peg = viewModel.peg
 
         ZStack {
             renderBaseImage(isAfterImage: true)
@@ -40,34 +38,35 @@ struct PegView: View {
                 .offset(viewModel.dragOffset)
                 .onTapGesture {
                     if palette.mode == .deletePeg {
-                        _ = board.removePeg(peg)
+                        _ = board.removePeg(viewModel)
                     }
                 }
                 .onLongPressGesture {
-                    _ = board.removePeg(peg)
+                    _ = board.removePeg(viewModel)
                 }
                 .gesture(
                     DragGesture()
                         .onChanged { value in
                             viewModel.dragOffset = value.translation
-                            zIndex = Double.infinity
+                            viewModel.zIndex = Double.infinity
                         }
                         .onEnded { value in
-                            let pegSuccessfullyTranslated = board.translatePeg(peg, translation: value.translation)
+                            let pegSuccessfullyTranslated = board.translatePeg(viewModel,
+                                                                               translation: value.translation)
                             if !pegSuccessfullyTranslated {
                                 viewModel.dragOffset = CGSize.zero
                             }
-                            zIndex = 0
+                            viewModel.zIndex = 0
                         }
                 )
         }
-        .zIndex(zIndex)
+        .zIndex(viewModel.zIndex)
     }
 }
 
 struct PegView_Previews: PreviewProvider {
     static var previews: some View {
         PegView()
-            .environmentObject(LevelDesignerView.ViewModel())
+            .environmentObject(LevelDesignerViewModel())
     }
 }

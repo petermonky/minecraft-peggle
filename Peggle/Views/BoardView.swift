@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BoardView: View {
-    @EnvironmentObject var levelDesigner: LevelDesignerView.ViewModel
+    @EnvironmentObject var levelDesigner: LevelDesignerViewModel
     @StateObject var viewModel: ViewModel
 
     init(viewModel: ViewModel = .init()) {
@@ -17,13 +17,15 @@ struct BoardView: View {
 
     var body: some View {
         let palette = levelDesigner.paletteViewModel
+        let pegs = Array(viewModel.pegViewModels)
 
         GeometryReader { geometry in
             ZStack {
-                ForEach(viewModel.pegViewModels, id: \.self) { pegViewModel in
-                    PegView(viewModel: pegViewModel)
+                ForEach(pegs, id: \.self) { peg in
+                    PegView(viewModel: peg)
                 }
             }
+            .scaleEffect(x: viewModel.sizeScale, y: viewModel.sizeScale, anchor: .top)
             .frame(width: geometry.size.width, height: geometry.size.height)
             .background(
                 Image("background")
@@ -34,21 +36,28 @@ struct BoardView: View {
                 if palette.mode != .deletePeg {
                     let pegFactory = palette.pegFactory
                     if let peg = pegFactory?.createPegAtPosition(location) {
-                        _ = viewModel.addPeg(peg)
+                        _ = viewModel.addPeg(PegViewModel(peg: peg))
                     }
                 }
             }
             .onAppear {
-                viewModel.boardSize = geometry.size
+                viewModel.initialiseBoardSize(boardSize: geometry.size)
+            }
+            .onChange(of: geometry.size) { _ in
+                withAnimation(.easeOut(duration: 0.225)) {
+                    viewModel.updateBoardSize(boardSize: geometry.size)
+                }
             }
         }
-        .environmentObject(viewModel)
+        .simultaneousGesture(TapGesture().onEnded {
+            hideKeyboard()
+        })
     }
 }
 
 struct BoardView_Previews: PreviewProvider {
     static var previews: some View {
         BoardView()
-            .environmentObject(LevelDesignerView.ViewModel())
+            .environmentObject(LevelDesignerViewModel())
     }
 }
