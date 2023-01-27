@@ -36,13 +36,18 @@ struct LevelListView: View {
                     levelDesigner.loadLevel(level)
                     dismiss()
                 }) {
-                    VStack(alignment: .leading) {
-                        Text(level.title)
-                            .font(.headline)
-                        Text(level.updatedAt, formatter: dateFormatter)
-                            .font(.subheadline)
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(level.title).font(.headline)
+                            Text(level.updatedAt, formatter: dateFormatter).font(.subheadline)
+                        }
+
+                        Spacer()
+
+                        Text("Currently open").isRendered(levelDesigner.isCurrentLevel(level))
                     }
                 }
+                .disabled(levelDesigner.isCurrentLevel(level))
             }
             .onDelete { indexSet in
                 Task {
@@ -52,6 +57,9 @@ struct LevelListView: View {
                     }
                 }
             }
+        }
+        .toolbar {
+            EditButton()
         }
         .task {
             do {

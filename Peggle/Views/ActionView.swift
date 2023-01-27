@@ -23,8 +23,7 @@ struct ActionView: View {
             HStack {
                 NavigationLink(destination: LevelListView(viewModel: levelList)) {
                     Text("LOAD")
-                }
-                .simultaneousGesture(TapGesture().onEnded {
+                }.simultaneousGesture(TapGesture().onEnded {
                     hideKeyboard()
                 })
 
@@ -39,7 +38,7 @@ struct ActionView: View {
                     }
                 }) {
                     Text("SAVE")
-                }
+                }.disabled(!viewModel.isValidForm)
 
                 Button(action: {
                     board.resetPegs()

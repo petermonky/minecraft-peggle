@@ -26,6 +26,10 @@ extension LevelDesignerView {
             self.levelListViewModel = levelListViewModel
         }
 
+        func isCurrentLevel(_ level: Level) -> Bool {
+            currentLevelId == level.id
+        }
+
         func resetLevel() {
             currentLevelId = nil
             actionViewModel.resetTitle()

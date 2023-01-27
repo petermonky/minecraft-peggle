@@ -14,6 +14,7 @@
 		D0078971297EA11400EB5AAE /* ActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0078970297EA11400EB5AAE /* ActionView.swift */; };
 		D01E45A7297E6777003E28A8 /* PegView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01E45A6297E6777003E28A8 /* PegView.swift */; };
 		D01E45A9297E6789003E28A8 /* PegViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01E45A8297E6789003E28A8 /* PegViewModel.swift */; };
+		D021AD8A29836B18001F63DD /* View+IsRendered.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021AD8929836B18001F63DD /* View+IsRendered.swift */; };
 		D03FFCAF29783B9000EFAD04 /* PeggleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03FFCAE29783B9000EFAD04 /* PeggleApp.swift */; };
 		D03FFCB329783B9300EFAD04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03FFCB229783B9300EFAD04 /* Assets.xcassets */; };
 		D03FFCB629783B9300EFAD04 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03FFCB529783B9300EFAD04 /* Preview Assets.xcassets */; };
@@ -59,6 +60,7 @@
 		D0078970297EA11400EB5AAE /* ActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionView.swift; sourceTree = "<group>"; };
 		D01E45A6297E6777003E28A8 /* PegView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegView.swift; sourceTree = "<group>"; };
 		D01E45A8297E6789003E28A8 /* PegViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegViewModel.swift; sourceTree = "<group>"; };
+		D021AD8929836B18001F63DD /* View+IsRendered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+IsRendered.swift"; sourceTree = "<group>"; };
 		D03FFCAB29783B9000EFAD04 /* Peggle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peggle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D03FFCAE29783B9000EFAD04 /* PeggleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeggleApp.swift; sourceTree = "<group>"; };
 		D03FFCB229783B9300EFAD04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				D0BF3F09297D6FB200354272 /* CGPoint+Hashable.swift */,
 				D0BF3F0B297D70FC00354272 /* CGPoint+Distance.swift */,
 				D0CB44222982F651008C5DAD /* View+HideKeyboard.swift */,
+				D021AD8929836B18001F63DD /* View+IsRendered.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				D08AEB7F29796AD300EA1590 /* PaletteViewModel.swift in Sources */,
 				D08AEB7B2979682E00EA1590 /* LevelDesignerViewModel.swift in Sources */,
 				D08AEB792979672C00EA1590 /* LevelDesignerView.swift in Sources */,
+				D021AD8A29836B18001F63DD /* View+IsRendered.swift in Sources */,
 				D07170B6297FBB4C00C0ABAF /* PersistenceController.swift in Sources */,
 				D0BF3F08297D6F3400354272 /* Peg.swift in Sources */,
 				D0BF3F0A297D6FB200354272 /* CGPoint+Hashable.swift in Sources */,

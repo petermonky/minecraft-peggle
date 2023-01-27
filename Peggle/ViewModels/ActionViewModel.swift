@@ -17,6 +17,10 @@ extension ActionView {
             self.title = title
         }
 
+        var isValidForm: Bool {
+            !title.isEmpty
+        }
+
         func loadTitle(_ title: String) {
             self.title = title
         }
