@@ -28,11 +28,11 @@ extension PaletteView {
         }
 
         var pegButtonViewModels: [PaletteButtonViewModel] {
-            pegButtons.map { PaletteButtonView.ViewModel(paletteButton: $0) }
+            pegButtons.map { PaletteButtonViewModel(paletteButton: $0) }
         }
 
         var deleteButtonViewModel: PaletteButtonViewModel {
-            PaletteButtonView.ViewModel(paletteButton: deleteButton)
+            PaletteButtonViewModel(paletteButton: deleteButton)
         }
 
         func onPegButtonSelect(pegButton: PegPaletteButton) {

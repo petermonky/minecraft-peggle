@@ -14,7 +14,7 @@ extension LevelDesignerView {
         @Published var boardViewModel: BoardViewModel
         @Published var actionViewModel: ActionViewModel
         @Published var levelListViewModel: LevelListViewModel
-        var currentLevelId: UUID?
+        private var currentLevelId: UUID?
 
         init(paletteViewModel: PaletteViewModel = .init(),
              boardViewModel: BoardViewModel = .init(),
@@ -45,7 +45,7 @@ extension LevelDesignerView {
         func saveLevel() async throws {
             let level = Level(id: currentLevelId,
                               title: actionViewModel.title,
-                              createdAt: Date.now,
+                              updatedAt: Date.now,
                               pegs: Set(boardViewModel.pegArray))
             currentLevelId = level.id
             levelListViewModel.addLevel(level)

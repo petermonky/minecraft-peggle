@@ -15,9 +15,20 @@
 		D01E45A7297E6777003E28A8 /* PegView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01E45A6297E6777003E28A8 /* PegView.swift */; };
 		D01E45A9297E6789003E28A8 /* PegViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01E45A8297E6789003E28A8 /* PegViewModel.swift */; };
 		D021AD8A29836B18001F63DD /* View+IsRendered.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021AD8929836B18001F63DD /* View+IsRendered.swift */; };
+		D021AD8E298397D2001F63DD /* LevelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021AD8D298397D2001F63DD /* LevelTests.swift */; };
+		D021AD91298398CA001F63DD /* PeggleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021AD90298398CA001F63DD /* PeggleUITestsLaunchTests.swift */; };
+		D021AD9329839907001F63DD /* PeggleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021AD9229839907001F63DD /* PeggleUITests.swift */; };
 		D03FFCAF29783B9000EFAD04 /* PeggleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03FFCAE29783B9000EFAD04 /* PeggleApp.swift */; };
 		D03FFCB329783B9300EFAD04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03FFCB229783B9300EFAD04 /* Assets.xcassets */; };
 		D03FFCB629783B9300EFAD04 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03FFCB529783B9300EFAD04 /* Preview Assets.xcassets */; };
+		D04E7C472983A1DF008C5941 /* PegTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04E7C462983A1DF008C5941 /* PegTests.swift */; };
+		D04E7C4B2983AAFE008C5941 /* LevelListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04E7C4A2983AAFE008C5941 /* LevelListViewModelTests.swift */; };
+		D04E7C4D2983D273008C5941 /* ActionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04E7C4C2983D273008C5941 /* ActionViewModelTests.swift */; };
+		D04E7C4F2983F5B4008C5941 /* PegViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04E7C4E2983F5B4008C5941 /* PegViewModelTests.swift */; };
+		D04E7C51298439F2008C5941 /* BoardViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04E7C50298439F2008C5941 /* BoardViewModelTests.swift */; };
+		D04E7C5329844B72008C5941 /* PaletteButtonViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04E7C5229844B72008C5941 /* PaletteButtonViewModelTests.swift */; };
+		D04E7C5529844CF1008C5941 /* PaletteViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04E7C5429844CF1008C5941 /* PaletteViewModelTests.swift */; };
+		D04E7C5729845074008C5941 /* LevelDesignerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04E7C5629845074008C5941 /* LevelDesignerViewModelTests.swift */; };
 		D07170B6297FBB4C00C0ABAF /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07170B5297FBB4C00C0ABAF /* PersistenceController.swift */; };
 		D07170BF297FD41F00C0ABAF /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07170BE297FD41F00C0ABAF /* Level.swift */; };
 		D08AEB792979672C00EA1590 /* LevelDesignerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08AEB782979672C00EA1590 /* LevelDesignerView.swift */; };
@@ -61,12 +72,23 @@
 		D01E45A6297E6777003E28A8 /* PegView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegView.swift; sourceTree = "<group>"; };
 		D01E45A8297E6789003E28A8 /* PegViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegViewModel.swift; sourceTree = "<group>"; };
 		D021AD8929836B18001F63DD /* View+IsRendered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+IsRendered.swift"; sourceTree = "<group>"; };
+		D021AD8D298397D2001F63DD /* LevelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelTests.swift; sourceTree = "<group>"; };
+		D021AD90298398CA001F63DD /* PeggleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeggleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D021AD9229839907001F63DD /* PeggleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeggleUITests.swift; sourceTree = "<group>"; };
 		D03FFCAB29783B9000EFAD04 /* Peggle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peggle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D03FFCAE29783B9000EFAD04 /* PeggleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeggleApp.swift; sourceTree = "<group>"; };
 		D03FFCB229783B9300EFAD04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D03FFCB529783B9300EFAD04 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D03FFCBB29783B9300EFAD04 /* PeggleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeggleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D03FFCC529783B9300EFAD04 /* PeggleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeggleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D04E7C462983A1DF008C5941 /* PegTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegTests.swift; sourceTree = "<group>"; };
+		D04E7C4A2983AAFE008C5941 /* LevelListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelListViewModelTests.swift; sourceTree = "<group>"; };
+		D04E7C4C2983D273008C5941 /* ActionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewModelTests.swift; sourceTree = "<group>"; };
+		D04E7C4E2983F5B4008C5941 /* PegViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegViewModelTests.swift; sourceTree = "<group>"; };
+		D04E7C50298439F2008C5941 /* BoardViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewModelTests.swift; sourceTree = "<group>"; };
+		D04E7C5229844B72008C5941 /* PaletteButtonViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteButtonViewModelTests.swift; sourceTree = "<group>"; };
+		D04E7C5429844CF1008C5941 /* PaletteViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteViewModelTests.swift; sourceTree = "<group>"; };
+		D04E7C5629845074008C5941 /* LevelDesignerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerViewModelTests.swift; sourceTree = "<group>"; };
 		D07170B5297FBB4C00C0ABAF /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		D07170BE297FD41F00C0ABAF /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		D08AEB782979672C00EA1590 /* LevelDesignerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerView.swift; sourceTree = "<group>"; };
@@ -181,10 +203,30 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		D021AD8B2983977A001F63DD /* PeggleTests */ = {
+			isa = PBXGroup;
+			children = (
+				D04E7C482983AAB7008C5941 /* Models */,
+				D04E7C492983AAD9008C5941 /* ViewModels */,
+			);
+			path = PeggleTests;
+			sourceTree = "<group>";
+		};
+		D021AD8F29839893001F63DD /* PeggleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D021AD90298398CA001F63DD /* PeggleUITestsLaunchTests.swift */,
+				D021AD9229839907001F63DD /* PeggleUITests.swift */,
+			);
+			path = PeggleUITests;
+			sourceTree = "<group>";
+		};
 		D03FFCA229783B9000EFAD04 = {
 			isa = PBXGroup;
 			children = (
 				D03FFCAD29783B9000EFAD04 /* Peggle */,
+				D021AD8B2983977A001F63DD /* PeggleTests */,
+				D021AD8F29839893001F63DD /* PeggleUITests */,
 				D03FFCAC29783B9000EFAD04 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -222,6 +264,29 @@
 				D03FFCB529783B9300EFAD04 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D04E7C482983AAB7008C5941 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D021AD8D298397D2001F63DD /* LevelTests.swift */,
+				D04E7C462983A1DF008C5941 /* PegTests.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D04E7C492983AAD9008C5941 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				D04E7C5629845074008C5941 /* LevelDesignerViewModelTests.swift */,
+				D04E7C5429844CF1008C5941 /* PaletteViewModelTests.swift */,
+				D04E7C5229844B72008C5941 /* PaletteButtonViewModelTests.swift */,
+				D04E7C50298439F2008C5941 /* BoardViewModelTests.swift */,
+				D04E7C4E2983F5B4008C5941 /* PegViewModelTests.swift */,
+				D04E7C4C2983D273008C5941 /* ActionViewModelTests.swift */,
+				D04E7C4A2983AAFE008C5941 /* LevelListViewModelTests.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		D07170B4297FBA3F00C0ABAF /* Persistence */ = {
@@ -304,10 +369,12 @@
 					};
 					D03FFCBA29783B9300EFAD04 = {
 						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
 						TestTargetID = D03FFCAA29783B9000EFAD04;
 					};
 					D03FFCC429783B9300EFAD04 = {
 						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
 						TestTargetID = D03FFCAA29783B9000EFAD04;
 					};
 				};
@@ -416,6 +483,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D04E7C4B2983AAFE008C5941 /* LevelListViewModelTests.swift in Sources */,
+				D04E7C472983A1DF008C5941 /* PegTests.swift in Sources */,
+				D04E7C4D2983D273008C5941 /* ActionViewModelTests.swift in Sources */,
+				D04E7C4F2983F5B4008C5941 /* PegViewModelTests.swift in Sources */,
+				D04E7C5729845074008C5941 /* LevelDesignerViewModelTests.swift in Sources */,
+				D04E7C5529844CF1008C5941 /* PaletteViewModelTests.swift in Sources */,
+				D021AD8E298397D2001F63DD /* LevelTests.swift in Sources */,
+				D04E7C5329844B72008C5941 /* PaletteButtonViewModelTests.swift in Sources */,
+				D04E7C51298439F2008C5941 /* BoardViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +499,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D021AD91298398CA001F63DD /* PeggleUITestsLaunchTests.swift in Sources */,
+				D021AD9329839907001F63DD /* PeggleUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -619,15 +697,22 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X77GX48L42;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.petermonky.PeggleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Peggle.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Peggle";
@@ -639,11 +724,17 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X77GX48L42;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.petermonky.PeggleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -658,14 +749,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X77GX48L42;
 				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.petermonky.PeggleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Peggle;
@@ -676,10 +774,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X77GX48L42;
 				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.petermonky.PeggleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -13,10 +13,10 @@ struct Level: Identifiable, Codable {
     var updatedAt: Date
     var pegs: Set<Peg>
 
-    init(id: UUID?, title: String = "", createdAt: Date = Date.now, pegs: Set<Peg> = []) {
+    init(id: UUID?, title: String = "", updatedAt: Date = Date.now, pegs: Set<Peg> = []) {
         self.id = id ?? UUID()
         self.title = title
-        self.updatedAt = createdAt
+        self.updatedAt = updatedAt
         self.pegs = pegs
     }
 }

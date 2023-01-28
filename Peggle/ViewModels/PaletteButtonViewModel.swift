@@ -20,7 +20,7 @@ extension PaletteButtonView {
 
 // MARK: Identifiable
 
-extension PaletteButtonView.ViewModel: Identifiable {
+extension PaletteButtonViewModel: Identifiable {
 }
 
 // MARK: PaletteButton

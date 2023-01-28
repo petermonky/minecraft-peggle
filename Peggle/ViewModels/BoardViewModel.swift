@@ -14,8 +14,8 @@ extension BoardView {
         @Published var initialBoardSize: CGSize?
         @Published var currentBoardSize: CGSize?
 
-        init(pegs: Set<PegViewModel> = []) {
-            self.pegViewModels = pegs
+        init(pegViewModels: Set<PegViewModel> = []) {
+            self.pegViewModels = pegViewModels
         }
 
         var pegArray: [Peg] {
@@ -23,8 +23,7 @@ extension BoardView {
         }
 
         var sizeScale: Double {
-            guard let initialBoardSize = initialBoardSize,
-                  let currentBoardSize = currentBoardSize else {
+            guard let currentBoardSize = currentBoardSize, let initialBoardSize = initialBoardSize else {
                 return 1
             }
             return currentBoardSize.height / initialBoardSize.height
@@ -47,7 +46,7 @@ extension BoardView {
             guard !hasOverlappingPeg(pegViewModel) else {
                 return false
             }
-            guard isOverflowingPeg(pegViewModel) else {
+            guard !isOverflowingPeg(pegViewModel) else {
                 return false
             }
             return pegViewModels.insert(pegViewModel).inserted
@@ -92,7 +91,7 @@ extension BoardView {
             let isWithinHorizontally = pegX > Constants.Peg.radius && pegX < boardWidth - Constants.Peg.radius
             let isWithinVertically = pegY > Constants.Peg.radius && pegY < boardHeight - Constants.Peg.radius
 
-            return isWithinHorizontally && isWithinVertically
+            return !isWithinHorizontally || !isWithinVertically
         }
     }
 

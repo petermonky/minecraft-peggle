@@ -20,16 +20,15 @@ extension PegView {
         }
 
         func overlapsWith(peg other: PegViewModel) -> Bool {
-            self.peg.position.distance(to: other.peg.position) <= 2 * Constants.Peg.radius
+            peg.overlapsWith(peg: other.peg)
         }
 
         func translateBy(_ value: CGSize) {
-            peg.position.x += value.width
-            peg.position.y += value.height
+            peg.translateBy(value)
         }
 
         func clone() -> PegViewModel {
-            PegViewModel(peg: Peg(type: peg.type, position: peg.position))
+            PegViewModel(peg: peg.clone())
         }
     }
 }

@@ -22,13 +22,26 @@ class Peg: Identifiable, Codable {
         type.rawValue
     }
 
-    enum CodingKeys: String, CodingKey {
-        case type, position
-    }
-
     init(type: PegType, position: CGPoint) {
         self.type = type
         self.position = position
+    }
+
+    func overlapsWith(peg other: Peg) -> Bool {
+        self.position.distance(to: other.position) <= 2 * Constants.Peg.radius
+    }
+
+    func translateBy(_ value: CGSize) {
+        position.x += value.width
+        position.y += value.height
+    }
+
+    func clone() -> Peg {
+        Peg(type: type, position: position)
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case type, position
     }
 }
 
