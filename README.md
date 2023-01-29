@@ -18,9 +18,9 @@
 3. Do not burn out. Have fun!
 
 ## Dev Guide
-You may put your dev guide either in this section, or in a new file entirely.
-You are encouraged to include diagrams where appropriate in order to enhance
-your guide.
+The developer guide is located at `Peggle/Documentation/DeveloperGuide.md`.
+The guide includes diagrams that are fetched from a remote origin, so it
+may take a brief moment to load all the images.
 
 ## Rules of the Game
 Please write the rules of your game here. This section should include the
@@ -48,9 +48,63 @@ Please write all of the additional features that you have implemented so that
 your grader can award you credit.
 
 ## Tests
-If you decide to write how you are going to do your tests instead of writing
-actual tests, please write in this section. If you decide to write all of your
-tests in code, please delete this section.
+
+### Unit Tests
+The XCode project includes unit tests for the models and view models of
+the application. Refer to the project for more information.
+
+### Integration Tests
+
+Below is an exposition on how integration tests will be performed on the application.
+
+- Test palette view
+    - Should display a horizontal array of buttons, with peg palette buttons grouped together on the left, and the delete peg palette button located on the right.
+- Test palette button view
+    - Blue peg button
+        - Should be selected by default upon start up.
+        - When tapped, a semi-transparent white overlay should appear over the button.
+    - Orange peg button
+        - When tapped, a semi-transparent white overlay should appear over the button.
+    - Delete peg button
+        - When tapped, a semi-transparent white overlay should appear over the button.
+- Test board view
+    - If a peg palette button is selected
+        - When tapped, if the tap position does not overlap with another peg and does not overflow the board, a peg of the selected type should be created at the tap position.
+        - When tapped, if the tap position does not overlap with another peg and does overflow the board, a peg of the selected type should not be created at the tap position.
+        - When tapped, if the tap position does overlap with another peg and does not overflow the board, a peg of the selected type should not be created at the tap position.
+        - When tapped, if the tap position does overlap with another peg and does overflow the board, a peg of the selected type should not be created at the tap position.
+- Test peg view
+    - Tap gesture
+        - If the delete peg palette button is selected, the tapped peg should be deleted.
+        - If the delete peg palette button is not selected, nothing should happen.
+    - Drag gesture
+        - If the drag release position does not overlap with another peg and does not overflow the board, the peg should be translated to the release position.
+        - If the drag release position does not overlap with another peg and does overflow the board, the peg should not be translated to the release position.
+        - If the drag release position does overlap with another peg and does not overflow the board, the peg should not be translated to the release position.
+        - If the drag release position does overlap with another peg and does overflow the board, the peg should not be translated to the release position.
+    - Long press gesture
+        - The peg should be deleted from the board.
+- Action view
+    - SAVE button
+        - When tapped, the current level opened by the level designer should be saved into persistent storage. The saved level should be visible in the level list view.
+    - LOAD button
+        - When tapped, the level list view should slide in from the right.
+        - When tapped, it should dismiss the keyboard if it is open.
+    - RESET button
+        - When tapped, every peg on the board should be removed.
+    - Title text field
+        - When tapped, the keyboard should open.
+        - When typing in the keyboard, the title of the level should be visibly updated. The title should not be saved into persistent storage unless the SAVE button is tapped afterwards.
+    - START button
+        - When tapped, nothing should happen.
+- Level list view
+    - Should display a list of previously created levels.
+    - Create new level button
+        - When tapped, it should clear the loaded level from the level designer–remove all pegs from the board and clear the title in the action–and redirect the user back to the level designer.
+    - Existing level button
+        - If one of the previously created levels is open in the level designer, the opened level should be greyed out from the list with the text "Currently open" displayed on the right-side of the item.
+        - When tapped, if the tapped level is currently open, nothing should happen.
+        - When tapped, it the tapped level is not currently open, it should load the pegs and title of the board into the board and action, respectively, and the user should be redirected back to the level designer.
 
 ## Written Answers
 
