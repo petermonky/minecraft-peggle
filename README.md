@@ -51,7 +51,7 @@ your grader can award you credit.
 
 ### Unit Tests
 The XCode project includes unit tests for the models and view models of
-the application. Refer to the project for more information.
+the application. Refer to the project files for more information.
 
 ### Integration Tests
 

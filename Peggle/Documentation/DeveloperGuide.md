@@ -42,9 +42,9 @@ The application adopts an **opinionated version of MVVM**, in which the view int
 
 ![](https://i.imgur.com/p3HyXEp.png)
 
-As described above in the [application overview](#application-overview), the level designer consists of four main components: board, palette, action, and level list. Each component consists of a view and a view model, which are used to handle the presentation logic and domain logic of the application, respectively. Note how the board and palette consist further components that are the peg and palette button. Although the sub-components are simple enough that they may function as stand-alone views and bind with read-only data, as to maintain symmetry across components, the sub-components have also been created to adopt their own view models.
+As described above in the [application overview](#application-overview), the level designer consists of four main components: board, palette, action, and level list. Each component consists of a view and a view model, which are used to handle the presentation logic and domain logic of the application, respectively. Note how the board and palette consist further components that are the peg and palette button. Although the sub-components are simple enough that they may function as stand-alone views and bind with read-only data, as to maintain symmetry across components and better achieve separation of concerns, view models have been created for each individual sub-component.
 
-From the view models, the peg view model and the level list view model  own the peg and level models, respectively. The peg view model owns a peg and thus gains access to its data and methods to perform any necessary peg-related domain logic operations, such as translating a peg, determining inter-peg overlap, and cloning a peg. The level list view model own multiple levels and, similar to the peg view model, gains access to the level's respective data and methods. One should note that, in our current implementation, the level designer view model does **not directly** own the level model, but rather **indirectly**; different attributes of the level model such as ID, title, update date, and pegs, are spread across the level designer's sub-components upon loading a level to split up level-related operations.
+From the view models, the peg view model and the level list view model own the peg and level models, respectively. The peg view model owns a peg and thus gains access to its data and methods to perform any necessary peg-related domain logic operations, such as translating a peg, determining inter-peg overlap, and cloning a peg. The level list view model own multiple levels and, similar to the peg view model, gains access to the level's respective data and methods. One should note that, in our current implementation, the level designer view model does **not directly** own the level model, but rather **indirectly**; different attributes of the level model such as ID, title, update date, and pegs, are spread across the level designer's sub-components upon loading a level to split up level-related operations.
 
 The data manager exposes a **single shared instance** that is contained by the level designer view model to be used for saving and loading level data. Other components do not require a reference to the shared instance as the level designer is singlehandedly responsible for any data-related operations. This is made possible via SwiftUI's [`@EnvironmentObject`](https://developer.apple.com/documentation/swiftui/environmentobject) property wrapper that allows sub-views—board, palette, action, and level list views—to gain access to an observable object—level designer view model—as injected by the main view—level designer view.
 
@@ -56,7 +56,7 @@ Below are some noteworthy interactions between components of the application.
 
 ![](https://i.imgur.com/GC9zWZr.png)
 
-On start up, the application creates a level designer view that operates on its view model to load the data. The level designer view modedl first loads the data from the device's local document directory via the data manager, and converts the received array of levels to a set and passes it to the level list view model. This is possible as the level designer view model internally contains a direct reference to the level list view model. From this point forward, the user is able to view that the levels have correctly been loaded by clicking into the level list view.
+On start up, the application creates a level designer view that operates on its view model to load the data. The level designer view model first loads the data from the device's local document directory via the data manager, and converts the parsed array of levels to a set and passes it to the level list view model. This is possible as the level designer view model internally contains a direct reference to the level list view model. From this point forward, the user is able to view that the levels have correctly been loaded by clicking into the level list view.
 
 #### Tap peg palette button
 
@@ -132,7 +132,7 @@ In order to reduce coupling between view models, the view models instantiated us
 
 ### [Unit Testing](#unit-testing)
 
-The XCode project includes unit tests for the models and view models of the application. Refer to the project for more information.
+The XCode project includes unit tests for the models and view models of the application. Refer to the project files for more information.
 
 ### [Integration Testing](#integration-testing)
 
