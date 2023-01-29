@@ -15,6 +15,10 @@ extension PaletteButtonView {
         init(paletteButton: PaletteButton = BluePegPaletteButton()) {
             self.paletteButton = paletteButton
         }
+
+        func updatePalette(_ palette: PaletteViewModel) {
+            paletteButton.updatePalette(palette)
+        }
     }
 }
 

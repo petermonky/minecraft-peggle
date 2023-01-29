@@ -15,6 +15,7 @@ extension LevelDesignerView {
         @Published var actionViewModel: ActionViewModel
         @Published var levelListViewModel: LevelListViewModel
         private var currentLevelId: UUID?
+        private let dataManager = DataManager.shared
 
         init(paletteViewModel: PaletteViewModel = .init(),
              boardViewModel: BoardViewModel = .init(),
@@ -38,8 +39,8 @@ extension LevelDesignerView {
 
         func loadLevel(_ level: Level) {
             currentLevelId = level.id
-            boardViewModel.loadPegs(level.pegs.map { PegViewModel(peg: $0) })
             actionViewModel.loadTitle(level.title)
+            boardViewModel.loadPegs(level.pegs.map { PegViewModel(peg: $0) })
         }
 
         func saveLevel() async throws {
@@ -53,12 +54,12 @@ extension LevelDesignerView {
         }
 
         func loadData() async throws {
-            let levels = try await PersistenceController.load()
+            let levels = try await dataManager.load()
             levelListViewModel.loadLevels(Set(levels))
         }
 
         func saveData() async throws {
-            try await PersistenceController.save(levels: Array(levelListViewModel.levels))
+            try await dataManager.save(levels: Array(levelListViewModel.levels))
         }
     }
 }

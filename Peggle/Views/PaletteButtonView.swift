@@ -20,7 +20,7 @@ struct PaletteButtonView: View {
         let paletteButton = viewModel.paletteButton
 
         Button(action: {
-            paletteButton.updatePalette(palette)
+            viewModel.updatePalette(palette)
         }) {
             Image(paletteButton.imageName)
                 .resizable()

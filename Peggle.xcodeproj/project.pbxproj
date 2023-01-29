@@ -16,8 +16,6 @@
 		D01E45A9297E6789003E28A8 /* PegViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01E45A8297E6789003E28A8 /* PegViewModel.swift */; };
 		D021AD8A29836B18001F63DD /* View+IsRendered.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021AD8929836B18001F63DD /* View+IsRendered.swift */; };
 		D021AD8E298397D2001F63DD /* LevelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021AD8D298397D2001F63DD /* LevelTests.swift */; };
-		D021AD91298398CA001F63DD /* PeggleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021AD90298398CA001F63DD /* PeggleUITestsLaunchTests.swift */; };
-		D021AD9329839907001F63DD /* PeggleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021AD9229839907001F63DD /* PeggleUITests.swift */; };
 		D03FFCAF29783B9000EFAD04 /* PeggleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03FFCAE29783B9000EFAD04 /* PeggleApp.swift */; };
 		D03FFCB329783B9300EFAD04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03FFCB229783B9300EFAD04 /* Assets.xcassets */; };
 		D03FFCB629783B9300EFAD04 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D03FFCB529783B9300EFAD04 /* Preview Assets.xcassets */; };
@@ -29,7 +27,7 @@
 		D04E7C5329844B72008C5941 /* PaletteButtonViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04E7C5229844B72008C5941 /* PaletteButtonViewModelTests.swift */; };
 		D04E7C5529844CF1008C5941 /* PaletteViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04E7C5429844CF1008C5941 /* PaletteViewModelTests.swift */; };
 		D04E7C5729845074008C5941 /* LevelDesignerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04E7C5629845074008C5941 /* LevelDesignerViewModelTests.swift */; };
-		D07170B6297FBB4C00C0ABAF /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07170B5297FBB4C00C0ABAF /* PersistenceController.swift */; };
+		D07170B6297FBB4C00C0ABAF /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07170B5297FBB4C00C0ABAF /* DataManager.swift */; };
 		D07170BF297FD41F00C0ABAF /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07170BE297FD41F00C0ABAF /* Level.swift */; };
 		D08AEB792979672C00EA1590 /* LevelDesignerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08AEB782979672C00EA1590 /* LevelDesignerView.swift */; };
 		D08AEB7B2979682E00EA1590 /* LevelDesignerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08AEB7A2979682E00EA1590 /* LevelDesignerViewModel.swift */; };
@@ -54,13 +52,6 @@
 			remoteGlobalIDString = D03FFCAA29783B9000EFAD04;
 			remoteInfo = Peggle;
 		};
-		D03FFCC629783B9300EFAD04 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D03FFCA329783B9000EFAD04 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D03FFCAA29783B9000EFAD04;
-			remoteInfo = Peggle;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -73,14 +64,11 @@
 		D01E45A8297E6789003E28A8 /* PegViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegViewModel.swift; sourceTree = "<group>"; };
 		D021AD8929836B18001F63DD /* View+IsRendered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+IsRendered.swift"; sourceTree = "<group>"; };
 		D021AD8D298397D2001F63DD /* LevelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelTests.swift; sourceTree = "<group>"; };
-		D021AD90298398CA001F63DD /* PeggleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeggleUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		D021AD9229839907001F63DD /* PeggleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeggleUITests.swift; sourceTree = "<group>"; };
 		D03FFCAB29783B9000EFAD04 /* Peggle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peggle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D03FFCAE29783B9000EFAD04 /* PeggleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeggleApp.swift; sourceTree = "<group>"; };
 		D03FFCB229783B9300EFAD04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D03FFCB529783B9300EFAD04 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D03FFCBB29783B9300EFAD04 /* PeggleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeggleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D03FFCC529783B9300EFAD04 /* PeggleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeggleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D04E7C462983A1DF008C5941 /* PegTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegTests.swift; sourceTree = "<group>"; };
 		D04E7C4A2983AAFE008C5941 /* LevelListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelListViewModelTests.swift; sourceTree = "<group>"; };
 		D04E7C4C2983D273008C5941 /* ActionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewModelTests.swift; sourceTree = "<group>"; };
@@ -89,7 +77,7 @@
 		D04E7C5229844B72008C5941 /* PaletteButtonViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteButtonViewModelTests.swift; sourceTree = "<group>"; };
 		D04E7C5429844CF1008C5941 /* PaletteViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteViewModelTests.swift; sourceTree = "<group>"; };
 		D04E7C5629845074008C5941 /* LevelDesignerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerViewModelTests.swift; sourceTree = "<group>"; };
-		D07170B5297FBB4C00C0ABAF /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		D07170B5297FBB4C00C0ABAF /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		D07170BE297FD41F00C0ABAF /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		D08AEB782979672C00EA1590 /* LevelDesignerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerView.swift; sourceTree = "<group>"; };
 		D08AEB7A2979682E00EA1590 /* LevelDesignerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerViewModel.swift; sourceTree = "<group>"; };
@@ -115,13 +103,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D03FFCB829783B9300EFAD04 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D03FFCC229783B9300EFAD04 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -212,21 +193,11 @@
 			path = PeggleTests;
 			sourceTree = "<group>";
 		};
-		D021AD8F29839893001F63DD /* PeggleUITests */ = {
-			isa = PBXGroup;
-			children = (
-				D021AD90298398CA001F63DD /* PeggleUITestsLaunchTests.swift */,
-				D021AD9229839907001F63DD /* PeggleUITests.swift */,
-			);
-			path = PeggleUITests;
-			sourceTree = "<group>";
-		};
 		D03FFCA229783B9000EFAD04 = {
 			isa = PBXGroup;
 			children = (
 				D03FFCAD29783B9000EFAD04 /* Peggle */,
 				D021AD8B2983977A001F63DD /* PeggleTests */,
-				D021AD8F29839893001F63DD /* PeggleUITests */,
 				D03FFCAC29783B9000EFAD04 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -236,7 +207,6 @@
 			children = (
 				D03FFCAB29783B9000EFAD04 /* Peggle.app */,
 				D03FFCBB29783B9300EFAD04 /* PeggleTests.xctest */,
-				D03FFCC529783B9300EFAD04 /* PeggleUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -292,7 +262,7 @@
 		D07170B4297FBA3F00C0ABAF /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				D07170B5297FBB4C00C0ABAF /* PersistenceController.swift */,
+				D07170B5297FBB4C00C0ABAF /* DataManager.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -322,6 +292,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D03FFCD229783B9300EFAD04 /* Build configuration list for PBXNativeTarget "PeggleTests" */;
 			buildPhases = (
+				D017DF9929869322009125B3 /* Run SwiftLint */,
 				D03FFCB729783B9300EFAD04 /* Sources */,
 				D03FFCB829783B9300EFAD04 /* Frameworks */,
 				D03FFCB929783B9300EFAD04 /* Resources */,
@@ -335,24 +306,6 @@
 			productName = PeggleTests;
 			productReference = D03FFCBB29783B9300EFAD04 /* PeggleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		D03FFCC429783B9300EFAD04 /* PeggleUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D03FFCD529783B9300EFAD04 /* Build configuration list for PBXNativeTarget "PeggleUITests" */;
-			buildPhases = (
-				D03FFCC129783B9300EFAD04 /* Sources */,
-				D03FFCC229783B9300EFAD04 /* Frameworks */,
-				D03FFCC329783B9300EFAD04 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D03FFCC729783B9300EFAD04 /* PBXTargetDependency */,
-			);
-			name = PeggleUITests;
-			productName = PeggleUITests;
-			productReference = D03FFCC529783B9300EFAD04 /* PeggleUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -368,11 +321,6 @@
 						CreatedOnToolsVersion = 14.2;
 					};
 					D03FFCBA29783B9300EFAD04 = {
-						CreatedOnToolsVersion = 14.2;
-						LastSwiftMigration = 1420;
-						TestTargetID = D03FFCAA29783B9000EFAD04;
-					};
-					D03FFCC429783B9300EFAD04 = {
 						CreatedOnToolsVersion = 14.2;
 						LastSwiftMigration = 1420;
 						TestTargetID = D03FFCAA29783B9000EFAD04;
@@ -394,7 +342,6 @@
 			targets = (
 				D03FFCAA29783B9000EFAD04 /* Peggle */,
 				D03FFCBA29783B9300EFAD04 /* PeggleTests */,
-				D03FFCC429783B9300EFAD04 /* PeggleUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -416,17 +363,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D03FFCC329783B9300EFAD04 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		D0078972297EA64A00EB5AAE /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint >/dev/null; then\n  swiftlint --fix && swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		D017DF9929869322009125B3 /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -456,7 +415,7 @@
 				D08AEB7B2979682E00EA1590 /* LevelDesignerViewModel.swift in Sources */,
 				D08AEB792979672C00EA1590 /* LevelDesignerView.swift in Sources */,
 				D021AD8A29836B18001F63DD /* View+IsRendered.swift in Sources */,
-				D07170B6297FBB4C00C0ABAF /* PersistenceController.swift in Sources */,
+				D07170B6297FBB4C00C0ABAF /* DataManager.swift in Sources */,
 				D0BF3F08297D6F3400354272 /* Peg.swift in Sources */,
 				D0BF3F0A297D6FB200354272 /* CGPoint+Hashable.swift in Sources */,
 				D01E45A9297E6789003E28A8 /* PegViewModel.swift in Sources */,
@@ -495,15 +454,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D03FFCC129783B9300EFAD04 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D021AD91298398CA001F63DD /* PeggleUITestsLaunchTests.swift in Sources */,
-				D021AD9329839907001F63DD /* PeggleUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -511,11 +461,6 @@
 			isa = PBXTargetDependency;
 			target = D03FFCAA29783B9000EFAD04 /* Peggle */;
 			targetProxy = D03FFCBC29783B9300EFAD04 /* PBXContainerItemProxy */;
-		};
-		D03FFCC729783B9300EFAD04 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D03FFCAA29783B9000EFAD04 /* Peggle */;
-			targetProxy = D03FFCC629783B9300EFAD04 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -745,55 +690,6 @@
 			};
 			name = Release;
 		};
-		D03FFCD629783B9300EFAD04 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X77GX48L42;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.petermonky.PeggleUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Peggle;
-			};
-			name = Debug;
-		};
-		D03FFCD729783B9300EFAD04 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X77GX48L42;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.petermonky.PeggleUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Peggle;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -820,15 +716,6 @@
 			buildConfigurations = (
 				D03FFCD329783B9300EFAD04 /* Debug */,
 				D03FFCD429783B9300EFAD04 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D03FFCD529783B9300EFAD04 /* Build configuration list for PBXNativeTarget "PeggleUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D03FFCD629783B9300EFAD04 /* Debug */,
-				D03FFCD729783B9300EFAD04 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

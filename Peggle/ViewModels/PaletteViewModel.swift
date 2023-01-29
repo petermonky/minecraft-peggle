@@ -35,6 +35,13 @@ extension PaletteView {
             PaletteButtonViewModel(paletteButton: deleteButton)
         }
 
+        func createPegAtPosition(_ position: CGPoint) -> Peg? {
+            guard mode != .deletePeg else {
+                return nil
+            }
+            return pegFactory?.createPegAtPosition(position)
+        }
+
         func onPegButtonSelect(pegButton: PegPaletteButton) {
             mode = pegButton.type
             pegFactory = pegButton.factory
