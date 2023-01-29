@@ -9,9 +9,7 @@ The purpose of this developer guide is to provide a comprehensive understanding 
 - interested in understanding the inner workings of the application, 
 - intending to making further contributions to the application.
 
-The guide is organised into several sections, starting with an overview of the application's architecture and the relationships between its components. The application follows the **Model-View-VidewModel (MVVM)** architectural pattern to separate its domain logic and presentation logic; the guide therefore delves into the details of each component, including the model, view, and view model layers. To demonstrate the extensibility and maintainability of the application, the guide also covers the design patterns and paradigms used throughout development.
-
-In order to aid with understanding the relationships between the different components of the application – namely, the flow of data and control between them – the guide also includes diagrams to visually represent inter-component interactions. The guide also includes information about the performance constraints of the application as to establish a level of strain that can reasonably be handled by the application.
+The guide is organised into several sections, starting with an overview of the application's architecture and the relationships between its components. The application follows the **Model-View-VidewModel (MVVM)** architectural pattern to separate its domain logic and presentation logic; the guide therefore delves into the details of each component, including the model, view, and view model layers. To demonstrate the extensibility and maintainability of the application, the guide also covers the design patterns and paradigms used throughout development. In order to aid with understanding the relationships between the different components of the application – namely, the flow of data and control between them – the guide also includes diagrams to visually represent inter-component interactions.
 
 ### [Application Overview](#application-overview)
 
