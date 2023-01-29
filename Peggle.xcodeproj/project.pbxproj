@@ -12,6 +12,7 @@
 		D0078967297E961100EB5AAE /* PegFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0078966297E961100EB5AAE /* PegFactory.swift */; };
 		D007896F297E9C6300EB5AAE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D007896E297E9C6300EB5AAE /* Constants.swift */; };
 		D0078971297EA11400EB5AAE /* ActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0078970297EA11400EB5AAE /* ActionView.swift */; };
+		D017DFA02986A6E3009125B3 /* DeveloperGuide.md in Resources */ = {isa = PBXBuildFile; fileRef = D017DF9F2986A6E3009125B3 /* DeveloperGuide.md */; };
 		D01E45A7297E6777003E28A8 /* PegView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01E45A6297E6777003E28A8 /* PegView.swift */; };
 		D01E45A9297E6789003E28A8 /* PegViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01E45A8297E6789003E28A8 /* PegViewModel.swift */; };
 		D021AD8A29836B18001F63DD /* View+IsRendered.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021AD8929836B18001F63DD /* View+IsRendered.swift */; };
@@ -60,6 +61,7 @@
 		D0078966297E961100EB5AAE /* PegFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegFactory.swift; sourceTree = "<group>"; };
 		D007896E297E9C6300EB5AAE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D0078970297EA11400EB5AAE /* ActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionView.swift; sourceTree = "<group>"; };
+		D017DF9F2986A6E3009125B3 /* DeveloperGuide.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = DeveloperGuide.md; sourceTree = "<group>"; };
 		D01E45A6297E6777003E28A8 /* PegView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegView.swift; sourceTree = "<group>"; };
 		D01E45A8297E6789003E28A8 /* PegViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegViewModel.swift; sourceTree = "<group>"; };
 		D021AD8929836B18001F63DD /* View+IsRendered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+IsRendered.swift"; sourceTree = "<group>"; };
@@ -184,6 +186,14 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		D017DF9A2986A618009125B3 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				D017DF9F2986A6E3009125B3 /* DeveloperGuide.md */,
+			);
+			path = Documentation;
+			sourceTree = "<group>";
+		};
 		D021AD8B2983977A001F63DD /* PeggleTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +224,7 @@
 		D03FFCAD29783B9000EFAD04 /* Peggle */ = {
 			isa = PBXGroup;
 			children = (
+				D017DF9A2986A618009125B3 /* Documentation */,
 				D0078963297E958900EB5AAE /* Lifecycle */,
 				D0078961297E953700EB5AAE /* Views */,
 				D0078962297E955A00EB5AAE /* ViewModels */,
@@ -353,6 +364,7 @@
 			files = (
 				D03FFCB629783B9300EFAD04 /* Preview Assets.xcassets in Resources */,
 				D03FFCB329783B9300EFAD04 /* Assets.xcassets in Resources */,
+				D017DFA02986A6E3009125B3 /* DeveloperGuide.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
