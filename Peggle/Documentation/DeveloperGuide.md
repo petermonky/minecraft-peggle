@@ -136,7 +136,7 @@ In order to reduce coupling between view models, the view models instantiated us
 
 The XCode project includes unit tests for the models and view models of the application. Refer to the project for more information.
 
-### Integration Testing
+### [Integration Testing](#integration-testing)
 
 Below is an exposition on how integration tests will be performed on the application.
 
