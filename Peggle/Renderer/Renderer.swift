@@ -8,7 +8,8 @@
 import Foundation
 
 class Renderer: ObservableObject, GameEngineDelegate {
-    @Published var ballGameView: BallGameView
+//    @Published var ballGameView: BallGameView
+    @Published var ballGameViews: [BallGameView]
     @Published var pegGameViews: [PegGameView]
     var gameEngine: GameEngine
 
@@ -16,7 +17,7 @@ class Renderer: ObservableObject, GameEngineDelegate {
     init(gameEngine: GameEngine = GameEngine(level: Level(id: nil,
                                                           frame: CGSize(width: 834.0, height: 984.0)))) {
         self.pegGameViews = []
-        self.ballGameView = BallGameView()
+        self.ballGameViews = []
         self.gameEngine = gameEngine
         gameEngine.delegate = self
     }
@@ -25,10 +26,12 @@ class Renderer: ObservableObject, GameEngineDelegate {
         // TODO: let game engine handle
         let pegGameObjects = physicsWorld.bodies.compactMap { $0 as? PegGameObject }
         pegGameViews = pegGameObjects.map { PegGameView(gameObject: $0) }
+        let ballGameObjects = physicsWorld.bodies.compactMap { $0 as? BallGameObject }
+        ballGameViews = ballGameObjects.map { BallGameView(gameObject: $0) }
 
-        if let ballGameObject = physicsWorld.bodies.first(where: { $0 is BallGameObject }) as? BallGameObject {
-            ballGameView = BallGameView(gameObject: ballGameObject)
-        }
+//        if let ballGameObject = physicsWorld.bodies.first(where: { $0 is BallGameObject }) as? BallGameObject {
+//            ballGameView = BallGameView(gameObject: ballGameObject)
+//        }
     }
 
     func render() {

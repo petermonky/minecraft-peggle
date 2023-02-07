@@ -49,7 +49,7 @@
 		D09BBCFA2990C9AD004340FF /* PhysicsShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BBCF92990C9AD004340FF /* PhysicsShape.swift */; };
 		D09BBCFC29910977004340FF /* BallGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BBCFB29910977004340FF /* BallGameView.swift */; };
 		D09BBD0029912096004340FF /* CirclePhysicsBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BBCFF29912096004340FF /* CirclePhysicsBody.swift */; };
-		D09BBD0229915B78004340FF /* DynamicBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BBD0129915B78004340FF /* DynamicBody.swift */; };
+		D09BBD0229915B78004340FF /* DynamicPhysicsBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BBD0129915B78004340FF /* DynamicPhysicsBody.swift */; };
 		D09BBD0429915E04004340FF /* CircleDynamicPhysicsBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BBD0329915E04004340FF /* CircleDynamicPhysicsBody.swift */; };
 		D09BBD0A2991FDE2004340FF /* BallCollidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BBD092991FDE2004340FF /* BallCollidable.swift */; };
 		D0BF3F04297BC6C800354272 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF3F03297BC6C800354272 /* BoardView.swift */; };
@@ -118,7 +118,7 @@
 		D09BBCF92990C9AD004340FF /* PhysicsShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicsShape.swift; sourceTree = "<group>"; };
 		D09BBCFB29910977004340FF /* BallGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallGameView.swift; sourceTree = "<group>"; };
 		D09BBCFF29912096004340FF /* CirclePhysicsBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclePhysicsBody.swift; sourceTree = "<group>"; };
-		D09BBD0129915B78004340FF /* DynamicBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicBody.swift; sourceTree = "<group>"; };
+		D09BBD0129915B78004340FF /* DynamicPhysicsBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicPhysicsBody.swift; sourceTree = "<group>"; };
 		D09BBD0329915E04004340FF /* CircleDynamicPhysicsBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleDynamicPhysicsBody.swift; sourceTree = "<group>"; };
 		D09BBD092991FDE2004340FF /* BallCollidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallCollidable.swift; sourceTree = "<group>"; };
 		D0BF3F03297BC6C800354272 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
@@ -295,7 +295,7 @@
 				D09BBCF92990C9AD004340FF /* PhysicsShape.swift */,
 				D044900E298EA25A0068AA3C /* PhysicsWorld.swift */,
 				D0449010298EA3EA0068AA3C /* PhysicsBody.swift */,
-				D09BBD0129915B78004340FF /* DynamicBody.swift */,
+				D09BBD0129915B78004340FF /* DynamicPhysicsBody.swift */,
 				D09BBCFF29912096004340FF /* CirclePhysicsBody.swift */,
 				D09BBD0329915E04004340FF /* CircleDynamicPhysicsBody.swift */,
 			);
@@ -534,7 +534,7 @@
 				D07170BF297FD41F00C0ABAF /* Level.swift in Sources */,
 				D09BBCF0298FE027004340FF /* GameEngineDelegate.swift in Sources */,
 				D0078971297EA11400EB5AAE /* ActionView.swift in Sources */,
-				D09BBD0229915B78004340FF /* DynamicBody.swift in Sources */,
+				D09BBD0229915B78004340FF /* DynamicPhysicsBody.swift in Sources */,
 				D09BBCF62990058A004340FF /* PegGameView.swift in Sources */,
 				D0CB44232982F651008C5DAD /* View+HideKeyboard.swift in Sources */,
 				D0078960297E8A8500EB5AAE /* PaletteButtonViewModel.swift in Sources */,

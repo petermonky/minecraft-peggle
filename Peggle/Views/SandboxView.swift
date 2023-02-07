@@ -16,7 +16,9 @@ struct SandboxView: View {
 
     var body: some View {
         ZStack {
-            renderer.ballGameView
+//            renderer.ballGameView
+
+            ForEach(renderer.ballGameViews, id: \.position) { $0 }
 
             ForEach(renderer.pegGameViews, id: \.position) { $0 }
         }

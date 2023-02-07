@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol CircleDynamicPhysicsBody: CirclePhysicsBody, DynamicBody {
+protocol CircleDynamicPhysicsBody: CirclePhysicsBody, DynamicPhysicsBody {
 }
 
 // MARK: Frame collision
@@ -56,12 +56,14 @@ extension CircleDynamicPhysicsBody {
         position.distance(to: circleBody.position) <= (shape.radius + circleBody.shape.radius)
     }
 
+    // TODO: fledge out collision resolution logic
     mutating func resolveCollisionWith(circleBody: any CirclePhysicsBody, futureBody: Body, restitution: CGFloat) {
-        if futureBody.hasCollisionWith(circleBody: circleBody) {
-            let normalised = CGVector(from: circleBody.position, to: position).normalise
-            let scaled = normalised.scale(by: shape.radius + circleBody.shape.radius)
-            velocity = velocity.reflectAlongVector(scaled).scale(by: restitution)
-            position = circleBody.position.move(by: scaled)
+        guard futureBody.hasCollisionWith(circleBody: circleBody) else {
+            return
         }
+        let normalised = CGVector(from: circleBody.position, to: position).normalise
+        let scaled = normalised.scale(by: shape.radius + circleBody.shape.radius)
+        position = circleBody.position.move(by: scaled)
+        velocity = velocity.reflectAlongVector(scaled).scale(by: restitution)
     }
 }

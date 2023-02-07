@@ -9,14 +9,14 @@ import Foundation
 
 struct PegGameObject: CirclePhysicsBody, BallCollidable {
     var position: CGPoint
-    var shape: CirclePhysicsShape
     var hasCollidedWithBall: Bool
+    let shape: CirclePhysicsShape
     let peg: Peg
 
     init(peg: Peg = BluePeg()) {
         self.position = peg.position
-        self.shape = CirclePhysicsShape(radius: Constants.Peg.radius)
         self.hasCollidedWithBall = false
+        self.shape = CirclePhysicsShape(radius: Constants.Peg.radius)
         self.peg = peg
     }
 

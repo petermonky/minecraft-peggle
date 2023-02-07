@@ -10,14 +10,13 @@ import Foundation
 protocol PhysicsBody {
     associatedtype Shape: PhysicsShape
 
-    var position: CGPoint { get set }
+    var position: CGPoint { get }
+    var velocity: CGVector { get }
     var shape: Shape { get }
-
-    mutating func updatePosition(_ position: CGPoint)
 }
 
 extension PhysicsBody {
-    mutating func updatePosition(_ position: CGPoint) {
-        self.position = position
+    var velocity: CGVector {
+        CGVector.zero
     }
 }

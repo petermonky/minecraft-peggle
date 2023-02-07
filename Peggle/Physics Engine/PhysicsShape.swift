@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol PhysicsShape {
+protocol PhysicsShape: Equatable {
     var center: CGPoint { get }
 }
 

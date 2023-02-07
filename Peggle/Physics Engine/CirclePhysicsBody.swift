@@ -8,5 +8,5 @@
 import Foundation
 
 protocol CirclePhysicsBody: PhysicsBody where Shape == CirclePhysicsShape {
-    override var shape: Shape { get }
+    override var shape: CirclePhysicsShape { get }
 }
