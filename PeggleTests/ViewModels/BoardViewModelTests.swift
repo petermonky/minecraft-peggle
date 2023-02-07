@@ -15,10 +15,10 @@ final class BoardViewModelTests: XCTestCase {
 
         XCTAssertEqual(boardViewModel.pegViewModels, [],
                        "Board view model should be initialised with empty set of peg view models.")
-        XCTAssertNil(boardViewModel.initialBoardSize,
-                     "Board view model should be initialised with initial board size of nil.")
-        XCTAssertNil(boardViewModel.currentBoardSize,
-                     "Board view model should be initialised with current board size of nil.")
+        XCTAssertEqual(boardViewModel.initialBoardSize, CGSize.zero,
+                       "Board view model should be initialised with initial board size of CGSize.zero.")
+        XCTAssertEqual(boardViewModel.currentBoardSize, CGSize.zero,
+                       "Board view model should be initialised with current board size of CGSize.zero.")
     }
 
     func testConstruct_filledParameters() {
@@ -27,10 +27,10 @@ final class BoardViewModelTests: XCTestCase {
 
         XCTAssertEqual(boardViewModel.pegViewModels, pegViewModels,
                        "Board view model should be initialised with filled set of peg view models.")
-        XCTAssertNil(boardViewModel.initialBoardSize,
-                     "Board view model should be initialised with initial board size of nil.")
-        XCTAssertNil(boardViewModel.currentBoardSize,
-                     "Board view model should be initialised with current board size of nil.")
+        XCTAssertEqual(boardViewModel.initialBoardSize, CGSize.zero,
+                       "Board view model should be initialised with initial board size of CGSize.zero.")
+        XCTAssertEqual(boardViewModel.currentBoardSize, CGSize.zero,
+                       "Board view model should be initialised with current board size of CGSize.zero.")
     }
 
     func testPegArray_emptyPegViewModels() {

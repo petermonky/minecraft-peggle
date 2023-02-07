@@ -45,6 +45,7 @@ extension LevelDesignerView {
 
         func saveLevel() async throws {
             let level = Level(id: currentLevelId,
+                              frame: boardViewModel.initialBoardSize,
                               title: actionViewModel.title,
                               updatedAt: Date.now,
                               pegs: Set(boardViewModel.pegArray))

@@ -35,7 +35,7 @@ extension PegView {
 
 // MARK: Hashable
 
-extension PegView.ViewModel: Hashable {
+extension PegViewModel: Hashable {
     static func == (lhs: PegViewModel, rhs: PegViewModel) -> Bool {
         lhs.peg == rhs.peg
     }

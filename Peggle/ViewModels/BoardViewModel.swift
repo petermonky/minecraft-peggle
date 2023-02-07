@@ -11,8 +11,8 @@ typealias BoardViewModel = BoardView.ViewModel
 extension BoardView {
     class ViewModel: ObservableObject {
         @Published var pegViewModels: Set<PegViewModel>
-        @Published var initialBoardSize: CGSize?
-        @Published var currentBoardSize: CGSize?
+        @Published var initialBoardSize = CGSize.zero
+        @Published var currentBoardSize = CGSize.zero
 
         init(pegViewModels: Set<PegViewModel> = []) {
             self.pegViewModels = pegViewModels
@@ -23,10 +23,14 @@ extension BoardView {
         }
 
         var sizeScale: Double {
-            guard let currentBoardSize = currentBoardSize, let initialBoardSize = initialBoardSize else {
+            guard boardSuccessfullyInitialised else {
                 return 1
             }
             return currentBoardSize.height / initialBoardSize.height
+        }
+
+        var boardSuccessfullyInitialised: Bool {
+            initialBoardSize != CGSize.zero && currentBoardSize != CGSize.zero
         }
 
         func initialiseBoardSize(boardSize: CGSize) {
@@ -82,9 +86,11 @@ extension BoardView {
         }
 
         func isOverflowingPeg(_ pegViewModel: PegViewModel) -> Bool {
-            guard let boardWidth = currentBoardSize?.width, let boardHeight = currentBoardSize?.height else {
+            guard boardSuccessfullyInitialised else {
                 return false
             }
+            let boardWidth = currentBoardSize.width
+            let boardHeight = currentBoardSize.height
             let pegX = pegViewModel.peg.position.x
             let pegY = pegViewModel.peg.position.y
 

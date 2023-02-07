@@ -17,9 +17,9 @@ final class LevelDesignerViewModelTests: XCTestCase {
                       && levelDesignerViewModel.paletteViewModel.pegFactory is BluePegFactory,
                       "Level designer view model should be initialised with default palette view model.")
         XCTAssertTrue(levelDesignerViewModel.boardViewModel.pegViewModels.isEmpty
-                      && levelDesignerViewModel.boardViewModel.initialBoardSize == nil
-                      && levelDesignerViewModel.boardViewModel.currentBoardSize == nil,
-                       "Level designer view model should be initialised with default board view model.")
+                      && levelDesignerViewModel.boardViewModel.initialBoardSize == CGSize.zero
+                      && levelDesignerViewModel.boardViewModel.currentBoardSize == CGSize.zero,
+                      "Level designer view model should be initialised with default board view model.")
         XCTAssertEqual(levelDesignerViewModel.actionViewModel.title, "",
                        "Level designer view model should be initialised with default action view model.")
         XCTAssertEqual(levelDesignerViewModel.levelListViewModel.levels, [],

@@ -24,3 +24,15 @@ extension Constants {
         static let afterImageOpacity = 0.5
     }
 }
+
+extension Constants {
+    enum Ball {
+        static let radius: CGFloat = 30.0
+    }
+}
+
+extension Constants {
+    enum Physics {
+        static let restitution: CGFloat = 0.8
+    }
+}
