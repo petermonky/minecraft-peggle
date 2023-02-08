@@ -7,22 +7,24 @@
 
 import SwiftUI
 
-struct PegGameView: View {
-    let imageName: String
-    let position: CGPoint
+struct PegGameView: GameView {
+    let id: UUID
+    let gameObject: PegGameObject
 
     init(gameObject: PegGameObject = .init()) {
-        imageName = gameObject.peg.imageName
-        position = gameObject.position
+        self.id = UUID()
+        self.gameObject = gameObject
     }
 
     var body: some View {
-        Image(imageName)
+        Image(gameObject.hasCollidedWithBall
+              ? gameObject.peg.glowImageName
+              : gameObject.peg.normalImageName)
             .resizable()
             .frame(width: 2 * Constants.Peg.radius,
                    height: 2 * Constants.Peg.radius)
             .clipShape(Circle())
-            .position(position)
+            .position(gameObject.position)
     }
 }
 

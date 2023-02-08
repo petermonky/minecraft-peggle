@@ -7,16 +7,22 @@
 
 import Foundation
 
-protocol PhysicsBody {
+protocol PhysicsBody: AnyObject {
     associatedtype Shape: PhysicsShape
 
     var position: CGPoint { get }
     var velocity: CGVector { get }
     var shape: Shape { get }
+
+    func resolvedCollision(with other: any PhysicsBody)
+    func clone() -> Self
 }
 
 extension PhysicsBody {
     var velocity: CGVector {
         CGVector.zero
+    }
+
+    func resolvedCollision(with other: any PhysicsBody) {
     }
 }

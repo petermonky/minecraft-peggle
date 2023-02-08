@@ -9,22 +9,22 @@ import Foundation
 import SwiftUI
 
 enum PegType: String, Codable {
-    case blue = "peg-blue"
-    case orange = "peg-orange"
+    case blue
+    case orange
 }
 
 class Peg: Identifiable, Codable {
     var id = UUID()
     var type: PegType
     var position: CGPoint
+    var normalImageName: String
+    var glowImageName: String
 
-    var imageName: String {
-        type.rawValue
-    }
-
-    init(type: PegType, position: CGPoint) {
+    init(type: PegType, position: CGPoint, normalImageName: String, glowImageName: String) {
         self.type = type
         self.position = position
+        self.normalImageName = normalImageName
+        self.glowImageName = glowImageName
     }
 
     func overlapsWith(peg other: Peg) -> Bool {
@@ -37,11 +37,7 @@ class Peg: Identifiable, Codable {
     }
 
     func clone() -> Peg {
-        Peg(type: type, position: position)
-    }
-
-    enum CodingKeys: String, CodingKey {
-        case type, position
+        Peg(type: type, position: position, normalImageName: normalImageName, glowImageName: glowImageName)
     }
 }
 
@@ -59,7 +55,7 @@ extension Peg: Hashable {
 
 class BluePeg: Peg {
     init(position: CGPoint = CGPoint.zero) {
-        super.init(type: .blue, position: position)
+        super.init(type: .blue, position: position, normalImageName: "peg-blue", glowImageName: "peg-blue-glow")
     }
 
     required init(from decoder: Decoder) throws {
@@ -73,7 +69,7 @@ class BluePeg: Peg {
 
 class OrangePeg: Peg {
     init(position: CGPoint = CGPoint.zero) {
-        super.init(type: .orange, position: position)
+        super.init(type: .orange, position: position, normalImageName: "peg-orange", glowImageName: "peg-orange-glow")
     }
 
     required init(from decoder: Decoder) throws {

@@ -7,22 +7,22 @@
 
 import SwiftUI
 
-struct BallGameView: View {
-    let imageName: String
-    let position: CGPoint
+struct BallGameView: GameView {
+    let id: UUID
+    let gameObject: BallGameObject
 
     init(gameObject: BallGameObject = .init()) {
-        imageName = "ball"
-        position = gameObject.position
+        self.id = UUID()
+        self.gameObject = gameObject
     }
 
     var body: some View {
-        Image(imageName)
+        Image("ball")
             .resizable()
             .frame(width: 2 * Constants.Ball.radius,
                    height: 2 * Constants.Ball.radius)
             .clipShape(Circle())
-            .position(position)
+            .position(gameObject.position)
     }
 }
 

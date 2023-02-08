@@ -23,7 +23,7 @@ final class PegViewModelTests: XCTestCase {
                        "Peg view model peg type should be blue.")
         XCTAssertEqual(pegViewModel.peg.position, CGPoint.zero,
                        "Peg view model peg position should be CGPoint.zero.")
-        XCTAssertEqual(pegViewModel.peg.imageName, PegType.blue.rawValue,
+        XCTAssertEqual(pegViewModel.peg.normalImageName, "peg-blue",
                        "Peg view model peg imageName should be \"peg-blue\".")
     }
 
@@ -43,7 +43,7 @@ final class PegViewModelTests: XCTestCase {
                        "Peg view model peg type should be orange.")
         XCTAssertEqual(pegViewModel.peg.position, pegPosition,
                        "Peg view model peg position should be (100, 100).")
-        XCTAssertEqual(pegViewModel.peg.imageName, PegType.orange.rawValue,
+        XCTAssertEqual(pegViewModel.peg.normalImageName, "peg-orange",
                        "Peg view model peg imageName should be \"peg-orange\".")
     }
 
@@ -187,7 +187,7 @@ final class PegViewModelTests: XCTestCase {
         XCTAssertEqual(pegViewModel.peg.type, clone.peg.type, "Peg type should be equal to clone type.")
         XCTAssertEqual(pegViewModel.peg.position, clone.peg.position,
                        "Peg position should be equal to clone position.")
-        XCTAssertEqual(pegViewModel.peg.imageName, clone.peg.imageName,
+        XCTAssertEqual(pegViewModel.peg.normalImageName, clone.peg.normalImageName,
                        "Peg imageName should be equal to clone position.")
     }
 
@@ -201,7 +201,7 @@ final class PegViewModelTests: XCTestCase {
         XCTAssertEqual(pegViewModel.peg.type, clone.peg.type, "Peg type should be equal to clone type.")
         XCTAssertEqual(pegViewModel.peg.position, clone.peg.position,
                        "Peg position should be equal to clone position.")
-        XCTAssertEqual(pegViewModel.peg.imageName, clone.peg.imageName,
+        XCTAssertEqual(pegViewModel.peg.normalImageName, clone.peg.normalImageName,
                        "Peg imageName should be equal to clone position.")
     }
 

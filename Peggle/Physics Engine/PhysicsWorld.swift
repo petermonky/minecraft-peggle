@@ -34,68 +34,58 @@ class PhysicsWorld {
     }
 
     private func handleSteps(delta: TimeInterval) {
-        bodies = bodies.map { body in
-            guard var body = body as? any DynamicPhysicsBody else {
-                return body
+        for body in bodies {
+            guard let body = body as? any DynamicPhysicsBody else {
+                continue
             }
-            body = applyStep(body: body, delta: delta)
-            return body
+            applyStep(body: body, delta: delta)
         }
     }
 
     private func handleCollisions(delta: TimeInterval) {
-        var copy = bodies
         for i in 0..<bodies.count {
-            guard var body = bodies[i] as? (any DynamicPhysicsBody) else {
+            guard let body = bodies[i] as? (any DynamicPhysicsBody) else {
                 continue
             }
-            body = applyFrameCollisionBetween(body, and: frame, delta: delta)
-            for j in i + 1..<bodies.count {
+            applyFrameCollisionBetween(body, and: frame, delta: delta)
+            for j in 0..<bodies.count where i != j {
                 if let circleBody = bodies[j] as? (any CirclePhysicsBody) {
-                    body = applyCircleBodyCollisionBetween(body, and: circleBody, delta: delta)
+                    applyCircleBodyCollisionBetween(body, and: circleBody, delta: delta)
+                } else {
+                    fatalError("Invalid body")
                 } // TODO: else if polygon
             }
-            copy[i] = body
         }
-        bodies = copy
     }
 
-    private func applyStep<T: DynamicPhysicsBody>(body: T, delta: TimeInterval) -> T {
-        var body = body
-        body = applyGravity(body: body, delta: delta)
-        body = applyVelocity(body: body, delta: delta)
-        return body
+    private func applyStep<T: DynamicPhysicsBody>(body: T, delta: TimeInterval) {
+        applyGravity(body: body, delta: delta)
+        applyVelocity(body: body, delta: delta)
     }
 
-    private func applyGravity<T: DynamicPhysicsBody>(body: T, delta: TimeInterval) -> T {
-        var body = body
+    private func applyGravity<T: DynamicPhysicsBody>(body: T, delta: TimeInterval) {
         let velocity = body.velocity.add(by: gravity.scale(by: delta))
         body.updateVelocity(velocity)
-        return body
     }
 
-    private func applyVelocity<T: DynamicPhysicsBody>(body: T, delta: TimeInterval) -> T {
-        var body = body
+    private func applyVelocity<T: DynamicPhysicsBody>(body: T, delta: TimeInterval) {
         let position = body.position.move(by: body.velocity.scale(by: delta))
         body.updatePosition(position)
-        return body
     }
 
     private func applyFrameCollisionBetween<T: DynamicPhysicsBody>(_ body: T,
                                                                    and frame: CGSize,
-                                                                   delta: TimeInterval) -> T {
-        var body = body
-        let futureBody = applyStep(body: body, delta: delta)
+                                                                   delta: TimeInterval) {
+        let futureBody = body.clone()
+        applyStep(body: futureBody, delta: delta)
         body.resolveCollisionWith(frame: frame, futureBody: futureBody)
-        return body
     }
 
     private func applyCircleBodyCollisionBetween<T: DynamicPhysicsBody>(_ body: T,
                                                                         and circleBody: any CirclePhysicsBody,
-                                                                        delta: TimeInterval) -> T {
-        var body = body
-        let futureBody = applyStep(body: body, delta: delta)
+                                                                        delta: TimeInterval) {
+        let futureBody = body.clone()
+        applyStep(body: futureBody, delta: delta)
         body.resolveCollisionWith(circleBody: circleBody, futureBody: futureBody)
-        return body
     }
 }

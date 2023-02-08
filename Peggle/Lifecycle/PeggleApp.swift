@@ -11,7 +11,7 @@ import SwiftUI
 struct PeggleApp: App {
     var body: some Scene {
         WindowGroup {
-            SandboxView()
+            BoardGameView()
 //            LevelDesignerView()
 //                .environment(\.colorScheme, .light)
         }

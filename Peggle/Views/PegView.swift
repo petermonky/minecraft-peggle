@@ -16,7 +16,7 @@ struct PegView: View {
     }
 
     func renderBaseImage(isAfterImage: Bool) -> some View {
-        Image(viewModel.peg.imageName)
+        Image(viewModel.peg.normalImageName)
             .resizable()
             .overlay(Color.white.opacity(isAfterImage
                                          ? Constants.Peg.afterImageOpacity

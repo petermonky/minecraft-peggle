@@ -16,7 +16,7 @@ final class PegTests: XCTestCase {
         XCTAssertNotNil(peg.id, "Peg id should be new UUID.")
         XCTAssertEqual(peg.type, PegType.blue, "Peg type should be blue.")
         XCTAssertEqual(peg.position, CGPoint.zero, "Peg position should be CGPoint.zero.")
-        XCTAssertEqual(peg.imageName, PegType.blue.rawValue, "Peg imageName should be \"peg-blue\".")
+        XCTAssertEqual(peg.normalImageName, "peg-blue", "Peg imageName should be \"peg-blue\".")
     }
 
     func testConstruct_orangePeg() {
@@ -25,7 +25,7 @@ final class PegTests: XCTestCase {
         XCTAssertNotNil(peg.id, "Peg id should be new UUID.")
         XCTAssertEqual(peg.type, PegType.orange, "Peg type should be orange.")
         XCTAssertEqual(peg.position, CGPoint.zero, "Peg position should be CGPoint.zero.")
-        XCTAssertEqual(peg.imageName, PegType.orange.rawValue, "Peg imageName should be \"peg-orange\".")
+        XCTAssertEqual(peg.normalImageName, "peg-orange", "Peg imageName should be \"peg-orange\".")
     }
 
     func testOverlapsWith_fullOverlappingPeg_hasOverlap() {
@@ -166,7 +166,7 @@ final class PegTests: XCTestCase {
         XCTAssertNotEqual(peg.id, clone.id, "Peg id should not be equal to clone id.")
         XCTAssertEqual(peg.type, clone.type, "Peg type should be equal to clone type.")
         XCTAssertEqual(peg.position, clone.position, "Peg position should be equal to clone position.")
-        XCTAssertEqual(peg.imageName, clone.imageName, "Peg imageName should be equal to clone position.")
+        XCTAssertEqual(peg.normalImageName, clone.normalImageName, "Peg imageName should be equal to clone position.")
     }
 
     func testClone_orangePeg() {
@@ -177,7 +177,7 @@ final class PegTests: XCTestCase {
         XCTAssertNotEqual(peg.id, clone.id, "Peg id should not be equal to clone id.")
         XCTAssertEqual(peg.type, clone.type, "Peg type should be equal to clone type.")
         XCTAssertEqual(peg.position, clone.position, "Peg position should be equal to clone position.")
-        XCTAssertEqual(peg.imageName, clone.imageName, "Peg imageName should be equal to clone position.")
+        XCTAssertEqual(peg.normalImageName, clone.normalImageName, "Peg imageName should be equal to clone position.")
     }
 
     func testEqual_samePeg_isEqual() {

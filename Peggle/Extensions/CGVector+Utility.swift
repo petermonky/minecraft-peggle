@@ -8,6 +8,9 @@
 import Foundation
 
 extension CGVector {
+    static let xBasis = CGVector(dx: 1, dy: 0)
+    static let yBasis = CGVector(dx: 0, dy: 1)
+
     var length: CGFloat {
         sqrt(dx * dx + dy * dy)
     }
@@ -46,6 +49,11 @@ extension CGVector {
         let ys = self.dy * other.dy
 
         return xs + ys
+    }
+
+    func angle(with other: CGVector) -> CGFloat {
+        // theta = atan2(ax * by- ay * bx, ax * bx + ay * by)
+        return atan2(dx * other.dy - dy * other.dx, dx * other.dx + dy * other.dy)
     }
 
     func reflectAlongVector(_ vector: CGVector) -> CGVector {

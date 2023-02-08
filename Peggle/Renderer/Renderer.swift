@@ -8,39 +8,48 @@
 import Foundation
 
 class Renderer: ObservableObject, GameEngineDelegate {
-//    @Published var ballGameView: BallGameView
-    @Published var ballGameViews: [BallGameView]
-    @Published var pegGameViews: [PegGameView]
-    var gameEngine: GameEngine
+    // TODO: remove gameObject from view. stop riding mvvm !!
+    @Published private(set) var cannonGameView: CannonGameView?
+    @Published private(set) var ballGameViews: [BallGameView]?
+    @Published private(set) var pegGameViews: [PegGameView]?
+    private var gameEngine: GameEngine
 
     // TODO: remove nasty initialisation code here
     init(gameEngine: GameEngine = GameEngine(level: Level(id: nil,
                                                           frame: CGSize(width: 834.0, height: 984.0)))) {
-        self.pegGameViews = []
-        self.ballGameViews = []
+        self.cannonGameView = CannonGameView(gameObject: gameEngine.cannonGameObject)
         self.gameEngine = gameEngine
+
         gameEngine.delegate = self
     }
 
-    func didUpdateWorld(_ physicsWorld: PhysicsWorld) {
+    func didUpdateWorld() {
+        render()
+    }
+
+    func render() {
         // TODO: let game engine handle
-        let pegGameObjects = physicsWorld.bodies.compactMap { $0 as? PegGameObject }
+        cannonGameView = CannonGameView(gameObject: gameEngine.cannonGameObject)
+
+        let pegGameObjects = gameEngine.pegGameObjects
         pegGameViews = pegGameObjects.map { PegGameView(gameObject: $0) }
-        let ballGameObjects = physicsWorld.bodies.compactMap { $0 as? BallGameObject }
+
+        let ballGameObjects = gameEngine.ballGameObjects
         ballGameViews = ballGameObjects.map { BallGameView(gameObject: $0) }
 
-//        if let ballGameObject = physicsWorld.bodies.first(where: { $0 is BallGameObject }) as? BallGameObject {
+        print(pegGameObjects.filter { $0.hasCollidedWithBall })
+
+//        if let ballGameObject = gameEngine.physicsWorld.bodies
+//            .first(where: { $0 is BallGameObject }) as? BallGameObject {
 //            ballGameView = BallGameView(gameObject: ballGameObject)
 //        }
     }
 
-    func render() {
-//        boardView.resetBoard()
-//        if let ballView = ballView {
-//            boardView.addBallView(ballView)
-//        }
-//        boardView.addBucketView(bucketView)
-//        boardView.addPegViews(pegViews)
-//        boardView.addBlockViews(blockViews)
+    func updateCannonAngle(position: CGPoint) {
+        gameEngine.updateCannonAngle(position: position)
+    }
+
+    func fireBall(position: CGPoint) {
+        gameEngine.fireBall(position: position)
     }
 }

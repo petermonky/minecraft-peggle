@@ -8,5 +8,5 @@
 import Foundation
 
 protocol GameEngineDelegate: AnyObject {
-    func didUpdateWorld(_ physicsWorld: PhysicsWorld)
+    func didUpdateWorld()
 }

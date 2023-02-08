@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BallGameObject: CircleDynamicPhysicsBody {
+final class BallGameObject: CircleDynamicPhysicsBody {
     var position: CGPoint
     var velocity: CGVector
     let shape: CirclePhysicsShape
@@ -16,5 +16,9 @@ struct BallGameObject: CircleDynamicPhysicsBody {
         self.position = position
         self.velocity = velocity
         self.shape = CirclePhysicsShape(radius: Constants.Ball.radius)
+    }
+
+    func clone() -> BallGameObject {
+        BallGameObject(position: position, velocity: velocity)
     }
 }
