@@ -19,15 +19,9 @@ struct BoardGameView: View {
             if let cannonGameView = renderer.cannonGameView {
                 cannonGameView
             }
-
-//            if let ballGameView = renderer.ballGameView {
-//                ballGameView
-//            }
-
-            if let ballGameViews = renderer.ballGameViews {
-                ForEach(ballGameViews) { $0 }
+            if let ballGameView = renderer.ballGameView {
+                ballGameView
             }
-
             if let pegGameViews = renderer.pegGameViews {
                 ForEach(pegGameViews) { $0 }
             }

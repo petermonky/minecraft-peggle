@@ -10,39 +10,42 @@ import Foundation
 class Renderer: ObservableObject, GameEngineDelegate {
     // TODO: remove gameObject from view. stop riding mvvm !!
     @Published private(set) var cannonGameView: CannonGameView?
-    @Published private(set) var ballGameViews: [BallGameView]?
+    @Published private(set) var ballGameView: BallGameView?
     @Published private(set) var pegGameViews: [PegGameView]?
     private var gameEngine: GameEngine
 
     // TODO: remove nasty initialisation code here
-    init(gameEngine: GameEngine = GameEngine(level: Level(id: nil,
-                                                          frame: CGSize(width: 834.0, height: 984.0)))) {
-        self.cannonGameView = CannonGameView(gameObject: gameEngine.cannonGameObject)
+    init(gameEngine: GameEngine = GameEngine(level: Level(id: nil, frame: CGSize(width: 834.0, height: 984.0)))) {
         self.gameEngine = gameEngine
-
         gameEngine.delegate = self
     }
 
     func didUpdateWorld() {
-        render()
+        clearViews()
+        renderViews()
     }
 
-    func render() {
-        // TODO: let game engine handle
+    func didGameOver() {
+//        pegGameViews?.forEach {
+//            $0.isVisible = false
+//        }
+    }
+
+    func clearViews() {
+        cannonGameView = nil
+        ballGameView = nil
+        pegGameViews = nil
+    }
+
+    func renderViews() {
         cannonGameView = CannonGameView(gameObject: gameEngine.cannonGameObject)
 
         let pegGameObjects = gameEngine.pegGameObjects
         pegGameViews = pegGameObjects.map { PegGameView(gameObject: $0) }
 
-        let ballGameObjects = gameEngine.ballGameObjects
-        ballGameViews = ballGameObjects.map { BallGameView(gameObject: $0) }
-
-        print(pegGameObjects.filter { $0.hasCollidedWithBall })
-
-//        if let ballGameObject = gameEngine.physicsWorld.bodies
-//            .first(where: { $0 is BallGameObject }) as? BallGameObject {
-//            ballGameView = BallGameView(gameObject: ballGameObject)
-//        }
+        if let ballGameObject = gameEngine.ballGameObject {
+            ballGameView = BallGameView(gameObject: ballGameObject)
+        }
     }
 
     func updateCannonAngle(position: CGPoint) {

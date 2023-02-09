@@ -7,9 +7,9 @@
 
 import Foundation
 
-final class CannonGameObject {
-    let position: CGPoint
-    var angle: CGFloat
+final class CannonGameObject: GameObject {
+    @Published private(set) var position: CGPoint
+    @Published var angle: CGFloat
 
     init(position: CGPoint = CGPoint.zero, angle: CGFloat = CGFloat.zero) {
         self.position = position

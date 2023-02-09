@@ -52,9 +52,11 @@
 		D09BBD0429915E04004340FF /* CircleDynamicPhysicsBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BBD0329915E04004340FF /* CircleDynamicPhysicsBody.swift */; };
 		D0A4DB92299290D0003925BF /* CannonGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4DB91299290D0003925BF /* CannonGameView.swift */; };
 		D0A4DB942992921E003925BF /* BoardGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4DB932992921E003925BF /* BoardGameView.swift */; };
-		D0A4DB9A29929C80003925BF /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4DB9929929C80003925BF /* GameView.swift */; };
 		D0A4DB9C29936EC0003925BF /* CannonGameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4DB9B29936EC0003925BF /* CannonGameObject.swift */; };
 		D0A4DB9E29937065003925BF /* SpriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4DB9D29937065003925BF /* SpriteView.swift */; };
+		D0A4DBA2299404AB003925BF /* CollisionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4DBA1299404AB003925BF /* CollisionData.swift */; };
+		D0A4DBB02994A8B7003925BF /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4DBAF2994A8B7003925BF /* GameObject.swift */; };
+		D0A4DBB22994A8D6003925BF /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A4DBB12994A8D6003925BF /* GameView.swift */; };
 		D0BF3F04297BC6C800354272 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF3F03297BC6C800354272 /* BoardView.swift */; };
 		D0BF3F08297D6F3400354272 /* Peg.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF3F07297D6F3400354272 /* Peg.swift */; };
 		D0BF3F0A297D6FB200354272 /* CGPoint+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF3F09297D6FB200354272 /* CGPoint+Hashable.swift */; };
@@ -124,9 +126,11 @@
 		D09BBD0329915E04004340FF /* CircleDynamicPhysicsBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleDynamicPhysicsBody.swift; sourceTree = "<group>"; };
 		D0A4DB91299290D0003925BF /* CannonGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CannonGameView.swift; sourceTree = "<group>"; };
 		D0A4DB932992921E003925BF /* BoardGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardGameView.swift; sourceTree = "<group>"; };
-		D0A4DB9929929C80003925BF /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		D0A4DB9B29936EC0003925BF /* CannonGameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CannonGameObject.swift; sourceTree = "<group>"; };
 		D0A4DB9D29937065003925BF /* SpriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteView.swift; sourceTree = "<group>"; };
+		D0A4DBA1299404AB003925BF /* CollisionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionData.swift; sourceTree = "<group>"; };
+		D0A4DBAF2994A8B7003925BF /* GameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
+		D0A4DBB12994A8D6003925BF /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		D0BF3F03297BC6C800354272 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		D0BF3F07297D6F3400354272 /* Peg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Peg.swift; sourceTree = "<group>"; };
 		D0BF3F09297D6FB200354272 /* CGPoint+Hashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Hashable.swift"; sourceTree = "<group>"; };
@@ -303,6 +307,7 @@
 				D09BBD0129915B78004340FF /* DynamicPhysicsBody.swift */,
 				D09BBCFF29912096004340FF /* CirclePhysicsBody.swift */,
 				D09BBD0329915E04004340FF /* CircleDynamicPhysicsBody.swift */,
+				D0A4DBA1299404AB003925BF /* CollisionData.swift */,
 			);
 			path = "Physics Engine";
 			sourceTree = "<group>";
@@ -344,6 +349,7 @@
 				D09BBCE4298F8F35004340FF /* GameEngine.swift */,
 				D09BBCE6298F97DF004340FF /* DisplayLink.swift */,
 				D09BBCEF298FE027004340FF /* GameEngineDelegate.swift */,
+				D0A4DBAF2994A8B7003925BF /* GameObject.swift */,
 				D09BBCF12990019D004340FF /* PegGameObject.swift */,
 				D09BBCF72990C87B004340FF /* BallGameObject.swift */,
 				D0A4DB9B29936EC0003925BF /* CannonGameObject.swift */,
@@ -356,10 +362,10 @@
 			children = (
 				D09BBCE9298FAF75004340FF /* Renderer.swift */,
 				D0A4DB932992921E003925BF /* BoardGameView.swift */,
+				D0A4DBB12994A8D6003925BF /* GameView.swift */,
 				D09BBCF529900589004340FF /* PegGameView.swift */,
 				D09BBCFB29910977004340FF /* BallGameView.swift */,
 				D0A4DB91299290D0003925BF /* CannonGameView.swift */,
-				D0A4DB9929929C80003925BF /* GameView.swift */,
 				D0A4DB9D29937065003925BF /* SpriteView.swift */,
 			);
 			path = Renderer;
@@ -545,16 +551,18 @@
 				D0A4DB92299290D0003925BF /* CannonGameView.swift in Sources */,
 				D09BBD0229915B78004340FF /* DynamicPhysicsBody.swift in Sources */,
 				D0A4DB9E29937065003925BF /* SpriteView.swift in Sources */,
+				D0A4DBA2299404AB003925BF /* CollisionData.swift in Sources */,
 				D09BBCF62990058A004340FF /* PegGameView.swift in Sources */,
 				D0CB44232982F651008C5DAD /* View+HideKeyboard.swift in Sources */,
 				D0078960297E8A8500EB5AAE /* PaletteButtonViewModel.swift in Sources */,
-				D0A4DB9A29929C80003925BF /* GameView.swift in Sources */,
 				D09BBCFC29910977004340FF /* BallGameView.swift in Sources */,
 				D0BF3F10297D713100354272 /* BoardViewModel.swift in Sources */,
 				D0078967297E961100EB5AAE /* PegFactory.swift in Sources */,
 				D007896F297E9C6300EB5AAE /* Constants.swift in Sources */,
 				D0449015298EA8E10068AA3C /* CGPoint+Utility.swift in Sources */,
 				D0A4DB9C29936EC0003925BF /* CannonGameObject.swift in Sources */,
+				D0A4DBB22994A8D6003925BF /* GameView.swift in Sources */,
+				D0A4DBB02994A8B7003925BF /* GameObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

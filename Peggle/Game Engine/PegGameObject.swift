@@ -7,21 +7,30 @@
 
 import Foundation
 
-final class PegGameObject: CirclePhysicsBody {
-    var position: CGPoint
-    var hasCollidedWithBall: Bool
+final class PegGameObject: GameObject, CirclePhysicsBody {
+    @Published var position: CGPoint
+    @Published var hasCollidedWithBall: Bool
+    @Published var isVisible: Bool
+    private var ballCollisionCount: Int
     let shape: CirclePhysicsShape
     let peg: Peg
+
+    var isBlockingBall: Bool {
+        ballCollisionCount == Constants.Peg.blockingThreshold
+    }
 
     init(peg: Peg = BluePeg(), hasCollidedWithBall: Bool = false) {
         self.position = peg.position
         self.hasCollidedWithBall = hasCollidedWithBall
+        self.isVisible = true
+        self.ballCollisionCount = 0
         self.shape = CirclePhysicsShape(radius: Constants.Peg.radius)
         self.peg = peg
     }
 
     func resolvedCollision(with other: any PhysicsBody) {
         if other is BallGameObject {
+            ballCollisionCount = min(ballCollisionCount + 1, Constants.Peg.blockingThreshold)
             hasCollidedWithBall = true
         }
     }

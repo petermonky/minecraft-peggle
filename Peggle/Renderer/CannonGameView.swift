@@ -7,13 +7,11 @@
 
 import SwiftUI
 
-struct CannonGameView: GameView {
-    let id: UUID
-    let gameObject: CannonGameObject
+struct CannonGameView: View {
+    @StateObject var gameObject: CannonGameObject
 
     init(gameObject: CannonGameObject = .init()) {
-        self.id = UUID()
-        self.gameObject = gameObject
+        _gameObject = StateObject(wrappedValue: gameObject)
     }
 
     var body: some View {

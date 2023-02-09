@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct BallGameView: GameView {
-    let id: UUID
-    let gameObject: BallGameObject
+struct BallGameView: View, Identifiable {
+    @StateObject var gameObject: BallGameObject
+    let id: String
 
     init(gameObject: BallGameObject = .init()) {
-        self.id = UUID()
-        self.gameObject = gameObject
+        _gameObject = StateObject(wrappedValue: gameObject)
+        id = gameObject.id
     }
 
     var body: some View {

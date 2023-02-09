@@ -17,9 +17,26 @@ enum GameState {
 class GameEngine {
     let cannonGameObject: CannonGameObject
     let physicsWorld: PhysicsWorld
-    var state: GameState
+    private(set) var state: GameState
     weak var delegate: GameEngineDelegate?
-    
+
+    var ballGameObject: BallGameObject? {
+        physicsWorld.bodies.first { $0 is BallGameObject } as? BallGameObject
+    }
+
+    var pegGameObjects: [PegGameObject] {
+        physicsWorld.bodies.compactMap { $0 as? PegGameObject }
+    }
+
+    var collidedPegGameObjects: [PegGameObject] {
+        pegGameObjects.filter { $0.hasCollidedWithBall }
+    }
+
+    // TODO: use collisiondata ??
+    var blockingPegGameObjects: [PegGameObject] {
+        pegGameObjects.filter { $0.isBlockingBall }
+    }
+
     init(level: Level) {
         self.cannonGameObject = CannonGameObject(position: CGPoint(x: level.frame.width / 2, y: 100))
         self.physicsWorld = PhysicsWorld(frame: level.frame)
@@ -28,32 +45,32 @@ class GameEngine {
         level.pegs.forEach { peg in
             physicsWorld.addBody(PegGameObject(peg: peg))
         }
-//        physicsWorld.addBody(BallGameObject(position: CGPoint(x: 100, y: 200), velocity: CGVector(dx: 0, dy: 0)))
-//        for i in 1...8 {
-//            physicsWorld.addBody(BallGameObject(position: CGPoint(x: i * 100, y: 100), velocity: CGVector(dx: 0, dy: 0)))
-//        }
-//
-//        physicsWorld.addBody(PegGameObject(peg: BluePeg(position: CGPoint(x: 70, y: 300))))
-//        physicsWorld.addBody(PegGameObject(peg: BluePeg(position: CGPoint(x: 130, y: 300))))
         for i in 1...20 {
-            physicsWorld.addBody(PegGameObject(peg: BluePeg(position: CGPoint(x: i * 140 - 50, y: 600))))
+            physicsWorld.addBody(PegGameObject(peg: BluePeg(position: CGPoint(x: i * 110 - 50, y: 600))))
         }
         for i in 1...8 {
-            physicsWorld.addBody(PegGameObject(peg: OrangePeg(position: CGPoint(x: i * 140 - 80, y: 800))))
+            physicsWorld.addBody(PegGameObject(peg: OrangePeg(position: CGPoint(x: i * 110 - 80, y: 800))))
         }
         for i in 1...8 {
-            physicsWorld.addBody(PegGameObject(peg: BluePeg(position: CGPoint(x: i * 140 - 80, y: 400))))
+            physicsWorld.addBody(PegGameObject(peg: BluePeg(position: CGPoint(x: i * 125 - 80, y: 400))))
         }
 
         createDisplayLink()
     }
 
-    var ballGameObjects: [BallGameObject] {
-        physicsWorld.bodies.compactMap { $0 as? BallGameObject }
+    private var isGameOver: Bool {
+        physicsWorld.collisionData.contains(where: {
+            isBallFrameBottomCollision(collisionData: $0 )
+        })
     }
 
-    var pegGameObjects: [PegGameObject] {
-        physicsWorld.bodies.compactMap { $0 as? PegGameObject }
+    private func isBallFrameBottomCollision(collisionData: any CollisionData) -> Bool {
+        if let collisionData = collisionData as? CircleFrameCollisionData,
+           collisionData.side == .bottom,
+           collisionData.sourceId == ballGameObject?.id {
+            return true
+        }
+        return false
     }
 
     func createDisplayLink() {
@@ -64,10 +81,50 @@ class GameEngine {
     @objc func step(displaylink: CADisplayLink) {
         let interval = displaylink.targetTimestamp - displaylink.timestamp
         physicsWorld.update(delta: interval)
+
+        removeBlockingPegs()
+        handleGameOver()
         delegate?.didUpdateWorld()
     }
 
-    // TODO: refactor angle computation
+    private func updateGameState(_ state: GameState) {
+        self.state = state
+    }
+
+    private func handleGameOver() {
+        guard isGameOver else {
+            return
+        }
+
+        removeCollidedPegs()
+        removeExitedBall()
+
+        delegate?.didGameOver()
+        updateGameState(.pending)
+    }
+
+    private func removeBlockingPegs() {
+        removePegs(blockingPegGameObjects)
+    }
+
+    private func removeCollidedPegs() {
+        removePegs(collidedPegGameObjects)
+    }
+
+    private func removePegs(_ pegs: [PegGameObject]) {
+        pegs.forEach { $0.isVisible = false }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            pegs.forEach { self.physicsWorld.removeBody($0) }
+        }
+    }
+
+    private func removeExitedBall() {
+        guard let ballGameObject = ballGameObject else {
+            return
+        }
+        physicsWorld.removeBody(ballGameObject)
+    }
+
     func updateCannonAngle(position: CGPoint) {
         let vector = CGVector(from: position, to: cannonGameObject.position)
         let angle = vector.angle(with: .xBasis)
@@ -77,5 +134,6 @@ class GameEngine {
     func fireBall(position: CGPoint) {
         let vector = CGVector(from: position, to: cannonGameObject.position)
         physicsWorld.addBody(BallGameObject(position: cannonGameObject.position, velocity: vector.normalise.scale(by: -800)))
+        updateGameState(.active)
     }
 }

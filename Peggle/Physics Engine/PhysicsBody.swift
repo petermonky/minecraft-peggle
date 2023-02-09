@@ -7,9 +7,10 @@
 
 import Foundation
 
-protocol PhysicsBody: AnyObject {
+protocol PhysicsBody: AnyObject, Identifiable {
     associatedtype Shape: PhysicsShape
 
+    var id: String { get }
     var position: CGPoint { get }
     var velocity: CGVector { get }
     var shape: Shape { get }
@@ -19,6 +20,10 @@ protocol PhysicsBody: AnyObject {
 }
 
 extension PhysicsBody {
+    var id: String {
+        String(UInt(bitPattern: ObjectIdentifier(self)))
+    }
+
     var velocity: CGVector {
         CGVector.zero
     }

@@ -7,13 +7,17 @@
 
 import SwiftUI
 
-struct PegGameView: GameView {
-    let id: UUID
-    let gameObject: PegGameObject
+struct PegGameView: View, Identifiable {
+    @StateObject var gameObject: PegGameObject
+    @State var scale: Double
+    @State var opacity: Double
+    let id: String
 
     init(gameObject: PegGameObject = .init()) {
-        self.id = UUID()
-        self.gameObject = gameObject
+        _gameObject = StateObject(wrappedValue: gameObject)
+        scale = 1
+        opacity = 1
+        id = gameObject.id
     }
 
     var body: some View {
@@ -21,10 +25,17 @@ struct PegGameView: GameView {
               ? gameObject.peg.glowImageName
               : gameObject.peg.normalImageName)
             .resizable()
-            .frame(width: 2 * Constants.Peg.radius,
-                   height: 2 * Constants.Peg.radius)
-            .clipShape(Circle())
+            .scaledToFill()
+            .frame(width: 2 * Constants.Peg.radius * scale,
+                   height: 2 * Constants.Peg.radius * scale)
             .position(gameObject.position)
+            .opacity(opacity)
+            .onChange(of: gameObject.isVisible) { _ in
+                withAnimation(.easeOut(duration: 0.25)) { // TODO: make delay global constant
+                    opacity = 0
+                    scale = 1.5
+                }
+            }
     }
 }
 

@@ -9,4 +9,5 @@ import Foundation
 
 protocol GameEngineDelegate: AnyObject {
     func didUpdateWorld()
+    func didGameOver()
 }

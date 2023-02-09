@@ -8,16 +8,21 @@
 import Foundation
 
 class PhysicsWorld {
-    var frame: CGSize
-    var gravity: CGVector
-    var bodies: [any PhysicsBody]
+    let frame: CGSize
+    let gravity: CGVector
+    private(set) var bodies: [any PhysicsBody]
+    private(set) var collisionData: [any CollisionData]
 
-    init(frame: CGSize = CGSize(),
-         gravity: CGVector = CGVector(dx: 0, dy: 980.0), // TODO: move gravity to constants
-         bodies: [any PhysicsBody] = []) {
+    init(
+        frame: CGSize = CGSize(),
+        gravity: CGVector = CGVector(dx: 0, dy: 980.0), // TODO: move gravity to constants
+        bodies: [any PhysicsBody] = [],
+        collisionData: [any CollisionData] = []
+    ) {
         self.frame = frame
         self.gravity = gravity
         self.bodies = bodies
+        self.collisionData = collisionData
     }
 
     var circlePhysicsBodies: [any CirclePhysicsBody] {
@@ -26,6 +31,10 @@ class PhysicsWorld {
 
     func addBody(_ body: any PhysicsBody) {
         bodies.append(body)
+    }
+
+    func removeBody(_ body: any PhysicsBody) {
+        bodies.removeAll(where: { $0 === body })
     }
 
     func update(delta: TimeInterval) {
@@ -43,13 +52,15 @@ class PhysicsWorld {
     }
 
     private func handleCollisions(delta: TimeInterval) {
-        for i in 0..<bodies.count {
-            guard let body = bodies[i] as? (any DynamicPhysicsBody) else {
+        collisionData.removeAll()
+
+        for body in bodies {
+            guard let body = body as? (any DynamicPhysicsBody) else {
                 continue
             }
             applyFrameCollisionBetween(body, and: frame, delta: delta)
-            for j in 0..<bodies.count where i != j {
-                if let circleBody = bodies[j] as? (any CirclePhysicsBody) {
+            for other in bodies where body !== other {
+                if let circleBody = other as? (any CirclePhysicsBody) {
                     applyCircleBodyCollisionBetween(body, and: circleBody, delta: delta)
                 } else {
                     fatalError("Invalid body")
@@ -73,19 +84,31 @@ class PhysicsWorld {
         body.updatePosition(position)
     }
 
-    private func applyFrameCollisionBetween<T: DynamicPhysicsBody>(_ body: T,
-                                                                   and frame: CGSize,
-                                                                   delta: TimeInterval) {
+    private func applyFrameCollisionBetween<T: DynamicPhysicsBody>(
+        _ body: T,
+        and frame: CGSize,
+        delta: TimeInterval
+    ) {
         let futureBody = body.clone()
         applyStep(body: futureBody, delta: delta)
-        body.resolveCollisionWith(frame: frame, futureBody: futureBody)
+
+        for side in FrameSideType.allCases where futureBody.hasCollisionWith(frame: frame, side: side) {
+            collisionData.append(body.createCollisionDataWith(frame: frame, side: side))
+            body.resolveCollisionWith(frame: frame, side: side)
+        }
     }
 
-    private func applyCircleBodyCollisionBetween<T: DynamicPhysicsBody>(_ body: T,
-                                                                        and circleBody: any CirclePhysicsBody,
-                                                                        delta: TimeInterval) {
+    private func applyCircleBodyCollisionBetween<T: DynamicPhysicsBody>(
+        _ body: T,
+        and circleBody: any CirclePhysicsBody,
+        delta: TimeInterval
+    ) {
         let futureBody = body.clone()
         applyStep(body: futureBody, delta: delta)
-        body.resolveCollisionWith(circleBody: circleBody, futureBody: futureBody)
+
+        if futureBody.hasCollisionWith(circleBody: circleBody) {
+            collisionData.append(body.createCollisionDataWith(circleBody: circleBody))
+            body.resolveCollisionWith(circleBody: circleBody)
+        }
     }
 }

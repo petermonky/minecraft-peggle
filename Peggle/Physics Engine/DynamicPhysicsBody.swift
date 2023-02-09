@@ -7,6 +7,13 @@
 
 import Foundation
 
+enum FrameSideType: CaseIterable {
+    case left
+    case right
+    case top
+    case bottom
+}
+
 protocol DynamicPhysicsBody: PhysicsBody where Body == Self {
     associatedtype Body: PhysicsBody
 
@@ -15,8 +22,14 @@ protocol DynamicPhysicsBody: PhysicsBody where Body == Self {
 
     func updatePosition(_ position: CGPoint)
     func updateVelocity(_ velocity: CGVector)
-    func resolveCollisionWith(frame: CGSize, futureBody: Body, restitution: CGFloat)
-    func resolveCollisionWith(circleBody: any CirclePhysicsBody, futureBody: Body, restitution: CGFloat)
+
+    func hasCollisionWith(frame: CGSize, side: FrameSideType) -> Bool
+    func resolveCollisionWith(frame: CGSize, side: FrameSideType, restitution: CGFloat)
+    func createCollisionDataWith(frame: CGSize, side: FrameSideType) -> CircleFrameCollisionData
+
+    func hasCollisionWith(circleBody: any CirclePhysicsBody) -> Bool
+    func resolveCollisionWith(circleBody: any CirclePhysicsBody, restitution: CGFloat)
+    func createCollisionDataWith(circleBody: any CirclePhysicsBody) -> CircleCircleCollisionData
 }
 
 extension DynamicPhysicsBody {
@@ -30,11 +43,11 @@ extension DynamicPhysicsBody {
 }
 
 extension DynamicPhysicsBody {
-    func resolveCollisionWith(frame: CGSize, futureBody: Body) {
-        resolveCollisionWith(frame: frame, futureBody: futureBody, restitution: Constants.Physics.restitution)
+    func resolveCollisionWith(frame: CGSize, side: FrameSideType) {
+        resolveCollisionWith(frame: frame, side: side, restitution: Constants.Physics.restitution)
     }
 
-    func resolveCollisionWith(circleBody: any CirclePhysicsBody, futureBody: Body) {
-        resolveCollisionWith(circleBody: circleBody, futureBody: futureBody, restitution: Constants.Physics.restitution)
+    func resolveCollisionWith(circleBody: any CirclePhysicsBody) {
+        resolveCollisionWith(circleBody: circleBody, restitution: Constants.Physics.restitution)
     }
 }

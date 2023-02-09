@@ -22,6 +22,8 @@ extension Constants {
     enum Peg {
         static let radius: CGFloat = 30.0
         static let afterImageOpacity = 0.5
+
+        static let blockingThreshold = 120
     }
 }
 
@@ -33,6 +35,6 @@ extension Constants {
 
 extension Constants {
     enum Physics {
-        static let restitution: CGFloat = 0.8
+        static let restitution: CGFloat = 0.85
     }
 }
