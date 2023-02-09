@@ -14,8 +14,11 @@ class Renderer: ObservableObject, GameEngineDelegate {
     @Published private(set) var pegGameViews: [PegGameView]?
     private var gameEngine: GameEngine
 
-    // TODO: remove nasty initialisation code here
-    init(gameEngine: GameEngine = GameEngine(level: Level(id: nil, frame: CGSize(width: 834.0, height: 984.0)))) {
+    var frame: CGSize {
+        gameEngine.frame
+    }
+
+    init(gameEngine: GameEngine) {
         self.gameEngine = gameEngine
         gameEngine.delegate = self
     }
@@ -25,10 +28,9 @@ class Renderer: ObservableObject, GameEngineDelegate {
         renderViews()
     }
 
+    // TODO: add game over logic
     func didGameOver() {
-//        pegGameViews?.forEach {
-//            $0.isVisible = false
-//        }
+        print("Game over")
     }
 
     func clearViews() {
@@ -49,10 +51,16 @@ class Renderer: ObservableObject, GameEngineDelegate {
     }
 
     func updateCannonAngle(position: CGPoint) {
+        guard gameEngine.isInState(.pending) else {
+            return
+        }
         gameEngine.updateCannonAngle(position: position)
     }
 
     func fireBall(position: CGPoint) {
-        gameEngine.fireBall(position: position)
+        guard gameEngine.isInState(.pending) else {
+            return
+        }
+        gameEngine.addBallTowards(position: position)
     }
 }

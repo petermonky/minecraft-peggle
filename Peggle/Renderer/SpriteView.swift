@@ -25,6 +25,11 @@ struct SpriteView: View {
 
 struct SpriteView_Previews: PreviewProvider {
     static var previews: some View {
-        SpriteView(spriteSheet: Image("cannon"), width: 120, height: 120, frame: 1)
+        SpriteView(
+            spriteSheet: Image("cannon"),
+            width: Constants.Cannon.width,
+            height: Constants.Cannon.height,
+            frame: 1
+        )
     }
 }

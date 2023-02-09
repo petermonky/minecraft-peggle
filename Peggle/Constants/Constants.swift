@@ -23,6 +23,8 @@ extension Constants {
         static let radius: CGFloat = 30.0
         static let afterImageOpacity = 0.5
 
+        static let fadeDuration: CGFloat = 0.25
+        static let popScale: CGFloat = 1.5
         static let blockingThreshold = 120
     }
 }
@@ -30,11 +32,20 @@ extension Constants {
 extension Constants {
     enum Ball {
         static let radius: CGFloat = 30.0
+        static let initialSpeed: CGFloat = 1_200
+    }
+}
+
+extension Constants {
+    enum Cannon {
+        static let width: CGFloat = 120
+        static let height: CGFloat = 120
     }
 }
 
 extension Constants {
     enum Physics {
         static let restitution: CGFloat = 0.85
+        static let gravity = CGVector(dx: 0, dy: 980)
     }
 }

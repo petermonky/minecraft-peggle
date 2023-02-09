@@ -26,9 +26,10 @@ struct PaletteButtonView: View {
                 .resizable()
                 .frame(width: Constants.PaletteButton.width,
                        height: Constants.PaletteButton.height)
-                .overlay(Color.white.opacity(palette.mode == paletteButton.type
-                                             ? Constants.PaletteButton.selectedOpacity
-                                             : 0.0))
+                .overlay(Color.white.opacity(
+                    palette.mode == paletteButton.type
+                    ? Constants.PaletteButton.selectedOpacity
+                    : 0.0))
                 .clipShape(Circle())
         }
     }

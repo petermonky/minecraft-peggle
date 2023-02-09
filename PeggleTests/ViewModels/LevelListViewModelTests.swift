@@ -17,7 +17,7 @@ final class LevelListViewModelTests: XCTestCase {
     }
 
     func testConstruct_filledParameters() {
-        let levels = Set<Level>([Level(id: nil), Level(id: nil)])
+        let levels = Set<Level>([Level(), Level()])
         let levelList = LevelListViewModel(levels: levels)
 
         XCTAssertEqual(levelList.levels, levels, "Level list should be initialised with filled set of levels.")
@@ -31,7 +31,7 @@ final class LevelListViewModelTests: XCTestCase {
     }
 
     func testLevelArray_filledLevelSet() {
-        let levels = Set<Level>([Level(id: nil), Level(id: nil)])
+        let levels = Set<Level>([Level(), Level()])
         let levelList = LevelListViewModel(levels: levels)
 
         XCTAssertEqual(levelList.levelArray,
@@ -40,7 +40,7 @@ final class LevelListViewModelTests: XCTestCase {
     }
 
     func testAddLevel_emptyLevelSet() {
-        let level = Level(id: nil)
+        let level = Level()
         let levelList = LevelListViewModel()
 
         levelList.addLevel(level)
@@ -49,8 +49,8 @@ final class LevelListViewModelTests: XCTestCase {
     }
 
     func testAddLevel_filledLevelSetAndAddingNonExistingLevel() {
-        let level = Level(id: nil)
-        var levels = Set<Level>([Level(id: nil), Level(id: nil)])
+        let level = Level()
+        var levels = Set<Level>([Level(), Level()])
         let levelList = LevelListViewModel(levels: levels)
 
         levelList.addLevel(level)
@@ -60,8 +60,8 @@ final class LevelListViewModelTests: XCTestCase {
     }
 
     func testAddLevel_filledLevelSetAndAddingExistingLevel() {
-        let level = Level(id: nil)
-        let levels = Set<Level>([level, Level(id: nil)])
+        let level = Level()
+        let levels = Set<Level>([level, Level()])
         let levelList = LevelListViewModel(levels: levels)
 
         levelList.addLevel(level)
@@ -70,7 +70,7 @@ final class LevelListViewModelTests: XCTestCase {
     }
 
     func testDeleteLevel_emptyLevelSet() {
-        let level = Level(id: nil)
+        let level = Level()
         let levelList = LevelListViewModel()
 
         levelList.deleteLevel(level)
@@ -79,8 +79,8 @@ final class LevelListViewModelTests: XCTestCase {
     }
 
     func testDeleteLevel_filledLevelSetAndDeletingNonExistingLevel() {
-        let level = Level(id: nil)
-        let levels = Set<Level>([Level(id: nil), Level(id: nil)])
+        let level = Level()
+        let levels = Set<Level>([Level(), Level()])
         let levelList = LevelListViewModel(levels: levels)
 
         levelList.deleteLevel(level)
@@ -89,8 +89,8 @@ final class LevelListViewModelTests: XCTestCase {
     }
 
     func testDeleteLevel_filledLevelSetAndDeletingExistingLevel() {
-        let level = Level(id: nil)
-        var levels = Set<Level>([level, Level(id: nil)])
+        let level = Level()
+        var levels = Set<Level>([level, Level()])
         let levelList = LevelListViewModel(levels: levels)
 
         levelList.deleteLevel(level)
@@ -109,7 +109,7 @@ final class LevelListViewModelTests: XCTestCase {
     }
 
     func testLoadLevels_emptyLevelSetAndLoadingFilledLevelSet() {
-        let levels = Set<Level>([Level(id: nil), Level(id: nil)])
+        let levels = Set<Level>([Level(), Level()])
         let levelList = LevelListViewModel()
 
         let exp = expectation(description: "Loading levels")
@@ -124,7 +124,7 @@ final class LevelListViewModelTests: XCTestCase {
 
     func testLoadLevels_filledLevelSetAndLoadingEmptyLevelSet() {
         let levels = Set<Level>()
-        let levelList = LevelListViewModel(levels: [Level(id: nil), Level(id: nil)])
+        let levelList = LevelListViewModel(levels: [Level(), Level()])
 
         let exp = expectation(description: "Loading levels")
         levelList.loadLevels(levels)
@@ -137,8 +137,8 @@ final class LevelListViewModelTests: XCTestCase {
     }
 
     func testLoadLevels_filledLevelSetAndLoadingFilledLevelSet() {
-        let levels = Set<Level>([Level(id: nil), Level(id: nil)])
-        let levelList = LevelListViewModel(levels: [Level(id: nil), Level(id: nil)])
+        let levels = Set<Level>([Level(), Level()])
+        let levelList = LevelListViewModel(levels: [Level(), Level()])
 
         let exp = expectation(description: "Loading levels")
         levelList.loadLevels(levels)

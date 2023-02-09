@@ -24,7 +24,6 @@ struct LevelDesignerView: View {
                 }
                 .padding()
             }
-            .ignoresSafeArea(.container, edges: .top)
         }
         .task {
             do {

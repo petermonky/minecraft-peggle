@@ -11,7 +11,7 @@ import XCTest
 final class LevelTests: XCTestCase {
 
     func testConstruct_emptyParameters() {
-        let level = Level(id: nil)
+        let level = Level()
 
         XCTAssertNotNil(level.id, "Level id should be new UUID.")
         XCTAssertEqual(level.title, "", "Level title should be empty string.")

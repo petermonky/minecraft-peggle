@@ -17,10 +17,8 @@ enum FrameSideType: CaseIterable {
 protocol DynamicPhysicsBody: PhysicsBody where Body == Self {
     associatedtype Body: PhysicsBody
 
-    override var position: CGPoint { get set }
     override var velocity: CGVector { get set }
 
-    func updatePosition(_ position: CGPoint)
     func updateVelocity(_ velocity: CGVector)
 
     func hasCollisionWith(frame: CGSize, side: FrameSideType) -> Bool
@@ -33,16 +31,10 @@ protocol DynamicPhysicsBody: PhysicsBody where Body == Self {
 }
 
 extension DynamicPhysicsBody {
-    func updatePosition(_ position: CGPoint) {
-        self.position = position
-    }
-
     func updateVelocity(_ velocity: CGVector) {
         self.velocity = velocity
     }
-}
 
-extension DynamicPhysicsBody {
     func resolveCollisionWith(frame: CGSize, side: FrameSideType) {
         resolveCollisionWith(frame: frame, side: side, restitution: Constants.Physics.restitution)
     }

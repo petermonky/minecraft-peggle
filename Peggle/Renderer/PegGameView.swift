@@ -31,9 +31,9 @@ struct PegGameView: View, Identifiable {
             .position(gameObject.position)
             .opacity(opacity)
             .onChange(of: gameObject.isVisible) { _ in
-                withAnimation(.easeOut(duration: 0.25)) { // TODO: make delay global constant
+                withAnimation(.easeOut(duration: Constants.Peg.fadeDuration)) {
                     opacity = 0
-                    scale = 1.5
+                    scale = Constants.Peg.popScale
                 }
             }
     }

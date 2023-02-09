@@ -8,6 +8,10 @@
 import Foundation
 
 extension CGPoint {
+    func distance(to point: CGPoint) -> CGFloat {
+        sqrt(pow((point.x - x), 2) + pow((point.y - y), 2))
+    }
+
     func move(by vector: CGVector) -> CGPoint {
         let x = self.x + vector.dx
         let y = self.y + vector.dy

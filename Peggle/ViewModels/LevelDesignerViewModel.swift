@@ -14,7 +14,7 @@ extension LevelDesignerView {
         @Published var boardViewModel: BoardViewModel
         @Published var actionViewModel: ActionViewModel
         @Published var levelListViewModel: LevelListViewModel
-        private var currentLevelId: UUID?
+        private var currentLevelId = UUID()
         private let dataManager = DataManager.shared
 
         init(paletteViewModel: PaletteViewModel = .init(),
@@ -32,7 +32,7 @@ extension LevelDesignerView {
         }
 
         func resetLevel() {
-            currentLevelId = nil
+            currentLevelId = UUID()
             actionViewModel.resetTitle()
             boardViewModel.resetPegs()
         }

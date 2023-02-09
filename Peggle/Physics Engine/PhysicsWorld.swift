@@ -15,7 +15,7 @@ class PhysicsWorld {
 
     init(
         frame: CGSize = CGSize(),
-        gravity: CGVector = CGVector(dx: 0, dy: 980.0), // TODO: move gravity to constants
+        gravity: CGVector = Constants.Physics.gravity,
         bodies: [any PhysicsBody] = [],
         collisionData: [any CollisionData] = []
     ) {

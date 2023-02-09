@@ -44,6 +44,10 @@ extension CGVector {
         return CGVector(dx: dx, dy: dy)
     }
 
+    var flip: CGVector {
+        scale(by: -1)
+    }
+
     func dot(with other: CGVector) -> CGFloat {
         let xs = self.dx * other.dx
         let ys = self.dy * other.dy

@@ -11,9 +11,15 @@ import SwiftUI
 struct PeggleApp: App {
     var body: some Scene {
         WindowGroup {
-            BoardGameView()
+            let gameEngine = GameEngine(level: Level.mockData)
+            let renderer = Renderer(gameEngine: gameEngine)
+            BoardGameView(renderer: renderer)
+                .environment(\.colorScheme, .light)
+                .ignoresSafeArea(.container)
+            // Level designer commented for PS3
 //            LevelDesignerView()
 //                .environment(\.colorScheme, .light)
+//                .ignoresSafeArea(.container)
         }
     }
 }

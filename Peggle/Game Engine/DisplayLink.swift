@@ -11,6 +11,4 @@ import SwiftUI
 class DisplayLink: NSObject, ObservableObject {
     @Published var frameDuration: CFTimeInterval = 0
     @Published var frameChange = false
-
-    static let shared = DisplayLink()
 }

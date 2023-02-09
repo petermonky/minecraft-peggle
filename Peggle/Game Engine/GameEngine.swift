@@ -10,7 +10,6 @@ import SwiftUI
 
 enum GameState {
     case active
-    case loading
     case pending
 }
 
@@ -19,6 +18,10 @@ class GameEngine {
     let physicsWorld: PhysicsWorld
     private(set) var state: GameState
     weak var delegate: GameEngineDelegate?
+
+    var frame: CGSize {
+        physicsWorld.frame
+    }
 
     var ballGameObject: BallGameObject? {
         physicsWorld.bodies.first { $0 is BallGameObject } as? BallGameObject
@@ -38,24 +41,19 @@ class GameEngine {
     }
 
     init(level: Level) {
-        self.cannonGameObject = CannonGameObject(position: CGPoint(x: level.frame.width / 2, y: 100))
-        self.physicsWorld = PhysicsWorld(frame: level.frame)
+        self.cannonGameObject = CannonGameObject(position: CGPoint(
+            x: level.frame.width / 2,
+            y: Constants.Cannon.height / 2)
+        )
+        self.physicsWorld = PhysicsWorld(frame: level.frame.extend(y: Constants.Cannon.height))
         self.state = .pending
 
-        level.pegs.forEach { peg in
-            physicsWorld.addBody(PegGameObject(peg: peg))
-        }
-        for i in 1...20 {
-            physicsWorld.addBody(PegGameObject(peg: BluePeg(position: CGPoint(x: i * 110 - 50, y: 600))))
-        }
-        for i in 1...8 {
-            physicsWorld.addBody(PegGameObject(peg: OrangePeg(position: CGPoint(x: i * 110 - 80, y: 800))))
-        }
-        for i in 1...8 {
-            physicsWorld.addBody(PegGameObject(peg: BluePeg(position: CGPoint(x: i * 125 - 80, y: 400))))
-        }
-
+        initialisePegs(level: level)
         createDisplayLink()
+    }
+
+    func isInState(_ state: GameState) -> Bool {
+        self.state == state
     }
 
     private var isGameOver: Bool {
@@ -73,7 +71,16 @@ class GameEngine {
         return false
     }
 
-    func createDisplayLink() {
+    private func initialisePegs(level: Level) {
+        level.pegs.forEach { peg in
+            let pegGameObject = PegGameObject(peg: peg)
+            let shiftedPosition = pegGameObject.position.move(by: CGVector(dx: 0, dy: Constants.Cannon.height))
+            pegGameObject.updatePosition(shiftedPosition)
+            physicsWorld.addBody(pegGameObject)
+        }
+    }
+
+    private func createDisplayLink() {
         let displaylink = CADisplayLink(target: self, selector: #selector(step))
         displaylink.add(to: .current, forMode: .default)
     }
@@ -98,9 +105,9 @@ class GameEngine {
 
         removeCollidedPegs()
         removeExitedBall()
+        updateGameState(.pending)
 
         delegate?.didGameOver()
-        updateGameState(.pending)
     }
 
     private func removeBlockingPegs() {
@@ -113,7 +120,7 @@ class GameEngine {
 
     private func removePegs(_ pegs: [PegGameObject]) {
         pegs.forEach { $0.isVisible = false }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.Peg.fadeDuration) {
             pegs.forEach { self.physicsWorld.removeBody($0) }
         }
     }
@@ -125,15 +132,30 @@ class GameEngine {
         physicsWorld.removeBody(ballGameObject)
     }
 
+    private func validCannonAngle(_ angle: CGFloat) -> Bool {
+        angle >= 0 && angle <= CGFloat.pi
+    }
+
     func updateCannonAngle(position: CGPoint) {
         let vector = CGVector(from: position, to: cannonGameObject.position)
         let angle = vector.angle(with: .xBasis)
-        cannonGameObject.angle = CGFloat.pi / 2 - angle
+        guard validCannonAngle(angle) else {
+            return
+        }
+        cannonGameObject.angle = (CGFloat.pi / 2 - angle)
     }
 
-    func fireBall(position: CGPoint) {
+    func addBallTowards(position: CGPoint) {
         let vector = CGVector(from: position, to: cannonGameObject.position)
-        physicsWorld.addBody(BallGameObject(position: cannonGameObject.position, velocity: vector.normalise.scale(by: -800)))
+        let angle = vector.angle(with: .xBasis)
+        guard validCannonAngle(angle) else {
+            return
+        }
+        let normalFromCannonToPosition = vector.normalise.flip
+        physicsWorld.addBody(BallGameObject(
+            position: cannonGameObject.position,
+            velocity: normalFromCannonToPosition.scale(by: Constants.Ball.initialSpeed))
+        )
         updateGameState(.active)
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct BoardGameView: View {
     @StateObject var renderer: Renderer
 
-    init(renderer: Renderer = .init()) {
+    init(renderer: Renderer) {
         _renderer = StateObject(wrappedValue: renderer)
     }
 
@@ -36,11 +36,19 @@ struct BoardGameView: View {
                     renderer.fireBall(position: value.location)
                 }
         )
+        .frame(width: renderer.frame.width, height: renderer.frame.height)
+        .background(
+            Image("background")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+        )
     }
 }
 
 struct BoardGameView_Previews: PreviewProvider {
     static var previews: some View {
-        BoardGameView()
+        let gameEngine = GameEngine(level: Level.mockData)
+        let renderer = Renderer(gameEngine: gameEngine)
+        BoardGameView(renderer: renderer)
     }
 }
