@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum FrameSideType: CaseIterable {
+enum FrameSide: CaseIterable {
     case left
     case right
     case top
@@ -21,9 +21,9 @@ protocol DynamicPhysicsBody: PhysicsBody where Body == Self {
 
     func updateVelocity(_ velocity: CGVector)
 
-    func hasCollisionWith(frame: CGSize, side: FrameSideType) -> Bool
-    func resolveCollisionWith(frame: CGSize, side: FrameSideType, restitution: CGFloat)
-    func createCollisionDataWith(frame: CGSize, side: FrameSideType) -> CircleFrameCollisionData
+    func hasCollisionWith(frame: CGSize, side: FrameSide) -> Bool
+    func resolveCollisionWith(frame: CGSize, side: FrameSide, restitution: CGFloat)
+    func createCollisionDataWith(frame: CGSize, side: FrameSide) -> CircleFrameCollisionData
 
     func hasCollisionWith(circleBody: any CirclePhysicsBody) -> Bool
     func resolveCollisionWith(circleBody: any CirclePhysicsBody, restitution: CGFloat)
@@ -35,7 +35,7 @@ extension DynamicPhysicsBody {
         self.velocity = velocity
     }
 
-    func resolveCollisionWith(frame: CGSize, side: FrameSideType) {
+    func resolveCollisionWith(frame: CGSize, side: FrameSide) {
         resolveCollisionWith(frame: frame, side: side, restitution: Constants.Physics.restitution)
     }
 

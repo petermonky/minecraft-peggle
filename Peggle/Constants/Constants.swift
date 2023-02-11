@@ -40,6 +40,8 @@ extension Constants {
     enum Cannon {
         static let width: CGFloat = 120
         static let height: CGFloat = 120
+        static let overlayDuration: CGFloat = 0.15
+        static let overlayOpacity: CGFloat = 0.5
     }
 }
 

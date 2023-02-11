@@ -13,7 +13,7 @@ struct PeggleApp: App {
         WindowGroup {
             let gameEngine = GameEngine(level: Level.mockData)
             let renderer = Renderer(gameEngine: gameEngine)
-            BoardGameView(renderer: renderer)
+            RendererView(renderer: renderer)
                 .environment(\.colorScheme, .light)
                 .ignoresSafeArea(.container)
             // Level designer commented for PS3

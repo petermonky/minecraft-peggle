@@ -35,7 +35,6 @@ class GameEngine {
         pegGameObjects.filter { $0.hasCollidedWithBall }
     }
 
-    // TODO: use collisiondata ??
     var blockingPegGameObjects: [PegGameObject] {
         pegGameObjects.filter { $0.isBlockingBall }
     }
@@ -43,8 +42,8 @@ class GameEngine {
     init(level: Level) {
         self.cannonGameObject = CannonGameObject(position: CGPoint(
             x: level.frame.width / 2,
-            y: Constants.Cannon.height / 2)
-        )
+            y: Constants.Cannon.height / 2
+        ))
         self.physicsWorld = PhysicsWorld(frame: level.frame.extend(y: Constants.Cannon.height))
         self.state = .pending
 
@@ -91,7 +90,11 @@ class GameEngine {
 
         removeBlockingPegs()
         handleGameOver()
-        delegate?.didUpdateWorld()
+        delegate?.didUpdateWorld(
+            cannonGameObject: cannonGameObject,
+            ballGameObject: ballGameObject,
+            pegGameObjects: pegGameObjects
+        )
     }
 
     private func updateGameState(_ state: GameState) {
@@ -105,6 +108,7 @@ class GameEngine {
 
         removeCollidedPegs()
         removeExitedBall()
+        cannonGameObject.setAvailable()
         updateGameState(.pending)
 
         delegate?.didGameOver()
@@ -151,11 +155,14 @@ class GameEngine {
         guard validCannonAngle(angle) else {
             return
         }
+
         let normalFromCannonToPosition = vector.normalise.flip
         physicsWorld.addBody(BallGameObject(
             position: cannonGameObject.position,
             velocity: normalFromCannonToPosition.scale(by: Constants.Ball.initialSpeed))
         )
+
+        cannonGameObject.setUnavailable()
         updateGameState(.active)
     }
 }

@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol CircleDynamicPhysicsBody: CirclePhysicsBody, DynamicPhysicsBody {
+protocol DynamicCirclePhysicsBody: CirclePhysicsBody, DynamicPhysicsBody {
 }
 
 // MARK: Frame collision
 
-extension CircleDynamicPhysicsBody {
-    func hasCollisionWith(frame: CGSize, side: FrameSideType) -> Bool {
+extension DynamicCirclePhysicsBody {
+    func hasCollisionWith(frame: CGSize, side: FrameSide) -> Bool {
         switch side {
         case .left:
             return position.x - shape.radius < 0
@@ -26,7 +26,7 @@ extension CircleDynamicPhysicsBody {
         }
     }
 
-    func resolveCollisionWith(frame: CGSize, side: FrameSideType, restitution: CGFloat) {
+    func resolveCollisionWith(frame: CGSize, side: FrameSide, restitution: CGFloat) {
         switch side {
         case .left:
             position.x = shape.radius
@@ -43,14 +43,14 @@ extension CircleDynamicPhysicsBody {
         }
     }
 
-    func createCollisionDataWith(frame: CGSize, side: FrameSideType) -> CircleFrameCollisionData {
+    func createCollisionDataWith(frame: CGSize, side: FrameSide) -> CircleFrameCollisionData {
         CircleFrameCollisionData(circleBody: self, side: side)
     }
 }
 
 // MARK: Circle body collision
 
-extension CircleDynamicPhysicsBody {
+extension DynamicCirclePhysicsBody {
     func hasCollisionWith(circleBody: any CirclePhysicsBody) -> Bool {
         position.distance(to: circleBody.position) <= (shape.radius + circleBody.shape.radius)
     }

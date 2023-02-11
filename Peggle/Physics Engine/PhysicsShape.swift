@@ -7,16 +7,12 @@
 
 import Foundation
 
-protocol PhysicsShape {
+protocol PhysicsShape: Equatable {
     var center: CGPoint { get }
 }
 
-struct CirclePhysicsShape: PhysicsShape {
-    var center: CGPoint
-    var radius: CGFloat
-
-    init(radius: CGFloat = 0) {
-        self.center = CGPoint.zero
-        self.radius = radius
+extension PhysicsShape {
+    var center: CGPoint {
+        CGPoint.zero
     }
 }

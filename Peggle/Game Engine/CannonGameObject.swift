@@ -10,9 +10,19 @@ import Foundation
 final class CannonGameObject: GameObject {
     @Published private(set) var position: CGPoint
     @Published var angle: CGFloat
+    @Published var isAvailable: Bool
 
-    init(position: CGPoint = CGPoint.zero, angle: CGFloat = CGFloat.zero) {
+    init(position: CGPoint = CGPoint.zero, angle: CGFloat = CGFloat.zero, isAvailable: Bool = true) {
         self.position = position
         self.angle = angle
+        self.isAvailable = isAvailable
+    }
+
+    func setAvailable() {
+        isAvailable = true
+    }
+
+    func setUnavailable() {
+        isAvailable = false
     }
 }

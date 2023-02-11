@@ -23,9 +23,17 @@ class Renderer: ObservableObject, GameEngineDelegate {
         gameEngine.delegate = self
     }
 
-    func didUpdateWorld() {
+    func didUpdateWorld(
+        cannonGameObject: CannonGameObject?,
+        ballGameObject: BallGameObject?,
+        pegGameObjects: [PegGameObject]?
+    ) {
         clearViews()
-        renderViews()
+        renderViews(
+            cannonGameObject: cannonGameObject,
+            ballGameObject: ballGameObject,
+            pegGameObjects: pegGameObjects
+        )
     }
 
     // TODO: add game over logic
@@ -39,11 +47,18 @@ class Renderer: ObservableObject, GameEngineDelegate {
         pegGameViews = nil
     }
 
-    func renderViews() {
-        cannonGameView = CannonGameView(gameObject: gameEngine.cannonGameObject)
+    func renderViews(
+        cannonGameObject: CannonGameObject?,
+        ballGameObject: BallGameObject?,
+        pegGameObjects: [PegGameObject]?
+    ) {
+        if let cannonGameObject = cannonGameObject {
+            cannonGameView = CannonGameView(gameObject: cannonGameObject)
+        }
 
-        let pegGameObjects = gameEngine.pegGameObjects
-        pegGameViews = pegGameObjects.map { PegGameView(gameObject: $0) }
+        if let pegGameObjects = pegGameObjects {
+            pegGameViews = pegGameObjects.map { PegGameView(gameObject: $0) }
+        }
 
         if let ballGameObject = gameEngine.ballGameObject {
             ballGameView = BallGameView(gameObject: ballGameObject)
@@ -57,7 +72,7 @@ class Renderer: ObservableObject, GameEngineDelegate {
         gameEngine.updateCannonAngle(position: position)
     }
 
-    func fireBall(position: CGPoint) {
+    func addBallTowards(position: CGPoint) {
         guard gameEngine.isInState(.pending) else {
             return
         }

@@ -38,8 +38,8 @@ class PhysicsWorld {
     }
 
     func update(delta: TimeInterval) {
-        handleSteps(delta: delta)
         handleCollisions(delta: delta)
+        handleSteps(delta: delta)
     }
 
     private func handleSteps(delta: TimeInterval) {
@@ -92,7 +92,7 @@ class PhysicsWorld {
         let futureBody = body.clone()
         applyStep(body: futureBody, delta: delta)
 
-        for side in FrameSideType.allCases where futureBody.hasCollisionWith(frame: frame, side: side) {
+        for side in FrameSide.allCases where futureBody.hasCollisionWith(frame: frame, side: side) {
             collisionData.append(body.createCollisionDataWith(frame: frame, side: side))
             body.resolveCollisionWith(frame: frame, side: side)
         }

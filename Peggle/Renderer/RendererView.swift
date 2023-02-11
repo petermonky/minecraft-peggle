@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BoardGameView: View {
+struct RendererView: View {
     @StateObject var renderer: Renderer
 
     init(renderer: Renderer) {
@@ -33,7 +33,7 @@ struct BoardGameView: View {
                     renderer.updateCannonAngle(position: value.location)
                 }
                 .onEnded { value in
-                    renderer.fireBall(position: value.location)
+                    renderer.addBallTowards(position: value.location)
                 }
         )
         .frame(width: renderer.frame.width, height: renderer.frame.height)
@@ -49,6 +49,6 @@ struct BoardGameView_Previews: PreviewProvider {
     static var previews: some View {
         let gameEngine = GameEngine(level: Level.mockData)
         let renderer = Renderer(gameEngine: gameEngine)
-        BoardGameView(renderer: renderer)
+        RendererView(renderer: renderer)
     }
 }

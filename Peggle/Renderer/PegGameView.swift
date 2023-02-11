@@ -30,10 +30,12 @@ struct PegGameView: View, Identifiable {
                    height: 2 * Constants.Peg.radius * scale)
             .position(gameObject.position)
             .opacity(opacity)
-            .onChange(of: gameObject.isVisible) { _ in
+            .onChange(of: gameObject.isVisible) { isVisible in
                 withAnimation(.easeOut(duration: Constants.Peg.fadeDuration)) {
-                    opacity = 0
-                    scale = Constants.Peg.popScale
+                    if !isVisible {
+                        opacity = 0
+                        scale = Constants.Peg.popScale
+                    }
                 }
             }
     }
