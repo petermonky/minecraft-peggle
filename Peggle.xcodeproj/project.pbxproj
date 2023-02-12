@@ -49,7 +49,6 @@
 		D08AEB7D29796A6D00EA1590 /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08AEB7C29796A6D00EA1590 /* PaletteView.swift */; };
 		D08AEB7F29796AD300EA1590 /* PaletteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08AEB7E29796AD300EA1590 /* PaletteViewModel.swift */; };
 		D09BBCE5298F8F35004340FF /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BBCE4298F8F35004340FF /* GameEngine.swift */; };
-		D09BBCE7298F97DF004340FF /* DisplayLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BBCE6298F97DF004340FF /* DisplayLink.swift */; };
 		D09BBCEA298FAF75004340FF /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BBCE9298FAF75004340FF /* Renderer.swift */; };
 		D09BBCF0298FE027004340FF /* GameEngineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BBCEF298FE027004340FF /* GameEngineDelegate.swift */; };
 		D09BBCF22990019D004340FF /* PegGameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BBCF12990019D004340FF /* PegGameObject.swift */; };
@@ -134,7 +133,6 @@
 		D08AEB7C29796A6D00EA1590 /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
 		D08AEB7E29796AD300EA1590 /* PaletteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteViewModel.swift; sourceTree = "<group>"; };
 		D09BBCE4298F8F35004340FF /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
-		D09BBCE6298F97DF004340FF /* DisplayLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayLink.swift; sourceTree = "<group>"; };
 		D09BBCE9298FAF75004340FF /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		D09BBCEF298FE027004340FF /* GameEngineDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineDelegate.swift; sourceTree = "<group>"; };
 		D09BBCF12990019D004340FF /* PegGameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegGameObject.swift; sourceTree = "<group>"; };
@@ -397,7 +395,6 @@
 			children = (
 				D09BBCE4298F8F35004340FF /* GameEngine.swift */,
 				D09BBCEF298FE027004340FF /* GameEngineDelegate.swift */,
-				D09BBCE6298F97DF004340FF /* DisplayLink.swift */,
 				D0A4DBAF2994A8B7003925BF /* GameObject.swift */,
 				D09BBCF12990019D004340FF /* PegGameObject.swift */,
 				D09BBCF72990C87B004340FF /* BallGameObject.swift */,
@@ -580,7 +577,6 @@
 				D0BF3F08297D6F3400354272 /* Peg.swift in Sources */,
 				D0BF3F0A297D6FB200354272 /* CGPoint+Hashable.swift in Sources */,
 				D0449013298EA7270068AA3C /* CGVector+Utility.swift in Sources */,
-				D09BBCE7298F97DF004340FF /* DisplayLink.swift in Sources */,
 				D01E45A9297E6789003E28A8 /* PegViewModel.swift in Sources */,
 				D09BBCEA298FAF75004340FF /* Renderer.swift in Sources */,
 				D08AEB7D29796A6D00EA1590 /* PaletteView.swift in Sources */,

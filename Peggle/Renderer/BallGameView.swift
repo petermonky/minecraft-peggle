@@ -11,7 +11,7 @@ struct BallGameView: View, Identifiable {
     @StateObject var gameObject: BallGameObject
     let id: String
 
-    init(gameObject: BallGameObject = .init()) {
+    init(gameObject: BallGameObject) {
         _gameObject = StateObject(wrappedValue: gameObject)
         id = gameObject.id
     }
@@ -28,6 +28,7 @@ struct BallGameView: View, Identifiable {
 
 struct BallGameView_Previews: PreviewProvider {
     static var previews: some View {
-        BallGameView()
+        let ballGameObject = BallGameObject(velocity: CGVector.zero)
+        BallGameView(gameObject: ballGameObject)
     }
 }

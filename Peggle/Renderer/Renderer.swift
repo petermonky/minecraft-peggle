@@ -20,7 +20,7 @@ class Renderer: ObservableObject, GameEngineDelegate {
 
     init(gameEngine: GameEngine) {
         self.gameEngine = gameEngine
-        gameEngine.delegate = self
+        gameEngine.setDelegate(self)
     }
 
     func didUpdateWorld(

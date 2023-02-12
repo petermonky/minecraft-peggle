@@ -13,7 +13,7 @@ struct PegGameView: View, Identifiable {
     @State var opacity: Double
     let id: String
 
-    init(gameObject: PegGameObject = .init()) {
+    init(gameObject: PegGameObject) {
         _gameObject = StateObject(wrappedValue: gameObject)
         scale = 1
         opacity = 1
@@ -43,6 +43,7 @@ struct PegGameView: View, Identifiable {
 
 struct PegGameView_Previews: PreviewProvider {
     static var previews: some View {
-        PegGameView()
+        let pegGameObject = PegGameObject()
+        PegGameView(gameObject: pegGameObject)
     }
 }

@@ -11,7 +11,7 @@ struct CannonGameView: View {
     @StateObject var gameObject: CannonGameObject
     @State var overlayOpacity: CGFloat
 
-    init(gameObject: CannonGameObject = .init()) {
+    init(gameObject: CannonGameObject) {
         _gameObject = StateObject(wrappedValue: gameObject)
         overlayOpacity = 0
     }
@@ -48,6 +48,7 @@ struct CannonGameView: View {
 
 struct CannonGameView_Previews: PreviewProvider {
     static var previews: some View {
-        CannonGameView()
+        let cannonGameObject = CannonGameObject()
+        CannonGameView(gameObject: cannonGameObject)
     }
 }

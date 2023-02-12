@@ -51,6 +51,10 @@ class GameEngine {
         createDisplayLink()
     }
 
+    func setDelegate(_ delegate: GameEngineDelegate) {
+        self.delegate = delegate
+    }
+
     func isInState(_ state: GameState) -> Bool {
         self.state == state
     }
