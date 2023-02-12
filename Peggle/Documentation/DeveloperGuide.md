@@ -195,6 +195,8 @@ The XCode project includes unit tests for the models and view models of the appl
 
 Below is an exposition on how integration tests will be performed on the application.
 
+#### Level designer
+
 - Test palette view
     - Should display a horizontal array of buttons, with peg palette buttons grouped together on the left, and the delete peg palette button located on the right.
 - Test palette button view
@@ -243,3 +245,28 @@ Below is an exposition on how integration tests will be performed on the applica
         - If one of the previously created levels is open in the level designer, the opened level should be greyed out from the list with the text "Currently open" displayed on the right-side of the item.
         - When tapped, if the tapped level is currently open, nothing should happen.
         - When tapped, it the tapped level is not currently open, it should load the pegs and title of the board into the board and action, respectively, and the user should be redirected back to the level designer.
+
+#### Game player
+
+- Test start up
+    - Should correctly load a level by displaying pegs (1) at the correct position and (2) with the correct type.
+    - Cannon should be pointing downwards.
+- Test cannon
+    - Should follow the position the user is holding down at.
+    - Should not point upwards; i.e. the angle of the head of the cannon should not deviate more than ±90 degrees from the original angle.
+    - Should turn grey once the ball is fired and the game is in its active state.
+    - Should not change angle when the game is in its active state.
+    - Should not fire ball when the game is in its active state.
+    - SHould turn back to its original colour once the game exits its active state to the idle state.
+- Test ball
+    - Should be affected by gravity.
+    - Should display proper collision with pegs and bounce off in a reasonable manner (parabolic trajectory).
+    - Should bounce off the top and the sides of the physics world.
+    - Should disappear once it collides with the bottom of the physics world (game over).
+- Test peg
+    - Should not be affected by gravity.
+    - Should not move during collision with the ball.
+    - Should glow up once collided with the ball.
+    - Should disappear if in constant collision for too long with the ball.
+    - Should disappear if the ball exits the physics world (game over) and if the peg is lit.
+    - Should fade away and scale larger upon disappear.
