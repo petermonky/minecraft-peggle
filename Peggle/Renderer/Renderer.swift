@@ -66,14 +66,14 @@ class Renderer: ObservableObject, GameEngineDelegate {
     }
 
     func updateCannonAngle(position: CGPoint) {
-        guard gameEngine.isInState(.pending) else {
+        guard gameEngine.isInState(.idle) else {
             return
         }
         gameEngine.updateCannonAngle(position: position)
     }
 
     func addBallTowards(position: CGPoint) {
-        guard gameEngine.isInState(.pending) else {
+        guard gameEngine.isInState(.idle) else {
             return
         }
         gameEngine.addBallTowards(position: position)

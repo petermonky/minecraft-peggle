@@ -10,7 +10,7 @@ import SwiftUI
 
 enum GameState {
     case active
-    case pending
+    case idle
 }
 
 class GameEngine {
@@ -45,7 +45,7 @@ class GameEngine {
             y: Constants.Cannon.height / 2
         ))
         self.physicsWorld = PhysicsWorld(frame: level.frame.extend(y: Constants.Cannon.height))
-        self.state = .pending
+        self.state = .idle
 
         initialisePegs(level: level)
         createDisplayLink()
@@ -113,7 +113,7 @@ class GameEngine {
         removeCollidedPegs()
         removeExitedBall()
         cannonGameObject.setAvailable()
-        updateGameState(.pending)
+        updateGameState(.idle)
 
         delegate?.didGameOver()
     }
