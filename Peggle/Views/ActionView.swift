@@ -21,7 +21,7 @@ struct ActionView: View {
 
         HStack(spacing: 24) {
             HStack {
-                NavigationLink(destination: LevelListView(viewModel: levelList)) {
+                NavigationLink(destination: LevelListView(viewModel: levelList).environmentObject(levelDesigner)) {
                     Text("LOAD")
                 }.simultaneousGesture(TapGesture().onEnded {
                     hideKeyboard()

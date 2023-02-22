@@ -62,7 +62,6 @@ extension DynamicCirclePhysicsBody {
 
         position = circleBody.position.move(by: scaled)
         velocity = velocity.reflectAlongVector(scaled).scale(by: restitution)
-        circleBody.resolvedCollision(with: self)
     }
 
     func createCollisionDataWith(circleBody: any CirclePhysicsBody) -> CircleCircleCollisionData {

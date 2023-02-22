@@ -10,6 +10,7 @@ import Foundation
 class Renderer: ObservableObject, GameEngineDelegate {
     // TODO: remove gameObject from view. stop riding mvvm !!
     @Published private(set) var cannonGameView: CannonGameView?
+    @Published private(set) var bucketGameView: BucketGameView?
     @Published private(set) var ballGameView: BallGameView?
     @Published private(set) var pegGameViews: [PegGameView]?
     private var gameEngine: GameEngine
@@ -25,12 +26,14 @@ class Renderer: ObservableObject, GameEngineDelegate {
 
     func didUpdateWorld(
         cannonGameObject: CannonGameObject?,
+        bucketGameObject: BucketGameObject?,
         ballGameObject: BallGameObject?,
         pegGameObjects: [PegGameObject]?
     ) {
         clearViews()
         renderViews(
             cannonGameObject: cannonGameObject,
+            bucketGameObject: bucketGameObject,
             ballGameObject: ballGameObject,
             pegGameObjects: pegGameObjects
         )
@@ -43,17 +46,23 @@ class Renderer: ObservableObject, GameEngineDelegate {
 
     func clearViews() {
         cannonGameView = nil
+        bucketGameView = nil
         ballGameView = nil
         pegGameViews = nil
     }
 
     func renderViews(
         cannonGameObject: CannonGameObject?,
+        bucketGameObject: BucketGameObject?,
         ballGameObject: BallGameObject?,
         pegGameObjects: [PegGameObject]?
     ) {
         if let cannonGameObject = cannonGameObject {
             cannonGameView = CannonGameView(gameObject: cannonGameObject)
+        }
+
+        if let bucketGameObject = bucketGameObject {
+            bucketGameView = BucketGameView(gameObject: bucketGameObject)
         }
 
         if let pegGameObjects = pegGameObjects {

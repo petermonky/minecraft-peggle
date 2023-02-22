@@ -15,6 +15,7 @@ enum GameState {
 
 class GameEngine {
     let cannonGameObject: CannonGameObject
+    let bucketGameObject: BucketGameObject
     let physicsWorld: PhysicsWorld
     private(set) var state: GameState
     weak var delegate: GameEngineDelegate?
@@ -44,7 +45,14 @@ class GameEngine {
             x: level.frame.width / 2,
             y: Constants.Cannon.height / 2
         ))
-        self.physicsWorld = PhysicsWorld(frame: level.frame.extend(y: Constants.Cannon.height))
+        self.bucketGameObject = BucketGameObject(position: CGPoint(
+            x: level.frame.width / 2,
+            y: level.frame.height + Constants.Cannon.height + Constants.Bucket.height / 2
+        ))
+        self.physicsWorld = PhysicsWorld(frame: level.frame
+            .extend(y: Constants.Cannon.height)
+            .extend(y: Constants.Bucket.height)
+        )
         self.state = .idle
 
         initialisePegs(level: level)
@@ -63,6 +71,18 @@ class GameEngine {
         physicsWorld.collisionData.contains(where: {
             isBallFrameBottomCollision(collisionData: $0 )
         })
+    }
+
+    private var ballPegCollisions: [CircleCircleCollisionData] {
+        physicsWorld.collisionData
+            .compactMap { $0 as? CircleCircleCollisionData }
+            .filter { data in
+                let sourceIsBall = data.sourceId == ballGameObject?.id
+                let targetIsPeg = pegGameObjects.contains(where: {
+                    data.targetId == $0.id
+                })
+                return sourceIsBall && targetIsPeg
+            }
     }
 
     private func isBallFrameBottomCollision(collisionData: any CollisionData) -> Bool {
@@ -92,10 +112,12 @@ class GameEngine {
         let interval = displaylink.targetTimestamp - displaylink.timestamp
         physicsWorld.update(delta: interval)
 
+        lightCollidingPegs()
         removeBlockingPegs()
         handleGameOver()
         delegate?.didUpdateWorld(
             cannonGameObject: cannonGameObject,
+            bucketGameObject: bucketGameObject,
             ballGameObject: ballGameObject,
             pegGameObjects: pegGameObjects
         )
@@ -103,6 +125,18 @@ class GameEngine {
 
     private func updateGameState(_ state: GameState) {
         self.state = state
+    }
+
+    private func lightCollidingPegs() {
+        for peg in pegGameObjects where ballPegCollisions.contains(where: {
+            $0.targetId == peg.id
+        }) {
+            peg.collideWithBall()
+        }
+    }
+
+    private func removeBlockingPegs() {
+        removePegs(blockingPegGameObjects)
     }
 
     private func handleGameOver() {
@@ -116,10 +150,6 @@ class GameEngine {
         updateGameState(.idle)
 
         delegate?.didGameOver()
-    }
-
-    private func removeBlockingPegs() {
-        removePegs(blockingPegGameObjects)
     }
 
     private func removeCollidedPegs() {

@@ -44,7 +44,7 @@ extension Level: Hashable {
 extension Level {
     static var mockData: Level {
         // Optimised for iPad Pro (11-inch) (4th generation)
-        let frame = CGSize(width: 834.0, height: 984.0)
+        let frame = CGSize(width: 834.0, height: 894.0)
         var pegs = Set<Peg>()
         (1...10).forEach {
             pegs.insert(BluePeg(position: CGPoint(x: $0 * 150 - 75, y: 200)))

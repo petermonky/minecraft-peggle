@@ -15,15 +15,16 @@ struct LevelDesignerView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            VStack(spacing: 0) {
-                BoardView(viewModel: viewModel.boardViewModel)
-                VStack(spacing: 24) {
-                    PaletteView(viewModel: viewModel.paletteViewModel)
-                    ActionView(viewModel: viewModel.actionViewModel)
-                }
-                .padding()
+        VStack(spacing: 0) {
+            DataView()
+            BoardView(viewModel: viewModel.boardViewModel)
+            VStack {
+                PaletteView(viewModel: viewModel.paletteViewModel)
+                Spacer()
+                ActionView(viewModel: viewModel.actionViewModel)
             }
+            .frame(height: 180)
+            .padding(20)
         }
         .task {
             do {
@@ -33,6 +34,7 @@ struct LevelDesignerView: View {
                 print("Error loading levels.")
             }
         }
+        .ignoresSafeArea(edges: .all)
         .environmentObject(viewModel)
     }
 }

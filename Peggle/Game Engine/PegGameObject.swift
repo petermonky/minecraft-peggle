@@ -28,11 +28,9 @@ final class PegGameObject: GameObject, CirclePhysicsBody {
         self.peg = peg
     }
 
-    func resolvedCollision(with other: any PhysicsBody) {
-        if other is BallGameObject {
-            ballCollisionCount = min(ballCollisionCount + 1, Constants.Peg.blockingThreshold)
-            hasCollidedWithBall = true
-        }
+    func collideWithBall() {
+        ballCollisionCount = min(ballCollisionCount + 1, Constants.Peg.blockingThreshold)
+        hasCollidedWithBall = true
     }
 
     func clone() -> PegGameObject {

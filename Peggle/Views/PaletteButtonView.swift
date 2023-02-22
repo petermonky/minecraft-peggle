@@ -30,7 +30,6 @@ struct PaletteButtonView: View {
                     palette.mode == paletteButton.type
                     ? Constants.PaletteButton.selectedOpacity
                     : 0.0))
-                .clipShape(Circle())
         }
     }
 }

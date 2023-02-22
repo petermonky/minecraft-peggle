@@ -13,10 +13,10 @@ enum PegType: String, Codable {
     case orange
 }
 
-class Peg: Identifiable, Codable {
+class Peg: LevelObject {
     var id = UUID()
-    var type: PegType
     var position: CGPoint
+    var type: PegType
     var normalImageName: String
     var glowImageName: String
 

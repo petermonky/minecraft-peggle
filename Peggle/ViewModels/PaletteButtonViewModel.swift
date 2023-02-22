@@ -32,6 +32,7 @@ extension PaletteButtonViewModel: Identifiable {
 enum PaletteButtonType: String {
     case bluePeg   = "peg-blue"
     case orangePeg = "peg-orange"
+    case block     = "block"
     case deletePeg = "delete"
 }
 
@@ -67,6 +68,14 @@ struct OrangePegPaletteButton: PegPaletteButton {
 
     func updatePalette(_ palette: PaletteViewModel) {
         palette.onPegButtonSelect(pegButton: self)
+    }
+}
+
+struct BlockPaletteButton: PaletteButton {
+    var type: PaletteButtonType = .block
+
+    func updatePalette(_ palette: PaletteViewModel) {
+        palette.onBlockButtonSelect()
     }
 }
 

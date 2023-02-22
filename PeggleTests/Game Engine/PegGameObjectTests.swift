@@ -44,24 +44,6 @@ final class PegGameObjectTests: XCTestCase {
                        "pegGameObject.shape should be initialised to blue peg.")
     }
 
-    func testResolvedCollision_withNonBallGameObject() {
-        let pegGameObject1 = PegGameObject()
-        let pegGameObject2 = PegGameObject()
-
-        pegGameObject1.resolvedCollision(with: pegGameObject2)
-        XCTAssertFalse(pegGameObject1.hasCollidedWithBall,
-                       "pegGameObject.hasCollidedWithBall should be remained as false")
-    }
-
-    func testResolvedCollision_withBallGameObject() {
-        let pegGameObject = PegGameObject()
-        let ballGameObject = BallGameObject()
-
-        pegGameObject.resolvedCollision(with: ballGameObject)
-        XCTAssertTrue(pegGameObject.hasCollidedWithBall,
-                      "gameObject.hasCollidedWithBall should be changed to true")
-    }
-
     func testClone() {
         let peg = OrangePeg()
         let hasCollidedWithBall = true

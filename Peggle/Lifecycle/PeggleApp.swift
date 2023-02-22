@@ -11,12 +11,19 @@ import SwiftUI
 struct PeggleApp: App {
     var body: some Scene {
         WindowGroup {
-            let gameEngine = GameEngine(level: Level.mockData)
-            let renderer = Renderer(gameEngine: gameEngine)
-            RendererView(renderer: renderer)
-                .environment(\.colorScheme, .light)
-                .ignoresSafeArea(.container)
-            // Level designer commented for PS3
+            NavigationStack {
+                NavigationLink(destination: LevelDesignerView()) {
+                    Text("Level designer")
+                }
+                NavigationLink(destination: GamePlayerView(viewModel: GamePlayerViewModel(level: Level.mockData))) {
+                    Text("Game player")
+                }
+            }
+            .environment(\.colorScheme, .light)
+            .ignoresSafeArea(.container)
+//            let viewModel = GamePlayerViewModel(level: Level.mockData)
+//            GamePlayerView(viewModel: viewModel)
+                       // Level designer commented for PS3
 //            LevelDesignerView()
 //                .environment(\.colorScheme, .light)
 //                .ignoresSafeArea(.container)

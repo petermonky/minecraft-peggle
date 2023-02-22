@@ -16,13 +16,12 @@ struct PaletteView: View {
     }
 
     var body: some View {
-        HStack {
+        HStack(spacing: 20) {
             ForEach(viewModel.pegButtonViewModels) { pegButtonViewModel in
                 PaletteButtonView(viewModel: pegButtonViewModel)
             }
-
+            PaletteButtonView(viewModel: viewModel.blockButtonViewModel)
             Spacer()
-
             PaletteButtonView(viewModel: viewModel.deleteButtonViewModel)
         }
     }

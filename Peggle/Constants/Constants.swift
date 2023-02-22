@@ -12,8 +12,8 @@ enum Constants {
 
 extension Constants {
     enum PaletteButton {
-        static let width: CGFloat = 100.0
-        static let height: CGFloat = 100.0
+        static let width: CGFloat = 120.0
+        static let height: CGFloat = 120.0
         static let selectedOpacity = 0.5
     }
 }
@@ -38,10 +38,17 @@ extension Constants {
 
 extension Constants {
     enum Cannon {
-        static let width: CGFloat = 120
-        static let height: CGFloat = 120
+        static let width: CGFloat = 100.0
+        static let height: CGFloat = 100.0
         static let overlayDuration: CGFloat = 0.15
         static let overlayOpacity: CGFloat = 0.5
+    }
+}
+
+extension Constants {
+    enum Bucket {
+        static let width: CGFloat = 100.0
+        static let height: CGFloat = 100.0
     }
 }
 

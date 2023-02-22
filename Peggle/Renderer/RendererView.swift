@@ -15,33 +15,47 @@ struct RendererView: View {
     }
 
     var body: some View {
-        ZStack {
-            if let cannonGameView = renderer.cannonGameView {
-                cannonGameView
-            }
-            if let ballGameView = renderer.ballGameView {
-                ballGameView
-            }
-            if let pegGameViews = renderer.pegGameViews {
-                ForEach(pegGameViews) { $0 }
+        VStack(spacing: 0) {
+            HStack {
+                Text("Header")
+            }.frame(height: 80)
+            GeometryReader { _ in
+                ZStack {
+                    if let cannonGameView = renderer.cannonGameView {
+                        cannonGameView
+                    }
+                    if let ballGameView = renderer.ballGameView {
+                        ballGameView
+                    }
+                    if let pegGameViews = renderer.pegGameViews {
+                        ForEach(pegGameViews) { $0 }
+                    }
+                    if let bucketGameView = renderer.bucketGameView {
+                        bucketGameView
+                    }
+                }
+                .contentShape(Rectangle())
+                .gesture(
+                    DragGesture()
+                        .onChanged { value in
+                            renderer.updateCannonAngle(position: value.location)
+                        }
+                        .onEnded { value in
+                            renderer.addBallTowards(position: value.location)
+                        }
+                )
+                .frame(width: renderer.frame.width, height: renderer.frame.height)
+                .background(
+                    Image("background")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                )
+                .onAppear {
+                    // TODO: resize gameboard view
+                }
             }
         }
-        .contentShape(Rectangle())
-        .gesture(
-            DragGesture()
-                .onChanged { value in
-                    renderer.updateCannonAngle(position: value.location)
-                }
-                .onEnded { value in
-                    renderer.addBallTowards(position: value.location)
-                }
-        )
-        .frame(width: renderer.frame.width, height: renderer.frame.height)
-        .background(
-            Image("background")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-        )
+        .ignoresSafeArea(edges: .all)
     }
 }
 

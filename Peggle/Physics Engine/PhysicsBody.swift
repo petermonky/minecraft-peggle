@@ -16,8 +16,6 @@ protocol PhysicsBody: AnyObject, Identifiable {
     var shape: Shape { get }
 
     func updatePosition(_ position: CGPoint)
-
-    func resolvedCollision(with other: any PhysicsBody)
     func clone() -> Self
 }
 
@@ -32,8 +30,5 @@ extension PhysicsBody {
 
     func updatePosition(_ position: CGPoint) {
         self.position = position
-    }
-
-    func resolvedCollision(with other: any PhysicsBody) {
     }
 }
