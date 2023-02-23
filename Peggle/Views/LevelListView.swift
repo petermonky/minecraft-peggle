@@ -10,19 +10,15 @@ import SwiftUI
 struct LevelListView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var levelDesigner: LevelDesignerViewModel
-    @StateObject var viewModel: ViewModel
     let dateFormatter: DateFormatter
 
-    init(viewModel: ViewModel = .init()) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+    init() {
         dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .short
     }
 
     var body: some View {
-        let levels = viewModel.levelArray
-
         List {
             Button(action: {
                 levelDesigner.resetLevel()
@@ -31,7 +27,7 @@ struct LevelListView: View {
                 Text("Create new level")
             }
 
-            ForEach(levels) { level in
+            ForEach(levelDesigner.levels.reversed()) { level in
                 Button(action: {
                     levelDesigner.loadLevel(level)
                     dismiss()
@@ -51,10 +47,8 @@ struct LevelListView: View {
             }
             .onDelete { indexSet in
                 Task {
-                    if let index = indexSet.first {
-                        viewModel.deleteLevel(levels[index])
-                        try await levelDesigner.saveData()
-                    }
+                    levelDesigner.deleteLevels(atOffsets: indexSet)
+                    try await levelDesigner.saveData()
                 }
             }
         }

@@ -6,69 +6,202 @@
 
 import Foundation
 
-typealias LevelDesignerViewModel = LevelDesignerView.ViewModel
+@MainActor class LevelDesignerViewModel: ObservableObject {
+    // Palette
+    @Published private(set) var mode: PaletteButtonType = .bluePeg
+    @Published private(set) var pegFactory: PegFactory? = BluePegFactory()
+    @Published private(set) var pegPaletteButtons: [PegPaletteButton] = [
+        BluePegPaletteButton(),
+        OrangePegPaletteButton()
+    ]
+    @Published private(set) var blockPaletteButton: PaletteButton = BlockPaletteButton()
+    @Published private(set) var deletePaletteButton: PaletteButton = DeletePegPaletteButton()
 
-extension LevelDesignerView {
-    class ViewModel: ObservableObject {
-        @Published var paletteViewModel: PaletteViewModel
-        @Published var boardViewModel: BoardViewModel
-        @Published var actionViewModel: ActionViewModel
-        @Published var levelListViewModel: LevelListViewModel
-        private var currentLevelId = UUID()
-        private let dataManager = DataManager.shared
+    // Board
+    @Published var level = Level()
+    @Published var initialBoardSize = CGSize.zero
+    @Published var currentBoardSize = CGSize.zero
+    @Published var levelObject: (any LevelObject)?
 
-        init(paletteViewModel: PaletteViewModel = .init(),
-             boardViewModel: BoardViewModel = .init(),
-             actionViewModel: ActionViewModel = .init(),
-             levelListViewModel: LevelListViewModel = .init()) {
-            self.paletteViewModel = paletteViewModel
-            self.boardViewModel = boardViewModel
-            self.actionViewModel = actionViewModel
-            self.levelListViewModel = levelListViewModel
+    // Level list
+    @Published var levels: [Level] = []
+    private let dataManager = DataManager.shared
+}
+
+// MARK: - Level
+extension LevelDesignerViewModel {
+    var pegObjects: [Peg] {
+        Array(level.pegs)
+    }
+
+    var blockObjects: [Block] {
+        Array(level.blocks)
+    }
+
+    func isCurrentLevel(_ level: Level) -> Bool {
+        self.level == level
+    }
+
+    func isSelectedLevelObject(_ levelObject: any LevelObject) -> Bool {
+        self.levelObject === levelObject
+    }
+
+    func selectLevelObject(_ levelObject: any LevelObject) {
+        self.levelObject = levelObject
+    }
+
+    func resetLevel() {
+        level = Level()
+    }
+
+    func deleteLevels(atOffsets indexSet: IndexSet) {
+        levels.remove(atOffsets: indexSet)
+    }
+
+    func loadLevel(_ level: Level) {
+        self.level = level
+    }
+
+    func saveLevel() async throws {
+        levels = levels.filter { $0 != level }
+        levels.append(level)
+        try await saveData()
+    }
+
+    func loadData() async throws {
+        levels = try await dataManager.load()
+    }
+
+    func saveData() async throws {
+        try await dataManager.save(levels: levels)
+    }
+}
+
+// MARK: - Palette
+
+extension LevelDesignerViewModel {
+    func createBlockAtPosition(_ position: CGPoint) -> Block? {
+        guard mode == .block else {
+            return nil
         }
+        return NormalBlock(position: position)
+    }
 
-        func isCurrentLevel(_ level: Level) -> Bool {
-            currentLevelId == level.id
+    func createPegAtPosition(_ position: CGPoint) -> Peg? {
+        guard mode != .deletePeg && mode != .block else {
+            return nil
         }
+        return pegFactory?.createPegAtPosition(position)
+    }
 
-        func resetLevel() {
-            currentLevelId = UUID()
-            actionViewModel.resetTitle()
-            boardViewModel.resetLevelObjects()
+    func onPegButtonSelect(pegButton: PegPaletteButton) {
+        mode = pegButton.type
+        pegFactory = pegButton.factory
+    }
+
+    func onBlockButtonSelect() {
+        mode = .block
+        pegFactory = nil
+    }
+
+    func onDeleteButtonSelect() {
+        mode = .deletePeg
+        pegFactory = nil
+    }
+}
+
+// MARK: - Board
+
+extension LevelDesignerViewModel {
+    var levelObjects: [any LevelObject] {
+        pegObjects + blockObjects
+    }
+
+    func initialiseBoardSize(boardSize: CGSize) {
+        self.initialBoardSize = boardSize
+        self.currentBoardSize = boardSize
+    }
+
+    var boardSuccessfullyInitialised: Bool {
+        initialBoardSize != CGSize.zero && currentBoardSize != CGSize.zero
+    }
+    
+    func createObjectAtPosition(_ location: CGPoint) {
+        var levelObject: (any LevelObject)?
+        if let pegObject = createPegAtPosition(location) {
+            levelObject = pegObject
+        } else if let blockObject = createBlockAtPosition(location) {
+            levelObject = blockObject
         }
-
-        func loadLevel(_ level: Level) {
-            currentLevelId = level.id
-            actionViewModel.loadTitle(level.title)
-
-            let levelObjects = level.pegs.map { LevelObjectViewModel(levelObject: $0) }
-                               + level.blocks.map { LevelObjectViewModel(levelObject: $0) }
-            boardViewModel.loadLevelObjects(levelObjects)
+        if let levelObject = levelObject {
+            if addLevelObject(levelObject) {
+                selectLevelObject(levelObject)
+            }
         }
+    }
 
-        func instantiateLevel() -> Level {
-            Level(id: currentLevelId,
-                  frame: boardViewModel.initialBoardSize,
-                  title: actionViewModel.title,
-                  updatedAt: Date.now,
-                  pegs: Set(boardViewModel.pegObjectsArray),
-                  blocks: Set(boardViewModel.blockObjectsArray))
+    func addLevelObject(_ levelObject: any LevelObject) -> Bool {
+        guard !isOverlapping(levelObject) else {
+            return false
         }
+        guard !isOverflowing(levelObject) else {
+            return false
+        }
+        if let peg = levelObject as? Peg {
+            return level.pegs.insert(peg).inserted
+        } else if let block = levelObject as? Block {
+            return level.blocks.insert(block).inserted
+        }
+        return false
+    }
 
-        func saveLevel() async throws {
-            let level = instantiateLevel()
-            currentLevelId = level.id
-            levelListViewModel.addLevel(level)
-            try await saveData()
+    func removeLevelObject(_ levelObject: any LevelObject) -> Bool {
+        if let peg = levelObject as? Peg {
+            return level.pegs.remove(peg) != nil
+        } else if let block = levelObject as? Block {
+            return level.blocks.remove(block) != nil
         }
+        return false
+    }
 
-        func loadData() async throws {
-            let levels = try await dataManager.load()
-            levelListViewModel.loadLevels(Set(levels))
+    func translateLevelObject(_ levelObject: any LevelObject, translation: CGSize) -> Bool {
+        let newLevelObject = levelObject.clone()
+        newLevelObject.translateBy(translation)
+        guard removeLevelObject(levelObject) else {
+            return false
         }
+        guard addLevelObject(newLevelObject) else {
+            _ = addLevelObject(levelObject)
+            return false
+        }
+        return true
+    }
 
-        func saveData() async throws {
-            try await dataManager.save(levels: Array(levelListViewModel.levels))
+    func resetLevelObjects() {
+        level.pegs = []
+        level.blocks = []
+    }
+
+    func isOverlapping(_ levelObject: any LevelObject) -> Bool {
+        for other in levelObjects where other.overlapsWith(levelObject) {
+            return true
         }
+        return false
+    }
+
+    func isOverflowing(_ levelObject: any LevelObject) -> Bool {
+        guard boardSuccessfullyInitialised else {
+            return false
+        }
+        let boardWidth = currentBoardSize.width
+        let boardHeight = currentBoardSize.height
+        let objectX = levelObject.position.x
+        let objectY = levelObject.position.y
+
+        // TODO: update
+        let isWithinHorizontally = objectX > Constants.Peg.radius && objectX < boardWidth - Constants.Peg.radius
+        let isWithinVertically = objectY > Constants.Peg.radius && objectY < boardHeight - Constants.Peg.radius
+
+        return !isWithinHorizontally || !isWithinVertically
     }
 }

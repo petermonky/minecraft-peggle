@@ -9,20 +9,12 @@ import SwiftUI
 
 struct BoardView: View {
     @EnvironmentObject var levelDesigner: LevelDesignerViewModel
-    @StateObject var viewModel: ViewModel
-
-    init(viewModel: ViewModel = .init()) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
 
     var body: some View {
-        let palette = levelDesigner.paletteViewModel
-        let levelObjects = Array(viewModel.levelObjectViewModels)
-
         GeometryReader { geometry in
             ZStack {
-                ForEach(levelObjects, id: \.self) { levelObject in
-                    LevelObjectView(viewModel: levelObject)
+                ForEach(levelDesigner.levelObjects, id: \.id) { levelObject in
+                    LevelObjectView(levelObject: levelObject)
                 }
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
@@ -32,14 +24,10 @@ struct BoardView: View {
                     .aspectRatio(contentMode: .fill)
             )
             .onTapGesture { location in
-                if let levelObject = palette.createPegAtPosition(location) {
-                    _ = viewModel.addLevelObject(LevelObjectViewModel(levelObject: levelObject))
-                } else if let levelObject = palette.createBlockAtPosition(location) {
-                    _ = viewModel.addLevelObject(LevelObjectViewModel(levelObject: levelObject))
-                }
+                levelDesigner.createObjectAtPosition(location)
             }
             .onAppear {
-                viewModel.initialiseBoardSize(boardSize: geometry.size)
+                levelDesigner.initialiseBoardSize(boardSize: geometry.size)
             }
         }
         .simultaneousGesture(TapGesture().onEnded {

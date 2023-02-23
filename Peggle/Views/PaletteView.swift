@@ -9,20 +9,15 @@ import SwiftUI
 
 struct PaletteView: View {
     @EnvironmentObject var levelDesigner: LevelDesignerViewModel
-    @StateObject var viewModel: ViewModel
-
-    init(viewModel: ViewModel = .init()) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
 
     var body: some View {
         HStack(spacing: 20) {
-            ForEach(viewModel.pegButtonViewModels) { pegButtonViewModel in
-                PaletteButtonView(viewModel: pegButtonViewModel)
+            ForEach(levelDesigner.pegPaletteButtons, id: \.type) { pegPaletteButton in
+                PaletteButtonView(paletteButton: pegPaletteButton)
             }
-            PaletteButtonView(viewModel: viewModel.blockButtonViewModel)
+            PaletteButtonView(paletteButton: levelDesigner.blockPaletteButton)
             Spacer()
-            PaletteButtonView(viewModel: viewModel.deleteButtonViewModel)
+            PaletteButtonView(paletteButton: levelDesigner.deletePaletteButton)
         }
     }
 }

@@ -9,25 +9,22 @@ import SwiftUI
 
 struct PaletteButtonView: View {
     @EnvironmentObject var levelDesigner: LevelDesignerViewModel
-    @StateObject var viewModel: ViewModel
+    var paletteButton: PaletteButton
 
-    init(viewModel: ViewModel = .init()) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+    init(paletteButton: PaletteButton) {
+        self.paletteButton = paletteButton
     }
 
     var body: some View {
-        let palette = levelDesigner.paletteViewModel
-        let paletteButton = viewModel.paletteButton
-
         Button(action: {
-            viewModel.updatePalette(palette)
+            paletteButton.updatePalette(levelDesigner)
         }) {
             Image(paletteButton.imageName)
                 .resizable()
                 .frame(width: Constants.PaletteButton.width,
                        height: Constants.PaletteButton.height)
                 .overlay(Color.white.opacity(
-                    palette.mode == paletteButton.type
+                    levelDesigner.mode == paletteButton.type
                     ? Constants.PaletteButton.selectedOpacity
                     : 0.0))
         }
@@ -36,7 +33,7 @@ struct PaletteButtonView: View {
 
 struct PaletteButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        PaletteButtonView()
+        PaletteButtonView(paletteButton: BluePegPaletteButton())
             .environmentObject(LevelDesignerViewModel())
     }
 }

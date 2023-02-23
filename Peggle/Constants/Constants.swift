@@ -19,9 +19,14 @@ extension Constants {
 }
 
 extension Constants {
+    enum LevelObject {
+        static let afterImageOpacity = 0.5
+    }
+}
+
+extension Constants {
     enum Peg {
         static let radius: CGFloat = 30.0
-        static let afterImageOpacity = 0.5
 
         static let fadeDuration: CGFloat = 0.25
         static let popScale: CGFloat = 1.5

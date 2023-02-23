@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct LevelDesignerView: View {
-    @StateObject var viewModel: ViewModel
+    @StateObject var viewModel: LevelDesignerViewModel
 
-    init(viewModel: ViewModel = .init()) {
+    init(viewModel: LevelDesignerViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
         VStack(spacing: 0) {
             DataView()
-            BoardView(viewModel: viewModel.boardViewModel)
+            BoardView()
             VStack {
-                PaletteView(viewModel: viewModel.paletteViewModel)
+                PaletteView()
                 Spacer()
-                ActionView(viewModel: viewModel.actionViewModel)
+                ActionView()
             }
             .frame(height: 180)
             .padding(20)
@@ -41,6 +41,7 @@ struct LevelDesignerView: View {
 
 struct LevelDesignerView_Previews: PreviewProvider {
     static var previews: some View {
-        LevelDesignerView()
+        let viewModel = LevelDesignerViewModel()
+        LevelDesignerView(viewModel: viewModel)
     }
 }

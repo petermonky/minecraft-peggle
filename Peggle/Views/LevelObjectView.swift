@@ -9,66 +9,74 @@ import SwiftUI
 
 struct LevelObjectView: View {
     @EnvironmentObject var levelDesigner: LevelDesignerViewModel
-    @StateObject var viewModel: LevelObjectViewModel
+    @State var dragOffset = CGSize.zero
+    @State var zIndex: Double = 0
+    private var levelObject: any LevelObject
 
-    init(viewModel: LevelObjectViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+    init(levelObject: any LevelObject) {
+        self.levelObject = levelObject
     }
 
     func renderBaseImage(isAfterImage: Bool) -> some View {
-        Image(viewModel.levelObject.normalImageName)
+        Image(levelObject.normalImageName)
             .renderingMode(isAfterImage ? .template : .original)
             .resizable()
-            .foregroundColor(.white)
-            .opacity(isAfterImage
-                     ? Constants.Peg.afterImageOpacity
-                     : 1.0)
-            .frame(width: viewModel.levelObject.width,
-                   height: viewModel.levelObject.height)
-            .position(viewModel.levelObject.position)
+            .frame(width: levelObject.width,
+                   height: levelObject.height)
+            .position(levelObject.position)
     }
 
     var body: some View {
-        let palette = levelDesigner.paletteViewModel
-        let board = levelDesigner.boardViewModel
+        let isSelected = levelDesigner.isSelectedLevelObject(levelObject)
 
         ZStack {
             renderBaseImage(isAfterImage: true)
+                .foregroundColor(.white.opacity(Constants.LevelObject.afterImageOpacity))
 
-            renderBaseImage(isAfterImage: false)
-                .offset(viewModel.dragOffset)
-                .onTapGesture {
-                    if palette.mode == .deletePeg {
-                        _ = board.removeLevelObject(viewModel)
+            ZStack {
+                renderBaseImage(isAfterImage: false)
+                renderBaseImage(isAfterImage: true)
+                    .foregroundColor(.white.opacity(isSelected
+                                                    ? Constants.LevelObject.afterImageOpacity
+                                                    : 0.0))
+            }
+            .offset(dragOffset)
+            .onTapGesture {
+                if levelDesigner.mode == .deletePeg {
+                    _ = levelDesigner.removeLevelObject(levelObject)
+                } else {
+                    levelDesigner.selectLevelObject(levelObject)
+                }
+            }
+            .onLongPressGesture {
+                _ = levelDesigner.removeLevelObject(levelObject)
+            }
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        dragOffset = value.translation
+                        zIndex = Double.infinity
                     }
-                }
-                .onLongPressGesture {
-                    _ = board.removeLevelObject(viewModel)
-                }
-                .gesture(
-                    DragGesture()
-                        .onChanged { value in
-                            viewModel.dragOffset = value.translation
-                            viewModel.zIndex = Double.infinity
+                    .onEnded { value in
+                        let successfullyTranslated = levelDesigner.translateLevelObject(
+                            levelObject,
+                            translation: value.translation
+                        )
+                        if !successfullyTranslated {
+                            dragOffset = CGSize.zero
                         }
-                        .onEnded { value in
-                            let successfullyTranslated = board.translateLevelObject(viewModel,
-                                                                                    translation: value.translation)
-                            if !successfullyTranslated {
-                                viewModel.dragOffset = CGSize.zero
-                            }
-                            viewModel.zIndex = 0
-                        }
-                )
+                        zIndex = 0
+                    }
+            )
         }
-        .zIndex(viewModel.zIndex)
+        .zIndex(zIndex)
     }
 }
 
 struct LevelObjectView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = LevelObjectViewModel(levelObject: BluePeg())
-        LevelObjectView(viewModel: viewModel)
+        let levelObject = BluePeg()
+        LevelObjectView(levelObject: levelObject)
             .environmentObject(LevelDesignerViewModel())
     }
 }

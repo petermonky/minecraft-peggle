@@ -9,19 +9,11 @@ import SwiftUI
 
 struct ActionView: View {
     @EnvironmentObject var levelDesigner: LevelDesignerViewModel
-    @StateObject var viewModel: ViewModel
-
-    init(viewModel: ViewModel = .init()) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
 
     var body: some View {
-        let board = levelDesigner.boardViewModel
-        let levelList = levelDesigner.levelListViewModel
-
         HStack(spacing: 24) {
             HStack {
-                NavigationLink(destination: LevelListView(viewModel: levelList).environmentObject(levelDesigner)) {
+                NavigationLink(destination: LevelListView().environmentObject(levelDesigner)) {
                     Text("LOAD")
                 }.simultaneousGesture(TapGesture().onEnded {
                     hideKeyboard()
@@ -38,20 +30,20 @@ struct ActionView: View {
                     }
                 }) {
                     Text("SAVE")
-                }.disabled(!viewModel.isValidForm)
+                }.disabled(levelDesigner.level.title.isEmpty)
 
                 Button(action: {
-                    board.resetLevelObjects()
+                    levelDesigner.resetLevelObjects()
                 }) {
                     Text("RESET")
                 }
             }
 
-            TextField("Enter level title", text: $viewModel.title)
+            TextField("Enter level title", text: $levelDesigner.level.title)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
             NavigationLink(destination: GamePlayerView(
-                viewModel: GamePlayerViewModel(level: levelDesigner.instantiateLevel())
+                viewModel: GamePlayerViewModel(level: levelDesigner.level)
             )) {
                 Text("START")
             }.simultaneousGesture(TapGesture().onEnded {
