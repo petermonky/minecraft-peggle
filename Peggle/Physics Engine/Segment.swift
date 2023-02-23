@@ -19,6 +19,42 @@ struct Segment {
 }
 
 extension Segment {
+    // adapted from https://stackoverflow.com/a/6853926
+    func closestPoint(to point: CGPoint) -> CGPoint {
+        let a = point.x - start.x
+        let b = point.y - start.y
+        let c = end.x - start.x
+        let d = end.y - start.y
+
+        let dot = a * c + b * d
+        let len_sq = c * c + d * d
+        let param = dot / len_sq
+
+        var xx, yy: CGFloat
+
+        if param < 0 || (start.x == end.x && start.y == end.y) {
+            xx = start.x
+            yy = end.y
+        } else if param > 1 {
+            xx = end.x
+            yy = end.y
+        } else {
+            xx = start.x + param * c
+            yy = start.y + param * d
+        }
+
+        return CGPoint(x: xx, y: yy)
+    }
+
+    func distance(to point: CGPoint) -> CGFloat {
+        let closestPoint = closestPoint(to: point)
+
+        let dx = point.x - closestPoint.x
+        let dy = point.y - closestPoint.y
+
+        return sqrt(dx * dx + dy * dy)
+    }
+
     func contains(_ point: CGPoint) -> Bool {
         guard orientation(with: point) == .colinear else {
             return false

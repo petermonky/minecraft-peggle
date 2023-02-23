@@ -11,7 +11,7 @@ class GamePlayerViewModel: ObservableObject {
     @Published var renderer: Renderer
 
     init(level: Level) {
-        let gameEngine = GameEngine(level: Level.mockData)
+        let gameEngine = GameEngine(level: level)
         self.renderer = Renderer(gameEngine: gameEngine)
     }
 }

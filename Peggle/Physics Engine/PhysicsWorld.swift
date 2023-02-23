@@ -8,13 +8,13 @@
 import Foundation
 
 class PhysicsWorld {
-    let frame: CGSize
+    let frame: Frame
     let gravity: CGVector
     private(set) var bodies: [any PhysicsBody]
     private(set) var collisionData: [any CollisionData]
 
     init(
-        frame: CGSize = CGSize(),
+        frame: Frame = Frame(),
         gravity: CGVector = Constants.Physics.gravity,
         bodies: [any PhysicsBody] = [],
         collisionData: [any CollisionData] = []
@@ -60,11 +60,12 @@ class PhysicsWorld {
             }
             applyFrameCollisionBetween(body, and: frame, delta: delta)
             for other in bodies where body !== other {
-                if let circleBody = other as? (any CirclePhysicsBody) {
-                    applyCircleBodyCollisionBetween(body, and: circleBody, delta: delta)
-                } else {
-                    fatalError("Invalid body")
-                } // TODO: else if polygon
+                applyBodyCollisionBetween(body, and: other, delta: delta)
+//                if let circleBody = other as? (any CirclePhysicsBody) {
+//                    applyCircleBodyCollisionBetween(body, and: circleBody, delta: delta)
+//                } else {
+//                    fatalError("Invalid body")
+//                } // TODO: else if polygon
             }
         }
     }
@@ -86,29 +87,28 @@ class PhysicsWorld {
 
     private func applyFrameCollisionBetween<T: DynamicPhysicsBody>(
         _ body: T,
-        and frame: CGSize,
+        and frame: Frame,
         delta: TimeInterval
     ) {
         let futureBody = body.clone()
         applyStep(body: futureBody, delta: delta)
-
-        for side in FrameSide.allCases where futureBody.hasCollisionWith(frame: frame, side: side) {
-            collisionData.append(body.createCollisionDataWith(frame: frame, side: side))
-            body.resolveCollisionWith(frame: frame, side: side)
+        if CollisionManager.hasCollisionBetween(futureBody, and: frame),
+           let data = CollisionManager.resolveCollisionBetween(body: body, frame: frame) {
+            collisionData.append(data)
         }
     }
 
-    private func applyCircleBodyCollisionBetween<T: DynamicPhysicsBody>(
+    private func applyBodyCollisionBetween<T: DynamicPhysicsBody>(
         _ body: T,
-        and circleBody: any CirclePhysicsBody,
+        and other: any PhysicsBody,
         delta: TimeInterval
     ) {
         let futureBody = body.clone()
         applyStep(body: futureBody, delta: delta)
 
-        if futureBody.hasCollisionWith(circleBody: circleBody) {
-            collisionData.append(body.createCollisionDataWith(circleBody: circleBody))
-            body.resolveCollisionWith(circleBody: circleBody)
+        if CollisionManager.hasCollisionBetween(futureBody, and: other),
+           let data = CollisionManager.resolveCollisionBetween(body, and: other) {
+            collisionData.append(data)
         }
     }
 }

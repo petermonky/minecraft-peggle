@@ -33,7 +33,7 @@ final class CircleFrameCollisionDataTests: XCTestCase {
     func testConstruct_dynamicCirclePhysicsBodyAndBottomFrameSIde() {
         let circleBody = TestDynamicCirclePhysicsBody()
         let side: FrameSide = .bottom
-        let collisionData = CircleFrameCollisionData(circleBody: circleBody, side: side)
+        let collisionData = BodyFrameCollisionData(circleBody: circleBody, side: side)
 
         XCTAssertEqual(collisionData.sourceId, circleBody.id,
                        "sourceId should be equal to that of circle body's ID.")
@@ -44,7 +44,7 @@ final class CircleFrameCollisionDataTests: XCTestCase {
     func testConstruct_dynamicCirclePhysicsBodyAndTopFrameSIde() {
         let circleBody = TestDynamicCirclePhysicsBody()
         let side: FrameSide = .top
-        let collisionData = CircleFrameCollisionData(circleBody: circleBody, side: side)
+        let collisionData = BodyFrameCollisionData(circleBody: circleBody, side: side)
 
         XCTAssertEqual(collisionData.sourceId, circleBody.id,
                        "sourceId should be equal to that of circle body's ID.")
@@ -55,7 +55,7 @@ final class CircleFrameCollisionDataTests: XCTestCase {
     func testConstruct_dynamicCirclePhysicsBodyAndLeftFrameSIde() {
         let circleBody = TestDynamicCirclePhysicsBody()
         let side: FrameSide = .left
-        let collisionData = CircleFrameCollisionData(circleBody: circleBody, side: side)
+        let collisionData = BodyFrameCollisionData(circleBody: circleBody, side: side)
 
         XCTAssertEqual(collisionData.sourceId, circleBody.id,
                        "sourceId should be equal to that of circle body's ID.")
@@ -66,7 +66,7 @@ final class CircleFrameCollisionDataTests: XCTestCase {
     func testConstruct_dynamicCirclePhysicsBodyAndRightFrameSIde() {
         let circleBody = TestDynamicCirclePhysicsBody()
         let side: FrameSide = .right
-        let collisionData = CircleFrameCollisionData(circleBody: circleBody, side: side)
+        let collisionData = BodyFrameCollisionData(circleBody: circleBody, side: side)
 
         XCTAssertEqual(collisionData.sourceId, circleBody.id,
                        "sourceId should be equal to that of circle body's ID.")

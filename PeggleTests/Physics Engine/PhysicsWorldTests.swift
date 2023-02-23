@@ -63,7 +63,7 @@ final class PhysicsWorldTests: XCTestCase {
         let body1 = TestDynamicCirclePhysicsBody()
         let body2 = TestCirclePhysicsBody()
         let bodies: [any PhysicsBody] = [body1, body2]
-        let data = CircleCircleCollisionData(first: body1, second: body2)
+        let data = BodyBodyCollisionData(circle1: body1, circle2: body2)
         let collisionData: [any CollisionData] = [data]
         let physicsWorld = PhysicsWorld(frame: frame, gravity: gravity, bodies: bodies, collisionData: collisionData)
 

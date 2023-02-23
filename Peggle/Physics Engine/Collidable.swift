@@ -8,10 +8,4 @@
 import Foundation
 
 protocol Collidable {
-    associatedtype Shape: PhysicsShape
-
-    var position: CGPoint { get }
-    var shape: Shape { get }
-
-    func contains(_ point: CGPoint) -> Bool
 }

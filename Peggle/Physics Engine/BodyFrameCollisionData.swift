@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct CircleFrameCollisionData: CollisionData {
+struct BodyFrameCollisionData: CollisionData {
     let sourceId: String
     let side: FrameSide
 
-    init(circleBody: any DynamicCirclePhysicsBody, side: FrameSide) {
-        self.sourceId = circleBody.id
+    init(body: any DynamicPhysicsBody, side: FrameSide) {
+        self.sourceId = body.id
         self.side = side
     }
 }

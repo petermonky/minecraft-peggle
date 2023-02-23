@@ -10,7 +10,6 @@ typealias BoardViewModel = BoardView.ViewModel
 
 extension BoardView {
     class ViewModel: ObservableObject {
-//        @Published var pegViewModels: Set<PegViewModel>
         @Published var levelObjectViewModels: Set<LevelObjectViewModel>
         @Published var initialBoardSize = CGSize.zero
         @Published var currentBoardSize = CGSize.zero

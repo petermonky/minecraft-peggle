@@ -25,7 +25,6 @@ struct BoardView: View {
                     LevelObjectView(viewModel: levelObject)
                 }
             }
-//            .scaleEffect(x: viewModel.sizeScale, y: viewModel.sizeScale, anchor: .top)
             .frame(width: geometry.size.width, height: geometry.size.height)
             .background(
                 Image("background")
@@ -42,12 +41,6 @@ struct BoardView: View {
             .onAppear {
                 viewModel.initialiseBoardSize(boardSize: geometry.size)
             }
-//            .onChange(of: geometry.size) { _ in
-//                withAnimation(.easeOut(duration: 0.225)) {
-//                    print(geometry.size)
-//                    viewModel.updateBoardSize(boardSize: geometry.size)
-//                }
-//            }
         }
         .simultaneousGesture(TapGesture().onEnded {
             hideKeyboard()

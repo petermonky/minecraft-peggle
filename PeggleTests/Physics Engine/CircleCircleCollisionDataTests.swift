@@ -47,7 +47,7 @@ final class CircleCircleCollisionDataTests: XCTestCase {
     func testConstruct_dynamicCirclePhysicsBodyAndCirclePhysicsBody() {
         let first = TestDynamicCirclePhysicsBody()
         let second = TestCirclePhysicsBody()
-        let collisionData = CircleCircleCollisionData(first: first, second: second)
+        let collisionData = BodyBodyCollisionData(circle1: first, circle2: second)
 
         XCTAssertEqual(collisionData.sourceId, first.id,
                        "sourceId should be initialised to that of first body's ID.")
@@ -58,7 +58,7 @@ final class CircleCircleCollisionDataTests: XCTestCase {
     func testConstruct_dynamicCirclePhysicsBodyAndDynamicCirclePhysicsBody() {
         let first = TestDynamicCirclePhysicsBody()
         let second = TestDynamicCirclePhysicsBody()
-        let collisionData = CircleCircleCollisionData(first: first, second: second)
+        let collisionData = BodyBodyCollisionData(circle1: first, circle2: second)
 
         XCTAssertEqual(collisionData.sourceId, first.id,
                        "sourceId should be initialised to that of first body's ID.")

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol PolygonCollidable: Collidable where Shape == PolygonPhysicsShape {
+protocol PolygonCollidable: BodyCollidable where Shape == PolygonPhysicsShape {
     override var shape: PolygonPhysicsShape { get }
 
     var vertices: [CGPoint] { get }
@@ -32,10 +32,8 @@ extension PolygonCollidable {
 
     func contains(_ point: CGPoint) -> Bool {
         let positionToPoint = Segment(start: position, end: point)
-        for segment in segments {
-            if segment.intersects(with: positionToPoint) {
-                return false
-            }
+        for segment in segments where segment.intersects(with: positionToPoint) {
+            return false
         }
         return true
     }

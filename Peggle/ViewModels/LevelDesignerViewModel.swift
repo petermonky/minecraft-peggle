@@ -46,13 +46,17 @@ extension LevelDesignerView {
             boardViewModel.loadLevelObjects(levelObjects)
         }
 
+        func instantiateLevel() -> Level {
+            Level(id: currentLevelId,
+                  frame: boardViewModel.initialBoardSize,
+                  title: actionViewModel.title,
+                  updatedAt: Date.now,
+                  pegs: Set(boardViewModel.pegObjectsArray),
+                  blocks: Set(boardViewModel.blockObjectsArray))
+        }
+
         func saveLevel() async throws {
-            let level = Level(id: currentLevelId,
-                              frame: boardViewModel.initialBoardSize,
-                              title: actionViewModel.title,
-                              updatedAt: Date.now,
-                              pegs: Set(boardViewModel.pegObjectsArray),
-                              blocks: Set(boardViewModel.blockObjectsArray))
+            let level = instantiateLevel()
             currentLevelId = level.id
             levelListViewModel.addLevel(level)
             try await saveData()

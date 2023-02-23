@@ -28,7 +28,7 @@ extension LevelObject {
 
 extension LevelObject {
     func overlapsWith(_ other: any LevelObject) -> Bool {
-        CollisionManager.hasCollisionBetween(self, other)
+        CollisionManager.hasCollisionBetween(self, and: other)
     }
 
     func translateBy(_ value: CGSize) {

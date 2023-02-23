@@ -49,13 +49,16 @@ extension Level {
         // Optimised for iPad Pro (11-inch) (4th generation)
         let frame = CGSize(width: 834.0, height: 894.0)
         var pegs = Set<Peg>()
+//        (1...10).forEach {
+//            pegs.insert(BluePeg(position: CGPoint(x: $0 * 150 - 75, y: 200)))
+//            pegs.insert(OrangePeg(position: CGPoint(x: $0 * 120 - 60, y: 400)))
+//        }
+        var blocks = Set<Block>()
         (1...10).forEach {
-            pegs.insert(BluePeg(position: CGPoint(x: $0 * 150 - 75, y: 200)))
-            pegs.insert(OrangePeg(position: CGPoint(x: $0 * 120 - 60, y: 400)))
-            pegs.insert(BluePeg(position: CGPoint(x: $0 * 90 - 45, y: 600)))
+            blocks.insert(NormalBlock(position: CGPoint(x: $0 * 90 - 45, y: 600)))
         }
         let title = "Mock level"
 
-        return Level(frame: frame, title: title, pegs: pegs)
+        return Level(frame: frame, title: title, pegs: pegs, blocks: blocks)
     }
 }

@@ -8,12 +8,17 @@
 import Foundation
 
 class CollisionManager {
-    static func hasCollisionBetween(_ first: any Collidable, _ second: any Collidable) -> Bool {
+}
+
+extension CollisionManager {
+    static func hasCollisionBetween(_ first: any Collidable, and second: any Collidable) -> Bool {
         if let first = first as? any CircleCollidable {
             if let second = second as? any CircleCollidable {
                 return hasCollisionBetween(circle1: first, circle2: second)
             } else if let second = second as? any PolygonCollidable {
                 return hasCollisionBetween(circle: first, polygon: second)
+            } else if let second = second as? any FrameCollidable {
+                return hasCollisionBetween(circle: first, frame: second)
             }
         } else if let first = first as? any PolygonCollidable {
             if let second = second as? any CircleCollidable {
@@ -37,7 +42,7 @@ class CollisionManager {
             }
             let projection = circle.position.project(onto: segment)
             if !circle.contains(projection) {
-                return false
+                continue
             }
             let startToProjectionLength = CGVector(from: segment.start, to: projection).length
             let endToProjectionLength = CGVector(from: segment.end, to: projection).length
@@ -59,5 +64,122 @@ class CollisionManager {
             return true
         }
         return false
+    }
+
+    private static func hasCollisionBetween(circle: any CircleCollidable, frame: any FrameCollidable) -> Bool {
+        let hasLeftCollision = circle.position.x - circle.radius < 0
+        let hasRightCollision = circle.position.x + circle.radius > frame.width
+        let hasTopCollision = circle.position.y - circle.radius < 0
+        let hasBottomCollision = circle.position.y + circle.radius > frame.height
+
+        return hasLeftCollision || hasRightCollision || hasTopCollision || hasBottomCollision
+    }
+}
+
+extension CollisionManager {
+    static func resolveCollisionBetween(
+        _ first: any DynamicPhysicsBody,
+        and second: any PhysicsBody,
+        restitution: CGFloat = Constants.Physics.restitution
+    ) -> (any CollisionData)? {
+        if let first = first as? any DynamicCirclePhysicsBody {
+            if let second = second as? any CirclePhysicsBody {
+                return resolveCollisionBetween(circle1: first, circle2: second)
+            } else if let second = second as? any PolygonPhysicsBody {
+                return resolveCollisionBetween(circle: first, polygon: second)
+            }
+        }
+        return nil
+    }
+
+    private static func resolveCollisionBetween(
+        circle1: any DynamicCirclePhysicsBody,
+        circle2: any CirclePhysicsBody,
+        restitution: CGFloat = Constants.Physics.restitution
+    ) -> BodyBodyCollisionData {
+        let normalised = CGVector(from: circle2.position, to: circle1.position).normalise
+        let scaled = normalised.scale(by: circle1.shape.radius + circle2.shape.radius)
+
+        circle1.position = circle2.position.move(by: scaled)
+        circle1.velocity = circle1.velocity.reflectAlongVector(normalised).scale(by: restitution)
+        return BodyBodyCollisionData(body1: circle1, body2: circle2)
+    }
+
+    private static func resolveCollisionBetween(
+        circle: any DynamicCirclePhysicsBody,
+        polygon: any PolygonPhysicsBody,
+        restitution: CGFloat = Constants.Physics.restitution
+    ) -> BodyBodyCollisionData? {
+        guard let closestSegment = closestSegmentFrom(circle, to: polygon) else {
+            return nil
+        }
+        let closestPoint = closestSegment.closestPoint(to: circle.position)
+        let normalised = CGVector(from: closestPoint, to: circle.position).normalise
+        let scaled = normalised.scale(by: circle.radius)
+
+        circle.position = closestPoint.move(by: scaled)
+        circle.velocity = circle.velocity.reflectAlongVector(normalised).scale(by: restitution)
+        return BodyBodyCollisionData(body1: circle, body2: polygon)
+    }
+
+    private static func closestSegmentFrom(
+        _ body: any DynamicPhysicsBody,
+        to polygon: any PolygonPhysicsBody
+    ) -> Segment? {
+        var minDistance = CGFloat.infinity
+        var minSegment: Segment?
+        for segment in polygon.segments where segment.distance(to: body.position) < minDistance {
+            minDistance = segment.distance(to: body.position)
+            minSegment = segment
+        }
+        return minSegment
+    }
+
+    static func resolveCollisionBetween(
+        body: any DynamicPhysicsBody,
+        frame: any FrameCollidable,
+        restitution: CGFloat = Constants.Physics.restitution
+    ) -> BodyFrameCollisionData? {
+        guard let closestSide = closestSideFrom(body, to: frame) else {
+            return nil
+        }
+
+        switch closestSide {
+        case .left:
+            body.velocity = body.velocity.reflectAlongXAxis().scale(by: restitution)
+        case .right:
+            body.velocity = body.velocity.reflectAlongXAxis().scale(by: restitution)
+        case .top:
+            body.velocity = body.velocity.reflectAlongYAxis().scale(by: restitution)
+        case .bottom:
+            body.velocity = body.velocity.reflectAlongYAxis().scale(by: restitution)
+        }
+
+        let collisionData = BodyFrameCollisionData(body: body, side: closestSide)
+        return collisionData
+    }
+
+    private static func closestSideFrom(_ body: any DynamicPhysicsBody, to frame: any FrameCollidable) -> FrameSide? {
+        var distance = CGFloat.infinity
+        var closestSide: FrameSide?
+
+        if abs(body.position.x) < distance {
+            closestSide = .left
+            distance = abs(body.position.x)
+        }
+        if abs(frame.width - body.position.x) < distance {
+            closestSide = .right
+            distance = abs(frame.width - body.position.x)
+        }
+        if abs(body.position.y) < distance {
+            closestSide = .top
+            distance = abs(body.position.y)
+        }
+        if abs(frame.height - body.position.y) < distance {
+            closestSide = .bottom
+            distance = abs(frame.height - body.position.y)
+        }
+
+        return closestSide
     }
 }

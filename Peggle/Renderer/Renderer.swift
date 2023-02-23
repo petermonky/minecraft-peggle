@@ -13,6 +13,7 @@ class Renderer: ObservableObject, GameEngineDelegate {
     @Published private(set) var bucketGameView: BucketGameView?
     @Published private(set) var ballGameView: BallGameView?
     @Published private(set) var pegGameViews: [PegGameView]?
+    @Published private(set) var blockGameViews: [BlockGameView]?
     private var gameEngine: GameEngine
 
     var frame: CGSize {
@@ -28,14 +29,16 @@ class Renderer: ObservableObject, GameEngineDelegate {
         cannonGameObject: CannonGameObject?,
         bucketGameObject: BucketGameObject?,
         ballGameObject: BallGameObject?,
-        pegGameObjects: [PegGameObject]?
+        pegGameObjects: [PegGameObject]?,
+        blockGameObjects: [BlockGameObject]?
     ) {
         clearViews()
         renderViews(
             cannonGameObject: cannonGameObject,
             bucketGameObject: bucketGameObject,
             ballGameObject: ballGameObject,
-            pegGameObjects: pegGameObjects
+            pegGameObjects: pegGameObjects,
+            blockGameObjects: blockGameObjects
         )
     }
 
@@ -55,7 +58,8 @@ class Renderer: ObservableObject, GameEngineDelegate {
         cannonGameObject: CannonGameObject?,
         bucketGameObject: BucketGameObject?,
         ballGameObject: BallGameObject?,
-        pegGameObjects: [PegGameObject]?
+        pegGameObjects: [PegGameObject]?,
+        blockGameObjects: [BlockGameObject]?
     ) {
         if let cannonGameObject = cannonGameObject {
             cannonGameView = CannonGameView(gameObject: cannonGameObject)
@@ -67,6 +71,10 @@ class Renderer: ObservableObject, GameEngineDelegate {
 
         if let pegGameObjects = pegGameObjects {
             pegGameViews = pegGameObjects.map { PegGameView(gameObject: $0) }
+        }
+
+        if let blockGameObjects = blockGameObjects {
+            blockGameViews = blockGameObjects.map { BlockGameView(gameObject: $0) }
         }
 
         if let ballGameObject = gameEngine.ballGameObject {

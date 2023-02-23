@@ -50,10 +50,13 @@ struct ActionView: View {
             TextField("Enter level title", text: $viewModel.title)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
-            Button(action: {
-            }) {
+            NavigationLink(destination: GamePlayerView(
+                viewModel: GamePlayerViewModel(level: levelDesigner.instantiateLevel())
+            )) {
                 Text("START")
-            }
+            }.simultaneousGesture(TapGesture().onEnded {
+                hideKeyboard()
+            })
         }
     }
 }

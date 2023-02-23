@@ -30,6 +30,9 @@ struct RendererView: View {
                     if let pegGameViews = renderer.pegGameViews {
                         ForEach(pegGameViews) { $0 }
                     }
+                    if let blockGameViews = renderer.blockGameViews {
+                        ForEach(blockGameViews) { $0 }
+                    }
                     if let bucketGameView = renderer.bucketGameView {
                         bucketGameView
                     }

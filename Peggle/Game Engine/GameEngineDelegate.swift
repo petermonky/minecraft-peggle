@@ -12,7 +12,8 @@ protocol GameEngineDelegate: AnyObject {
         cannonGameObject: CannonGameObject?,
         bucketGameObject: BucketGameObject?,
         ballGameObject: BallGameObject?,
-        pegGameObjects: [PegGameObject]?
+        pegGameObjects: [PegGameObject]?,
+        blockGameObjects: [BlockGameObject]?
     )
     func didGameOver()
 }
