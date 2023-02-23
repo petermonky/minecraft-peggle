@@ -8,14 +8,32 @@
 import Foundation
 import SwiftUI
 
-class Block: LevelObject {
+class Block: LevelObject, PolygonCollidable {
+    typealias Shape = PolygonPhysicsShape
+
     var id = UUID()
     var position: CGPoint
+    var shape: Shape
     var normalImageName: String
 
-    init(position: CGPoint, normalImageName: String) {
+    var width: CGFloat {
+        shape.width
+    }
+
+    var height: CGFloat {
+        shape.height
+    }
+
+    init(position: CGPoint, shape: Shape, normalImageName: String) {
         self.position = position
+        self.shape = shape
         self.normalImageName = normalImageName
+    }
+
+    required init(instance: Block) {
+        position = instance.position
+        shape = instance.shape
+        normalImageName = instance.normalImageName
     }
 
     func overlapsWith(peg other: Peg) -> Bool {
@@ -27,26 +45,22 @@ class Block: LevelObject {
         position.y += value.height
     }
 
-    func clone() -> Block {
-        Block(position: position, normalImageName: normalImageName)
-    }
-}
-
-// MARK: Hashable
-
-extension Block: Hashable {
-    static func == (lhs: Block, rhs: Block) -> Bool {
-        lhs.id == rhs.id
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+    func clone() -> Self? {
+        Block(position: position, shape: shape, normalImageName: normalImageName) as? Self
     }
 }
 
 class NormalBlock: Block {
     init(position: CGPoint = CGPoint.zero) {
-        super.init(position: position, normalImageName: "block")
+        super.init(
+            position: position,
+            shape: PolygonPhysicsShape(width: Constants.Block.width, height: Constants.Block.height),
+            normalImageName: "block"
+        )
+    }
+
+    required init(instance: Block) {
+        super.init(instance: instance)
     }
 
     required init(from decoder: Decoder) throws {

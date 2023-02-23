@@ -18,4 +18,10 @@ extension CGPoint {
 
         return CGPoint(x: x, y: y)
     }
+
+    func project(onto segment: Segment) -> CGPoint {
+        let startToEnd = CGVector(from: segment.start, to: segment.end)
+        let startToSelf = CGVector(from: segment.start, to: self)
+        return segment.start.move(by: startToSelf.project(onto: startToEnd))
+    }
 }

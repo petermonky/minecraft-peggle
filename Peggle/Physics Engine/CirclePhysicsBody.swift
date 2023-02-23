@@ -7,6 +7,5 @@
 
 import Foundation
 
-protocol CirclePhysicsBody: PhysicsBody where Shape == CirclePhysicsShape {
-    override var shape: CirclePhysicsShape { get }
+protocol CirclePhysicsBody: PhysicsBody, CircleCollidable {
 }

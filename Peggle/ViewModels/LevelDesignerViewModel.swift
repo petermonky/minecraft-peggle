@@ -34,13 +34,16 @@ extension LevelDesignerView {
         func resetLevel() {
             currentLevelId = UUID()
             actionViewModel.resetTitle()
-            boardViewModel.resetPegs()
+            boardViewModel.resetLevelObjects()
         }
 
         func loadLevel(_ level: Level) {
             currentLevelId = level.id
             actionViewModel.loadTitle(level.title)
-            boardViewModel.loadPegs(level.pegs.map { PegViewModel(peg: $0) })
+
+            let levelObjects = level.pegs.map { LevelObjectViewModel(levelObject: $0) }
+                               + level.blocks.map { LevelObjectViewModel(levelObject: $0) }
+            boardViewModel.loadLevelObjects(levelObjects)
         }
 
         func saveLevel() async throws {
@@ -48,7 +51,8 @@ extension LevelDesignerView {
                               frame: boardViewModel.initialBoardSize,
                               title: actionViewModel.title,
                               updatedAt: Date.now,
-                              pegs: Set(boardViewModel.pegArray))
+                              pegs: Set(boardViewModel.pegObjectsArray),
+                              blocks: Set(boardViewModel.blockObjectsArray))
             currentLevelId = level.id
             levelListViewModel.addLevel(level)
             try await saveData()

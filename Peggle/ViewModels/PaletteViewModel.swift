@@ -41,7 +41,7 @@ extension PaletteView {
         var deleteButtonViewModel: PaletteButtonViewModel {
             PaletteButtonViewModel(paletteButton: deleteButton)
         }
-        
+
         func createBlockAtPosition(_ position: CGPoint) -> Block? {
             guard mode == .block else {
                 return nil

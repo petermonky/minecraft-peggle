@@ -10,16 +10,25 @@ typealias BoardViewModel = BoardView.ViewModel
 
 extension BoardView {
     class ViewModel: ObservableObject {
-        @Published var pegViewModels: Set<PegViewModel>
+//        @Published var pegViewModels: Set<PegViewModel>
+        @Published var levelObjectViewModels: Set<LevelObjectViewModel>
         @Published var initialBoardSize = CGSize.zero
         @Published var currentBoardSize = CGSize.zero
 
-        init(pegViewModels: Set<PegViewModel> = []) {
-            self.pegViewModels = pegViewModels
+        init(levelObjectViewModels: Set<LevelObjectViewModel> = []) {
+            self.levelObjectViewModels = levelObjectViewModels
         }
 
-        var pegArray: [Peg] {
-            Array(pegViewModels).map { $0.peg }
+        var levelObjectsArray: [any LevelObject] {
+            Array(levelObjectViewModels).map { $0.levelObject }
+        }
+
+        var pegObjectsArray: [Peg] {
+            levelObjectsArray.compactMap { $0 as? Peg }
+        }
+
+        var blockObjectsArray: [Block] {
+            levelObjectsArray.compactMap { $0 as? Block }
         }
 
         var sizeScale: Double {
@@ -42,60 +51,60 @@ extension BoardView {
             self.currentBoardSize = boardSize
         }
 
-        func loadPegs(_ pegViewModels: [PegViewModel]) {
-            self.pegViewModels = Set(pegViewModels)
+        func loadLevelObjects(_ levelObjectViewModels: [LevelObjectViewModel]) {
+            self.levelObjectViewModels = Set(levelObjectViewModels)
         }
 
-        func addPeg(_ pegViewModel: PegViewModel) -> Bool {
-            guard !hasOverlappingPeg(pegViewModel) else {
+        func addLevelObject(_ levelObjectViewModel: LevelObjectViewModel) -> Bool {
+            guard !isOverlapping(levelObjectViewModel) else {
                 return false
             }
-            guard !isOverflowingPeg(pegViewModel) else {
+            guard !isOverflowing(levelObjectViewModel) else {
                 return false
             }
-            return pegViewModels.insert(pegViewModel).inserted
+            return levelObjectViewModels.insert(levelObjectViewModel).inserted
         }
 
-        func removePeg(_ pegViewModel: PegViewModel) -> Bool {
-            pegViewModels.remove(pegViewModel) != nil
+        func removeLevelObject(_ levelObjectViewModel: LevelObjectViewModel) -> Bool {
+            levelObjectViewModels.remove(levelObjectViewModel) != nil
         }
 
-        func translatePeg(_ pegViewModel: PegViewModel, translation: CGSize) -> Bool {
-            let newPegViewModel = pegViewModel.clone()
-            newPegViewModel.translateBy(translation)
-
-            guard removePeg(pegViewModel) else {
+        func translateLevelObject(_ levelObjectViewModel: LevelObjectViewModel, translation: CGSize) -> Bool {
+            let newLevelObjectViewModel = levelObjectViewModel.clone()
+            newLevelObjectViewModel.translateBy(translation)
+            guard removeLevelObject(levelObjectViewModel) else {
                 return false
             }
-            guard addPeg(newPegViewModel) else {
-                _ = addPeg(pegViewModel)
+            guard addLevelObject(newLevelObjectViewModel) else {
+                _ = addLevelObject(levelObjectViewModel)
                 return false
             }
             return true
         }
 
-        func resetPegs() {
-            pegViewModels = []
+        func resetLevelObjects() {
+            levelObjectViewModels = []
         }
 
-        func hasOverlappingPeg(_ pegViewModel: PegViewModel) -> Bool {
-            for oldPegViewModel in pegViewModels where oldPegViewModel.overlapsWith(peg: pegViewModel) {
+        func isOverlapping(_ levelObjectViewModel: LevelObjectViewModel) -> Bool {
+            for oldLevelObjectViewModel in levelObjectViewModels where oldLevelObjectViewModel.overlapsWith(levelObjectViewModel) {
                 return true
             }
             return false
         }
 
-        func isOverflowingPeg(_ pegViewModel: PegViewModel) -> Bool {
+        func isOverflowing(_ levelObjectViewModel: LevelObjectViewModel) -> Bool {
             guard boardSuccessfullyInitialised else {
                 return false
             }
             let boardWidth = currentBoardSize.width
             let boardHeight = currentBoardSize.height
-            let pegX = pegViewModel.peg.position.x
-            let pegY = pegViewModel.peg.position.y
+            let objectX = levelObjectViewModel.levelObject.position.x
+            let objectY = levelObjectViewModel.levelObject.position.y
 
-            let isWithinHorizontally = pegX > Constants.Peg.radius && pegX < boardWidth - Constants.Peg.radius
-            let isWithinVertically = pegY > Constants.Peg.radius && pegY < boardHeight - Constants.Peg.radius
+            // TODO: update
+            let isWithinHorizontally = objectX > Constants.Peg.radius && objectX < boardWidth - Constants.Peg.radius
+            let isWithinVertically = objectY > Constants.Peg.radius && objectY < boardHeight - Constants.Peg.radius
 
             return !isWithinHorizontally || !isWithinVertically
         }

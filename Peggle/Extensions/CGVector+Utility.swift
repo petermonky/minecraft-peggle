@@ -76,4 +76,8 @@ extension CGVector {
     func reflectAlongYAxis() -> CGVector {
         reflectAlongVector(CGVector(dx: 0, dy: 1))
     }
+
+    func project(onto vector: CGVector) -> CGVector {
+        vector.normalise.scale(by: dot(with: vector.normalise))
+    }
 }

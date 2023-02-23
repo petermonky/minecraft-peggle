@@ -36,14 +36,14 @@ final class BoardViewModelTests: XCTestCase {
     func testPegArray_emptyPegViewModels() {
         let boardViewModel = BoardViewModel()
 
-        XCTAssertEqual(boardViewModel.pegArray, [], "Board view model should have empty peg array.")
+        XCTAssertEqual(boardViewModel.levelObjectsArray, [], "Board view model should have empty peg array.")
     }
 
     func testPegArray_nonEmptyPegViewModels() {
         let pegViewModels = Set([PegViewModel(), PegViewModel()])
         let boardViewModel = BoardViewModel(pegViewModels: pegViewModels)
 
-        XCTAssertEqual(Set(boardViewModel.pegArray), Set( Array(pegViewModels).map { $0.peg }),
+        XCTAssertEqual(Set(boardViewModel.levelObjectsArray), Set( Array(pegViewModels).map { $0.peg }),
                        "Board view model should have non-empty peg array.")
     }
 
@@ -87,7 +87,7 @@ final class BoardViewModelTests: XCTestCase {
     func testLoadPegs_emptyPegViewModels() {
         let boardViewModel = BoardViewModel()
 
-        boardViewModel.loadPegs([])
+        boardViewModel.loadLevelObjects([])
         XCTAssertEqual(boardViewModel.pegViewModels, [],
                        "Board view model should have empty set of peg view models after load.")
     }
@@ -96,7 +96,7 @@ final class BoardViewModelTests: XCTestCase {
         let pegViewModels = [PegViewModel(), PegViewModel()]
         let boardViewModel = BoardViewModel()
 
-        boardViewModel.loadPegs(pegViewModels)
+        boardViewModel.loadLevelObjects(pegViewModels)
         XCTAssertEqual(boardViewModel.pegViewModels, Set(pegViewModels),
                        "Board view model should have non-empty set of peg view models after load.")
     }
@@ -106,7 +106,7 @@ final class BoardViewModelTests: XCTestCase {
         let boardViewModel = BoardViewModel()
 
         boardViewModel.initialiseBoardSize(boardSize: CGSize(width: 200, height: 200))
-        XCTAssertTrue(boardViewModel.addPeg(pegViewModel),
+        XCTAssertTrue(boardViewModel.addLevelObject(pegViewModel),
                       "Adding new peg view model to board view model should be successful.")
         XCTAssertEqual(boardViewModel.pegViewModels, [pegViewModel],
                        "Board view model should have non-empty set of peg view models after adding peg view model.")
@@ -117,7 +117,7 @@ final class BoardViewModelTests: XCTestCase {
         let boardViewModel = BoardViewModel()
 
         boardViewModel.initialiseBoardSize(boardSize: CGSize(width: 200, height: 200))
-        XCTAssertFalse(boardViewModel.addPeg(pegViewModel),
+        XCTAssertFalse(boardViewModel.addLevelObject(pegViewModel),
                        "Adding new peg view model to board view model should not be successful.")
         XCTAssertEqual(boardViewModel.pegViewModels, [],
                        "Board view model should have empty set of peg view models after adding peg view model.")
@@ -190,7 +190,7 @@ final class BoardViewModelTests: XCTestCase {
         let pegViewModel = PegViewModel()
         let boardViewModel = BoardViewModel()
 
-        XCTAssertFalse(boardViewModel.removePeg(pegViewModel),
+        XCTAssertFalse(boardViewModel.removeLevelObject(pegViewModel),
                        "Board view model should not remove non-existing peg view model.")
         XCTAssertEqual(boardViewModel.pegViewModels, [],
                        "Board view model should have empty set of peg view models.")
@@ -225,7 +225,7 @@ final class BoardViewModelTests: XCTestCase {
         let boardViewModel = BoardViewModel(pegViewModels: Set(pegViewModels))
 
         boardViewModel.initialiseBoardSize(boardSize: CGSize(width: 200, height: 200))
-        XCTAssertTrue(boardViewModel.translatePeg(pegViewModel, translation: CGSize(width: 100, height: 100)),
+        XCTAssertTrue(boardViewModel.translateLevelObject(pegViewModel, translation: CGSize(width: 100, height: 100)),
                       "Board view model should successfully translate peg.")
         XCTAssertEqual(boardViewModel.pegViewModels.count, 2,
                        "Board view model should have same number of peg view models.")
@@ -239,7 +239,7 @@ final class BoardViewModelTests: XCTestCase {
         let boardViewModel = BoardViewModel(pegViewModels: Set(pegViewModels))
 
         boardViewModel.initialiseBoardSize(boardSize: CGSize(width: 200, height: 200))
-        XCTAssertFalse(boardViewModel.translatePeg(pegViewModel, translation: CGSize(width: 100, height: 100)),
+        XCTAssertFalse(boardViewModel.translateLevelObject(pegViewModel, translation: CGSize(width: 100, height: 100)),
                        "Board view model should unsuccessfully translate peg.")
         XCTAssertEqual(boardViewModel.pegViewModels.count, 2,
                        "Board view model should have same number of peg view models.")
@@ -252,7 +252,7 @@ final class BoardViewModelTests: XCTestCase {
 
         XCTAssertEqual(boardViewModel.pegViewModels, [],
                        "Board view model should initially have empty set of peg view models.")
-        boardViewModel.resetPegs()
+        boardViewModel.resetLevelObjects()
         XCTAssertEqual(boardViewModel.pegViewModels, [],
                        "Board view model should ultimately have empty set of peg view models.")
     }

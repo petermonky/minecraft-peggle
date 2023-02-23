@@ -13,19 +13,22 @@ struct Level: Identifiable, Codable {
     var title: String
     var updatedAt: Date
     var pegs: Set<Peg>
+    var blocks: Set<Block>
 
     init(
         id: UUID = UUID(),
         frame: CGSize = CGSize.zero,
         title: String = "",
         updatedAt: Date = Date.now,
-        pegs: Set<Peg> = []
+        pegs: Set<Peg> = [],
+        blocks: Set<Block> = []
     ) {
         self.id = id
         self.frame = frame
         self.title = title
         self.updatedAt = updatedAt
         self.pegs = pegs
+        self.blocks = blocks
     }
 }
 

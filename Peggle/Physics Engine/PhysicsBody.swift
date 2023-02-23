@@ -7,9 +7,7 @@
 
 import Foundation
 
-protocol PhysicsBody: AnyObject, Identifiable {
-    associatedtype Shape: PhysicsShape
-
+protocol PhysicsBody: AnyObject, Collidable, Identifiable {
     var id: String { get }
     var position: CGPoint { get set }
     var velocity: CGVector { get }

@@ -13,49 +13,58 @@ enum PegType: String, Codable {
     case orange
 }
 
-class Peg: LevelObject {
+class Peg: LevelObject, CircleCollidable {
+    typealias Shape = CirclePhysicsShape
+
     var id = UUID()
     var position: CGPoint
+    var shape: Shape
     var type: PegType
     var normalImageName: String
     var glowImageName: String
 
-    init(type: PegType, position: CGPoint, normalImageName: String, glowImageName: String) {
-        self.type = type
+    var width: CGFloat {
+        2 * shape.radius
+    }
+
+    var height: CGFloat {
+        2 * shape.radius
+    }
+
+    init(type: PegType, shape: Shape, position: CGPoint, normalImageName: String, glowImageName: String) {
         self.position = position
+        self.shape = shape
         self.normalImageName = normalImageName
+        self.type = type
         self.glowImageName = glowImageName
     }
 
-    func overlapsWith(peg other: Peg) -> Bool {
+    required init(instance: Peg) {
+        position = instance.position
+        shape = instance.shape
+        normalImageName = instance.normalImageName
+        type = instance.type
+        glowImageName = instance.glowImageName
+    }
+
+    func overlapsWith(_ other: Peg) -> Bool {
         self.position.distance(to: other.position) <= 2 * Constants.Peg.radius
     }
-
-    func translateBy(_ value: CGSize) {
-        position.x += value.width
-        position.y += value.height
-    }
-
-    func clone() -> Peg {
-        Peg(type: type, position: position, normalImageName: normalImageName, glowImageName: glowImageName)
-    }
 }
 
-// MARK: Hashable
-
-extension Peg: Hashable {
-    static func == (lhs: Peg, rhs: Peg) -> Bool {
-        lhs.id == rhs.id
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-}
-
-class BluePeg: Peg {
+final class BluePeg: Peg {
     init(position: CGPoint = CGPoint.zero) {
-        super.init(type: .blue, position: position, normalImageName: "peg-blue", glowImageName: "peg-blue-glow")
+        super.init(
+            type: .blue,
+            shape: CirclePhysicsShape(radius: Constants.Peg.radius),
+            position: position,
+            normalImageName: "peg-blue",
+            glowImageName: "peg-blue-glow"
+        )
+    }
+
+    required init(instance: Peg) {
+        super.init(instance: instance)
     }
 
     required init(from decoder: Decoder) throws {
@@ -69,7 +78,17 @@ class BluePeg: Peg {
 
 class OrangePeg: Peg {
     init(position: CGPoint = CGPoint.zero) {
-        super.init(type: .orange, position: position, normalImageName: "peg-orange", glowImageName: "peg-orange-glow")
+        super.init(
+            type: .orange,
+            shape: CirclePhysicsShape(radius: Constants.Peg.radius),
+            position: position,
+            normalImageName: "peg-orange",
+            glowImageName: "peg-orange-glow"
+        )
+    }
+
+    required init(instance: Peg) {
+        super.init(instance: instance)
     }
 
     required init(from decoder: Decoder) throws {

@@ -41,7 +41,7 @@ struct ActionView: View {
                 }.disabled(!viewModel.isValidForm)
 
                 Button(action: {
-                    board.resetPegs()
+                    board.resetLevelObjects()
                 }) {
                     Text("RESET")
                 }

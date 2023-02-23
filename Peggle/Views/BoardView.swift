@@ -17,12 +17,12 @@ struct BoardView: View {
 
     var body: some View {
         let palette = levelDesigner.paletteViewModel
-        let pegs = Array(viewModel.pegViewModels)
+        let levelObjects = Array(viewModel.levelObjectViewModels)
 
         GeometryReader { geometry in
             ZStack {
-                ForEach(pegs, id: \.self) { peg in
-                    PegView(viewModel: peg)
+                ForEach(levelObjects, id: \.self) { levelObject in
+                    LevelObjectView(viewModel: levelObject)
                 }
             }
 //            .scaleEffect(x: viewModel.sizeScale, y: viewModel.sizeScale, anchor: .top)
@@ -33,8 +33,10 @@ struct BoardView: View {
                     .aspectRatio(contentMode: .fill)
             )
             .onTapGesture { location in
-                if let peg = palette.createPegAtPosition(location) {
-                    _ = viewModel.addPeg(PegViewModel(peg: peg))
+                if let levelObject = palette.createPegAtPosition(location) {
+                    _ = viewModel.addLevelObject(LevelObjectViewModel(levelObject: levelObject))
+                } else if let levelObject = palette.createBlockAtPosition(location) {
+                    _ = viewModel.addLevelObject(LevelObjectViewModel(levelObject: levelObject))
                 }
             }
             .onAppear {

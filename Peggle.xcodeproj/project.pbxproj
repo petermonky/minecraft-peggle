@@ -75,6 +75,15 @@
 		D0AEFBE529A5120D00BCE15F /* GamePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AEFBE429A5120D00BCE15F /* GamePlayerView.swift */; };
 		D0AEFBE729A5125B00BCE15F /* GamePlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AEFBE629A5125B00BCE15F /* GamePlayerViewModel.swift */; };
 		D0AEFBE929A5286700BCE15F /* DataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AEFBE829A5286600BCE15F /* DataView.swift */; };
+		D0AEFBEF29A5FB8A00BCE15F /* LevelObjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AEFBEE29A5FB8A00BCE15F /* LevelObjectViewModel.swift */; };
+		D0AEFBF129A5FBF600BCE15F /* LevelObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AEFBF029A5FBF600BCE15F /* LevelObjectView.swift */; };
+		D0AEFBF329A6087E00BCE15F /* PolygonPhysicsShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AEFBF229A6087E00BCE15F /* PolygonPhysicsShape.swift */; };
+		D0AEFBF529A6098100BCE15F /* Collidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AEFBF429A6098100BCE15F /* Collidable.swift */; };
+		D0AEFBF729A609D500BCE15F /* CollisionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AEFBF629A609D500BCE15F /* CollisionManager.swift */; };
+		D0AEFBFB29A61AEB00BCE15F /* Segment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AEFBFA29A61AEB00BCE15F /* Segment.swift */; };
+		D0AEFBFD29A6227600BCE15F /* CircleCollidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AEFBFC29A6227600BCE15F /* CircleCollidable.swift */; };
+		D0AEFBFF29A622A400BCE15F /* PolygonCollidable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AEFBFE29A622A400BCE15F /* PolygonCollidable.swift */; };
+		D0AEFC0129A62B4200BCE15F /* Cloneable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AEFC0029A62B4200BCE15F /* Cloneable.swift */; };
 		D0BF3F04297BC6C800354272 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF3F03297BC6C800354272 /* BoardView.swift */; };
 		D0BF3F08297D6F3400354272 /* Peg.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF3F07297D6F3400354272 /* Peg.swift */; };
 		D0BF3F0A297D6FB200354272 /* CGPoint+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BF3F09297D6FB200354272 /* CGPoint+Hashable.swift */; };
@@ -166,6 +175,15 @@
 		D0AEFBE429A5120D00BCE15F /* GamePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayerView.swift; sourceTree = "<group>"; };
 		D0AEFBE629A5125B00BCE15F /* GamePlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayerViewModel.swift; sourceTree = "<group>"; };
 		D0AEFBE829A5286600BCE15F /* DataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataView.swift; sourceTree = "<group>"; };
+		D0AEFBEE29A5FB8A00BCE15F /* LevelObjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelObjectViewModel.swift; sourceTree = "<group>"; };
+		D0AEFBF029A5FBF600BCE15F /* LevelObjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelObjectView.swift; sourceTree = "<group>"; };
+		D0AEFBF229A6087E00BCE15F /* PolygonPhysicsShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonPhysicsShape.swift; sourceTree = "<group>"; };
+		D0AEFBF429A6098100BCE15F /* Collidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collidable.swift; sourceTree = "<group>"; };
+		D0AEFBF629A609D500BCE15F /* CollisionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionManager.swift; sourceTree = "<group>"; };
+		D0AEFBFA29A61AEB00BCE15F /* Segment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Segment.swift; sourceTree = "<group>"; };
+		D0AEFBFC29A6227600BCE15F /* CircleCollidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleCollidable.swift; sourceTree = "<group>"; };
+		D0AEFBFE29A622A400BCE15F /* PolygonCollidable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolygonCollidable.swift; sourceTree = "<group>"; };
+		D0AEFC0029A62B4200BCE15F /* Cloneable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cloneable.swift; sourceTree = "<group>"; };
 		D0BF3F03297BC6C800354272 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		D0BF3F07297D6F3400354272 /* Peg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Peg.swift; sourceTree = "<group>"; };
 		D0BF3F09297D6FB200354272 /* CGPoint+Hashable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Hashable.swift"; sourceTree = "<group>"; };
@@ -202,6 +220,7 @@
 				D007895D297E89C900EB5AAE /* PaletteButtonView.swift */,
 				D0BF3F03297BC6C800354272 /* BoardView.swift */,
 				D01E45A6297E6777003E28A8 /* PegView.swift */,
+				D0AEFBF029A5FBF600BCE15F /* LevelObjectView.swift */,
 				D0078970297EA11400EB5AAE /* ActionView.swift */,
 				D0CB441C29825729008C5DAD /* LevelListView.swift */,
 				D0AEFBE429A5120D00BCE15F /* GamePlayerView.swift */,
@@ -218,6 +237,7 @@
 				D007895F297E8A8500EB5AAE /* PaletteButtonViewModel.swift */,
 				D0BF3F0F297D713100354272 /* BoardViewModel.swift */,
 				D01E45A8297E6789003E28A8 /* PegViewModel.swift */,
+				D0AEFBEE29A5FB8A00BCE15F /* LevelObjectViewModel.swift */,
 				D0CB44202982DBEA008C5DAD /* ActionViewModel.swift */,
 				D0CB441E298298A4008C5DAD /* LevelListViewModel.swift */,
 				D0AEFBE629A5125B00BCE15F /* GamePlayerViewModel.swift */,
@@ -248,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				D0078966297E961100EB5AAE /* PegFactory.swift */,
+				D0AEFC0029A62B4200BCE15F /* Cloneable.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -355,6 +376,8 @@
 			children = (
 				D09BBCF92990C9AD004340FF /* PhysicsShape.swift */,
 				D044E5B2299801AB00CD098A /* CirclePhysicsShape.swift */,
+				D0AEFBF229A6087E00BCE15F /* PolygonPhysicsShape.swift */,
+				D0AEFBFA29A61AEB00BCE15F /* Segment.swift */,
 				D044900E298EA25A0068AA3C /* PhysicsWorld.swift */,
 				D0449010298EA3EA0068AA3C /* PhysicsBody.swift */,
 				D09BBD0129915B78004340FF /* DynamicPhysicsBody.swift */,
@@ -363,6 +386,10 @@
 				D0A4DBA1299404AB003925BF /* CollisionData.swift */,
 				D044E5B4299801C400CD098A /* CircleFrameCollisionData.swift */,
 				D044E5B6299801D900CD098A /* CircleCircleCollisionData.swift */,
+				D0AEFBF629A609D500BCE15F /* CollisionManager.swift */,
+				D0AEFBF429A6098100BCE15F /* Collidable.swift */,
+				D0AEFBFC29A6227600BCE15F /* CircleCollidable.swift */,
+				D0AEFBFE29A622A400BCE15F /* PolygonCollidable.swift */,
 			);
 			path = "Physics Engine";
 			sourceTree = "<group>";
@@ -583,6 +610,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0AEFBF729A609D500BCE15F /* CollisionManager.swift in Sources */,
 				D08AEB7F29796AD300EA1590 /* PaletteViewModel.swift in Sources */,
 				D09BBCFA2990C9AD004340FF /* PhysicsShape.swift in Sources */,
 				D08AEB7B2979682E00EA1590 /* LevelDesignerViewModel.swift in Sources */,
@@ -591,14 +619,19 @@
 				D08AEB792979672C00EA1590 /* LevelDesignerView.swift in Sources */,
 				D021AD8A29836B18001F63DD /* View+IsRendered.swift in Sources */,
 				D0AEFBE129A50D5200BCE15F /* BucketGameView.swift in Sources */,
+				D0AEFBF129A5FBF600BCE15F /* LevelObjectView.swift in Sources */,
+				D0AEFBFB29A61AEB00BCE15F /* Segment.swift in Sources */,
 				D0853A7329A4E178000D0F20 /* LevelObject.swift in Sources */,
 				D07170B6297FBB4C00C0ABAF /* DataManager.swift in Sources */,
 				D0A4DBB62994C784003925BF /* Comparable+Utility.swift in Sources */,
 				D09BBD0429915E04004340FF /* DynamicCirclePhysicsBody.swift in Sources */,
 				D09BBD0029912096004340FF /* CirclePhysicsBody.swift in Sources */,
+				D0AEFBF529A6098100BCE15F /* Collidable.swift in Sources */,
 				D0449011298EA3EA0068AA3C /* PhysicsBody.swift in Sources */,
 				D0BF3F08297D6F3400354272 /* Peg.swift in Sources */,
 				D0AEFBE929A5286700BCE15F /* DataView.swift in Sources */,
+				D0AEFBEF29A5FB8A00BCE15F /* LevelObjectViewModel.swift in Sources */,
+				D0AEFBFF29A622A400BCE15F /* PolygonCollidable.swift in Sources */,
 				D0BF3F0A297D6FB200354272 /* CGPoint+Hashable.swift in Sources */,
 				D0449013298EA7270068AA3C /* CGVector+Utility.swift in Sources */,
 				D01E45A9297E6789003E28A8 /* PegViewModel.swift in Sources */,
@@ -611,6 +644,7 @@
 				D03FFCAF29783B9000EFAD04 /* PeggleApp.swift in Sources */,
 				D0CB441F298298A4008C5DAD /* LevelListViewModel.swift in Sources */,
 				D01E45A7297E6777003E28A8 /* PegView.swift in Sources */,
+				D0AEFC0129A62B4200BCE15F /* Cloneable.swift in Sources */,
 				D044E5B5299801C400CD098A /* CircleFrameCollisionData.swift in Sources */,
 				D0BF3F04297BC6C800354272 /* BoardView.swift in Sources */,
 				D0AEFBE329A50D6F00BCE15F /* BucketGameObject.swift in Sources */,
@@ -624,11 +658,13 @@
 				D044E5B3299801AB00CD098A /* CirclePhysicsShape.swift in Sources */,
 				D0A4DB92299290D0003925BF /* CannonGameView.swift in Sources */,
 				D09BBD0229915B78004340FF /* DynamicPhysicsBody.swift in Sources */,
+				D0AEFBFD29A6227600BCE15F /* CircleCollidable.swift in Sources */,
 				D0A4DB9E29937065003925BF /* SpriteView.swift in Sources */,
 				D0A4DBB8299537BE003925BF /* CGSize+Utility.swift in Sources */,
 				D0A4DBA2299404AB003925BF /* CollisionData.swift in Sources */,
 				D09BBCF62990058A004340FF /* PegGameView.swift in Sources */,
 				D0CB44232982F651008C5DAD /* View+HideKeyboard.swift in Sources */,
+				D0AEFBF329A6087E00BCE15F /* PolygonPhysicsShape.swift in Sources */,
 				D0078960297E8A8500EB5AAE /* PaletteButtonViewModel.swift in Sources */,
 				D09BBCFC29910977004340FF /* BallGameView.swift in Sources */,
 				D0AEFBE729A5125B00BCE15F /* GamePlayerViewModel.swift in Sources */,

@@ -30,6 +30,13 @@ extension Constants {
 }
 
 extension Constants {
+    enum Block {
+        static let width: CGFloat = 60.0
+        static let height: CGFloat = 60.0
+    }
+}
+
+extension Constants {
     enum Ball {
         static let radius: CGFloat = 30.0
         static let initialSpeed: CGFloat = 1_200
