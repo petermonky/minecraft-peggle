@@ -8,7 +8,8 @@
 import Foundation
 
 protocol GameCharacter: AnyObject {
+    var gameEngine: GameEngine? { get set }
     var name: String { get }
 
-    func applyPower(gameEngine: GameEngine)
+    func applyPower()
 }

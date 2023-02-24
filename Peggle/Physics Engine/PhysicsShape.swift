@@ -9,6 +9,8 @@ import Foundation
 
 protocol PhysicsShape: Equatable, Codable {
     var center: CGPoint { get }
+    var width: CGFloat { get }
+    var height: CGFloat { get }
 }
 
 extension PhysicsShape {

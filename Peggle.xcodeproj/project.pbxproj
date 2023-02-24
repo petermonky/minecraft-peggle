@@ -12,9 +12,14 @@
 		D000EF8629A7791A009BDBBB /* LevelSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D000EF8529A7791A009BDBBB /* LevelSelectionViewModel.swift */; };
 		D000EF8829A793F4009BDBBB /* Popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D000EF8729A793F4009BDBBB /* Popup.swift */; };
 		D000EF8A29A799CA009BDBBB /* GameOverModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D000EF8929A799CA009BDBBB /* GameOverModalView.swift */; };
-		D000EF8C29A79DC5009BDBBB /* CharacterModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D000EF8B29A79DC5009BDBBB /* CharacterModalView.swift */; };
+		D000EF8C29A79DC5009BDBBB /* GamePresetModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D000EF8B29A79DC5009BDBBB /* GamePresetModalView.swift */; };
 		D000EF8E29A7A0F8009BDBBB /* GameCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D000EF8D29A7A0F8009BDBBB /* GameCharacter.swift */; };
 		D000EF9029A7A1C1009BDBBB /* KaboomCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D000EF8F29A7A1C1009BDBBB /* KaboomCharacter.swift */; };
+		D000EF9229A858E8009BDBBB /* SpookyCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D000EF9129A858E8009BDBBB /* SpookyCharacter.swift */; };
+		D000EF9429A88053009BDBBB /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D000EF9329A88053009BDBBB /* GameMode.swift */; };
+		D000EF9629A880F9009BDBBB /* NormalMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D000EF9529A880F9009BDBBB /* NormalMode.swift */; };
+		D000EF9829A8D5F2009BDBBB /* BeatTheScoreMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D000EF9729A8D5F2009BDBBB /* BeatTheScoreMode.swift */; };
+		D000EF9A29A8E65E009BDBBB /* SiamLeftSiamRightMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D000EF9929A8E65E009BDBBB /* SiamLeftSiamRightMode.swift */; };
 		D007895E297E89C900EB5AAE /* PaletteButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D007895D297E89C900EB5AAE /* PaletteButtonView.swift */; };
 		D0078967297E961100EB5AAE /* PegFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0078966297E961100EB5AAE /* PegFactory.swift */; };
 		D007896F297E9C6300EB5AAE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D007896E297E9C6300EB5AAE /* Constants.swift */; };
@@ -116,9 +121,14 @@
 		D000EF8529A7791A009BDBBB /* LevelSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectionViewModel.swift; sourceTree = "<group>"; };
 		D000EF8729A793F4009BDBBB /* Popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popup.swift; sourceTree = "<group>"; };
 		D000EF8929A799CA009BDBBB /* GameOverModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverModalView.swift; sourceTree = "<group>"; };
-		D000EF8B29A79DC5009BDBBB /* CharacterModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterModalView.swift; sourceTree = "<group>"; };
+		D000EF8B29A79DC5009BDBBB /* GamePresetModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePresetModalView.swift; sourceTree = "<group>"; };
 		D000EF8D29A7A0F8009BDBBB /* GameCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCharacter.swift; sourceTree = "<group>"; };
 		D000EF8F29A7A1C1009BDBBB /* KaboomCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KaboomCharacter.swift; sourceTree = "<group>"; };
+		D000EF9129A858E8009BDBBB /* SpookyCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpookyCharacter.swift; sourceTree = "<group>"; };
+		D000EF9329A88053009BDBBB /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
+		D000EF9529A880F9009BDBBB /* NormalMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalMode.swift; sourceTree = "<group>"; };
+		D000EF9729A8D5F2009BDBBB /* BeatTheScoreMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatTheScoreMode.swift; sourceTree = "<group>"; };
+		D000EF9929A8E65E009BDBBB /* SiamLeftSiamRightMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiamLeftSiamRightMode.swift; sourceTree = "<group>"; };
 		D007895D297E89C900EB5AAE /* PaletteButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteButtonView.swift; sourceTree = "<group>"; };
 		D0078966297E961100EB5AAE /* PegFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegFactory.swift; sourceTree = "<group>"; };
 		D007896E297E9C6300EB5AAE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -461,6 +471,11 @@
 				D0AEFBE229A50D6F00BCE15F /* BucketGameObject.swift */,
 				D000EF8D29A7A0F8009BDBBB /* GameCharacter.swift */,
 				D000EF8F29A7A1C1009BDBBB /* KaboomCharacter.swift */,
+				D000EF9129A858E8009BDBBB /* SpookyCharacter.swift */,
+				D000EF9329A88053009BDBBB /* GameMode.swift */,
+				D000EF9529A880F9009BDBBB /* NormalMode.swift */,
+				D000EF9729A8D5F2009BDBBB /* BeatTheScoreMode.swift */,
+				D000EF9929A8E65E009BDBBB /* SiamLeftSiamRightMode.swift */,
 			);
 			path = "Game Engine";
 			sourceTree = "<group>";
@@ -471,7 +486,7 @@
 				D09BBCE9298FAF75004340FF /* Renderer.swift */,
 				D0A4DB932992921E003925BF /* RendererView.swift */,
 				D000EF8929A799CA009BDBBB /* GameOverModalView.swift */,
-				D000EF8B29A79DC5009BDBBB /* CharacterModalView.swift */,
+				D000EF8B29A79DC5009BDBBB /* GamePresetModalView.swift */,
 				D0A4DBB12994A8D6003925BF /* GameView.swift */,
 				D09BBCF529900589004340FF /* PegGameView.swift */,
 				D0AEFC1029A73B2200BCE15F /* BlockGameView.swift */,
@@ -642,6 +657,7 @@
 				D000EF8229A76643009BDBBB /* PaletteButton.swift in Sources */,
 				D0AEFBFB29A61AEB00BCE15F /* Segment.swift in Sources */,
 				D0853A7329A4E178000D0F20 /* LevelObject.swift in Sources */,
+				D000EF9229A858E8009BDBBB /* SpookyCharacter.swift in Sources */,
 				D000EF9029A7A1C1009BDBBB /* KaboomCharacter.swift in Sources */,
 				D07170B6297FBB4C00C0ABAF /* DataManager.swift in Sources */,
 				D0A4DBB62994C784003925BF /* Comparable+Utility.swift in Sources */,
@@ -650,15 +666,18 @@
 				D0AEFBF529A6098100BCE15F /* Collidable.swift in Sources */,
 				D0AEFC0D29A7320F00BCE15F /* DynamicPolygonPhysicsBody.swift in Sources */,
 				D0449011298EA3EA0068AA3C /* PhysicsBody.swift in Sources */,
+				D000EF9829A8D5F2009BDBBB /* BeatTheScoreMode.swift in Sources */,
 				D0AEFC0529A71DB600BCE15F /* FrameCollidable.swift in Sources */,
 				D0BF3F08297D6F3400354272 /* Peg.swift in Sources */,
 				D0AEFBE929A5286700BCE15F /* DataView.swift in Sources */,
+				D000EF9A29A8E65E009BDBBB /* SiamLeftSiamRightMode.swift in Sources */,
 				D0AEFBFF29A622A400BCE15F /* PolygonCollidable.swift in Sources */,
 				D000EF8629A7791A009BDBBB /* LevelSelectionViewModel.swift in Sources */,
 				D0BF3F0A297D6FB200354272 /* CGPoint+Hashable.swift in Sources */,
 				D0449013298EA7270068AA3C /* CGVector+Utility.swift in Sources */,
 				D0AEFBE529A5120D00BCE15F /* GamePlayerView.swift in Sources */,
 				D09BBCEA298FAF75004340FF /* Renderer.swift in Sources */,
+				D000EF9429A88053009BDBBB /* GameMode.swift in Sources */,
 				D08AEB7D29796A6D00EA1590 /* PaletteView.swift in Sources */,
 				D09BBCF82990C87B004340FF /* BallGameObject.swift in Sources */,
 				D007895E297E89C900EB5AAE /* PaletteButtonView.swift in Sources */,
@@ -670,6 +689,7 @@
 				D0AEFBE329A50D6F00BCE15F /* BucketGameObject.swift in Sources */,
 				D0CB441D29825729008C5DAD /* LevelListView.swift in Sources */,
 				D0853A7129A4E094000D0F20 /* Block.swift in Sources */,
+				D000EF9629A880F9009BDBBB /* NormalMode.swift in Sources */,
 				D09BBCF22990019D004340FF /* PegGameObject.swift in Sources */,
 				D0AEFC0F29A739FA00BCE15F /* BlockGameObject.swift in Sources */,
 				D0AEFC0329A71BB700BCE15F /* BodyCollidable.swift in Sources */,
@@ -685,7 +705,7 @@
 				D0A4DB9E29937065003925BF /* SpriteView.swift in Sources */,
 				D0A4DBA2299404AB003925BF /* CollisionData.swift in Sources */,
 				D09BBCF62990058A004340FF /* PegGameView.swift in Sources */,
-				D000EF8C29A79DC5009BDBBB /* CharacterModalView.swift in Sources */,
+				D000EF8C29A79DC5009BDBBB /* GamePresetModalView.swift in Sources */,
 				D0CB44232982F651008C5DAD /* View+HideKeyboard.swift in Sources */,
 				D0AEFBF329A6087E00BCE15F /* PolygonPhysicsShape.swift in Sources */,
 				D09BBCFC29910977004340FF /* BallGameView.swift in Sources */,

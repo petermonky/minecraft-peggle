@@ -20,47 +20,20 @@ class GameEngine {
     let cannonGameObject: CannonGameObject
     let bucketGameObject: BucketGameObject
     let physicsWorld: PhysicsWorld
+    let level: Level
 
     private(set) var character: GameCharacter?
+    private(set) var mode: GameMode?
+    private(set) var currentTime: Date?
     private(set) var endTime: Date?
     private(set) var lives: Int?
     private(set) var state: GameState
+    private(set) var removedPegs: Set<PegGameObject>
 
-    private weak var renderer: Renderer?
-
-    var frame: CGSize {
-        CGSize(width: physicsWorld.frame.width, height: physicsWorld.frame.height)
-    }
-
-    var ballGameObject: BallGameObject? {
-        physicsWorld.bodies.first { $0 is BallGameObject } as? BallGameObject
-    }
-
-    var pegGameObjects: [PegGameObject] {
-        physicsWorld.bodies.compactMap { $0 as? PegGameObject }
-    }
-
-    var blockGameObjects: [BlockGameObject] {
-        physicsWorld.bodies.compactMap { $0 as? BlockGameObject }
-    }
-
-    var collidedPegGameObjects: [PegGameObject] {
-        pegGameObjects.filter { $0.hasCollidedWithBall }
-    }
-
-    var collidedGreenPegGameObjects: [PegGameObject] {
-        collidedPegGameObjects.filter { $0.peg.type == .green }
-    }
-
-    var blockingPegGameObjects: [PegGameObject] {
-        pegGameObjects.filter { $0.isBlockingBall }
-    }
-
-    var isGameOver: Bool {
-        lives == 0
-    }
+    weak var renderer: Renderer?
 
     init(level: Level) {
+        self.level = level
         self.cannonGameObject = CannonGameObject(position: CGPoint(
             x: level.frame.width / 2,
             y: Constants.Cannon.height / 2
@@ -74,45 +47,10 @@ class GameEngine {
             .adjust(y: Constants.Bucket.height)
         self.physicsWorld = PhysicsWorld(frame: Frame(width: frame.width, height: frame.height))
         self.state = .loading
+        self.removedPegs = []
 
         initialiseLevelObjects(level: level)
         createDisplayLink()
-    }
-
-    func setRenderer(_ renderer: Renderer) {
-        self.renderer = renderer
-    }
-
-    func isInState(_ state: GameState) -> Bool {
-        self.state == state
-    }
-
-    func startGame(character: GameCharacter) {
-        self.character = character
-        self.endTime = Date.now + 10
-        self.lives = 1
-        self.state = .idle
-    }
-
-    private var ballPegCollisions: [BodyBodyCollisionData] {
-        physicsWorld.collisionData
-            .compactMap { $0 as? BodyBodyCollisionData }
-            .filter { data in
-                let sourceIsBall = data.sourceId == ballGameObject?.id
-                let targetIsPeg = pegGameObjects.contains(where: {
-                    data.targetId == $0.id
-                })
-                return sourceIsBall && targetIsPeg
-            }
-    }
-
-    private func isBallFrameBottomCollision(collisionData: any CollisionData) -> Bool {
-        if let collisionData = collisionData as? BodyFrameCollisionData,
-           collisionData.side == .bottom,
-           collisionData.sourceId == ballGameObject?.id {
-            return true
-        }
-        return false
     }
 
     private func initialiseLevelObjects(level: Level) {
@@ -134,39 +72,205 @@ class GameEngine {
         let displaylink = CADisplayLink(target: self, selector: #selector(step))
         displaylink.add(to: .current, forMode: .default)
     }
+}
+
+extension GameEngine {
+    var frame: CGSize {
+        CGSize(width: physicsWorld.frame.width, height: physicsWorld.frame.height)
+    }
+
+    var score: Int {
+        removedPegs.map { $0.peg.score }.reduce(0, +) * removedPegs.count * scoreMultiplier
+    }
+
+    private var scoreMultiplier: Int {
+        let visibleOrangePegsCount = visiblePegs.filter { $0.peg.type == .orange }.count
+        if visibleOrangePegsCount >= 16 {
+            return 1
+        } else if visibleOrangePegsCount >= 11 {
+            return 2
+        } else if visibleOrangePegsCount >= 8 {
+            return 3
+        } else if visibleOrangePegsCount >= 4 {
+            return 5
+        } else if visibleOrangePegsCount >= 1 {
+            return 10
+        } else {
+            return 100
+        }
+        // TODO: this is stupid
+    }
+
+    var ballGameObject: BallGameObject? {
+        physicsWorld.bodies.first { $0 is BallGameObject } as? BallGameObject
+    }
+
+    var pegGameObjects: [PegGameObject] {
+        physicsWorld.bodies.compactMap { $0 as? PegGameObject }
+    }
+
+    var visiblePegs: [PegGameObject] {
+        pegGameObjects.filter { $0.isVisible }
+    }
+
+    var blockGameObjects: [BlockGameObject] {
+        physicsWorld.bodies.compactMap { $0 as? BlockGameObject }
+    }
+
+    var collidedPegGameObjects: [PegGameObject] {
+        pegGameObjects.filter { $0.hasCollidedWithBall }
+    }
+
+    var blockingPegGameObjects: [PegGameObject] {
+        pegGameObjects.filter { $0.isBlockingBall }
+    }
+
+    var isReady: Bool {
+        character != nil && mode != nil
+    }
+
+    var noLives: Bool {
+        lives == 0
+    }
+
+    var time: TimeInterval? {
+        guard let endTime = endTime,
+              let currentTime = currentTime else {
+            return nil
+        }
+        return currentTime.distance(to: endTime)
+    }
+
+    var noTime: Bool {
+        guard let remainingTime = time else {
+            return false
+        }
+        return remainingTime <= 0
+    }
+
+    var isGameOver: Bool {
+        isInState(.lose) || isInState(.win)
+    }
+
+    var collidingPegs: [PegGameObject] {
+        physicsWorld.collisionData
+            .compactMap { $0 as? BodyBodyCollisionData }
+            .filter { data in
+                let sourceIsBall = data.source === ballGameObject
+                let targetIsPeg = pegGameObjects.contains(where: {
+                    data.target === $0
+                })
+                return sourceIsBall && targetIsPeg
+            }
+            .map { $0.target }
+            .compactMap { $0 as? PegGameObject }
+    }
+
+    var collidingGreenPegs: [PegGameObject] {
+        collidingPegs.filter { $0.peg.type == .green }
+    }
+
+    var hasBallBucketCollision: Bool {
+        guard let ballGameObject = ballGameObject else {
+            return false
+        }
+        return CollisionManager.hasCollisionBetween(bucketGameObject, and: ballGameObject)
+    }
+}
+
+extension GameEngine {
+    func setRenderer(_ renderer: Renderer) {
+        self.renderer = renderer
+    }
+
+    func isInState(_ state: GameState) -> Bool {
+        self.state == state
+    }
+
+    func startGame(character: GameCharacter, mode: GameMode) {
+        self.character = character
+        character.gameEngine = self
+
+        self.mode = mode
+        mode.gameEngine = self
+
+        self.currentTime = Date.now
+        if let presetDuration = mode.presetDuration {
+            self.endTime = Date.now + presetDuration
+        } else {
+            self.endTime = nil
+        }
+
+        self.lives = mode.presetLives
+        self.state = .idle
+    }
+
+    private func isBallExitCollision(collisionData: any CollisionData) -> Bool {
+        if let collisionData = collisionData as? BodyFrameCollisionData,
+           collisionData.side == .bottom,
+           collisionData.source === ballGameObject {
+            return true
+        }
+        return false
+    }
 
     @objc func step(displaylink: CADisplayLink) {
-        let interval = displaylink.targetTimestamp - displaylink.timestamp
-        physicsWorld.update(delta: interval)
+        guard !isGameOver else {
+            return
+        }
 
+        physicsWorld.update(delta: displaylink.targetTimestamp - displaylink.timestamp)
+        updateCurrentTime()
+
+        character?.applyPower()
         lightCollidingPegs()
         removeBlockingPegs()
 
-        handleBallEnterBucket()
+        handleBallBucketCollision()
         updateBucketMovement()
-        handleBallExitLevel()
+        handleBallExitCollision()
 
-        character?.applyPower(gameEngine: self)
         renderer?.didUpdateWorld()
+        if !isGameOver {
+            mode?.handleGameOver()
+        }
     }
 
-    private func handleBallEnterBucket() {
-        guard let ballGameObject = ballGameObject else {
+    private func updateCurrentTime() {
+        guard !isGameOver else {
             return
         }
-        if CollisionManager.hasCollisionBetween(bucketGameObject, and: ballGameObject) {
+        currentTime = Date.now
+    }
+
+    private func handleBallBucketCollision() {
+        if hasBallBucketCollision {
             refreshGameState()
             lives? += 1
         }
     }
 
-    private func handleBallExitLevel() {
-        if physicsWorld.collisionData.contains(where: {
-            isBallFrameBottomCollision(collisionData: $0 )
-        }) {
-            refreshGameState()
-            handleGameOver()
+    private func handleBallExitCollision() {
+        let hasBallExitCollision = physicsWorld.collisionData.contains(where: {
+            isBallExitCollision(collisionData: $0)
+        })
+        guard hasBallExitCollision else {
+            return
         }
+        if let ball = ballGameObject, ball.isSpooky {
+            respawnBall()
+        } else {
+            refreshGameState()
+        }
+    }
+
+    private func respawnBall() {
+        guard let ball = ballGameObject else {
+            return
+        }
+        let newPosition = CGPoint(x: ball.position.x, y: Constants.Ball.radius)
+        ball.updatePosition(newPosition)
+        ball.unsetSpooky()
     }
 
     private func updateBucketMovement() {
@@ -182,27 +286,19 @@ class GameEngine {
         bucketGameObject.moveInDirection()
     }
 
-    private func updateGameState(_ state: GameState) {
+    func updateGameState(_ state: GameState) {
         self.state = state
+        renderer?.didUpdateGameState()
     }
 
     private func lightCollidingPegs() {
-        for peg in pegGameObjects where ballPegCollisions.contains(where: {
-            $0.targetId == peg.id
-        }) {
+        for peg in collidingPegs {
             peg.collideWithBall()
         }
     }
 
     private func removeBlockingPegs() {
         removePegs(blockingPegGameObjects)
-    }
-
-    private func handleGameOver() {
-        if isGameOver {
-            updateGameState(.lose)
-            renderer?.didGameOver()
-        }
     }
 
     private func refreshGameState() {
@@ -217,11 +313,22 @@ class GameEngine {
     }
 
     func removePegs(_ pegs: [PegGameObject]) {
-        pegs.forEach { $0.isVisible = false }
+        pegs.forEach {
+            $0.isVisible = false
+            removedPegs.insert($0)
+        }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + Constants.Peg.fadeDuration) {
             pegs.forEach { self.physicsWorld.removeBody($0) }
         }
+    }
+
+    func pegsSurrounding(_ peg: PegGameObject, within radius: Double) -> [PegGameObject] {
+        var surroundingPegs: [PegGameObject] = []
+        for other in visiblePegs where other.peg.position.distance(to: peg.position) <= radius { // TODO: constant
+            surroundingPegs.append(other)
+        }
+        return surroundingPegs
     }
 
     private func removeExitedBall() {
@@ -264,7 +371,9 @@ class GameEngine {
             velocity: normalFromCannonToPosition.scale(by: Constants.Ball.initialSpeed))
         )
 
-        lives? -= 1
+        if let lives = lives {
+            self.lives = max(lives - 1, 0)
+        }
         cannonGameObject.setUnavailable()
         updateGameState(.active)
     }

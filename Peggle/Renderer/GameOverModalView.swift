@@ -9,15 +9,11 @@ import SwiftUI
 
 struct GameOverModalView: View {
     @Environment(\.dismiss) private var dismiss
-    private var gameEngine: GameEngine
-
-    init(gameEngine: GameEngine) {
-        self.gameEngine = gameEngine
-    }
+    @EnvironmentObject private var renderer: Renderer
 
     var body: some View {
         VStack(spacing: 16) {
-            Text("GAME OVER")
+            Text(renderer.isGameInState(.win) ? "YOU WIN" : "GAME OVER")
             HStack(spacing: 16) {
                 Button(action: {
                     print("replay")
@@ -41,6 +37,7 @@ struct GameOverModalView: View {
 struct GameOverModalView_Previews: PreviewProvider {
     static var previews: some View {
         let gameEngine = GameEngine(level: Level.mockData)
-        GameOverModalView(gameEngine: gameEngine)
+        let renderer = Renderer(gameEngine: gameEngine)
+        GameOverModalView().environmentObject(renderer)
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class PegGameObject: GameObject, Equatable, CirclePhysicsBody {
+final class PegGameObject: GameObject, Hashable, CirclePhysicsBody {
     @Published var position: CGPoint
     @Published var hasCollidedWithBall: Bool
     @Published var isVisible: Bool
@@ -41,5 +41,9 @@ final class PegGameObject: GameObject, Equatable, CirclePhysicsBody {
 extension PegGameObject {
     static func == (lhs: PegGameObject, rhs: PegGameObject) -> Bool {
         lhs.peg == rhs.peg
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(peg)
     }
 }

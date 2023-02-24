@@ -5,10 +5,14 @@
 //  Created by Peter Jung on 2023/02/21.
 //
 
-import SwiftUI
+ import SwiftUI
 
-struct GamePlayerView: View {
+ struct GamePlayerView: View {
     @StateObject var viewModel: GamePlayerViewModel
+
+    init(viewModel: GamePlayerViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
 
     var body: some View {
         VStack {
@@ -17,11 +21,12 @@ struct GamePlayerView: View {
                .ignoresSafeArea(.container)
         }
     }
-}
 
-struct GamePlayerView_Previews: PreviewProvider {
+ }
+
+ struct GamePlayerView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = GamePlayerViewModel(level: Level.mockData)
         GamePlayerView(viewModel: viewModel)
     }
-}
+ }

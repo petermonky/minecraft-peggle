@@ -10,6 +10,14 @@ import Foundation
 struct CirclePhysicsShape: PhysicsShape {
     var radius: CGFloat
 
+    var width: CGFloat {
+        radius * 2
+    }
+
+    var height: CGFloat {
+        radius * 2
+    }
+
     init(radius: CGFloat = 1) {
         if radius > 0 {
             self.radius = radius

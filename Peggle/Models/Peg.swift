@@ -23,6 +23,7 @@ class Peg: LevelObject, CircleCollidable {
     var type: PegType
     var normalImageName: String
     var glowImageName: String
+    var score: Int
 
     var width: CGFloat {
         2 * shape.radius
@@ -32,12 +33,13 @@ class Peg: LevelObject, CircleCollidable {
         2 * shape.radius
     }
 
-    init(type: PegType, shape: Shape, position: CGPoint, normalImageName: String, glowImageName: String) {
+    init(type: PegType, shape: Shape, position: CGPoint, normalImageName: String, glowImageName: String, score: Int) {
         self.position = position
         self.shape = shape
         self.normalImageName = normalImageName
         self.type = type
         self.glowImageName = glowImageName
+        self.score = score
     }
 
     required init(instance: Peg) {
@@ -46,6 +48,7 @@ class Peg: LevelObject, CircleCollidable {
         normalImageName = instance.normalImageName
         type = instance.type
         glowImageName = instance.glowImageName
+        self.score = instance.score
     }
 
     func overlapsWith(_ other: Peg) -> Bool {
@@ -60,7 +63,8 @@ final class BluePeg: Peg {
             shape: CirclePhysicsShape(radius: Constants.Peg.radius),
             position: position,
             normalImageName: "peg-blue",
-            glowImageName: "peg-blue-glow"
+            glowImageName: "peg-blue-glow",
+            score: Constants.Peg.Blue.score
         )
     }
 
@@ -84,7 +88,8 @@ final class OrangePeg: Peg {
             shape: CirclePhysicsShape(radius: Constants.Peg.radius),
             position: position,
             normalImageName: "peg-orange",
-            glowImageName: "peg-orange-glow"
+            glowImageName: "peg-orange-glow",
+            score: Constants.Peg.Orange.score
         )
     }
 
@@ -108,7 +113,8 @@ final class GreenPeg: Peg {
             shape: CirclePhysicsShape(radius: Constants.Peg.radius),
             position: position,
             normalImageName: "peg-green",
-            glowImageName: "peg-green-glow"
+            glowImageName: "peg-green-glow",
+            score: Constants.Peg.Green.score
         )
     }
 

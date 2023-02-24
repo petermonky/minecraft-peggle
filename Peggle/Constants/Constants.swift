@@ -32,6 +32,18 @@ extension Constants {
         static let popScale: CGFloat = 1.5
         static let blockingThreshold = 120
         static let explodeDelay: CGFloat = 0.25
+
+        enum Blue {
+            static let score: Int = 10
+        }
+
+        enum Green {
+            static let score: Int = 50
+        }
+
+        enum Orange {
+            static let score: Int = 100
+        }
     }
 }
 

@@ -13,28 +13,59 @@ class Renderer: ObservableObject, GameEngineDelegate {
     @Published private(set) var ballGameView: BallGameView?
     @Published private(set) var pegGameViews: [PegGameView]?
     @Published private(set) var blockGameViews: [BlockGameView]?
-    @Published private(set) var isGameOverModalPresent: Bool
     private var gameEngine: GameEngine
+
+    init(gameEngine: GameEngine) {
+        self.gameEngine = gameEngine
+        gameEngine.setRenderer(self)
+    }
+}
+
+extension Renderer {
+    var goalText: String {
+        gameEngine.mode?.goalText ?? ""
+    }
 
     var frame: CGSize {
         gameEngine.frame
     }
 
+    var isGameOver: Bool {
+        gameEngine.isGameOver
+    }
+
     var remainingTime: TimeInterval? {
-        if let endTime = gameEngine.endTime {
-            return Date.now.distance(to: endTime)
-        }
-        return nil
+        gameEngine.time
     }
 
     var remainingLives: Int? {
         gameEngine.lives
     }
 
-    init(gameEngine: GameEngine) {
-        self.gameEngine = gameEngine
-        self.isGameOverModalPresent = false
-        gameEngine.setRenderer(self)
+    var score: Int {
+        gameEngine.score
+    }
+
+    var bluePegsCount: Int {
+        gameEngine.visiblePegs.filter { $0.peg.type == .blue }.count
+    }
+
+    var orangePegsCount: Int {
+        gameEngine.visiblePegs.filter { $0.peg.type == .orange }.count
+    }
+
+    var greenPegsCount: Int {
+        gameEngine.visiblePegs.filter { $0.peg.type == .green }.count
+    }
+}
+
+extension Renderer {
+    func startGameEngine(character: GameCharacter, mode: GameMode) {
+        gameEngine.startGame(character: character, mode: mode)
+    }
+
+    func isGameInState(_ state: GameState) -> Bool {
+        gameEngine.state == state
     }
 
     func didUpdateWorld() {
@@ -42,9 +73,8 @@ class Renderer: ObservableObject, GameEngineDelegate {
         renderViews()
     }
 
-    // TODO: add game over logic
-    func didGameOver() {
-        isGameOverModalPresent = true
+    func didUpdateGameState() {
+//        gameState = gameEngine.state
     }
 
     func clearViews() {
@@ -63,5 +93,13 @@ class Renderer: ObservableObject, GameEngineDelegate {
         bucketGameView = BucketGameView(gameObject: gameEngine.bucketGameObject)
         pegGameViews = gameEngine.pegGameObjects.map { PegGameView(gameObject: $0) }
         blockGameViews = gameEngine.blockGameObjects.map { BlockGameView(gameObject: $0) }
+    }
+
+    func updateCannonAngle(position: CGPoint) {
+        gameEngine.updateCannonAngle(position: position)
+    }
+
+    func addBallTowards(position: CGPoint) {
+        gameEngine.addBallTowards(position: position)
     }
 }

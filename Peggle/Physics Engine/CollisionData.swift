@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol CollisionData: Hashable {
-    var sourceId: String { get }
+protocol CollisionData: AnyObject {
+    var source: any DynamicPhysicsBody { get }
 }

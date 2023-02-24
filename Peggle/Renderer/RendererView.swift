@@ -8,19 +8,22 @@
 import SwiftUI
 
 struct RendererView: View {
-    private var gameEngine: GameEngine
     @StateObject private var renderer: Renderer
 
     init(gameEngine: GameEngine) {
-        self.gameEngine = gameEngine
         _renderer = StateObject(wrappedValue: Renderer(gameEngine: gameEngine))
     }
 
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text("\(renderer.remainingTime ?? 1)")
-                Text("\(renderer.remainingLives ?? 1)")
+                Text("\(renderer.remainingTime ?? 0)")
+                Text("\(renderer.remainingLives ?? 0)")
+                Text("\(renderer.score)")
+                Text("\(renderer.bluePegsCount)")
+                Text("\(renderer.orangePegsCount)")
+                Text("\(renderer.greenPegsCount)")
+                Text("\(renderer.goalText)")
             }.frame(height: 80)
             GeometryReader { _ in
                 ZStack {
@@ -38,10 +41,10 @@ struct RendererView: View {
                 .gesture(
                     DragGesture()
                         .onChanged { value in
-                            gameEngine.updateCannonAngle(position: value.location)
+                            renderer.updateCannonAngle(position: value.location)
                         }
                         .onEnded { value in
-                            gameEngine.addBallTowards(position: value.location)
+                            renderer.addBallTowards(position: value.location)
                         }
                 )
                 .frame(width: renderer.frame.width, height: renderer.frame.height)
@@ -55,12 +58,12 @@ struct RendererView: View {
                 }
             }
         }
-        .modifier(Popup(isPresented: gameEngine.isInState(.loading),
+        .modifier(Popup(isPresented: renderer.isGameInState(.loading),
                         alignment: .center,
-                        content: { CharacterModalView(gameEngine: gameEngine) }))
-        .modifier(Popup(isPresented: gameEngine.isInState(.lose),
+                        content: { GamePresetModalView().environmentObject(renderer) }))
+        .modifier(Popup(isPresented: renderer.isGameOver,
                         alignment: .center,
-                        content: { GameOverModalView(gameEngine: gameEngine) }))
+                        content: { GameOverModalView().environmentObject(renderer) }))
         .ignoresSafeArea(edges: .all)
     }
 }

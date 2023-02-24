@@ -102,7 +102,7 @@ extension CollisionManager {
 
         circle1.position = circle2.position.move(by: scaled)
         circle1.velocity = circle1.velocity.reflectAlongVector(normalised).scale(by: restitution)
-        return BodyBodyCollisionData(body1: circle1, body2: circle2)
+        return BodyBodyCollisionData(source: circle1, target: circle2)
     }
 
     private static func resolveCollisionBetween(
@@ -119,7 +119,7 @@ extension CollisionManager {
 
         circle.position = closestPoint.move(by: scaled)
         circle.velocity = circle.velocity.reflectAlongVector(normalised).scale(by: restitution)
-        return BodyBodyCollisionData(body1: circle, body2: polygon)
+        return BodyBodyCollisionData(source: circle, target: polygon)
     }
 
     private static func closestSegmentFrom(
@@ -146,12 +146,16 @@ extension CollisionManager {
 
         switch closestSide {
         case .left:
+            body.position.x = body.shape.width / 2
             body.velocity = body.velocity.reflectAlongXAxis().scale(by: restitution)
         case .right:
+            body.position.x = frame.width - body.shape.width / 2
             body.velocity = body.velocity.reflectAlongXAxis().scale(by: restitution)
         case .top:
+            body.position.y = body.shape.height / 2
             body.velocity = body.velocity.reflectAlongYAxis().scale(by: restitution)
         case .bottom:
+            body.position.y = frame.height - body.shape.height / 2
             body.velocity = body.velocity.reflectAlongYAxis().scale(by: restitution)
         }
 

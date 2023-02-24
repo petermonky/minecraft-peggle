@@ -10,11 +10,13 @@ import Foundation
 final class BallGameObject: GameObject, DynamicCirclePhysicsBody {
     @Published var position: CGPoint
     @Published var velocity: CGVector
+    @Published var isSpooky: Bool
     let shape: CirclePhysicsShape
 
     init(position: CGPoint = CGPoint.zero, velocity: CGVector = CGVector.zero) {
         self.position = position
         self.velocity = velocity
+        self.isSpooky = false
         self.shape = CirclePhysicsShape(radius: Constants.Ball.radius)
     }
 
@@ -24,5 +26,13 @@ final class BallGameObject: GameObject, DynamicCirclePhysicsBody {
 
     func explosionBoost(by vector: CGVector) {
         velocity = velocity.add(by: vector)
+    }
+
+    func setSpooky() {
+        isSpooky = true
+    }
+
+    func unsetSpooky() {
+        isSpooky = false
     }
 }

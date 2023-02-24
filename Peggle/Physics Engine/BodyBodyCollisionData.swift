@@ -7,12 +7,23 @@
 
 import Foundation
 
-struct BodyBodyCollisionData: CollisionData {
-    let sourceId: String
-    let targetId: String
+class BodyBodyCollisionData: CollisionData, Hashable {
+    let source: any DynamicPhysicsBody
+    let target: any PhysicsBody
 
-    init(body1: any DynamicPhysicsBody, body2: any PhysicsBody) {
-        self.sourceId = body1.id
-        self.targetId = body2.id
+    init(source: any DynamicPhysicsBody, target: any PhysicsBody) {
+        self.source = source
+        self.target = target
+    }
+}
+
+extension BodyBodyCollisionData {
+    public static func == (lhs: BodyBodyCollisionData, rhs: BodyBodyCollisionData) -> Bool {
+        lhs.source === rhs.source && lhs.target === rhs.target
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(source.id)
+        hasher.combine(target.id)
     }
 }
