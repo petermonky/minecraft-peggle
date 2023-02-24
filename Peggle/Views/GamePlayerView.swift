@@ -12,11 +12,7 @@ struct GamePlayerView: View {
 
     var body: some View {
         VStack {
-//            HStack {
-//                Text("test")
-//            }
-//            .frame(height: 180)
-            RendererView(renderer: viewModel.renderer)
+            RendererView(gameEngine: viewModel.gameEngine)
                .environment(\.colorScheme, .light)
                .ignoresSafeArea(.container)
         }

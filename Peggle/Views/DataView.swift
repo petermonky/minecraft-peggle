@@ -12,6 +12,8 @@ struct DataView: View {
 
     var body: some View {
         HStack {
+            Text("\(levelDesigner.pegObjects.count)")
+            Text("\(levelDesigner.blockObjects.count)")
         }
         .frame(height: 80)
     }

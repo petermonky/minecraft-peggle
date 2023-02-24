@@ -1,3 +1,4 @@
+//
 //  LevelDesignerViewModel.swift
 //  Peggle
 //
@@ -12,20 +13,19 @@ import Foundation
     @Published private(set) var pegFactory: PegFactory? = BluePegFactory()
     @Published private(set) var pegPaletteButtons: [PegPaletteButton] = [
         BluePegPaletteButton(),
-        OrangePegPaletteButton()
+        OrangePegPaletteButton(),
+        GreenPegPaletteButton()
     ]
     @Published private(set) var blockPaletteButton: PaletteButton = BlockPaletteButton()
     @Published private(set) var deletePaletteButton: PaletteButton = DeletePegPaletteButton()
 
     // Board
     @Published var level = Level()
-    @Published var initialBoardSize = CGSize.zero
-    @Published var currentBoardSize = CGSize.zero
-    @Published var levelObject: (any LevelObject)?
+    @Published private(set) var levelObject: (any LevelObject)?
 
     // Level list
-    @Published var levels: [Level] = []
-    private let dataManager = DataManager.shared
+    @Published private(set) var levels: [Level] = []
+    private let dataManager = DataManager()
 }
 
 // MARK: - Level
@@ -117,15 +117,14 @@ extension LevelDesignerViewModel {
         pegObjects + blockObjects
     }
 
-    func initialiseBoardSize(boardSize: CGSize) {
-        self.initialBoardSize = boardSize
-        self.currentBoardSize = boardSize
+    var boardSuccessfullyInitialised: Bool {
+        level.frame.width != CGFloat.zero && level.frame.height != CGFloat.zero
     }
 
-    var boardSuccessfullyInitialised: Bool {
-        initialBoardSize != CGSize.zero && currentBoardSize != CGSize.zero
+    func initialiseFrame(size: CGSize) {
+        level.frame = Frame(size: size)
     }
-    
+
     func createObjectAtPosition(_ location: CGPoint) {
         var levelObject: (any LevelObject)?
         if let pegObject = createPegAtPosition(location) {
@@ -193,8 +192,8 @@ extension LevelDesignerViewModel {
         guard boardSuccessfullyInitialised else {
             return false
         }
-        let boardWidth = currentBoardSize.width
-        let boardHeight = currentBoardSize.height
+        let boardWidth = level.frame.width
+        let boardHeight = level.frame.height
         let objectX = levelObject.position.x
         let objectY = levelObject.position.y
 

@@ -163,21 +163,21 @@ extension CollisionManager {
         var distance = CGFloat.infinity
         var closestSide: FrameSide?
 
-        if abs(body.position.x) < distance {
+        if body.position.x < distance {
             closestSide = .left
-            distance = abs(body.position.x)
+            distance = body.position.x
         }
-        if abs(frame.width - body.position.x) < distance {
+        if frame.width - body.position.x < distance {
             closestSide = .right
-            distance = abs(frame.width - body.position.x)
+            distance = frame.width - body.position.x
         }
-        if abs(body.position.y) < distance {
+        if body.position.y < distance {
             closestSide = .top
-            distance = abs(body.position.y)
+            distance = body.position.y
         }
-        if abs(frame.height - body.position.y) < distance {
+        if frame.height - body.position.y < distance {
             closestSide = .bottom
-            distance = abs(frame.height - body.position.y)
+            distance = frame.height - body.position.y
         }
 
         return closestSide

@@ -27,7 +27,7 @@ struct LevelListView: View {
                 Text("Create new level")
             }
 
-            ForEach(levelDesigner.levels.reversed()) { level in
+            ForEach(levelDesigner.levels) { level in
                 Button(action: {
                     levelDesigner.loadLevel(level)
                     dismiss()

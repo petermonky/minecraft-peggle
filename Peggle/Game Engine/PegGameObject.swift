@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class PegGameObject: GameObject, CirclePhysicsBody {
+final class PegGameObject: GameObject, Equatable, CirclePhysicsBody {
     @Published var position: CGPoint
     @Published var hasCollidedWithBall: Bool
     @Published var isVisible: Bool
@@ -35,5 +35,11 @@ final class PegGameObject: GameObject, CirclePhysicsBody {
 
     func clone() -> PegGameObject {
         PegGameObject(peg: peg, hasCollidedWithBall: hasCollidedWithBall)
+    }
+}
+
+extension PegGameObject {
+    static func == (lhs: PegGameObject, rhs: PegGameObject) -> Bool {
+        lhs.peg == rhs.peg
     }
 }

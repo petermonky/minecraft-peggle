@@ -8,12 +8,6 @@
 import Foundation
 
 protocol GameEngineDelegate: AnyObject {
-    func didUpdateWorld(
-        cannonGameObject: CannonGameObject?,
-        bucketGameObject: BucketGameObject?,
-        ballGameObject: BallGameObject?,
-        pegGameObjects: [PegGameObject]?,
-        blockGameObjects: [BlockGameObject]?
-    )
+    func didUpdateWorld()
     func didGameOver()
 }

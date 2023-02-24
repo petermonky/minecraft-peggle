@@ -8,43 +8,40 @@
 import SwiftUI
 
 struct RendererView: View {
-    @StateObject var renderer: Renderer
+    private var gameEngine: GameEngine
+    @StateObject private var renderer: Renderer
 
-    init(renderer: Renderer) {
-        _renderer = StateObject(wrappedValue: renderer)
+    init(gameEngine: GameEngine) {
+        self.gameEngine = gameEngine
+        _renderer = StateObject(wrappedValue: Renderer(gameEngine: gameEngine))
     }
 
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text("Header")
+                Text("\(renderer.remainingTime ?? 1)")
+                Text("\(renderer.remainingLives ?? 1)")
             }.frame(height: 80)
             GeometryReader { _ in
                 ZStack {
-                    if let cannonGameView = renderer.cannonGameView {
-                        cannonGameView
-                    }
-                    if let ballGameView = renderer.ballGameView {
-                        ballGameView
-                    }
+                    renderer.cannonGameView
+                    renderer.ballGameView
+                    renderer.bucketGameView
                     if let pegGameViews = renderer.pegGameViews {
                         ForEach(pegGameViews) { $0 }
                     }
                     if let blockGameViews = renderer.blockGameViews {
                         ForEach(blockGameViews) { $0 }
                     }
-                    if let bucketGameView = renderer.bucketGameView {
-                        bucketGameView
-                    }
                 }
                 .contentShape(Rectangle())
                 .gesture(
                     DragGesture()
                         .onChanged { value in
-                            renderer.updateCannonAngle(position: value.location)
+                            gameEngine.updateCannonAngle(position: value.location)
                         }
                         .onEnded { value in
-                            renderer.addBallTowards(position: value.location)
+                            gameEngine.addBallTowards(position: value.location)
                         }
                 )
                 .frame(width: renderer.frame.width, height: renderer.frame.height)
@@ -58,6 +55,12 @@ struct RendererView: View {
                 }
             }
         }
+        .modifier(Popup(isPresented: gameEngine.isInState(.loading),
+                        alignment: .center,
+                        content: { CharacterModalView(gameEngine: gameEngine) }))
+        .modifier(Popup(isPresented: gameEngine.isInState(.lose),
+                        alignment: .center,
+                        content: { GameOverModalView(gameEngine: gameEngine) }))
         .ignoresSafeArea(edges: .all)
     }
 }
@@ -65,7 +68,6 @@ struct RendererView: View {
 struct BoardGameView_Previews: PreviewProvider {
     static var previews: some View {
         let gameEngine = GameEngine(level: Level.mockData)
-        let renderer = Renderer(gameEngine: gameEngine)
-        RendererView(renderer: renderer)
+        RendererView(gameEngine: gameEngine)
     }
 }

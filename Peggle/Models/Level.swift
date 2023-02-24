@@ -9,7 +9,7 @@ import Foundation
 
 struct Level: Identifiable, Codable {
     var id: UUID
-    var frame: CGSize
+    var frame: Frame
     var title: String
     var updatedAt: Date
     var pegs: Set<Peg>
@@ -17,7 +17,7 @@ struct Level: Identifiable, Codable {
 
     init(
         id: UUID = UUID(),
-        frame: CGSize = CGSize.zero,
+        frame: Frame = Frame(),
         title: String = "",
         updatedAt: Date = Date.now,
         pegs: Set<Peg> = [],
@@ -47,7 +47,7 @@ extension Level: Hashable {
 extension Level {
     static var mockData: Level {
         // Optimised for iPad Pro (11-inch) (4th generation)
-        let frame = CGSize(width: 834.0, height: 894.0)
+        let frame = Frame(width: 834.0, height: 894.0)
         let pegs = Set<Peg>()
 //        (1...10).forEach {
 //            pegs.insert(BluePeg(position: CGPoint(x: $0 * 150 - 75, y: 200)))

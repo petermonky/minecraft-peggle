@@ -17,7 +17,7 @@ struct BucketGameView: View {
     var body: some View {
         Image("bucket")
             .resizable()
-            .scaledToFill()
+            .scaledToFit()
             .frame(width: Constants.Cannon.width, height: Constants.Cannon.height)
             .position(gameObject.position)
     }

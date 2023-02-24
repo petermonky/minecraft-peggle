@@ -9,16 +9,24 @@ import Foundation
 import SwiftUI
 
 enum GameState {
+    case loading
     case active
     case idle
+    case lose
+    case win
 }
 
 class GameEngine {
     let cannonGameObject: CannonGameObject
     let bucketGameObject: BucketGameObject
     let physicsWorld: PhysicsWorld
+
+    private(set) var character: GameCharacter?
+    private(set) var endTime: Date?
+    private(set) var lives: Int?
     private(set) var state: GameState
-    weak var delegate: GameEngineDelegate?
+
+    private weak var renderer: Renderer?
 
     var frame: CGSize {
         CGSize(width: physicsWorld.frame.width, height: physicsWorld.frame.height)
@@ -40,8 +48,16 @@ class GameEngine {
         pegGameObjects.filter { $0.hasCollidedWithBall }
     }
 
+    var collidedGreenPegGameObjects: [PegGameObject] {
+        collidedPegGameObjects.filter { $0.peg.type == .green }
+    }
+
     var blockingPegGameObjects: [PegGameObject] {
         pegGameObjects.filter { $0.isBlockingBall }
+    }
+
+    var isGameOver: Bool {
+        lives == 0
     }
 
     init(level: Level) {
@@ -54,27 +70,28 @@ class GameEngine {
             y: level.frame.height + Constants.Cannon.height + Constants.Bucket.height / 2
         ))
         let frame = level.frame
-            .extend(y: Constants.Cannon.height)
-            .extend(y: Constants.Bucket.height)
+            .adjust(y: Constants.Cannon.height)
+            .adjust(y: Constants.Bucket.height)
         self.physicsWorld = PhysicsWorld(frame: Frame(width: frame.width, height: frame.height))
-        self.state = .idle
+        self.state = .loading
 
         initialiseLevelObjects(level: level)
         createDisplayLink()
     }
 
-    func setDelegate(_ delegate: GameEngineDelegate) {
-        self.delegate = delegate
+    func setRenderer(_ renderer: Renderer) {
+        self.renderer = renderer
     }
 
     func isInState(_ state: GameState) -> Bool {
         self.state == state
     }
 
-    private var isGameOver: Bool {
-        physicsWorld.collisionData.contains(where: {
-            isBallFrameBottomCollision(collisionData: $0 )
-        })
+    func startGame(character: GameCharacter) {
+        self.character = character
+        self.endTime = Date.now + 10
+        self.lives = 1
+        self.state = .idle
     }
 
     private var ballPegCollisions: [BodyBodyCollisionData] {
@@ -124,14 +141,45 @@ class GameEngine {
 
         lightCollidingPegs()
         removeBlockingPegs()
-        handleGameOver()
-        delegate?.didUpdateWorld(
-            cannonGameObject: cannonGameObject,
-            bucketGameObject: bucketGameObject,
-            ballGameObject: ballGameObject,
-            pegGameObjects: pegGameObjects,
-            blockGameObjects: blockGameObjects
-        )
+
+        handleBallEnterBucket()
+        updateBucketMovement()
+        handleBallExitLevel()
+
+        character?.applyPower(gameEngine: self)
+        renderer?.didUpdateWorld()
+    }
+
+    private func handleBallEnterBucket() {
+        guard let ballGameObject = ballGameObject else {
+            return
+        }
+        if CollisionManager.hasCollisionBetween(bucketGameObject, and: ballGameObject) {
+            refreshGameState()
+            lives? += 1
+        }
+    }
+
+    private func handleBallExitLevel() {
+        if physicsWorld.collisionData.contains(where: {
+            isBallFrameBottomCollision(collisionData: $0 )
+        }) {
+            refreshGameState()
+            handleGameOver()
+        }
+    }
+
+    private func updateBucketMovement() {
+        let hasCollisionWithLeft = bucketGameObject.position.x - Constants.Bucket.width / 2 <= 0
+        let hasCollisionWithRight = bucketGameObject.position.x + Constants.Bucket.width / 2 >= frame.width
+
+        if hasCollisionWithLeft {
+            bucketGameObject.updateDirection(to: .right)
+        } else if hasCollisionWithRight {
+            bucketGameObject.updateDirection(to: .left)
+        }
+
+        bucketGameObject.moveInDirection()
     }
 
     private func updateGameState(_ state: GameState) {
@@ -151,24 +199,26 @@ class GameEngine {
     }
 
     private func handleGameOver() {
-        guard isGameOver else {
-            return
+        if isGameOver {
+            updateGameState(.lose)
+            renderer?.didGameOver()
         }
+    }
 
+    private func refreshGameState() {
         removeCollidedPegs()
         removeExitedBall()
         cannonGameObject.setAvailable()
         updateGameState(.idle)
-
-        delegate?.didGameOver()
     }
 
     private func removeCollidedPegs() {
         removePegs(collidedPegGameObjects)
     }
 
-    private func removePegs(_ pegs: [PegGameObject]) {
+    func removePegs(_ pegs: [PegGameObject]) {
         pegs.forEach { $0.isVisible = false }
+
         DispatchQueue.main.asyncAfter(deadline: .now() + Constants.Peg.fadeDuration) {
             pegs.forEach { self.physicsWorld.removeBody($0) }
         }
@@ -186,6 +236,9 @@ class GameEngine {
     }
 
     func updateCannonAngle(position: CGPoint) {
+        guard isInState(.idle) else {
+            return
+        }
         let vector = CGVector(from: position, to: cannonGameObject.position)
         let angle = vector.angle(with: .xBasis)
         guard validCannonAngle(angle) else {
@@ -195,6 +248,10 @@ class GameEngine {
     }
 
     func addBallTowards(position: CGPoint) {
+        guard isInState(.idle) else {
+            return
+        }
+
         let vector = CGVector(from: position, to: cannonGameObject.position)
         let angle = vector.angle(with: .xBasis)
         guard validCannonAngle(angle) else {
@@ -207,6 +264,7 @@ class GameEngine {
             velocity: normalFromCannonToPosition.scale(by: Constants.Ball.initialSpeed))
         )
 
+        lives? -= 1
         cannonGameObject.setUnavailable()
         updateGameState(.active)
     }

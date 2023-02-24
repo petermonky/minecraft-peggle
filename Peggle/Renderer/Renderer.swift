@@ -8,43 +8,43 @@
 import Foundation
 
 class Renderer: ObservableObject, GameEngineDelegate {
-    // TODO: remove gameObject from view. stop riding mvvm !!
     @Published private(set) var cannonGameView: CannonGameView?
     @Published private(set) var bucketGameView: BucketGameView?
     @Published private(set) var ballGameView: BallGameView?
     @Published private(set) var pegGameViews: [PegGameView]?
     @Published private(set) var blockGameViews: [BlockGameView]?
+    @Published private(set) var isGameOverModalPresent: Bool
     private var gameEngine: GameEngine
 
     var frame: CGSize {
         gameEngine.frame
     }
 
-    init(gameEngine: GameEngine) {
-        self.gameEngine = gameEngine
-        gameEngine.setDelegate(self)
+    var remainingTime: TimeInterval? {
+        if let endTime = gameEngine.endTime {
+            return Date.now.distance(to: endTime)
+        }
+        return nil
     }
 
-    func didUpdateWorld(
-        cannonGameObject: CannonGameObject?,
-        bucketGameObject: BucketGameObject?,
-        ballGameObject: BallGameObject?,
-        pegGameObjects: [PegGameObject]?,
-        blockGameObjects: [BlockGameObject]?
-    ) {
+    var remainingLives: Int? {
+        gameEngine.lives
+    }
+
+    init(gameEngine: GameEngine) {
+        self.gameEngine = gameEngine
+        self.isGameOverModalPresent = false
+        gameEngine.setRenderer(self)
+    }
+
+    func didUpdateWorld() {
         clearViews()
-        renderViews(
-            cannonGameObject: cannonGameObject,
-            bucketGameObject: bucketGameObject,
-            ballGameObject: ballGameObject,
-            pegGameObjects: pegGameObjects,
-            blockGameObjects: blockGameObjects
-        )
+        renderViews()
     }
 
     // TODO: add game over logic
     func didGameOver() {
-        print("Game over")
+        isGameOverModalPresent = true
     }
 
     func clearViews() {
@@ -52,47 +52,16 @@ class Renderer: ObservableObject, GameEngineDelegate {
         bucketGameView = nil
         ballGameView = nil
         pegGameViews = nil
+        blockGameViews = nil
     }
 
-    func renderViews(
-        cannonGameObject: CannonGameObject?,
-        bucketGameObject: BucketGameObject?,
-        ballGameObject: BallGameObject?,
-        pegGameObjects: [PegGameObject]?,
-        blockGameObjects: [BlockGameObject]?
-    ) {
-        if let cannonGameObject = cannonGameObject {
-            cannonGameView = CannonGameView(gameObject: cannonGameObject)
-        }
-
-        if let bucketGameObject = bucketGameObject {
-            bucketGameView = BucketGameView(gameObject: bucketGameObject)
-        }
-
-        if let pegGameObjects = pegGameObjects {
-            pegGameViews = pegGameObjects.map { PegGameView(gameObject: $0) }
-        }
-
-        if let blockGameObjects = blockGameObjects {
-            blockGameViews = blockGameObjects.map { BlockGameView(gameObject: $0) }
-        }
-
+    func renderViews() {
         if let ballGameObject = gameEngine.ballGameObject {
             ballGameView = BallGameView(gameObject: ballGameObject)
         }
-    }
-
-    func updateCannonAngle(position: CGPoint) {
-        guard gameEngine.isInState(.idle) else {
-            return
-        }
-        gameEngine.updateCannonAngle(position: position)
-    }
-
-    func addBallTowards(position: CGPoint) {
-        guard gameEngine.isInState(.idle) else {
-            return
-        }
-        gameEngine.addBallTowards(position: position)
+        cannonGameView = CannonGameView(gameObject: gameEngine.cannonGameObject)
+        bucketGameView = BucketGameView(gameObject: gameEngine.bucketGameObject)
+        pegGameViews = gameEngine.pegGameObjects.map { PegGameView(gameObject: $0) }
+        blockGameViews = gameEngine.blockGameObjects.map { BlockGameView(gameObject: $0) }
     }
 }

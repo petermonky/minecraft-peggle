@@ -21,4 +21,8 @@ final class BallGameObject: GameObject, DynamicCirclePhysicsBody {
     func clone() -> BallGameObject {
         BallGameObject(position: position, velocity: velocity)
     }
+
+    func explosionBoost(by vector: CGVector) {
+        velocity = velocity.add(by: vector)
+    }
 }

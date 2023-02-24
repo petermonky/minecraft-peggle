@@ -11,6 +11,7 @@ import SwiftUI
 enum PegType: String, Codable {
     case blue
     case orange
+    case green
 }
 
 class Peg: LevelObject, CircleCollidable {
@@ -76,7 +77,7 @@ final class BluePeg: Peg {
     }
 }
 
-class OrangePeg: Peg {
+final class OrangePeg: Peg {
     init(position: CGPoint = CGPoint.zero) {
         super.init(
             type: .orange,
@@ -84,6 +85,30 @@ class OrangePeg: Peg {
             position: position,
             normalImageName: "peg-orange",
             glowImageName: "peg-orange-glow"
+        )
+    }
+
+    required init(instance: Peg) {
+        super.init(instance: instance)
+    }
+
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+
+    override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+    }
+}
+
+final class GreenPeg: Peg {
+    init(position: CGPoint = CGPoint.zero) {
+        super.init(
+            type: .green,
+            shape: CirclePhysicsShape(radius: Constants.Peg.radius),
+            position: position,
+            normalImageName: "peg-green",
+            glowImageName: "peg-green-glow"
         )
     }
 

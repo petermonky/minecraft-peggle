@@ -31,6 +31,7 @@ extension Constants {
         static let fadeDuration: CGFloat = 0.25
         static let popScale: CGFloat = 1.5
         static let blockingThreshold = 120
+        static let explodeDelay: CGFloat = 0.25
     }
 }
 

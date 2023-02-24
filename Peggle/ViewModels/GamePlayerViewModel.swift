@@ -7,11 +7,10 @@
 
 import Foundation
 
-class GamePlayerViewModel: ObservableObject {
-    @Published var renderer: Renderer
+@MainActor class GamePlayerViewModel: ObservableObject {
+    @Published var gameEngine: GameEngine
 
     init(level: Level) {
-        let gameEngine = GameEngine(level: level)
-        self.renderer = Renderer(gameEngine: gameEngine)
+        self.gameEngine = GameEngine(level: level)
     }
 }

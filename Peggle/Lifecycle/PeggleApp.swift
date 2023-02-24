@@ -15,8 +15,8 @@ struct PeggleApp: App {
                 NavigationLink(destination: LevelDesignerView(viewModel: LevelDesignerViewModel())) {
                     Text("Level designer")
                 }
-                NavigationLink(destination: GamePlayerView(viewModel: GamePlayerViewModel(level: Level.mockData))) {
-                    Text("Game player")
+                NavigationLink(destination: LevelSelectionView(viewModel: LevelSelectionViewModel())) {
+                    Text("Level Selection")
                 }
             }
             .environment(\.colorScheme, .light)

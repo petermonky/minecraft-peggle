@@ -8,9 +8,6 @@
 import Foundation
 
 class DataManager {
-
-    static let shared = DataManager()
-
     private func fileURL() throws -> URL {
         try FileManager.default.url(for: .documentDirectory,
                                     in: .userDomainMask,

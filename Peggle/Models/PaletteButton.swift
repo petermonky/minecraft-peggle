@@ -10,6 +10,7 @@ import Foundation
 enum PaletteButtonType: String {
     case bluePeg   = "peg-blue"
     case orangePeg = "peg-orange"
+    case greenPeg  = "peg-green"
     case block     = "block"
     case deletePeg = "delete"
 }
@@ -43,6 +44,15 @@ struct BluePegPaletteButton: PegPaletteButton {
 struct OrangePegPaletteButton: PegPaletteButton {
     var type: PaletteButtonType = .orangePeg
     var factory: PegFactory = OrangePegFactory()
+
+    @MainActor func updatePalette(_ levelDesigner: LevelDesignerViewModel) {
+        levelDesigner.onPegButtonSelect(pegButton: self)
+    }
+}
+
+struct GreenPegPaletteButton: PegPaletteButton {
+    var type: PaletteButtonType = .greenPeg
+    var factory: PegFactory = GreenPegFactory()
 
     @MainActor func updatePalette(_ levelDesigner: LevelDesignerViewModel) {
         levelDesigner.onPegButtonSelect(pegButton: self)

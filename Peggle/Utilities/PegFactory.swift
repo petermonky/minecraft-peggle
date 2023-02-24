@@ -22,3 +22,9 @@ class OrangePegFactory: PegFactory {
         OrangePeg(position: position)
     }
 }
+
+class GreenPegFactory: PegFactory {
+    func createPegAtPosition(_ position: CGPoint) -> Peg {
+        GreenPeg(position: position)
+    }
+}

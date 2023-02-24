@@ -27,7 +27,7 @@ struct BoardView: View {
                 levelDesigner.createObjectAtPosition(location)
             }
             .onAppear {
-                levelDesigner.initialiseBoardSize(boardSize: geometry.size)
+                levelDesigner.initialiseFrame(size: geometry.size)
             }
         }
         .simultaneousGesture(TapGesture().onEnded {

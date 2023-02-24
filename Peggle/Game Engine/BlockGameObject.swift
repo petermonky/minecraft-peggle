@@ -22,3 +22,9 @@ final class BlockGameObject: GameObject, PolygonPhysicsBody {
         BlockGameObject(block: block)
     }
 }
+
+extension BlockGameObject {
+    static func == (lhs: BlockGameObject, rhs: BlockGameObject) -> Bool {
+        lhs.block == rhs.block
+    }
+}
