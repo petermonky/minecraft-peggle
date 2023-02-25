@@ -17,10 +17,10 @@ enum GameState {
 }
 
 class GameEngine {
-    let cannonGameObject: CannonGameObject
-    let bucketGameObject: BucketGameObject
     let physicsWorld: PhysicsWorld
-    let level: Level
+    private(set) var cannonGameObject: CannonGameObject
+    private(set) var bucketGameObject: BucketGameObject
+    private(set) var level: Level
 
     private(set) var character: GameCharacter?
     private(set) var mode: GameMode?
@@ -49,11 +49,21 @@ class GameEngine {
         self.state = .loading
         self.removedPegs = []
 
-        initialiseLevelObjects(level: level)
         createDisplayLink()
     }
 
-    private func initialiseLevelObjects(level: Level) {
+    func initialiseLevel(frame: Frame) {
+        callibrateLevel(frame: frame)
+        addLevelObjects()
+    }
+
+    private func callibrateLevel(frame: Frame) {
+        level = level.clone()
+        level.scaledToFit(frame: frame.adjust(y: -(Constants.Cannon.height + Constants.Bucket.height)))
+        physicsWorld.adjustFrame(x: frame.width - physicsWorld.frame.width, y: frame.height - physicsWorld.frame.height)
+    }
+
+    private func addLevelObjects() {
         level.pegs.forEach { peg in
             let pegGameObject = PegGameObject(peg: peg)
             let shiftedPosition = pegGameObject.position.move(by: CGVector(dx: 0, dy: Constants.Cannon.height))
@@ -66,6 +76,14 @@ class GameEngine {
             blockGameObject.updatePosition(shiftedPosition)
             physicsWorld.addBody(blockGameObject)
         }
+        cannonGameObject = CannonGameObject(position: CGPoint(
+            x: level.frame.width / 2,
+            y: Constants.Cannon.height / 2
+        ))
+        bucketGameObject = BucketGameObject(position: CGPoint(
+            x: level.frame.width / 2,
+            y: level.frame.height + Constants.Cannon.height + Constants.Bucket.height / 2
+        ))
     }
 
     private func createDisplayLink() {
@@ -121,8 +139,8 @@ extension GameEngine {
         pegGameObjects.filter { $0.hasCollidedWithBall }
     }
 
-    var blockingPegGameObjects: [PegGameObject] {
-        pegGameObjects.filter { $0.isBlockingBall }
+    var blockingGameObjects: [any CollidableGameObject] {
+        collidingGameObjects.filter { $0.isBlockingBall }
     }
 
     var isReady: Bool {
@@ -152,18 +170,16 @@ extension GameEngine {
         isInState(.lose) || isInState(.win)
     }
 
-    var collidingPegs: [PegGameObject] {
+    var collidingGameObjects: [any CollidableGameObject] {
         physicsWorld.collisionData
             .compactMap { $0 as? BodyBodyCollisionData }
-            .filter { data in
-                let sourceIsBall = data.source === ballGameObject
-                let targetIsPeg = pegGameObjects.contains(where: {
-                    data.target === $0
-                })
-                return sourceIsBall && targetIsPeg
-            }
+            .filter { $0.source === ballGameObject }
             .map { $0.target }
-            .compactMap { $0 as? PegGameObject }
+            .compactMap { $0 as? any CollidableGameObject }
+    }
+
+    var collidingPegs: [PegGameObject] {
+        collidingGameObjects.compactMap { $0 as? PegGameObject }
     }
 
     var collidingGreenPegs: [PegGameObject] {
@@ -223,8 +239,8 @@ extension GameEngine {
         updateCurrentTime()
 
         character?.applyPower()
-        lightCollidingPegs()
-        removeBlockingPegs()
+        handleBallGameObjectCollision()
+        removeBlockingGameObjects()
 
         handleBallBucketCollision()
         updateBucketMovement()
@@ -291,14 +307,14 @@ extension GameEngine {
         renderer?.didUpdateGameState()
     }
 
-    private func lightCollidingPegs() {
-        for peg in collidingPegs {
-            peg.collideWithBall()
+    private func handleBallGameObjectCollision() {
+        for gameObject in collidingGameObjects {
+            gameObject.collideWithBall()
         }
     }
 
-    private func removeBlockingPegs() {
-        removePegs(blockingPegGameObjects)
+    private func removeBlockingGameObjects() {
+        removeGameObjects(blockingGameObjects)
     }
 
     private func refreshGameState() {
@@ -309,17 +325,18 @@ extension GameEngine {
     }
 
     private func removeCollidedPegs() {
-        removePegs(collidedPegGameObjects)
+        removeGameObjects(collidedPegGameObjects)
     }
 
-    func removePegs(_ pegs: [PegGameObject]) {
-        pegs.forEach {
+    func removeGameObjects(_ gameObjects: [any CollidableGameObject]) {
+        gameObjects.forEach {
             $0.isVisible = false
-            removedPegs.insert($0)
+            if let peg = $0 as? PegGameObject {
+                removedPegs.insert(peg)
+            }
         }
-
         DispatchQueue.main.asyncAfter(deadline: .now() + Constants.Peg.fadeDuration) {
-            pegs.forEach { self.physicsWorld.removeBody($0) }
+            gameObjects.forEach { self.physicsWorld.removeBody($0) }
         }
     }
 

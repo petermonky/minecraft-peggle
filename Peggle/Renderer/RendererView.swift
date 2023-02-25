@@ -25,7 +25,7 @@ struct RendererView: View {
                 Text("\(renderer.greenPegsCount)")
                 Text("\(renderer.goalText)")
             }.frame(height: 80)
-            GeometryReader { _ in
+            GeometryReader { geometry in
                 ZStack {
                     renderer.cannonGameView
                     renderer.ballGameView
@@ -54,7 +54,7 @@ struct RendererView: View {
                         .aspectRatio(contentMode: .fill)
                 )
                 .onAppear {
-                    // TODO: resize gameboard view
+                    renderer.initialiseLevelObjects(frame: Frame(size: geometry.size))
                 }
             }
         }

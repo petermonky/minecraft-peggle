@@ -11,11 +11,26 @@ struct PaletteView: View {
     @EnvironmentObject var levelDesigner: LevelDesignerViewModel
 
     var body: some View {
-        HStack(spacing: 20) {
-            ForEach(levelDesigner.pegPaletteButtons, id: \.type) { pegPaletteButton in
-                PaletteButtonView(paletteButton: pegPaletteButton)
+        HStack(spacing: 8) {
+
+//            LazyVGrid(columns: threeColumnGrid,
+//                      alignment: .leading,
+//                      spacing: 0) {
+//                ForEach(levelDesigner.pegPaletteButtons, id: \.type) { pegPaletteButton in
+//                    PaletteButtonView(paletteButton: pegPaletteButton)
+//                }
+//                PaletteButtonView(paletteButton: levelDesigner.blockPaletteButton)
+//            }
+            VStack(alignment: .leading, spacing: 20) {
+                HStack(spacing: 20) {
+                    ForEach(levelDesigner.pegPaletteButtons, id: \.type) { pegPaletteButton in
+                        PaletteButtonView(paletteButton: pegPaletteButton)
+                    }
+                }
+                HStack(spacing: 20) {
+                    PaletteButtonView(paletteButton: levelDesigner.blockPaletteButton)
+                }
             }
-            PaletteButtonView(paletteButton: levelDesigner.blockPaletteButton)
             Spacer()
             PaletteButtonView(paletteButton: levelDesigner.deletePaletteButton)
         }

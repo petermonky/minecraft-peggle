@@ -26,8 +26,8 @@ struct PegGameView: View, Identifiable {
               : gameObject.peg.normalImageName)
             .resizable()
             .scaledToFill()
-            .frame(width: 2 * Constants.Peg.radius * scale,
-                   height: 2 * Constants.Peg.radius * scale)
+            .frame(width: 2 * gameObject.radius * scale,
+                   height: 2 * gameObject.radius * scale)
             .position(gameObject.position)
             .opacity(opacity)
             .onChange(of: gameObject.isVisible) { isVisible in

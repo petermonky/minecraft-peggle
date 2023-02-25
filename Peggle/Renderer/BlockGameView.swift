@@ -9,10 +9,14 @@ import SwiftUI
 
 struct BlockGameView: View, Identifiable {
     @StateObject var gameObject: BlockGameObject
+    @State var scale: Double
+    @State var opacity: Double
     let id: String
 
     init(gameObject: BlockGameObject) {
         _gameObject = StateObject(wrappedValue: gameObject)
+        scale = 1
+        opacity = 1
         id = gameObject.id
     }
 
@@ -20,18 +24,18 @@ struct BlockGameView: View, Identifiable {
         Image(gameObject.block.normalImageName)
             .resizable()
             .scaledToFill()
-            .frame(width: Constants.Block.width,
-                   height: Constants.Block.height)
+            .frame(width: gameObject.shape.width,
+                   height: gameObject.shape.height)
             .position(gameObject.position)
-//            .opacity(opacity)
-//            .onChange(of: gameObject.isVisible) { isVisible in
-//                withAnimation(.easeOut(duration: Constants.Peg.fadeDuration)) {
-//                    if !isVisible {
-//                        opacity = 0
-//                        scale = Constants.Peg.popScale
-//                    }
-//                }
-//            }
+            .opacity(opacity)
+            .onChange(of: gameObject.isVisible) { isVisible in
+                withAnimation(.easeOut(duration: Constants.Peg.fadeDuration)) {
+                    if !isVisible {
+                        opacity = 0
+                        scale = Constants.Peg.popScale
+                    }
+                }
+            }
     }
 }
 

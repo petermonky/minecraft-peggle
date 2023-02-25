@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class BallGameObject: GameObject, DynamicCirclePhysicsBody {
+final class BallGameObject: ObservableObject, DynamicCirclePhysicsBody {
     @Published var position: CGPoint
     @Published var velocity: CGVector
     @Published var isSpooky: Bool

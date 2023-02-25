@@ -12,8 +12,8 @@ enum Constants {
 
 extension Constants {
     enum PaletteButton {
-        static let width: CGFloat = 120.0
-        static let height: CGFloat = 120.0
+        static let width: CGFloat = 90.0
+        static let height: CGFloat = 90.0
         static let selectedOpacity = 0.5
     }
 }

@@ -7,11 +7,11 @@
 
 import Foundation
 
-final class PegGameObject: GameObject, Hashable, CirclePhysicsBody {
+final class PegGameObject: CollidableGameObject, CirclePhysicsBody {
     @Published var position: CGPoint
     @Published var hasCollidedWithBall: Bool
     @Published var isVisible: Bool
-    private var ballCollisionCount: Int
+    var ballCollisionCount: Int
     let shape: CirclePhysicsShape
     let peg: Peg
 
@@ -24,7 +24,7 @@ final class PegGameObject: GameObject, Hashable, CirclePhysicsBody {
         self.hasCollidedWithBall = hasCollidedWithBall
         self.isVisible = true
         self.ballCollisionCount = 0
-        self.shape = CirclePhysicsShape(radius: Constants.Peg.radius)
+        self.shape = CirclePhysicsShape(radius: peg.radius)
         self.peg = peg
     }
 

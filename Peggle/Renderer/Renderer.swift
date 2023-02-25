@@ -19,6 +19,10 @@ class Renderer: ObservableObject, GameEngineDelegate {
         self.gameEngine = gameEngine
         gameEngine.setRenderer(self)
     }
+
+    func initialiseLevelObjects(frame: Frame) {
+        gameEngine.initialiseLevel(frame: frame)
+    }
 }
 
 extension Renderer {

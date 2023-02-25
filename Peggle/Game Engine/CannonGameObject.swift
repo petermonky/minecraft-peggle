@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class CannonGameObject: GameObject {
+final class CannonGameObject: ObservableObject {
     @Published private(set) var position: CGPoint
     @Published var angle: CGFloat
     @Published var isAvailable: Bool

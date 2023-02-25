@@ -51,8 +51,13 @@ class Peg: LevelObject, CircleCollidable {
         self.score = instance.score
     }
 
-    func overlapsWith(_ other: Peg) -> Bool {
-        self.position.distance(to: other.position) <= 2 * Constants.Peg.radius
+    func translate(by vector: CGVector) {
+        position.x += vector.dx
+        position.y += vector.dy
+    }
+
+    func scale(by value: CGFloat) {
+        shape.scale(by: value)
     }
 }
 

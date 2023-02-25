@@ -36,17 +36,17 @@ class Block: LevelObject, PolygonCollidable {
         normalImageName = instance.normalImageName
     }
 
-    func overlapsWith(peg other: Peg) -> Bool {
-        self.position.distance(to: other.position) <= 2 * Constants.Peg.radius
-    }
-
-    func translateBy(_ value: CGSize) {
-        position.x += value.width
-        position.y += value.height
-    }
-
     func clone() -> Self? {
         Block(position: position, shape: shape, normalImageName: normalImageName) as? Self
+    }
+
+    func translate(by vector: CGVector) {
+        position.x += vector.dx
+        position.y += vector.dy
+    }
+
+    func scale(by value: CGFloat) {
+        shape.scale(by: value)
     }
 }
 

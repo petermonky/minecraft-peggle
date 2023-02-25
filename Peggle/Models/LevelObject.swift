@@ -14,6 +14,10 @@ protocol LevelObject: AnyObject, Identifiable, Codable, Hashable, Cloneable, Col
     var normalImageName: String { get }
     var width: CGFloat { get }
     var height: CGFloat { get }
+
+    func overlapsWith(_ other: any LevelObject) -> Bool
+    func translate(by value: CGVector)
+    func scale(by value: CGFloat)
 }
 
 extension LevelObject {

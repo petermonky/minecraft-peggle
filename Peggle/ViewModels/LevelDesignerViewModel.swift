@@ -122,7 +122,7 @@ extension LevelDesignerViewModel {
     }
 
     func initialiseFrame(size: CGSize) {
-        level.frame = Frame(size: size)
+        level.scaledToFit(frame: Frame(size: size))
     }
 
     func createObjectAtPosition(_ location: CGPoint) {

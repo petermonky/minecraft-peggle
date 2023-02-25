@@ -25,4 +25,8 @@ struct CirclePhysicsShape: PhysicsShape {
             self.radius = 1
         }
     }
+
+    mutating func scale(by value: CGFloat) {
+        radius *= value
+    }
 }

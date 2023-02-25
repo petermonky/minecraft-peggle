@@ -11,6 +11,8 @@ protocol PhysicsShape: Equatable, Codable {
     var center: CGPoint { get }
     var width: CGFloat { get }
     var height: CGFloat { get }
+
+    mutating func scale(by value: CGFloat)
 }
 
 extension PhysicsShape {

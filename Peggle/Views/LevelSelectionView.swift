@@ -23,6 +23,11 @@ struct LevelSelectionView: View {
                     Text(level.title)
                 }
             }
+            NavigationLink(destination: GamePlayerView(
+                viewModel: GamePlayerViewModel(level: Level.mockData)
+            )) {
+                Text(Level.mockData.title)
+            }
         }
         .task {
             do {

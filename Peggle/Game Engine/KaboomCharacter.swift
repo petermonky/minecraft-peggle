@@ -22,7 +22,7 @@ class KaboomCharacter: GameCharacter {
         guard let gameEngine = gameEngine else {
             return
         }
-        gameEngine.removePegs(pegs)
+        gameEngine.removeGameObjects(pegs)
         chainExplosion(around: pegs)
     }
 
@@ -52,7 +52,7 @@ class KaboomCharacter: GameCharacter {
                     }
                 }
                 self.explodePegs(greenPegs)
-                gameEngine.removePegs(otherPegs)
+                gameEngine.removeGameObjects(otherPegs)
             }
         }
     }

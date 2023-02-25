@@ -8,8 +8,8 @@
 import Foundation
 
 class PhysicsWorld {
-    let frame: Frame
     let gravity: CGVector
+    private(set) var frame: Frame
     private(set) var bodies: [any PhysicsBody]
     private(set) var collisionData: [any CollisionData]
 
@@ -27,6 +27,10 @@ class PhysicsWorld {
 
     var circlePhysicsBodies: [any CirclePhysicsBody] {
         bodies.compactMap { $0 as? any CirclePhysicsBody }
+    }
+
+    func adjustFrame(x: CGFloat = .zero, y: CGFloat = .zero) {
+        frame = frame.adjust(x: x, y: y)
     }
 
     func addBody(_ body: any PhysicsBody) {
@@ -61,11 +65,6 @@ class PhysicsWorld {
             applyFrameCollisionBetween(body, and: frame, delta: delta)
             for other in bodies where body !== other {
                 applyBodyCollisionBetween(body, and: other, delta: delta)
-//                if let circleBody = other as? (any CirclePhysicsBody) {
-//                    applyCircleBodyCollisionBetween(body, and: circleBody, delta: delta)
-//                } else {
-//                    fatalError("Invalid body")
-//                } // TODO: else if polygon
             }
         }
     }

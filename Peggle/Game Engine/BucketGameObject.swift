@@ -12,7 +12,7 @@ enum BucketDirection {
     case right
 }
 
-final class BucketGameObject: GameObject, PolygonCollidable {
+final class BucketGameObject: ObservableObject, PolygonCollidable {
     @Published private(set) var position: CGPoint
     var direction: BucketDirection
     var shape: PolygonPhysicsShape

@@ -20,7 +20,6 @@ class SiamLeftSiamRightMode: GameMode {
         guard let gameEngine = gameEngine else {
             return
         }
-        print(gameEngine.hasBallBucketCollision)
         if gameEngine.noLives && gameEngine.isInState(.idle) {
             gameEngine.updateGameState(.win)
         } else if !gameEngine.collidingPegs.isEmpty {

@@ -23,7 +23,7 @@ struct LevelDesignerView: View {
                 Spacer()
                 ActionView()
             }
-            .frame(height: 180)
+            .frame(height: 250)
             .padding(20)
         }
         .task {

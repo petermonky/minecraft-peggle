@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 protocol GameView: View {
-    associatedtype Object: GameObject
+    associatedtype Object: CollidableGameObject
 
     var gameObject: Object { get set }
 }
