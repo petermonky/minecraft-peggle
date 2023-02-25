@@ -12,15 +12,6 @@ struct PaletteView: View {
 
     var body: some View {
         HStack(spacing: 8) {
-
-//            LazyVGrid(columns: threeColumnGrid,
-//                      alignment: .leading,
-//                      spacing: 0) {
-//                ForEach(levelDesigner.pegPaletteButtons, id: \.type) { pegPaletteButton in
-//                    PaletteButtonView(paletteButton: pegPaletteButton)
-//                }
-//                PaletteButtonView(paletteButton: levelDesigner.blockPaletteButton)
-//            }
             VStack(alignment: .leading, spacing: 20) {
                 HStack(spacing: 20) {
                     ForEach(levelDesigner.pegPaletteButtons, id: \.type) { pegPaletteButton in
@@ -32,8 +23,19 @@ struct PaletteView: View {
                 }
             }
             Spacer()
+            VStack {
+                Slider(value: $levelDesigner.resizeValue, in: 0.25...1.75)
+                    .onChange(of: levelDesigner.resizeValue, perform: sliderChanged )
+                Slider(value: $levelDesigner.rotateValue, in: -Double.pi...Double.pi)
+                    .onChange(of: levelDesigner.rotateValue, perform: sliderChanged )
+            }
+            Spacer()
             PaletteButtonView(paletteButton: levelDesigner.deletePaletteButton)
         }
+    }
+
+    private func sliderChanged(to newValue: Double) {
+        _ = levelDesigner.refreshLevelObject()
     }
 }
 

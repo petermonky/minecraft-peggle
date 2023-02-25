@@ -25,6 +25,8 @@ extension CollisionManager {
                 return hasCollisionBetween(circle: second, polygon: first)
             } else if let second = second as? any PolygonCollidable {
                 return hasCollisionBetween(polygon1: first, polygon2: second)
+            } else if let second = second as? any FrameCollidable {
+                return hasCollisionBetween(polygon: first, frame: second)
             }
         }
         return false
@@ -71,6 +73,15 @@ extension CollisionManager {
         let hasRightCollision = circle.position.x + circle.radius > frame.width
         let hasTopCollision = circle.position.y - circle.radius < 0
         let hasBottomCollision = circle.position.y + circle.radius > frame.height
+
+        return hasLeftCollision || hasRightCollision || hasTopCollision || hasBottomCollision
+    }
+
+    private static func hasCollisionBetween(polygon: any PolygonCollidable, frame: any FrameCollidable) -> Bool {
+        let hasLeftCollision = polygon.vertices.contains(where: { $0.x <= 0 })
+        let hasRightCollision = polygon.vertices.contains(where: { $0.x >= frame.width })
+        let hasTopCollision = polygon.vertices.contains(where: { $0.y <= 0 })
+        let hasBottomCollision = polygon.vertices.contains(where: { $0.y >= frame.height })
 
         return hasLeftCollision || hasRightCollision || hasTopCollision || hasBottomCollision
     }

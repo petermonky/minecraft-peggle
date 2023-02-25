@@ -14,6 +14,7 @@ struct BlockGameView: View, Identifiable {
     let id: String
 
     init(gameObject: BlockGameObject) {
+        print(gameObject.block.shape.rotation)
         _gameObject = StateObject(wrappedValue: gameObject)
         scale = 1
         opacity = 1
@@ -24,6 +25,7 @@ struct BlockGameView: View, Identifiable {
         Image(gameObject.block.normalImageName)
             .resizable()
             .scaledToFill()
+            .rotationEffect(.radians(gameObject.shape.rotation))
             .frame(width: gameObject.shape.width,
                    height: gameObject.shape.height)
             .position(gameObject.position)

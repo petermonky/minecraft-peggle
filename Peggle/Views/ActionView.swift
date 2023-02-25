@@ -42,13 +42,20 @@ struct ActionView: View {
             TextField("Enter level title", text: $levelDesigner.level.title)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
-            NavigationLink(destination: GamePlayerView(
-                viewModel: GamePlayerViewModel(level: levelDesigner.level)
-            )) {
+            NavigationLink(destination: NavigationLazyView(RendererView(gameEngine: GameEngine(level: levelDesigner.level)
+            ))) {
                 Text("START")
             }.simultaneousGesture(TapGesture().onEnded {
                 hideKeyboard()
             })
+
+//            NavigationLink(destination: GamePlayerView(
+//                viewModel: GamePlayerViewModel(level: levelDesigner.level)
+//            )) {
+//                Text("START")
+//            }.simultaneousGesture(TapGesture().onEnded {
+//                hideKeyboard()
+//            })
         }
     }
 }

@@ -1,16 +1,16 @@
+////
+////  GamePlayerViewModel.swift
+////  Peggle
+////
+////  Created by Peter Jung on 2023/02/21.
+////
 //
-//  GamePlayerViewModel.swift
-//  Peggle
+// import Foundation
 //
-//  Created by Peter Jung on 2023/02/21.
+// @MainActor class GamePlayerViewModel: ObservableObject {
+//    @Published var gameEngine: GameEngine
 //
-
-import Foundation
-
-@MainActor class GamePlayerViewModel: ObservableObject {
-    @Published var gameEngine: GameEngine
-
-    init(level: Level) {
-        self.gameEngine = GameEngine(level: level)
-    }
-}
+//    init(level: Level) {
+//        self.gameEngine = GameEngine(level: level)
+//    }
+// }

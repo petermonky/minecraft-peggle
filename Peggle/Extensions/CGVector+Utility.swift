@@ -48,6 +48,12 @@ extension CGVector {
         scale(by: -1)
     }
 
+    func rotate(by value: CGFloat) -> CGVector {
+        let newDx = cos(value) * self.dx - sin(value) * self.dy
+        let newDy = sin(value) * self.dx + cos(value) * self.dy
+        return CGVector(dx: newDx, dy: newDy)
+    }
+
     func dot(with other: CGVector) -> CGFloat {
         let xs = self.dx * other.dx
         let ys = self.dy * other.dy

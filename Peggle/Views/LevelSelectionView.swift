@@ -16,18 +16,18 @@ struct LevelSelectionView: View {
 
     var body: some View {
         List {
-            ForEach(viewModel.levels.reversed()) { level in
-                NavigationLink(destination: GamePlayerView(
-                    viewModel: GamePlayerViewModel(level: level)
-                )) {
-                    Text(level.title)
-                }
-            }
-            NavigationLink(destination: GamePlayerView(
-                viewModel: GamePlayerViewModel(level: Level.mockData)
-            )) {
-                Text(Level.mockData.title)
-            }
+//            ForEach(viewModel.levels.reversed()) { level in
+//                NavigationLink(destination: GamePlayerView(
+//                    viewModel: GamePlayerViewModel(level: level)
+//                )) {
+//                    Text(level.title)
+//                }
+//            }
+//            NavigationLink(destination: GamePlayerView(
+//                viewModel: GamePlayerViewModel(level: Level.mockData)
+//            )) {
+//                Text(Level.mockData.title)
+//            }
         }
         .task {
             do {

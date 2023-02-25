@@ -18,6 +18,7 @@ enum GameState {
 
 class GameEngine {
     let physicsWorld: PhysicsWorld
+    private var displayLink: CADisplayLink?
     private(set) var cannonGameObject: CannonGameObject
     private(set) var bucketGameObject: BucketGameObject
     private(set) var level: Level
@@ -86,9 +87,13 @@ class GameEngine {
         ))
     }
 
+    func invalidateDisplayLink() {
+        self.displayLink?.invalidate()
+    }
+
     private func createDisplayLink() {
-        let displaylink = CADisplayLink(target: self, selector: #selector(step))
-        displaylink.add(to: .current, forMode: .default)
+        self.displayLink = CADisplayLink(target: self, selector: #selector(step))
+        displayLink?.add(to: .current, forMode: .default)
     }
 }
 

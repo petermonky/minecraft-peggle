@@ -24,7 +24,7 @@ final class BlockGameObject: CollidableGameObject, PolygonPhysicsBody {
         self.hasCollidedWithBall = hasCollidedWithBall
         self.isVisible = true
         self.ballCollisionCount = 0
-        self.shape = PolygonPhysicsShape(width: block.width, height: block.height) // TODO: fix
+        self.shape = block.shape
         self.block = block
     }
 

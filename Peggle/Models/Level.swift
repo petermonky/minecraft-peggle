@@ -56,13 +56,13 @@ struct Level: Identifiable, Codable, Cloneable {
 
     func scale(by value: CGFloat) {
         for peg in pegs {
-            peg.scale(by: value)
+            peg.resize(by: value)
             let originToPosition = CGVector(from: CGPoint.zero, to: peg.position)
             let translationVector = originToPosition.scale(by: value).subtract(by: originToPosition)
             peg.translate(by: translationVector)
         }
         for block in blocks {
-            block.scale(by: value)
+            block.resize(by: value)
             let originToPosition = CGVector(from: CGPoint.zero, to: block.position)
             let translationVector = originToPosition.scale(by: value).subtract(by: originToPosition)
             block.translate(by: translationVector)

@@ -7,14 +7,12 @@
 
 import SwiftUI
 
-struct LevelObjectView: View {
+struct LevelObjectView<Object>: View where Object: LevelObject {
     @EnvironmentObject var levelDesigner: LevelDesignerViewModel
-    @State var dragOffset = CGSize.zero
-    @State var zIndex: Double = 0
-    private var levelObject: any LevelObject
+    @StateObject var levelObject: Object
 
-    init(levelObject: any LevelObject) {
-        self.levelObject = levelObject
+    init(levelObject: Object) {
+        _levelObject = StateObject(wrappedValue: levelObject)
     }
 
     func renderBaseImage(isAfterImage: Bool) -> some View {
@@ -23,6 +21,7 @@ struct LevelObjectView: View {
             .resizable()
             .frame(width: levelObject.width,
                    height: levelObject.height)
+            .rotationEffect(.radians(levelObject.rotationScale))
             .position(levelObject.position)
     }
 
@@ -40,7 +39,7 @@ struct LevelObjectView: View {
                                                     ? Constants.LevelObject.afterImageOpacity
                                                     : 0.0))
             }
-            .offset(dragOffset)
+            .offset(levelObject.dragOffset)
             .onTapGesture {
                 if levelDesigner.mode == .deletePeg {
                     _ = levelDesigner.removeLevelObject(levelObject)
@@ -54,8 +53,8 @@ struct LevelObjectView: View {
             .gesture(
                 DragGesture()
                     .onChanged { value in
-                        dragOffset = value.translation
-                        zIndex = Double.infinity
+                        levelObject.dragOffset = value.translation
+                        levelObject.zIndex = Double.infinity
                     }
                     .onEnded { value in
                         let successfullyTranslated = levelDesigner.translateLevelObject(
@@ -63,13 +62,13 @@ struct LevelObjectView: View {
                             translation: value.translation
                         )
                         if !successfullyTranslated {
-                            dragOffset = CGSize.zero
+                            levelObject.dragOffset = CGSize.zero
                         }
-                        zIndex = 0
+                        levelObject.zIndex = 0
                     }
             )
         }
-        .zIndex(zIndex)
+        .zIndex(levelObject.zIndex)
     }
 }
 

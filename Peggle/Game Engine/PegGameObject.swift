@@ -24,7 +24,7 @@ final class PegGameObject: CollidableGameObject, CirclePhysicsBody {
         self.hasCollidedWithBall = hasCollidedWithBall
         self.isVisible = true
         self.ballCollisionCount = 0
-        self.shape = CirclePhysicsShape(radius: peg.radius)
+        self.shape = peg.shape
         self.peg = peg
     }
 

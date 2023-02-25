@@ -18,6 +18,11 @@ class Peg: LevelObject, CircleCollidable {
     typealias Shape = CirclePhysicsShape
 
     var id = UUID()
+    @Published var dragOffset: CGSize = .zero
+    @Published var zIndex: Double = 0
+    @Published var sizeScale: CGFloat = 1
+    @Published var rotationScale: CGFloat = 0
+
     var position: CGPoint
     var shape: Shape
     var type: PegType
@@ -33,6 +38,15 @@ class Peg: LevelObject, CircleCollidable {
         2 * shape.radius
     }
 
+    enum CodingKeys: String, CodingKey {
+        case position
+        case shape
+        case type
+        case normalImageName
+        case glowImageName
+        case score
+    }
+
     init(type: PegType, shape: Shape, position: CGPoint, normalImageName: String, glowImageName: String, score: Int) {
         self.position = position
         self.shape = shape
@@ -40,6 +54,8 @@ class Peg: LevelObject, CircleCollidable {
         self.type = type
         self.glowImageName = glowImageName
         self.score = score
+        callibrateSizeScale()
+        callibrateRotationScale()
     }
 
     required init(instance: Peg) {
@@ -48,7 +64,17 @@ class Peg: LevelObject, CircleCollidable {
         normalImageName = instance.normalImageName
         type = instance.type
         glowImageName = instance.glowImageName
-        self.score = instance.score
+        score = instance.score
+        callibrateSizeScale()
+        callibrateRotationScale()
+    }
+
+    func callibrateSizeScale() {
+        sizeScale = shape.radius / Constants.Peg.radius
+    }
+
+    func callibrateRotationScale() {
+        rotationScale = shape.rotation
     }
 
     func translate(by vector: CGVector) {
@@ -56,8 +82,22 @@ class Peg: LevelObject, CircleCollidable {
         position.y += vector.dy
     }
 
-    func scale(by value: CGFloat) {
+    func resize(by value: CGFloat) {
         shape.scale(by: value)
+        callibrateSizeScale()
+    }
+
+    func resize(to value: CGFloat) {
+        resize(by: value / sizeScale)
+    }
+
+    func rotate(by value: CGFloat) {
+        shape.rotate(by: value)
+        callibrateRotationScale()
+    }
+
+    func rotate(to value: CGFloat) {
+        rotate(by: value - shape.rotation)
     }
 }
 

@@ -14,7 +14,11 @@ struct BoardView: View {
         GeometryReader { geometry in
             ZStack {
                 ForEach(levelDesigner.levelObjects, id: \.id) { levelObject in
-                    LevelObjectView(levelObject: levelObject)
+                    if let peg = levelObject as? Peg {
+                        LevelObjectView(levelObject: peg)
+                    } else if let block = levelObject as? Block {
+                        LevelObjectView(levelObject: block)
+                    }
                 }
             }
             .frame(width: geometry.size.width, height: geometry.size.height)

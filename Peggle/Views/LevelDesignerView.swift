@@ -35,9 +35,6 @@ struct LevelDesignerView: View {
             }
         }
         .ignoresSafeArea(edges: .all)
-        .onDisappear {
-            viewModel.resetLevel()
-        }
         .environmentObject(viewModel)
     }
 }

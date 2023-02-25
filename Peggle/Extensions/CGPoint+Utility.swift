@@ -24,4 +24,10 @@ extension CGPoint {
         let startToSelf = CGVector(from: segment.start, to: self)
         return segment.start.move(by: startToSelf.project(onto: startToEnd))
     }
+
+    func rotate(by value: CGFloat, about pivot: CGPoint) -> CGPoint {
+        let vector = CGVector(from: pivot, to: self)
+        let rotated = vector.rotate(by: value)
+        return pivot.move(by: rotated)
+    }
 }

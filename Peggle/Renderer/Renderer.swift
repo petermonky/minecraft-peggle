@@ -20,6 +20,10 @@ class Renderer: ObservableObject, GameEngineDelegate {
         gameEngine.setRenderer(self)
     }
 
+    deinit {
+        gameEngine.invalidateDisplayLink()
+    }
+
     func initialiseLevelObjects(frame: Frame) {
         gameEngine.initialiseLevel(frame: frame)
     }

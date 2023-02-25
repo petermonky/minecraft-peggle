@@ -8,16 +8,25 @@
 import Foundation
 import SwiftUI
 
-protocol LevelObject: AnyObject, Identifiable, Codable, Hashable, Cloneable, Collidable {
+protocol LevelObject: ObservableObject, Identifiable, Codable, Hashable, Cloneable, Collidable {
     var id: UUID { get }
     var position: CGPoint { get set }
     var normalImageName: String { get }
     var width: CGFloat { get }
     var height: CGFloat { get }
 
-    func overlapsWith(_ other: any LevelObject) -> Bool
+    var rotationScale: CGFloat { get set }
+    var sizeScale: CGFloat { get set }
+    var dragOffset: CGSize { get set }
+    var zIndex: Double { get set }
+
+    func overlapsWith(_ other: any Collidable) -> Bool
+    func callibrateSizeScale()
     func translate(by value: CGVector)
-    func scale(by value: CGFloat)
+    func resize(by value: CGFloat)
+    func resize(to value: CGFloat)
+    func rotate(by value: CGFloat)
+    func rotate(to value: CGFloat)
 }
 
 extension LevelObject {
@@ -31,7 +40,7 @@ extension LevelObject {
 }
 
 extension LevelObject {
-    func overlapsWith(_ other: any LevelObject) -> Bool {
+    func overlapsWith(_ other: any Collidable) -> Bool {
         CollisionManager.hasCollisionBetween(self, and: other)
     }
 

@@ -26,6 +26,7 @@ struct PegGameView: View, Identifiable {
               : gameObject.peg.normalImageName)
             .resizable()
             .scaledToFill()
+            .rotationEffect(.radians(gameObject.shape.rotation))
             .frame(width: 2 * gameObject.radius * scale,
                    height: 2 * gameObject.radius * scale)
             .position(gameObject.position)
