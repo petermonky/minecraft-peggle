@@ -15,18 +15,25 @@ struct PaletteButtonView: View {
         self.paletteButton = paletteButton
     }
 
+    func renderBaseImage(isOverlay: Bool) -> some View {
+        Image(paletteButton.imageName)
+            .renderingMode(isOverlay ? .template : .original)
+            .resizable()
+            .frame(width: Constants.PaletteButton.width,
+                   height: Constants.PaletteButton.height)
+    }
+
     var body: some View {
         Button(action: {
             paletteButton.updatePalette(levelDesigner)
         }) {
-            Image(paletteButton.imageName)
-                .resizable()
-                .frame(width: Constants.PaletteButton.width,
-                       height: Constants.PaletteButton.height)
-                .overlay(Color.white.opacity(
-                    levelDesigner.mode == paletteButton.type
-                    ? Constants.PaletteButton.selectedOpacity
-                    : 0.0))
+            ZStack {
+                renderBaseImage(isOverlay: false)
+                renderBaseImage(isOverlay: true)
+                    .foregroundColor(.white.opacity(levelDesigner.mode == paletteButton.type
+                                                    ? Constants.PaletteButton.selectedOpacity
+                                                    : 0.0))
+            }
         }
     }
 }

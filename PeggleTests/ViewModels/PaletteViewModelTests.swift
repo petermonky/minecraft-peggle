@@ -49,7 +49,7 @@ final class PaletteViewModelTests: XCTestCase {
         let paletteViewModel = PaletteViewModel()
 
         paletteViewModel.onDeleteButtonSelect()
-        XCTAssertEqual(paletteViewModel.mode, .deletePeg,
+        XCTAssertEqual(paletteViewModel.mode, .delete,
                        "Palette view model should adopt delete peg palette button.")
         XCTAssertNil(paletteViewModel.pegFactory,
                      "Palette view model should remove peg factory.")

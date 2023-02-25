@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import SwiftUI
 
 @MainActor class LevelDesignerViewModel: ObservableObject {
     // Palette
     @Published private(set) var mode: PaletteButtonType = .bluePeg
     @Published private(set) var pegFactory: PegFactory? = BluePegFactory()
-    @Published private(set) var pegPaletteButtons: [PegPaletteButton] = [
+    @Published private(set) var normalPegPaletteButtons: [PegPaletteButton] = [
         BluePegPaletteButton(),
         OrangePegPaletteButton(),
         GreenPegPaletteButton()
@@ -40,11 +41,31 @@ extension LevelDesignerViewModel {
         Array(level.blocks)
     }
 
+    var bluePegObjectsCount: Int {
+        pegObjects.filter { $0.type == .blue }.count
+    }
+
+    var orangePegObjectsCount: Int {
+        pegObjects.filter { $0.type == .orange }.count
+    }
+
+    var greenPegObjectsCount: Int {
+        pegObjects.filter { $0.type == .green }.count
+    }
+
+    var blockObjectsCount: Int {
+        blockObjects.count
+    }
+
+    var isLevelObjectSelected: Bool {
+        levelObject != nil
+    }
+
     func isCurrentLevel(_ level: Level) -> Bool {
         self.level == level
     }
 
-    func isSelectedLevelObject(_ levelObject: any LevelObject) -> Bool {
+    func isCurrentLevelObject(_ levelObject: any LevelObject) -> Bool {
         self.levelObject === levelObject
     }
 
@@ -92,7 +113,7 @@ extension LevelDesignerViewModel {
     }
 
     func createPegAtPosition(_ position: CGPoint) -> Peg? {
-        guard mode != .deletePeg && mode != .block else {
+        guard mode != .delete && mode != .block else {
             return nil
         }
         return pegFactory?.createPegAtPosition(position)
@@ -129,7 +150,7 @@ extension LevelDesignerViewModel {
     }
 
     func onDeleteButtonSelect() {
-        mode = .deletePeg
+        mode = .delete
         pegFactory = nil
     }
 }
@@ -178,15 +199,21 @@ extension LevelDesignerViewModel {
     }
 
     func removeLevelObject(_ levelObject: any LevelObject) -> Bool {
+        if isCurrentLevelObject(levelObject) {
+            deselectLevelObject()
+        }
         if let peg = levelObject as? Peg {
             return level.pegs.remove(peg) != nil
         } else if let block = levelObject as? Block {
             return level.blocks.remove(block) != nil
         }
-        if isSelectedLevelObject(levelObject) {
-            self.levelObject = nil
-        }
         return false
+    }
+
+    func deselectLevelObject() {
+        self.levelObject = nil
+        resizeValue = 1
+        rotateValue = 0
     }
 
     func translateLevelObject(_ levelObject: any LevelObject, translation: CGSize) -> Bool {

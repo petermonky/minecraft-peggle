@@ -9,10 +9,6 @@ import Foundation
 
 protocol Cloneable {
     init(instance: Self)
-}
 
-extension Cloneable {
-    func clone() -> Self {
-        Self(instance: self)
-    }
+    func clone() -> Self
 }

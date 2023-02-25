@@ -14,7 +14,6 @@ struct BlockGameView: View, Identifiable {
     let id: String
 
     init(gameObject: BlockGameObject) {
-        print(gameObject.block.shape.rotation)
         _gameObject = StateObject(wrappedValue: gameObject)
         scale = 1
         opacity = 1

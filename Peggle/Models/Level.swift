@@ -8,7 +8,6 @@
 import Foundation
 
 struct Level: Identifiable, Codable, Cloneable {
-
     var id: UUID
     var frame: Frame
     var title: String
@@ -39,6 +38,10 @@ struct Level: Identifiable, Codable, Cloneable {
         self.updatedAt = instance.updatedAt
         self.pegs = Set(instance.pegs.map { $0.clone() })
         self.blocks = Set(instance.blocks.map { $0.clone() })
+    }
+
+    func clone() -> Self {
+        Self(instance: self)
     }
 
     mutating func scaledToFit(frame: Frame) {

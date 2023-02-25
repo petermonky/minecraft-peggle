@@ -19,7 +19,12 @@ final class BlockGameObject: CollidableGameObject, PolygonPhysicsBody {
         ballCollisionCount == Constants.Peg.blockingThreshold
     }
 
-    init(block: Block, hasCollidedWithBall: Bool = false) {
+    init(
+        block: Block,
+        hasCollidedWithBall: Bool = false,
+        isVisible: Bool = true,
+        ballCollisionCount: Int = 0
+    ) {
         self.position = block.position
         self.hasCollidedWithBall = hasCollidedWithBall
         self.isVisible = true
@@ -28,13 +33,23 @@ final class BlockGameObject: CollidableGameObject, PolygonPhysicsBody {
         self.block = block
     }
 
+    init(instance: BlockGameObject) {
+        position = instance.position
+        hasCollidedWithBall = instance.hasCollidedWithBall
+        isVisible = instance.isVisible
+        ballCollisionCount = instance.ballCollisionCount
+        shape = instance.shape
+        block = instance.block
+
+    }
+
+    func clone() -> Self {
+        Self(instance: self)
+    }
+
     func collideWithBall() {
         ballCollisionCount = min(ballCollisionCount + 1, Constants.Peg.blockingThreshold)
         hasCollidedWithBall = true
-    }
-
-    func clone() -> BlockGameObject {
-        BlockGameObject(block: block)
     }
 }
 

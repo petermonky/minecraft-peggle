@@ -35,7 +35,11 @@ class Block: LevelObject, PolygonCollidable {
         case normalImageName
     }
 
-    init(position: CGPoint, shape: Shape, normalImageName: String) {
+    init(
+        position: CGPoint,
+        shape: Shape,
+        normalImageName: String
+    ) {
         self.position = position
         self.shape = shape
         self.normalImageName = normalImageName
@@ -49,6 +53,9 @@ class Block: LevelObject, PolygonCollidable {
         normalImageName = instance.normalImageName
         callibrateSizeScale()
         callibrateRotationScale()
+    }
+
+    func clone() -> Self {Self(instance: self)
     }
 
     func callibrateSizeScale() {
@@ -83,7 +90,7 @@ class Block: LevelObject, PolygonCollidable {
     }
 }
 
-class NormalBlock: Block {
+final class NormalBlock: Block {
     init(position: CGPoint = CGPoint.zero) {
         super.init(
             position: position,

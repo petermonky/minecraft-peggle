@@ -12,21 +12,26 @@ struct PeggleApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                NavigationLink(destination: LevelDesignerView(viewModel: LevelDesignerViewModel())) {
-                    Text("Level designer")
+                GeometryReader { _ in
+                    VStack(spacing: 20) {
+                        NavigationLink(destination: NavigationLazyView(LevelSelectionView(viewModel: LevelSelectionViewModel()))) {
+                            Text("Choose Level")
+                        }
+                        .buttonStyle(GrayButton(minWidth: 400, minHeight: 80))
+                        NavigationLink(destination: NavigationLazyView(LevelDesignerView(viewModel: LevelDesignerViewModel()))) {
+                            Text("Level Designer")
+                        }
+                        .buttonStyle(GrayButton(minWidth: 400, minHeight: 80))
+                    }
+                    .font(.custom("Minecraft-Regular", size: 32))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
-                NavigationLink(destination: LevelSelectionView(viewModel: LevelSelectionViewModel())) {
-                    Text("Level Selection")
-                }
+                .background(
+                    Image("background-dirt")
+                        .resizable(resizingMode: .tile)
+                )
+                .ignoresSafeArea(.container)
             }
-            .environment(\.colorScheme, .light)
-            .ignoresSafeArea(.container)
-//            let viewModel = GamePlayerViewModel(level: Level.mockData)
-//            GamePlayerView(viewModel: viewModel)
-                       // Level designer commented for PS3
-//            LevelDesignerView()
-//                .environment(\.colorScheme, .light)
-//                .ignoresSafeArea(.container)
         }
     }
 }

@@ -14,8 +14,8 @@ struct PaletteView: View {
         HStack(spacing: 8) {
             VStack(alignment: .leading, spacing: 20) {
                 HStack(spacing: 20) {
-                    ForEach(levelDesigner.pegPaletteButtons, id: \.type) { pegPaletteButton in
-                        PaletteButtonView(paletteButton: pegPaletteButton)
+                    ForEach(levelDesigner.normalPegPaletteButtons, id: \.type) {
+                        PaletteButtonView(paletteButton: $0)
                     }
                 }
                 HStack(spacing: 20) {
@@ -26,8 +26,10 @@ struct PaletteView: View {
             VStack {
                 Slider(value: $levelDesigner.resizeValue, in: 0.25...1.75)
                     .onChange(of: levelDesigner.resizeValue, perform: sliderChanged )
+                    .disabled(!levelDesigner.isLevelObjectSelected)
                 Slider(value: $levelDesigner.rotateValue, in: -Double.pi...Double.pi)
                     .onChange(of: levelDesigner.rotateValue, perform: sliderChanged )
+                    .disabled(!levelDesigner.isLevelObjectSelected)
             }
             Spacer()
             PaletteButtonView(paletteButton: levelDesigner.deletePaletteButton)

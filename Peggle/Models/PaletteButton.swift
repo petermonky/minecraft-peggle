@@ -12,7 +12,7 @@ enum PaletteButtonType: String {
     case orangePeg = "peg-orange"
     case greenPeg  = "peg-green"
     case block     = "block"
-    case deletePeg = "delete"
+    case delete = "delete"
 }
 
 protocol PaletteButton {
@@ -68,7 +68,7 @@ struct BlockPaletteButton: PaletteButton {
 }
 
 struct DeletePegPaletteButton: PaletteButton {
-    var type: PaletteButtonType = .deletePeg
+    var type: PaletteButtonType = .delete
 
     @MainActor func updatePalette(_ levelDesigner: LevelDesignerViewModel) {
         levelDesigner.onDeleteButtonSelect()

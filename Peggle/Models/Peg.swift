@@ -69,6 +69,10 @@ class Peg: LevelObject, CircleCollidable {
         callibrateRotationScale()
     }
 
+    func clone() -> Self {
+        Self(instance: self)
+    }
+
     func callibrateSizeScale() {
         sizeScale = shape.radius / Constants.Peg.radius
     }
@@ -98,6 +102,10 @@ class Peg: LevelObject, CircleCollidable {
 
     func rotate(to value: CGFloat) {
         rotate(by: value - shape.rotation)
+    }
+
+    func performCollisionAction(gameEngine: GameEngine) {
+        // override
     }
 }
 

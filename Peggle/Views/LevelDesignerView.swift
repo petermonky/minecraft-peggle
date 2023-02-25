@@ -25,6 +25,10 @@ struct LevelDesignerView: View {
             }
             .frame(height: 250)
             .padding(20)
+            .background(
+                Image("background-dirt")
+                    .resizable(resizingMode: .tile)
+            )
         }
         .task {
             do {
@@ -34,6 +38,8 @@ struct LevelDesignerView: View {
                 print("Error loading levels.")
             }
         }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: BackButtonView())
         .ignoresSafeArea(edges: .all)
         .environmentObject(viewModel)
     }

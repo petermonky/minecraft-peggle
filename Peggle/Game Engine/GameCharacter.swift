@@ -10,6 +10,7 @@ import Foundation
 protocol GameCharacter: AnyObject {
     var gameEngine: GameEngine? { get set }
     var name: String { get }
+    var description: String { get }
 
     func applyPower()
 }

@@ -7,14 +7,13 @@
 
 import Foundation
 
-protocol PhysicsBody: AnyObject, BodyCollidable, Identifiable {
+protocol PhysicsBody: AnyObject, Identifiable, BodyCollidable, Cloneable {
     var id: String { get }
     var position: CGPoint { get set }
     var velocity: CGVector { get }
     var shape: Shape { get }
 
     func updatePosition(_ position: CGPoint)
-    func clone() -> Self
 }
 
 extension PhysicsBody {

@@ -23,9 +23,9 @@ struct BoardView: View {
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
             .background(
-                Image("background")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
+                Image("background-ores")
+                    .resizable(resizingMode: .tile)
+                    .overlay(.black.opacity(0.25))
             )
             .onTapGesture { location in
                 levelDesigner.createObjectAtPosition(location)

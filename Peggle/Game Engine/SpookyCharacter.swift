@@ -9,7 +9,12 @@ import Foundation
 
 class SpookyCharacter: GameCharacter {
     weak var gameEngine: GameEngine?
-    var name: String = "Spooky"
+    let name: String = "Spooky"
+    let description: String = """
+    Boring regular ball got you down? Let's \
+    add some spooky magic and watch it \
+    teleport like it's no big deal.
+    """
 
     func applyPower() {
         guard let gameEngine = gameEngine else {
@@ -21,6 +26,12 @@ class SpookyCharacter: GameCharacter {
               !areGreenPegsNew else {
             return
         }
-        gameEngine.ballGameObject?.setSpooky()
+        greenPegs.forEach { greenPeg in
+            gameEngine.ballGameObjects.forEach { ball in
+                if CollisionManager.hasCollisionBetween(greenPeg, and: ball) {
+                    ball.setSpooky()
+                }
+            }
+        }
     }
 }

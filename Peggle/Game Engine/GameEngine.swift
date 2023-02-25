@@ -16,20 +16,24 @@ enum GameState {
     case win
 }
 
-class GameEngine {
-    let physicsWorld: PhysicsWorld
+class GameEngine: ObservableObject {
+    private let physicsWorld: PhysicsWorld
     private var displayLink: CADisplayLink?
     private(set) var cannonGameObject: CannonGameObject
     private(set) var bucketGameObject: BucketGameObject
     private(set) var level: Level
 
-    private(set) var character: GameCharacter?
-    private(set) var mode: GameMode?
-    private(set) var currentTime: Date?
-    private(set) var endTime: Date?
-    private(set) var lives: Int?
-    private(set) var state: GameState
-    private(set) var removedPegs: Set<PegGameObject>
+    let selectableCharacters: [GameCharacter] = [KaboomCharacter(), SpookyCharacter()]
+    let selectableGameModes: [GameMode] = [NormalMode(), BeatTheScoreMode(), SiamLeftSiamRightMode()]
+
+    @Published private(set) var character: GameCharacter?
+    @Published private(set) var mode: GameMode?
+    @Published private(set) var currentTime: Date?
+    @Published private(set) var endTime: Date?
+    @Published private(set) var lives: Int?
+    @Published private(set) var bucketShotCount: Int?
+    @Published private(set) var removedPegs: Set<PegGameObject>
+    @Published private(set) var state: GameState
 
     weak var renderer: Renderer?
 
@@ -69,13 +73,14 @@ class GameEngine {
             let pegGameObject = PegGameObject(peg: peg)
             let shiftedPosition = pegGameObject.position.move(by: CGVector(dx: 0, dy: Constants.Cannon.height))
             pegGameObject.updatePosition(shiftedPosition)
-            physicsWorld.addBody(pegGameObject)
+            pegGameObject.gameEngine = self
+            addPhysicsBody(pegGameObject)
         }
         level.blocks.forEach { block in
             let blockGameObject = BlockGameObject(block: block)
             let shiftedPosition = blockGameObject.position.move(by: CGVector(dx: 0, dy: Constants.Cannon.height))
             blockGameObject.updatePosition(shiftedPosition)
-            physicsWorld.addBody(blockGameObject)
+            addPhysicsBody(blockGameObject)
         }
         cannonGameObject = CannonGameObject(position: CGPoint(
             x: level.frame.width / 2,
@@ -94,6 +99,10 @@ class GameEngine {
     private func createDisplayLink() {
         self.displayLink = CADisplayLink(target: self, selector: #selector(step))
         displayLink?.add(to: .current, forMode: .default)
+    }
+
+    func addPhysicsBody(_ body: any PhysicsBody) {
+        physicsWorld.addBody(body)
     }
 }
 
@@ -124,8 +133,12 @@ extension GameEngine {
         // TODO: this is stupid
     }
 
-    var ballGameObject: BallGameObject? {
-        physicsWorld.bodies.first { $0 is BallGameObject } as? BallGameObject
+    var isPresetSelected: Bool {
+        character != nil && mode != nil
+    }
+
+    var ballGameObjects: [BallGameObject] {
+        physicsWorld.bodies.compactMap { $0 as? BallGameObject }
     }
 
     var pegGameObjects: [PegGameObject] {
@@ -134,6 +147,18 @@ extension GameEngine {
 
     var visiblePegs: [PegGameObject] {
         pegGameObjects.filter { $0.isVisible }
+    }
+
+    var bluePegsCount: Int {
+        visiblePegs.filter { $0.peg.type == .blue }.count
+    }
+
+    var orangePegsCount: Int {
+        visiblePegs.filter { $0.peg.type == .orange }.count
+    }
+
+    var greenPegsCount: Int {
+        visiblePegs.filter { $0.peg.type == .green }.count
     }
 
     var blockGameObjects: [BlockGameObject] {
@@ -161,7 +186,7 @@ extension GameEngine {
               let currentTime = currentTime else {
             return nil
         }
-        return currentTime.distance(to: endTime)
+        return max(currentTime.distance(to: endTime), 0)
     }
 
     var noTime: Bool {
@@ -178,7 +203,11 @@ extension GameEngine {
     var collidingGameObjects: [any CollidableGameObject] {
         physicsWorld.collisionData
             .compactMap { $0 as? BodyBodyCollisionData }
-            .filter { $0.source === ballGameObject }
+            .filter { data in
+                ballGameObjects.contains( where: {
+                    data.source === $0
+                })
+            }
             .map { $0.target }
             .compactMap { $0 as? any CollidableGameObject }
     }
@@ -191,11 +220,15 @@ extension GameEngine {
         collidingPegs.filter { $0.peg.type == .green }
     }
 
-    var hasBallBucketCollision: Bool {
-        guard let ballGameObject = ballGameObject else {
-            return false
-        }
-        return CollisionManager.hasCollisionBetween(bucketGameObject, and: ballGameObject)
+    var bucketCollidingBalls: [BallGameObject] {
+        ballGameObjects.filter { CollisionManager.hasCollisionBetween(bucketGameObject, and: $0) }
+    }
+
+    var exitCollidingBalls: [BallGameObject] {
+        physicsWorld.collisionData
+            .compactMap { $0 as? BodyFrameCollisionData }
+            .filter { $0.side == .bottom && $0.source is BallGameObject }
+            .compactMap { $0.source as? BallGameObject }
     }
 }
 
@@ -204,32 +237,41 @@ extension GameEngine {
         self.renderer = renderer
     }
 
+    func setCharacter(_ character: GameCharacter) {
+        self.character = character
+    }
+
+    func setGameMode(_ mode: GameMode) {
+        self.mode = mode
+    }
+
     func isInState(_ state: GameState) -> Bool {
         self.state == state
     }
 
-    func startGame(character: GameCharacter, mode: GameMode) {
-        self.character = character
-        character.gameEngine = self
-
-        self.mode = mode
-        mode.gameEngine = self
+    func startGame() {
+        guard isPresetSelected else {
+            return
+        }
+        character?.gameEngine = self
+        mode?.gameEngine = self
 
         self.currentTime = Date.now
-        if let presetDuration = mode.presetDuration {
+        if let presetDuration = mode?.presetDuration {
             self.endTime = Date.now + presetDuration
         } else {
             self.endTime = nil
         }
 
-        self.lives = mode.presetLives
+        self.lives = mode?.presetLives
+        self.bucketShotCount = mode?.presetBucketShotCount
         self.state = .idle
     }
 
     private func isBallExitCollision(collisionData: any CollisionData) -> Bool {
         if let collisionData = collisionData as? BodyFrameCollisionData,
            collisionData.side == .bottom,
-           collisionData.source === ballGameObject {
+           ballGameObjects.contains(where: { $0 === collisionData.source }) {
             return true
         }
         return false
@@ -247,14 +289,13 @@ extension GameEngine {
         handleBallGameObjectCollision()
         removeBlockingGameObjects()
 
+        handleBallExitCollision()
         handleBallBucketCollision()
         updateBucketMovement()
-        handleBallExitCollision()
 
+        mode?.handleGameOver()
+        refreshGameState()
         renderer?.didUpdateWorld()
-        if !isGameOver {
-            mode?.handleGameOver()
-        }
     }
 
     private func updateCurrentTime() {
@@ -265,30 +306,24 @@ extension GameEngine {
     }
 
     private func handleBallBucketCollision() {
-        if hasBallBucketCollision {
-            refreshGameState()
+        bucketCollidingBalls.forEach {
             lives? += 1
+            bucketShotCount? += 1
+            removeBall($0)
         }
     }
 
     private func handleBallExitCollision() {
-        let hasBallExitCollision = physicsWorld.collisionData.contains(where: {
-            isBallExitCollision(collisionData: $0)
-        })
-        guard hasBallExitCollision else {
-            return
-        }
-        if let ball = ballGameObject, ball.isSpooky {
-            respawnBall()
-        } else {
-            refreshGameState()
+        exitCollidingBalls.forEach {
+            if $0.isSpooky {
+                respawnBall($0)
+            } else {
+                removeBall($0)
+            }
         }
     }
 
-    private func respawnBall() {
-        guard let ball = ballGameObject else {
-            return
-        }
+    private func respawnBall(_ ball: BallGameObject) {
         let newPosition = CGPoint(x: ball.position.x, y: Constants.Ball.radius)
         ball.updatePosition(newPosition)
         ball.unsetSpooky()
@@ -323,8 +358,10 @@ extension GameEngine {
     }
 
     private func refreshGameState() {
+        guard ballGameObjects.isEmpty && isInState(.active) else {
+            return
+        }
         removeCollidedPegs()
-        removeExitedBall()
         cannonGameObject.setAvailable()
         updateGameState(.idle)
     }
@@ -334,14 +371,16 @@ extension GameEngine {
     }
 
     func removeGameObjects(_ gameObjects: [any CollidableGameObject]) {
-        gameObjects.forEach {
-            $0.isVisible = false
-            if let peg = $0 as? PegGameObject {
-                removedPegs.insert(peg)
-            }
+        gameObjects.forEach { removeGameObject($0) }
+    }
+
+    func removeGameObject(_ gameObject: any CollidableGameObject) {
+        gameObject.isVisible = false
+        if let peg = gameObject as? PegGameObject {
+            removedPegs.insert(peg)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + Constants.Peg.fadeDuration) {
-            gameObjects.forEach { self.physicsWorld.removeBody($0) }
+            self.physicsWorld.removeBody(gameObject)
         }
     }
 
@@ -353,11 +392,8 @@ extension GameEngine {
         return surroundingPegs
     }
 
-    private func removeExitedBall() {
-        guard let ballGameObject = ballGameObject else {
-            return
-        }
-        physicsWorld.removeBody(ballGameObject)
+    private func removeBall(_ ball: BallGameObject) {
+        physicsWorld.removeBody(ball)
     }
 
     private func validCannonAngle(_ angle: CGFloat) -> Bool {
@@ -388,7 +424,7 @@ extension GameEngine {
         }
 
         let normalFromCannonToPosition = vector.normalise.flip
-        physicsWorld.addBody(BallGameObject(
+        addPhysicsBody(BallGameObject(
             position: cannonGameObject.position,
             velocity: normalFromCannonToPosition.scale(by: Constants.Ball.initialSpeed))
         )

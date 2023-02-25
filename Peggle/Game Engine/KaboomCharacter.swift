@@ -9,7 +9,13 @@ import Foundation
 
 class KaboomCharacter: GameCharacter {
     weak var gameEngine: GameEngine?
-    var name: String = "Kaboom"
+    let name: String = "Ka-Boom"
+    let description: String = """
+    Who needs strategy when you have explosives? \
+    Watch as the green peg and its friends go out \
+    with a bang, and the ball gets knocked off \
+    course!
+    """
 
     func applyPower() {
         guard let gameEngine = gameEngine else {
@@ -27,16 +33,17 @@ class KaboomCharacter: GameCharacter {
     }
 
     private func chainExplosion(around pegs: [PegGameObject]) {
-        guard let gameEngine = gameEngine,
-              let ball = gameEngine.ballGameObject else {
+        guard let gameEngine = gameEngine else {
             return
         }
         for peg in pegs {
-            let distance = peg.position.distance(to: ball.position)
-            if distance <= 200 { // TODO: move to constants
-                var explosionVector = CGVector(from: peg.position, to: ball.position)
-                explosionVector = explosionVector.normalise.scale(by: 400 - 2 * distance)
-                ball.explosionBoost(by: explosionVector)
+            gameEngine.ballGameObjects.forEach { ball in
+                let distance = peg.position.distance(to: ball.position)
+                if distance <= 200 { // TODO: move to constants
+                    var explosionVector = CGVector(from: peg.position, to: ball.position)
+                    explosionVector = explosionVector.normalise.scale(by: 400 - 2 * distance)
+                    ball.explosionBoost(by: explosionVector)
+                }
             }
 
             let surroundingPegs = gameEngine.pegsSurrounding(peg, within: 200) // TODO: constants

@@ -11,6 +11,9 @@ class NormalMode: GameMode {
     weak var gameEngine: GameEngine?
     let presetLives: Int? = 10
     let presetDuration: Double? = nil
+    var presetBucketShotCount: Int?
+    let name: String = "Normal"
+    let description: String = "Got balls? Use them wisely to clear all orange pegs before you run out!"
     let goalText: String = "Clear all orange pegs!"
 
     func handleGameOver() {

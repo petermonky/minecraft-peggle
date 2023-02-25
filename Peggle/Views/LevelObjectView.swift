@@ -26,7 +26,7 @@ struct LevelObjectView<Object>: View where Object: LevelObject {
     }
 
     var body: some View {
-        let isSelected = levelDesigner.isSelectedLevelObject(levelObject)
+        let isSelected = levelDesigner.isCurrentLevelObject(levelObject)
 
         ZStack {
             renderBaseImage(isAfterImage: true)
@@ -41,7 +41,7 @@ struct LevelObjectView<Object>: View where Object: LevelObject {
             }
             .offset(levelObject.dragOffset)
             .onTapGesture {
-                if levelDesigner.mode == .deletePeg {
+                if levelDesigner.mode == .delete {
                     _ = levelDesigner.removeLevelObject(levelObject)
                 } else {
                     levelDesigner.selectLevelObject(levelObject)
@@ -67,6 +67,10 @@ struct LevelObjectView<Object>: View where Object: LevelObject {
                         levelObject.zIndex = 0
                     }
             )
+        }
+        .onAppear {
+            levelObject.callibrateSizeScale()
+            levelObject.callibrateRotationScale()
         }
         .zIndex(levelObject.zIndex)
     }

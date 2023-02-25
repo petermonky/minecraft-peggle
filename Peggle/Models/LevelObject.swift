@@ -22,6 +22,7 @@ protocol LevelObject: ObservableObject, Identifiable, Codable, Hashable, Cloneab
 
     func overlapsWith(_ other: any Collidable) -> Bool
     func callibrateSizeScale()
+    func callibrateRotationScale()
     func translate(by value: CGVector)
     func resize(by value: CGFloat)
     func resize(to value: CGFloat)
@@ -29,7 +30,7 @@ protocol LevelObject: ObservableObject, Identifiable, Codable, Hashable, Cloneab
     func rotate(to value: CGFloat)
 }
 
-extension LevelObject {
+ extension LevelObject {
     static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.id == rhs.id
     }
@@ -37,7 +38,7 @@ extension LevelObject {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-}
+ }
 
 extension LevelObject {
     func overlapsWith(_ other: any Collidable) -> Bool {

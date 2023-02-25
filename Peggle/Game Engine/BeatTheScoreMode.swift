@@ -10,6 +10,9 @@ import Foundation
 class BeatTheScoreMode: GameMode {
     weak var gameEngine: GameEngine?
     let presetLives: Int? = nil
+    var presetBucketShotCount: Int?
+    let name: String = "Beat The Score"
+    let description: String = "Tick tock, beat the clock! Score high and fast to win the game."
 
     var goalText: String {
         "Reach target score of \(targetScore)!"

@@ -12,9 +12,9 @@ struct ActionView: View {
 
     var body: some View {
         HStack(spacing: 24) {
-            HStack {
+            HStack(spacing: 20) {
                 NavigationLink(destination: LevelListView().environmentObject(levelDesigner)) {
-                    Text("LOAD")
+                    Text("Load")
                 }.simultaneousGesture(TapGesture().onEnded {
                     hideKeyboard()
                 })
@@ -29,22 +29,21 @@ struct ActionView: View {
                         }
                     }
                 }) {
-                    Text("SAVE")
+                    Text("Save")
                 }.disabled(levelDesigner.level.title.isEmpty)
 
                 Button(action: {
                     levelDesigner.resetLevelObjects()
                 }) {
-                    Text("RESET")
+                    Text("Reset")
                 }
             }
 
             TextField("Enter level title", text: $levelDesigner.level.title)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
-            NavigationLink(destination: NavigationLazyView(RendererView(gameEngine: GameEngine(level: levelDesigner.level)
-            ))) {
-                Text("START")
+            NavigationLink(destination: NavigationLazyView(GamePlayerView(viewModel: GamePlayerViewModel(level: levelDesigner.level)))) {
+                Text("Start")
             }.simultaneousGesture(TapGesture().onEnded {
                 hideKeyboard()
             })
@@ -57,6 +56,7 @@ struct ActionView: View {
 //                hideKeyboard()
 //            })
         }
+        .font(.custom("Minecraft-Regular", size: 20))
     }
 }
 

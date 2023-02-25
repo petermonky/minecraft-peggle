@@ -15,55 +15,35 @@ struct RendererView: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            HStack {
-                Text("\(renderer.remainingTime ?? 0)")
-                Text("\(renderer.remainingLives ?? 0)")
-                Text("\(renderer.score)")
-                Text("\(renderer.bluePegsCount)")
-                Text("\(renderer.orangePegsCount)")
-                Text("\(renderer.greenPegsCount)")
-                Text("\(renderer.goalText)")
-            }.frame(height: 80)
-            GeometryReader { geometry in
-                ZStack {
-                    renderer.cannonGameView
-                    renderer.ballGameView
-                    renderer.bucketGameView
-                    if let pegGameViews = renderer.pegGameViews {
-                        ForEach(pegGameViews) { $0 }
-                    }
-                    if let blockGameViews = renderer.blockGameViews {
-                        ForEach(blockGameViews) { $0 }
-                    }
+            ZStack {
+                renderer.cannonGameView
+                if let ballGameViews = renderer.ballGameViews {
+                    ForEach(ballGameViews) { $0 }
                 }
-                .contentShape(Rectangle())
-                .gesture(
-                    DragGesture()
-                        .onChanged { value in
-                            renderer.updateCannonAngle(position: value.location)
-                        }
-                        .onEnded { value in
-                            renderer.addBallTowards(position: value.location)
-                        }
-                )
-                .frame(width: renderer.frame.width, height: renderer.frame.height)
-                .background(
-                    Image("background")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                )
-                .onAppear {
-                    renderer.initialiseLevelObjects(frame: Frame(size: geometry.size))
+                renderer.bucketGameView
+                if let pegGameViews = renderer.pegGameViews {
+                    ForEach(pegGameViews) { $0 }
+                }
+                if let blockGameViews = renderer.blockGameViews {
+                    ForEach(blockGameViews) { $0 }
                 }
             }
-        }
-        .modifier(Popup(isPresented: renderer.isGameInState(.loading),
-                        alignment: .center,
-                        content: { GamePresetModalView().environmentObject(renderer) }))
-        .modifier(Popup(isPresented: renderer.isGameOver,
-                        alignment: .center,
-                        content: { GameOverModalView().environmentObject(renderer) }))
+            .contentShape(Rectangle())
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        renderer.updateCannonAngle(position: value.location)
+                    }
+                    .onEnded { value in
+                        renderer.addBallTowards(position: value.location)
+                    }
+            )
+            .frame(width: renderer.frame.width, height: renderer.frame.height)
+            .background(
+                Image("background-ores")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            )
         .ignoresSafeArea(edges: .all)
     }
 }

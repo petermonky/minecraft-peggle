@@ -24,6 +24,14 @@
 		D0078967297E961100EB5AAE /* PegFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0078966297E961100EB5AAE /* PegFactory.swift */; };
 		D007896F297E9C6300EB5AAE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D007896E297E9C6300EB5AAE /* Constants.swift */; };
 		D0078971297EA11400EB5AAE /* ActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0078970297EA11400EB5AAE /* ActionView.swift */; };
+		D01143A229AA6B3F00B3B53C /* MinecraftBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D011439E29AA6B3F00B3B53C /* MinecraftBold.otf */; };
+		D01143A329AA6B3F00B3B53C /* MinecraftRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D011439F29AA6B3F00B3B53C /* MinecraftRegular.otf */; };
+		D01143A429AA6B3F00B3B53C /* MinecraftItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D01143A029AA6B3F00B3B53C /* MinecraftItalic.otf */; };
+		D01143A529AA6B3F00B3B53C /* MinecraftBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D01143A129AA6B3F00B3B53C /* MinecraftBoldItalic.otf */; };
+		D01143A829AA716F00B3B53C /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01143A729AA716F00B3B53C /* Color+Hex.swift */; };
+		D01143AA29AA728B00B3B53C /* View+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01143A929AA728B00B3B53C /* View+Border.swift */; };
+		D01143AC29AA8A0100B3B53C /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01143AB29AA8A0100B3B53C /* BackButtonView.swift */; };
+		D01143AE29AA8AB900B3B53C /* GrayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01143AD29AA8AB900B3B53C /* GrayButton.swift */; };
 		D017DFA02986A6E3009125B3 /* DeveloperGuide.md in Resources */ = {isa = PBXBuildFile; fileRef = D017DF9F2986A6E3009125B3 /* DeveloperGuide.md */; };
 		D021AD8A29836B18001F63DD /* View+IsRendered.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021AD8929836B18001F63DD /* View+IsRendered.swift */; };
 		D021AD8E298397D2001F63DD /* LevelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021AD8D298397D2001F63DD /* LevelTests.swift */; };
@@ -134,6 +142,15 @@
 		D0078966297E961100EB5AAE /* PegFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegFactory.swift; sourceTree = "<group>"; };
 		D007896E297E9C6300EB5AAE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D0078970297EA11400EB5AAE /* ActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionView.swift; sourceTree = "<group>"; };
+		D011439E29AA6B3F00B3B53C /* MinecraftBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MinecraftBold.otf; sourceTree = "<group>"; };
+		D011439F29AA6B3F00B3B53C /* MinecraftRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MinecraftRegular.otf; sourceTree = "<group>"; };
+		D01143A029AA6B3F00B3B53C /* MinecraftItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MinecraftItalic.otf; sourceTree = "<group>"; };
+		D01143A129AA6B3F00B3B53C /* MinecraftBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MinecraftBoldItalic.otf; sourceTree = "<group>"; };
+		D01143A629AA6C3800B3B53C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D01143A729AA716F00B3B53C /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
+		D01143A929AA728B00B3B53C /* View+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Border.swift"; sourceTree = "<group>"; };
+		D01143AB29AA8A0100B3B53C /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
+		D01143AD29AA8AB900B3B53C /* GrayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayButton.swift; sourceTree = "<group>"; };
 		D017DF9F2986A6E3009125B3 /* DeveloperGuide.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = DeveloperGuide.md; sourceTree = "<group>"; };
 		D021AD8929836B18001F63DD /* View+IsRendered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+IsRendered.swift"; sourceTree = "<group>"; };
 		D021AD8D298397D2001F63DD /* LevelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelTests.swift; sourceTree = "<group>"; };
@@ -248,7 +265,10 @@
 				D0CB441C29825729008C5DAD /* LevelListView.swift */,
 				D0AEFBE829A5286600BCE15F /* DataView.swift */,
 				D000EF8329A778C9009BDBBB /* LevelSelectionView.swift */,
+				D01143AB29AA8A0100B3B53C /* BackButtonView.swift */,
 				D0AEFBE429A5120D00BCE15F /* GamePlayerView.swift */,
+				D000EF8929A799CA009BDBBB /* GameOverModalView.swift */,
+				D000EF8B29A79DC5009BDBBB /* GamePresetModalView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -290,6 +310,7 @@
 				D0078966297E961100EB5AAE /* PegFactory.swift */,
 				D0AEFC0029A62B4200BCE15F /* Cloneable.swift */,
 				D000EF8729A793F4009BDBBB /* Popup.swift */,
+				D01143AD29AA8AB900B3B53C /* GrayButton.swift */,
 				D0A813E429A9CFA400279D01 /* NavigationLazyView.swift */,
 			);
 			path = Utilities;
@@ -304,6 +325,8 @@
 				D0A4DBB52994C784003925BF /* Comparable+Utility.swift */,
 				D0CB44222982F651008C5DAD /* View+HideKeyboard.swift */,
 				D021AD8929836B18001F63DD /* View+IsRendered.swift */,
+				D01143A929AA728B00B3B53C /* View+Border.swift */,
+				D01143A729AA716F00B3B53C /* Color+Hex.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -314,6 +337,17 @@
 				D007896E297E9C6300EB5AAE /* Constants.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		D011439529AA6AA600B3B53C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D011439E29AA6B3F00B3B53C /* MinecraftBold.otf */,
+				D01143A129AA6B3F00B3B53C /* MinecraftBoldItalic.otf */,
+				D01143A029AA6B3F00B3B53C /* MinecraftItalic.otf */,
+				D011439F29AA6B3F00B3B53C /* MinecraftRegular.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		D017DF9A2986A618009125B3 /* Documentation */ = {
@@ -366,6 +400,8 @@
 		D03FFCAD29783B9000EFAD04 /* Peggle */ = {
 			isa = PBXGroup;
 			children = (
+				D01143A629AA6C3800B3B53C /* Info.plist */,
+				D011439529AA6AA600B3B53C /* Fonts */,
 				D09BBCE8298FAF61004340FF /* Renderer */,
 				D09BBCE3298F8CBC004340FF /* Game Engine */,
 				D044900D298EA2180068AA3C /* Physics Engine */,
@@ -488,8 +524,6 @@
 			children = (
 				D09BBCE9298FAF75004340FF /* Renderer.swift */,
 				D0A4DB932992921E003925BF /* RendererView.swift */,
-				D000EF8929A799CA009BDBBB /* GameOverModalView.swift */,
-				D000EF8B29A79DC5009BDBBB /* GamePresetModalView.swift */,
 				D0A4DBB12994A8D6003925BF /* GameView.swift */,
 				D09BBCF529900589004340FF /* PegGameView.swift */,
 				D0AEFC1029A73B2200BCE15F /* BlockGameView.swift */,
@@ -588,6 +622,10 @@
 				D03FFCB629783B9300EFAD04 /* Preview Assets.xcassets in Resources */,
 				D03FFCB329783B9300EFAD04 /* Assets.xcassets in Resources */,
 				D017DFA02986A6E3009125B3 /* DeveloperGuide.md in Resources */,
+				D01143A229AA6B3F00B3B53C /* MinecraftBold.otf in Resources */,
+				D01143A529AA6B3F00B3B53C /* MinecraftBoldItalic.otf in Resources */,
+				D01143A329AA6B3F00B3B53C /* MinecraftRegular.otf in Resources */,
+				D01143A429AA6B3F00B3B53C /* MinecraftItalic.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,6 +704,7 @@
 				D0A4DBB62994C784003925BF /* Comparable+Utility.swift in Sources */,
 				D09BBD0429915E04004340FF /* DynamicCirclePhysicsBody.swift in Sources */,
 				D09BBD0029912096004340FF /* CirclePhysicsBody.swift in Sources */,
+				D01143A829AA716F00B3B53C /* Color+Hex.swift in Sources */,
 				D0AEFBF529A6098100BCE15F /* Collidable.swift in Sources */,
 				D0AEFC0D29A7320F00BCE15F /* DynamicPolygonPhysicsBody.swift in Sources */,
 				D0449011298EA3EA0068AA3C /* PhysicsBody.swift in Sources */,
@@ -673,6 +712,7 @@
 				D0AEFC0529A71DB600BCE15F /* FrameCollidable.swift in Sources */,
 				D0BF3F08297D6F3400354272 /* Peg.swift in Sources */,
 				D0AEFBE929A5286700BCE15F /* DataView.swift in Sources */,
+				D01143AE29AA8AB900B3B53C /* GrayButton.swift in Sources */,
 				D000EF9A29A8E65E009BDBBB /* SiamLeftSiamRightMode.swift in Sources */,
 				D0AEFBFF29A622A400BCE15F /* PolygonCollidable.swift in Sources */,
 				D000EF8629A7791A009BDBBB /* LevelSelectionViewModel.swift in Sources */,
@@ -693,6 +733,7 @@
 				D0CB441D29825729008C5DAD /* LevelListView.swift in Sources */,
 				D0853A7129A4E094000D0F20 /* Block.swift in Sources */,
 				D000EF9629A880F9009BDBBB /* NormalMode.swift in Sources */,
+				D01143AA29AA728B00B3B53C /* View+Border.swift in Sources */,
 				D09BBCF22990019D004340FF /* PegGameObject.swift in Sources */,
 				D0AEFC0F29A739FA00BCE15F /* BlockGameObject.swift in Sources */,
 				D0AEFC0329A71BB700BCE15F /* BodyCollidable.swift in Sources */,
@@ -700,6 +741,7 @@
 				D07170BF297FD41F00C0ABAF /* Level.swift in Sources */,
 				D09BBCF0298FE027004340FF /* GameEngineDelegate.swift in Sources */,
 				D0078971297EA11400EB5AAE /* ActionView.swift in Sources */,
+				D01143AC29AA8A0100B3B53C /* BackButtonView.swift in Sources */,
 				D044E5B3299801AB00CD098A /* CirclePhysicsShape.swift in Sources */,
 				D0A4DB92299290D0003925BF /* CannonGameView.swift in Sources */,
 				D09BBD0229915B78004340FF /* DynamicPhysicsBody.swift in Sources */,
@@ -886,6 +928,7 @@
 				DEVELOPMENT_TEAM = X77GX48L42;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Peggle/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -915,6 +958,7 @@
 				DEVELOPMENT_TEAM = X77GX48L42;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Peggle/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
