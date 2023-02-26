@@ -93,7 +93,7 @@ struct GamePlayerView: View {
 
  struct GamePlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = GamePlayerViewModel(level: Level.mockData)
+        let viewModel = GamePlayerViewModel(level: Level.PeggleShowdown)
         GamePlayerView(viewModel: viewModel)
     }
  }

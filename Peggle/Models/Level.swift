@@ -95,19 +95,112 @@ extension Level: Hashable {
 }
 
 extension Level {
-    static var mockData: Level {
-        // Optimised for iPad Pro (11-inch) (4th generation)
-        let frame = Frame(width: 1_834.0, height: 1_894.0)
+    static var ChristmasSpirit: Level {
+        let width = 834
+        let height = 764
+        let frame = Frame(width: CGFloat(width), height: CGFloat(height))
+
         var pegs = Set<Peg>()
-        (1...10).forEach {
-            pegs.insert(BluePeg(position: CGPoint(x: $0 * 150 - 75, y: 200)))
-            pegs.insert(RedPeg(position: CGPoint(x: $0 * 120 - 60, y: 400)))
+        (1...9).forEach { i in
+            (1...7).forEach { j in
+                pegs.insert(RedPeg(
+                    position: CGPoint(x: i * width / 10, y: j * 100),
+                    radius: Constants.Peg.radius / 2
+                ))
+            }
+        }
+        (1...9).forEach { i in
+            (1...6).forEach { j in
+                pegs.insert(GreenPeg(
+                    position: CGPoint(x: i * width / 10, y: j * 100 + 50),
+                    radius: Constants.Peg.radius
+                ))
+            }
+        }
+
+        let title = "Christmas Spirit"
+
+        return Level(frame: frame, title: title, pegs: pegs)
+    }
+
+    static var BlockHell: Level {
+        let width = 834
+        let height = 764
+        let frame = Frame(width: CGFloat(width), height: CGFloat(height))
+
+        var pegs = Set<Peg>()
+        var blocks = Set<Block>()
+        (1...8).forEach {
+            blocks.insert(NormalBlock(
+                position: CGPoint(x: $0 * width / 9, y: 200),
+                width: Constants.Block.width / 2,
+                height: Constants.Block.height / 2,
+                rotation: .pi / 8 * CGFloat($0)
+            ))
+        }
+        (1...8).forEach {
+            pegs.insert(BluePeg(
+                position: CGPoint(x: $0 * width / 9, y: 300),
+                radius: Constants.Peg.radius / 2
+            ))
+            blocks.insert(NormalBlock(
+                position: CGPoint(x: $0 * width / 9, y: 200),
+                width: Constants.Block.width / 2,
+                height: Constants.Block.height / 2,
+                rotation: .pi / 8 * CGFloat($0)
+            ))
+        }
+        (1...7).forEach {
+            pegs.insert(GreenPeg(
+                position: CGPoint(x: $0 * width / 8, y: 500),
+                radius: Constants.Peg.radius
+            ))
+            blocks.insert(NormalBlock(
+                position: CGPoint(x: $0 * width / 8, y: 400),
+                width: Constants.Block.width,
+                height: Constants.Block.height,
+                rotation: .pi / 8 * CGFloat($0 + 1)
+            ))
+        }
+        (1...6).forEach {
+            pegs.insert(RedPeg(
+                position: CGPoint(x: $0 * width / 7, y: 700),
+                radius: Constants.Peg.radius * 1.5
+            ))
+            blocks.insert(NormalBlock(
+                position: CGPoint(x: $0 * width / 7, y: 600),
+                width: Constants.Block.width * 1.5,
+                height: Constants.Block.height * 1.5,
+                rotation: .pi / 8 * CGFloat($0 + 2)
+            ))
+        }
+
+        let title = "Block Hell"
+
+        return Level(frame: frame, title: title, pegs: pegs, blocks: blocks)
+    }
+
+    static var PeggleShowdown: Level {
+        let width = 834
+        let height = 764
+        let frame = Frame(width: CGFloat(width), height: CGFloat(height))
+
+        var pegs = Set<Peg>()
+        (1...4).forEach {
+            pegs.insert(BluePeg(position: CGPoint(x: $0 * width / 5, y: 150)))
+        }
+        (1...6).forEach {
+            pegs.insert(GreenPeg(position: CGPoint(x: $0 * width / 7, y: 300)))
+        }
+        (1...8).forEach {
+            pegs.insert(RedPeg(position: CGPoint(x: $0 * width / 9, y: 450)))
         }
         var blocks = Set<Block>()
         (1...10).forEach {
-            blocks.insert(NormalBlock(position: CGPoint(x: $0 * 90 - 45, y: 600)))
+            blocks.insert(NormalBlock(position: CGPoint(x: $0 * width / 11, y: 600)))
         }
-        let title = "Mock level"
+
+        let title = "Peggle Showdown"
 
         return Level(frame: frame, title: title, pegs: pegs, blocks: blocks)
     }

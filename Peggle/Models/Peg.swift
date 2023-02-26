@@ -110,10 +110,10 @@ class Peg: LevelObject, CircleCollidable {
 }
 
 final class BluePeg: Peg {
-    init(position: CGPoint = CGPoint.zero) {
+    init(position: CGPoint = CGPoint.zero, radius: CGFloat = Constants.Peg.radius) {
         super.init(
             type: .blue,
-            shape: CirclePhysicsShape(radius: Constants.Peg.radius),
+            shape: CirclePhysicsShape(radius: radius),
             position: position,
             normalImageName: "peg-blue",
             glowImageName: "peg-blue-glow",
@@ -135,10 +135,10 @@ final class BluePeg: Peg {
 }
 
 final class RedPeg: Peg {
-    init(position: CGPoint = CGPoint.zero) {
+    init(position: CGPoint = CGPoint.zero, radius: CGFloat = Constants.Peg.radius) {
         super.init(
             type: .red,
-            shape: CirclePhysicsShape(radius: Constants.Peg.radius),
+            shape: CirclePhysicsShape(radius: radius),
             position: position,
             normalImageName: "peg-red",
             glowImageName: "peg-red-glow",
@@ -160,10 +160,10 @@ final class RedPeg: Peg {
 }
 
 final class GreenPeg: Peg {
-    init(position: CGPoint = CGPoint.zero) {
+    init(position: CGPoint = CGPoint.zero, radius: CGFloat = Constants.Peg.radius) {
         super.init(
             type: .green,
-            shape: CirclePhysicsShape(radius: Constants.Peg.radius),
+            shape: CirclePhysicsShape(radius: radius),
             position: position,
             normalImageName: "peg-green",
             glowImageName: "peg-green-glow",

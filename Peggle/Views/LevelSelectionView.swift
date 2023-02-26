@@ -65,22 +65,24 @@ struct LevelSelectionView: View {
     }
 
     private func renderPresetLevels() -> some View {
-        NavigationLink(destination: NavigationLazyView(GamePlayerView(
-            viewModel: GamePlayerViewModel(level: Level.mockData)
-        ))) {
-            HStack {
-                Text(Level.mockData.title)
-                    .font(.custom("Minecraft-Bold", size: 20)).bold()
-                Spacer()
+        ForEach(viewModel.presetLevels) { level in
+            NavigationLink(destination: NavigationLazyView(GamePlayerView(
+                viewModel: GamePlayerViewModel(level: level)
+            ))) {
                 HStack {
-                    renderPegLabel(imageName: "peg-blue", pegType: .blue, level: Level.mockData)
-                    renderPegLabel(imageName: "peg-red", pegType: .red, level: Level.mockData)
-                    renderPegLabel(imageName: "peg-green", pegType: .green, level: Level.mockData)
+                    Text(level.title)
+                        .font(.custom("Minecraft-Bold", size: 20)).bold()
+                    Spacer()
+                    HStack {
+                        renderPegLabel(imageName: "peg-blue", pegType: .blue, level: level)
+                        renderPegLabel(imageName: "peg-red", pegType: .red, level: level)
+                        renderPegLabel(imageName: "peg-green", pegType: .green, level: level)
+                    }
                 }
+                .frame(maxWidth: .infinity)
             }
-            .frame(maxWidth: .infinity)
+            .buttonStyle(GrayButton())
         }
-        .buttonStyle(GrayButton())
     }
 
     private func renderPegLabel(imageName: String, pegType: PegType, level: Level) -> some View {

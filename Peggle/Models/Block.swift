@@ -55,7 +55,8 @@ class Block: LevelObject, PolygonCollidable {
         callibrateRotationScale()
     }
 
-    func clone() -> Self {Self(instance: self)
+    func clone() -> Self {
+        Self(instance: self)
     }
 
     func callibrateSizeScale() {
@@ -91,10 +92,15 @@ class Block: LevelObject, PolygonCollidable {
 }
 
 final class NormalBlock: Block {
-    init(position: CGPoint = CGPoint.zero) {
+    init(
+        position: CGPoint = CGPoint.zero,
+        width: CGFloat = Constants.Block.width,
+        height: CGFloat = Constants.Block.height,
+        rotation: CGFloat = .zero
+    ) {
         super.init(
             position: position,
-            shape: PolygonPhysicsShape(width: Constants.Block.width, height: Constants.Block.height),
+            shape: PolygonPhysicsShape(width: width, height: height, rotation: rotation),
             normalImageName: "block"
         )
     }

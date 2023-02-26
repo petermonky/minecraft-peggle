@@ -10,6 +10,7 @@ import Foundation
 @MainActor class LevelSelectionViewModel: ObservableObject {
     @Published private(set) var levels: [Level] = []
     private let dataManager = DataManager()
+    let presetLevels: [Level] = [Level.PeggleShowdown, Level.BlockHell, Level.ChristmasSpirit]
 
     func loadData() async throws {
         levels = try await dataManager.load()

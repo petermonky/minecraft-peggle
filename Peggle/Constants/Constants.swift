@@ -66,7 +66,7 @@ extension Constants {
     enum Bucket {
         static let width: CGFloat = 100.0
         static let height: CGFloat = 100.0
-        static let step: CGFloat = 2.0
+        static let step: CGFloat = 160.0
     }
 }
 

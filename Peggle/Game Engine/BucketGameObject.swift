@@ -26,12 +26,12 @@ final class BucketGameObject: ObservableObject, PolygonCollidable {
         self.direction = .right
     }
 
-    func moveInDirection() {
+    func moveInDirection(delta interval: TimeInterval) {
         switch direction {
         case .left:
-            position.x -= Constants.Bucket.step
+            position.x -= Constants.Bucket.step * interval
         case .right:
-            position.x += Constants.Bucket.step
+            position.x += Constants.Bucket.step * interval
         }
     }
 

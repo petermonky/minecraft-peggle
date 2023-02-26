@@ -42,10 +42,10 @@ struct PolygonPhysicsShape: PhysicsShape {
     }
 
     init(width: CGFloat, height: CGFloat, rotation: CGFloat = 0) {
-        let topLeft     = CGPoint.zero.move(by: CGVector(dx: -width / 2, dy: -height / 2))
-        let topRight    = CGPoint.zero.move(by: CGVector(dx: width / 2, dy: -height / 2))
-        let bottomLeft  = CGPoint.zero.move(by: CGVector(dx: width / 2, dy: height / 2))
-        let bottomRight = CGPoint.zero.move(by: CGVector(dx: -width / 2, dy: height / 2))
+        let topLeft     = CGPoint.zero.move(by: CGVector(dx: -width / 2, dy: -height / 2).rotate(by: rotation))
+        let topRight    = CGPoint.zero.move(by: CGVector(dx: width / 2, dy: -height / 2).rotate(by: rotation))
+        let bottomLeft  = CGPoint.zero.move(by: CGVector(dx: width / 2, dy: height / 2).rotate(by: rotation))
+        let bottomRight = CGPoint.zero.move(by: CGVector(dx: -width / 2, dy: height / 2).rotate(by: rotation))
         self.vertices = [topLeft, topRight, bottomLeft, bottomRight]
         self.width = width
         self.height = height

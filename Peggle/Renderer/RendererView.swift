@@ -63,7 +63,7 @@ struct RendererView: View {
 struct BoardGameView_Previews: PreviewProvider {
     static var previews: some View {
         let renderer = Renderer()
-        _ = GameEngine(level: Level.mockData, renderer: renderer)
+        _ = GameEngine(level: Level.PeggleShowdown, renderer: renderer)
         return RendererView(renderer: renderer)
     }
 }
