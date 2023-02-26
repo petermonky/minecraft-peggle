@@ -28,6 +28,7 @@ import SwiftUI
 
     // Level list
     @Published private(set) var levels: [Level] = []
+    let presetLevels: [Level] = [Level.PeggleShowdown, Level.BlockHell, Level.ChristmasSpirit]
     private let dataManager = DataManager()
 }
 
@@ -89,7 +90,7 @@ extension LevelDesignerViewModel {
 
     func saveLevel() async throws {
         levels = levels.filter { $0 != level }
-        levels.append(level)
+        levels.append(level.clone())
         try await saveData()
     }
 

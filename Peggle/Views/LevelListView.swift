@@ -24,6 +24,7 @@ struct LevelListView: View {
                 VStack(spacing: 12) {
                     renderCreateNewLevelButton()
                     renderLevels()
+                    renderPresetLevels()
                 }
                 .padding(.vertical, 140)
                 .padding(.horizontal, 60)
@@ -79,6 +80,29 @@ struct LevelListView: View {
                 .frame(maxWidth: .infinity)
             }
             .buttonStyle(GrayButton())
+            .disabled(levelDesigner.isCurrentLevel(level))
+        }
+    }
+
+    private func renderPresetLevels() -> some View {
+        ForEach(levelDesigner.presetLevels) { level in
+            Button(action: {
+                levelDesigner.loadLevel(level)
+                dismiss()
+            }) {
+                HStack {
+                    renderLevelTitleAndDate(level: level)
+                    Spacer()
+                    HStack {
+                        renderPegLabel(imageName: "peg-blue", pegType: .blue, level: level)
+                        renderPegLabel(imageName: "peg-red", pegType: .red, level: level)
+                        renderPegLabel(imageName: "peg-green", pegType: .green, level: level)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(GrayButton())
+            .disabled(levelDesigner.isCurrentLevel(level))
         }
     }
 

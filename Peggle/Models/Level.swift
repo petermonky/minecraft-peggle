@@ -131,14 +131,6 @@ extension Level {
         var pegs = Set<Peg>()
         var blocks = Set<Block>()
         (1...8).forEach {
-            blocks.insert(NormalBlock(
-                position: CGPoint(x: $0 * width / 9, y: 200),
-                width: Constants.Block.width / 2,
-                height: Constants.Block.height / 2,
-                rotation: .pi / 8 * CGFloat($0)
-            ))
-        }
-        (1...8).forEach {
             pegs.insert(BluePeg(
                 position: CGPoint(x: $0 * width / 9, y: 300),
                 radius: Constants.Peg.radius / 2
