@@ -64,8 +64,8 @@ struct GamePresetModalView: View {
 
 struct CharacterModalView_Previews: PreviewProvider {
     static var previews: some View {
-        let gameEngine = GameEngine(level: Level.mockData)
-        let renderer = Renderer(gameEngine: gameEngine)
-        GamePresetModalView().environmentObject(renderer)
+        let renderer = Renderer()
+        let gameEngine = GameEngine(level: Level.mockData, renderer: renderer)
+        GamePresetModalView().environmentObject(gameEngine)
     }
 }

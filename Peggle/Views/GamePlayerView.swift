@@ -77,12 +77,7 @@
             .frame(height: 140)
             .frame(maxWidth: .infinity)
             .background(Color(hex: 0x91bff1))
-            GeometryReader { geometry in
-                RendererView(gameEngine: viewModel.gameEngine)
-                    .onAppear {
-                        viewModel.gameEngine.initialiseLevel(frame: Frame(size: geometry.size))
-                    }
-            }
+            RendererView(renderer: viewModel.renderer)
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: BackButtonView())

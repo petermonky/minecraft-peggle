@@ -9,11 +9,13 @@ import Foundation
 import Combine
 
 @MainActor class GamePlayerViewModel: ObservableObject {
-    @Published var gameEngine: GameEngine
+    let gameEngine: GameEngine
+    let renderer: Renderer
     var anyCancellable: AnyCancellable?
 
     init(level: Level) {
-        self.gameEngine = GameEngine(level: level)
+        self.renderer = Renderer()
+        self.gameEngine = GameEngine(level: level, renderer: renderer)
         anyCancellable = gameEngine.objectWillChange.sink { [weak self] _ in
             self?.objectWillChange.send()
         }

@@ -34,6 +34,7 @@
 		D01143AE29AA8AB900B3B53C /* GrayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01143AD29AA8AB900B3B53C /* GrayButton.swift */; };
 		D01143B029AB002B00B3B53C /* ParticleEffectGameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01143AF29AB002B00B3B53C /* ParticleEffectGameObject.swift */; };
 		D01143B229AB024C00B3B53C /* ParticleEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01143B129AB024C00B3B53C /* ParticleEffectView.swift */; };
+		D01143B429AB3FA700B3B53C /* RendererDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01143B329AB3FA700B3B53C /* RendererDelegate.swift */; };
 		D017DFA02986A6E3009125B3 /* DeveloperGuide.md in Resources */ = {isa = PBXBuildFile; fileRef = D017DF9F2986A6E3009125B3 /* DeveloperGuide.md */; };
 		D021AD8A29836B18001F63DD /* View+IsRendered.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021AD8929836B18001F63DD /* View+IsRendered.swift */; };
 		D021AD8E298397D2001F63DD /* LevelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021AD8D298397D2001F63DD /* LevelTests.swift */; };
@@ -155,6 +156,7 @@
 		D01143AD29AA8AB900B3B53C /* GrayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayButton.swift; sourceTree = "<group>"; };
 		D01143AF29AB002B00B3B53C /* ParticleEffectGameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleEffectGameObject.swift; sourceTree = "<group>"; };
 		D01143B129AB024C00B3B53C /* ParticleEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleEffectView.swift; sourceTree = "<group>"; };
+		D01143B329AB3FA700B3B53C /* RendererDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RendererDelegate.swift; sourceTree = "<group>"; };
 		D017DF9F2986A6E3009125B3 /* DeveloperGuide.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = DeveloperGuide.md; sourceTree = "<group>"; };
 		D021AD8929836B18001F63DD /* View+IsRendered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+IsRendered.swift"; sourceTree = "<group>"; };
 		D021AD8D298397D2001F63DD /* LevelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelTests.swift; sourceTree = "<group>"; };
@@ -528,6 +530,7 @@
 			isa = PBXGroup;
 			children = (
 				D09BBCE9298FAF75004340FF /* Renderer.swift */,
+				D01143B329AB3FA700B3B53C /* RendererDelegate.swift */,
 				D0A4DB932992921E003925BF /* RendererView.swift */,
 				D0A4DBB12994A8D6003925BF /* GameView.swift */,
 				D09BBCF529900589004340FF /* PegGameView.swift */,
@@ -723,6 +726,7 @@
 				D01143AE29AA8AB900B3B53C /* GrayButton.swift in Sources */,
 				D000EF9A29A8E65E009BDBBB /* SiamLeftSiamRightMode.swift in Sources */,
 				D0AEFBFF29A622A400BCE15F /* PolygonCollidable.swift in Sources */,
+				D01143B429AB3FA700B3B53C /* RendererDelegate.swift in Sources */,
 				D000EF8629A7791A009BDBBB /* LevelSelectionViewModel.swift in Sources */,
 				D0BF3F0A297D6FB200354272 /* CGPoint+Hashable.swift in Sources */,
 				D0449013298EA7270068AA3C /* CGVector+Utility.swift in Sources */,

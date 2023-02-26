@@ -16,7 +16,8 @@ enum GameState {
     case win
 }
 
-class GameEngine: ObservableObject {
+class GameEngine: ObservableObject, RendererDelegate {
+
     private let physicsWorld: PhysicsWorld
     private var displayLink: CADisplayLink?
     private(set) var cannonGameObject: CannonGameObject
@@ -36,9 +37,9 @@ class GameEngine: ObservableObject {
     @Published private(set) var removedPegs: Set<PegGameObject>
     @Published private(set) var state: GameState
 
-    weak var renderer: Renderer?
+    private var renderer: Renderer
 
-    init(level: Level) {
+    init(level: Level, renderer: Renderer) {
         self.level = level
         self.cannonGameObject = CannonGameObject(position: CGPoint(
             x: level.frame.width / 2,
@@ -55,11 +56,15 @@ class GameEngine: ObservableObject {
         self.physicsWorld = PhysicsWorld(frame: Frame(width: frame.width, height: frame.height))
         self.state = .loading
         self.removedPegs = []
-
-        createDisplayLink()
+        self.renderer = renderer
+        renderer.gameEngine = self
     }
 
-    func initialiseLevel(frame: Frame) {
+    deinit {
+        renderer.invalidateDisplayLink()
+    }
+
+    func didAppear(frame: Frame) {
         callibrateLevel(frame: frame)
         addLevelObjects()
     }
@@ -92,15 +97,6 @@ class GameEngine: ObservableObject {
             x: level.frame.width / 2,
             y: level.frame.height + Constants.Cannon.height + Constants.Bucket.height / 2
         ))
-    }
-
-    func invalidateDisplayLink() {
-        self.displayLink?.invalidate()
-    }
-
-    private func createDisplayLink() {
-        self.displayLink = CADisplayLink(target: self, selector: #selector(step))
-        displayLink?.add(to: .current, forMode: .default)
     }
 
     func addPhysicsBody(_ body: any PhysicsBody) {
@@ -279,12 +275,12 @@ extension GameEngine {
         return false
     }
 
-    @objc func step(displaylink: CADisplayLink) {
+    func didRefreshDisplay(interval: TimeInterval) {
         guard !isGameOver else {
             return
         }
 
-        physicsWorld.update(delta: displaylink.targetTimestamp - displaylink.timestamp)
+        physicsWorld.update(delta: interval)
         updateCurrentTime()
 
         character?.applyPower()
@@ -297,7 +293,9 @@ extension GameEngine {
 
         mode?.handleGameOver()
         refreshGameState()
-        renderer?.didUpdateWorld()
+
+        renderer.clearViews()
+        renderer.renderViews()
     }
 
     private func updateCurrentTime() {
@@ -412,7 +410,7 @@ extension GameEngine {
         angle >= 0 && angle <= CGFloat.pi
     }
 
-    func updateCannonAngle(position: CGPoint) {
+    func didUpdateCannonTowards(position: CGPoint) {
         guard isInState(.idle) else {
             return
         }
@@ -424,7 +422,7 @@ extension GameEngine {
         cannonGameObject.angle = (CGFloat.pi / 2 - angle)
     }
 
-    func addBallTowards(position: CGPoint) {
+    func didAddBallTowards(position: CGPoint) {
         guard isInState(.idle) else {
             return
         }
@@ -447,4 +445,40 @@ extension GameEngine {
         cannonGameObject.setUnavailable()
         updateGameState(.active)
     }
+
+//    func updateCannonAngle(position: CGPoint) {
+//        guard isInState(.idle) else {
+//            return
+//        }
+//        let vector = CGVector(from: position, to: cannonGameObject.position)
+//        let angle = vector.angle(with: .xBasis)
+//        guard validCannonAngle(angle) else {
+//            return
+//        }
+//        cannonGameObject.angle = (CGFloat.pi / 2 - angle)
+//    }
+//
+//    func addBallTowards(position: CGPoint) {
+//        guard isInState(.idle) else {
+//            return
+//        }
+//
+//        let vector = CGVector(from: position, to: cannonGameObject.position)
+//        let angle = vector.angle(with: .xBasis)
+//        guard validCannonAngle(angle) else {
+//            return
+//        }
+//
+//        let normalFromCannonToPosition = vector.normalise.flip
+//        addPhysicsBody(BallGameObject(
+//            position: cannonGameObject.position,
+//            velocity: normalFromCannonToPosition.scale(by: Constants.Ball.initialSpeed))
+//        )
+//
+//        if let lives = lives {
+//            self.lives = max(lives - 1, 0)
+//        }
+//        cannonGameObject.setUnavailable()
+//        updateGameState(.active)
+//    }
 }

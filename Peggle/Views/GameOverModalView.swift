@@ -34,8 +34,8 @@ struct GameOverModalView: View {
 
 struct GameOverModalView_Previews: PreviewProvider {
     static var previews: some View {
-        let gameEngine = GameEngine(level: Level.mockData)
-        let renderer = Renderer(gameEngine: gameEngine)
-        GameOverModalView().environmentObject(renderer)
+        let renderer = Renderer()
+        let gameEngine = GameEngine(level: Level.mockData, renderer: renderer)
+        GameOverModalView().environmentObject(gameEngine)
     }
 }
