@@ -15,43 +15,32 @@ struct LevelObjectView<Object>: View where Object: LevelObject {
         _levelObject = StateObject(wrappedValue: levelObject)
     }
 
-    func renderBaseImage(isAfterImage: Bool) -> some View {
-        Image(levelObject.normalImageName)
-            .renderingMode(isAfterImage ? .template : .original)
-            .resizable()
-            .frame(width: levelObject.width,
-                   height: levelObject.height)
-            .rotationEffect(.radians(levelObject.rotationScale))
-            .position(levelObject.position)
+    var body: some View {
+        renderObject()
+        .onAppear {
+            levelObject.callibrateSizeScale()
+            levelObject.callibrateRotationScale()
+        }
+        .zIndex(levelObject.zIndex)
     }
 
-    var body: some View {
-        let isSelected = levelDesigner.isCurrentLevelObject(levelObject)
-
+    private func renderObject() -> some View {
         ZStack {
-            renderBaseImage(isAfterImage: true)
-                .foregroundColor(.white.opacity(Constants.LevelObject.afterImageOpacity))
-
-            ZStack {
-                renderBaseImage(isAfterImage: false)
-                renderBaseImage(isAfterImage: true)
-                    .foregroundColor(.white.opacity(isSelected
-                                                    ? Constants.LevelObject.afterImageOpacity
-                                                    : 0.0))
-            }
-            .offset(levelObject.dragOffset)
-            .onTapGesture {
-                if levelDesigner.mode == .delete {
-                    _ = levelDesigner.removeLevelObject(levelObject)
-                } else {
-                    levelDesigner.selectLevelObject(levelObject)
+            renderAfterImage()
+            renderTrueImage()
+                .offset(levelObject.dragOffset)
+                .onTapGesture {
+                    if levelDesigner.mode == .delete {
+                        _ = levelDesigner.removeLevelObject(levelObject)
+                    } else {
+                        levelDesigner.selectLevelObject(levelObject)
+                    }
                 }
-            }
-            .onLongPressGesture {
-                _ = levelDesigner.removeLevelObject(levelObject)
-            }
-            .gesture(
-                DragGesture()
+                .onLongPressGesture {
+                    _ = levelDesigner.removeLevelObject(levelObject)
+                }
+                .gesture(
+                    DragGesture()
                     .onChanged { value in
                         levelObject.dragOffset = value.translation
                         levelObject.zIndex = Double.infinity
@@ -66,13 +55,35 @@ struct LevelObjectView<Object>: View where Object: LevelObject {
                         }
                         levelObject.zIndex = 0
                     }
-            )
+                )
         }
-        .onAppear {
-            levelObject.callibrateSizeScale()
-            levelObject.callibrateRotationScale()
+    }
+
+    private func renderAfterImage() -> some View {
+        renderBaseImage(isAfterImage: true)
+            .foregroundColor(.white.opacity(Constants.LevelObject.afterImageOpacity))
+    }
+
+    private func renderTrueImage() -> some View {
+        let isSelected = levelDesigner.isCurrentLevelObject(levelObject)
+
+        return ZStack {
+            renderBaseImage(isAfterImage: false)
+            renderBaseImage(isAfterImage: true)
+                .foregroundColor(.white.opacity(isSelected
+                                                ? Constants.LevelObject.afterImageOpacity
+                                                : 0.0))
         }
-        .zIndex(levelObject.zIndex)
+    }
+
+    private func renderBaseImage(isAfterImage: Bool) -> some View {
+        Image(levelObject.normalImageName)
+            .renderingMode(isAfterImage ? .template : .original)
+            .resizable()
+            .frame(width: levelObject.width,
+                   height: levelObject.height)
+            .rotationEffect(.radians(levelObject.rotationScale))
+            .position(levelObject.position)
     }
 }
 

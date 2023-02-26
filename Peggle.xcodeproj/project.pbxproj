@@ -35,6 +35,7 @@
 		D01143B029AB002B00B3B53C /* ParticleEffectGameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01143AF29AB002B00B3B53C /* ParticleEffectGameObject.swift */; };
 		D01143B229AB024C00B3B53C /* ParticleEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01143B129AB024C00B3B53C /* ParticleEffectView.swift */; };
 		D01143B429AB3FA700B3B53C /* RendererDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01143B329AB3FA700B3B53C /* RendererDelegate.swift */; };
+		D01143B629AB6ADC00B3B53C /* GameEngine+RendererDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01143B529AB6ADC00B3B53C /* GameEngine+RendererDelegate.swift */; };
 		D017DFA02986A6E3009125B3 /* DeveloperGuide.md in Resources */ = {isa = PBXBuildFile; fileRef = D017DF9F2986A6E3009125B3 /* DeveloperGuide.md */; };
 		D021AD8A29836B18001F63DD /* View+IsRendered.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021AD8929836B18001F63DD /* View+IsRendered.swift */; };
 		D021AD8E298397D2001F63DD /* LevelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021AD8D298397D2001F63DD /* LevelTests.swift */; };
@@ -72,7 +73,6 @@
 		D08AEB7D29796A6D00EA1590 /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08AEB7C29796A6D00EA1590 /* PaletteView.swift */; };
 		D09BBCE5298F8F35004340FF /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BBCE4298F8F35004340FF /* GameEngine.swift */; };
 		D09BBCEA298FAF75004340FF /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BBCE9298FAF75004340FF /* Renderer.swift */; };
-		D09BBCF0298FE027004340FF /* GameEngineDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BBCEF298FE027004340FF /* GameEngineDelegate.swift */; };
 		D09BBCF22990019D004340FF /* PegGameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BBCF12990019D004340FF /* PegGameObject.swift */; };
 		D09BBCF62990058A004340FF /* PegGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BBCF529900589004340FF /* PegGameView.swift */; };
 		D09BBCF82990C87B004340FF /* BallGameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09BBCF72990C87B004340FF /* BallGameObject.swift */; };
@@ -157,6 +157,7 @@
 		D01143AF29AB002B00B3B53C /* ParticleEffectGameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleEffectGameObject.swift; sourceTree = "<group>"; };
 		D01143B129AB024C00B3B53C /* ParticleEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleEffectView.swift; sourceTree = "<group>"; };
 		D01143B329AB3FA700B3B53C /* RendererDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RendererDelegate.swift; sourceTree = "<group>"; };
+		D01143B529AB6ADC00B3B53C /* GameEngine+RendererDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "GameEngine+RendererDelegate.swift"; path = "../../../Downloads/GameEngine+RendererDelegate.swift"; sourceTree = "<group>"; };
 		D017DF9F2986A6E3009125B3 /* DeveloperGuide.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = DeveloperGuide.md; sourceTree = "<group>"; };
 		D021AD8929836B18001F63DD /* View+IsRendered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+IsRendered.swift"; sourceTree = "<group>"; };
 		D021AD8D298397D2001F63DD /* LevelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelTests.swift; sourceTree = "<group>"; };
@@ -196,7 +197,6 @@
 		D08AEB7C29796A6D00EA1590 /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
 		D09BBCE4298F8F35004340FF /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		D09BBCE9298FAF75004340FF /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
-		D09BBCEF298FE027004340FF /* GameEngineDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineDelegate.swift; sourceTree = "<group>"; };
 		D09BBCF12990019D004340FF /* PegGameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegGameObject.swift; sourceTree = "<group>"; };
 		D09BBCF529900589004340FF /* PegGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PegGameView.swift; sourceTree = "<group>"; };
 		D09BBCF72990C87B004340FF /* BallGameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallGameObject.swift; sourceTree = "<group>"; };
@@ -507,7 +507,7 @@
 			isa = PBXGroup;
 			children = (
 				D09BBCE4298F8F35004340FF /* GameEngine.swift */,
-				D09BBCEF298FE027004340FF /* GameEngineDelegate.swift */,
+				D01143B529AB6ADC00B3B53C /* GameEngine+RendererDelegate.swift */,
 				D0A4DBAF2994A8B7003925BF /* CollidableGameObject.swift */,
 				D09BBCF12990019D004340FF /* PegGameObject.swift */,
 				D0AEFC0E29A739FA00BCE15F /* BlockGameObject.swift */,
@@ -737,6 +737,7 @@
 				D09BBCF82990C87B004340FF /* BallGameObject.swift in Sources */,
 				D007895E297E89C900EB5AAE /* PaletteButtonView.swift in Sources */,
 				D03FFCAF29783B9000EFAD04 /* PeggleApp.swift in Sources */,
+				D01143B629AB6ADC00B3B53C /* GameEngine+RendererDelegate.swift in Sources */,
 				D0AEFC0129A62B4200BCE15F /* Cloneable.swift in Sources */,
 				D044E5B5299801C400CD098A /* BodyFrameCollisionData.swift in Sources */,
 				D0BF3F04297BC6C800354272 /* BoardView.swift in Sources */,
@@ -751,7 +752,6 @@
 				D0AEFC0329A71BB700BCE15F /* BodyCollidable.swift in Sources */,
 				D044900F298EA25A0068AA3C /* PhysicsWorld.swift in Sources */,
 				D07170BF297FD41F00C0ABAF /* Level.swift in Sources */,
-				D09BBCF0298FE027004340FF /* GameEngineDelegate.swift in Sources */,
 				D0078971297EA11400EB5AAE /* ActionView.swift in Sources */,
 				D01143AC29AA8A0100B3B53C /* BackButtonView.swift in Sources */,
 				D044E5B3299801AB00CD098A /* CirclePhysicsShape.swift in Sources */,

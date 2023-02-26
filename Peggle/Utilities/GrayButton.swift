@@ -23,8 +23,16 @@ struct GrayButton: ButtonStyle {
             .padding()
             .frame(minWidth: minWidth, minHeight: minHeight)
             .background(Color(hex: 0x707070))
-            .border(width: 4, edges: [.top, .leading], color: isEnabled ? Color(hex: 0xa9a9a9) : Color(hex: 0x575757))
-            .border(width: 4, edges: [.bottom, .trailing], color: isEnabled ? Color(hex: 0x575757) : Color(hex: 0xa9a9a9))
+            .border(
+                width: 4,
+                edges: [.top, .leading],
+                color: isEnabled ? Color(hex: 0xa9a9a9) : Color(hex: 0x575757)
+            )
+            .border(
+                width: 4,
+                edges: [.bottom, .trailing],
+                color: isEnabled ? Color(hex: 0x575757) : Color(hex: 0xa9a9a9)
+            )
             .foregroundColor(.accentColor)
             .overlay(.black.opacity(isEnabled ? 0.0 : 0.5))
     }

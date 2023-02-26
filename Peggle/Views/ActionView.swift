@@ -13,42 +13,55 @@ struct ActionView: View {
     var body: some View {
         HStack(spacing: 24) {
             HStack(spacing: 20) {
-                NavigationLink(destination: LevelListView().environmentObject(levelDesigner)) {
-                    Text("Load")
-                }.simultaneousGesture(TapGesture().onEnded {
-                    hideKeyboard()
-                })
-
-                Button(action: {
-                    Task {
-                        do {
-                            try await levelDesigner.saveLevel()
-                        } catch {
-                            // TODO: proper error handling
-                            print("Error saving levels.")
-                        }
-                    }
-                }) {
-                    Text("Save")
-                }.disabled(levelDesigner.level.title.isEmpty)
-
-                Button(action: {
-                    levelDesigner.resetLevelObjects()
-                }) {
-                    Text("Reset")
-                }
+                renderLoadButton()
+                renderSaveButton()
+                renderResetButton()
             }
-
             TextField("Enter level title", text: $levelDesigner.level.title)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-
-            NavigationLink(destination: NavigationLazyView(GamePlayerView(viewModel: GamePlayerViewModel(level: levelDesigner.level)))) {
-                Text("Start")
-            }.simultaneousGesture(TapGesture().onEnded {
-                hideKeyboard()
-            })
+            renderStartButton()
         }
         .font(.custom("Minecraft-Regular", size: 20))
+    }
+
+    private func renderLoadButton() -> some View {
+        NavigationLink(destination: LevelListView().environmentObject(levelDesigner)) {
+            Text("Load")
+        }.simultaneousGesture(TapGesture().onEnded {
+            hideKeyboard()
+        })
+    }
+
+    private func renderSaveButton() -> some View {
+        Button(action: {
+            Task {
+                do {
+                    try await levelDesigner.saveLevel()
+                } catch {
+                    print("Error saving levels.")
+                }
+            }
+        }) {
+            Text("Save")
+        }.disabled(levelDesigner.level.title.isEmpty)
+    }
+
+    private func renderResetButton() -> some View {
+        Button(action: {
+            levelDesigner.resetLevelObjects()
+        }) {
+            Text("Reset")
+        }
+    }
+
+    private func renderStartButton() -> some View {
+        NavigationLink(destination: NavigationLazyView(
+            GamePlayerView(viewModel: GamePlayerViewModel(level: levelDesigner.level))
+        )) {
+            Text("Start")
+        }.simultaneousGesture(TapGesture().onEnded {
+            hideKeyboard()
+        })
     }
 }
 

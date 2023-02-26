@@ -16,22 +16,7 @@ struct RendererView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            ZStack {
-                renderer.cannonGameView
-                renderer.bucketGameView
-                if let ballGameViews = renderer.ballGameViews {
-                    ForEach(ballGameViews) { $0 }
-                }
-                if let pegGameViews = renderer.pegGameViews {
-                    ForEach(pegGameViews) { $0 }
-                }
-                if let blockGameViews = renderer.blockGameViews {
-                    ForEach(blockGameViews) { $0 }
-                }
-                if let particleEffectViews = renderer.particleEffectViews {
-                    ForEach(particleEffectViews) { $0 }
-                }
-            }
+            renderGameObjectViews()
             .contentShape(Rectangle())
             .gesture(
                 DragGesture()
@@ -53,6 +38,25 @@ struct RendererView: View {
             }
         }
         .ignoresSafeArea(edges: .all)
+    }
+
+    private func renderGameObjectViews() -> some View {
+        ZStack {
+            renderer.cannonGameView
+            renderer.bucketGameView
+            if let ballGameViews = renderer.ballGameViews {
+                ForEach(ballGameViews) { $0 }
+            }
+            if let pegGameViews = renderer.pegGameViews {
+                ForEach(pegGameViews) { $0 }
+            }
+            if let blockGameViews = renderer.blockGameViews {
+                ForEach(blockGameViews) { $0 }
+            }
+            if let particleEffectViews = renderer.particleEffectViews {
+                ForEach(particleEffectViews) { $0 }
+            }
+        }
     }
 }
 

@@ -117,7 +117,7 @@ final class BluePeg: Peg {
             position: position,
             normalImageName: "peg-blue",
             glowImageName: "peg-blue-glow",
-            score: Constants.Peg.Blue.score
+            score: Constants.Peg.blueScore
         )
     }
 
@@ -142,7 +142,7 @@ final class RedPeg: Peg {
             position: position,
             normalImageName: "peg-red",
             glowImageName: "peg-red-glow",
-            score: Constants.Peg.Red.score
+            score: Constants.Peg.redScore
         )
     }
 
@@ -167,8 +167,12 @@ final class GreenPeg: Peg {
             position: position,
             normalImageName: "peg-green",
             glowImageName: "peg-green-glow",
-            score: Constants.Peg.Green.score
+            score: Constants.Peg.greenScore
         )
+    }
+
+    override func clone() -> Self {
+        Self(instance: self)
     }
 
     required init(instance: Peg) {

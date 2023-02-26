@@ -24,29 +24,37 @@ struct EdgeBorder: Shape {
         for edge in edges {
             var x: CGFloat {
                 switch edge {
-                case .top, .bottom, .leading: return rect.minX
-                case .trailing: return rect.maxX - width
+                case .top, .bottom, .leading:
+                    return rect.minX
+                case .trailing:
+                    return rect.maxX - width
                 }
             }
 
             var y: CGFloat {
                 switch edge {
-                case .top, .leading, .trailing: return rect.minY
-                case .bottom: return rect.maxY - width
+                case .top, .leading, .trailing:
+                    return rect.minY
+                case .bottom:
+                    return rect.maxY - width
                 }
             }
 
             var w: CGFloat {
                 switch edge {
-                case .top, .bottom: return rect.width
-                case .leading, .trailing: return width
+                case .top, .bottom:
+                    return rect.width
+                case .leading, .trailing:
+                    return width
                 }
             }
 
             var h: CGFloat {
                 switch edge {
-                case .top, .bottom: return width
-                case .leading, .trailing: return rect.height
+                case .top, .bottom:
+                    return width
+                case .leading, .trailing:
+                    return rect.height
                 }
             }
             path.addRect(CGRect(x: x, y: y, width: w, height: h))

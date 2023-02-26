@@ -15,14 +15,6 @@ struct PaletteButtonView: View {
         self.paletteButton = paletteButton
     }
 
-    func renderBaseImage(isOverlay: Bool) -> some View {
-        Image(paletteButton.imageName)
-            .renderingMode(isOverlay ? .template : .original)
-            .resizable()
-            .frame(width: Constants.PaletteButton.width,
-                   height: Constants.PaletteButton.height)
-    }
-
     var body: some View {
         Button(action: {
             paletteButton.updatePalette(levelDesigner)
@@ -35,6 +27,14 @@ struct PaletteButtonView: View {
                                                     : 0.0))
             }
         }
+    }
+
+    func renderBaseImage(isOverlay: Bool) -> some View {
+        Image(paletteButton.imageName)
+            .renderingMode(isOverlay ? .template : .original)
+            .resizable()
+            .frame(width: Constants.PaletteButton.width,
+                   height: Constants.PaletteButton.height)
     }
 }
 

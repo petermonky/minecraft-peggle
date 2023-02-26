@@ -14,7 +14,12 @@ final class ParticleEffectGameObject: ObservableObject {
     let angle: CGFloat
     @Published var isVisible: Bool
 
-    init(position: CGPoint = .zero, imageName: String, duration: CGFloat = .zero, angle: CGFloat = .zero) {
+    init(
+        position: CGPoint = .zero,
+        imageName: String = "",
+        duration: CGFloat = .zero,
+        angle: CGFloat = .zero
+    ) {
         self.position = position
         self.imageName = imageName
         self.isVisible = true

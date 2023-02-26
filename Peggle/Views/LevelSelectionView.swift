@@ -18,70 +18,8 @@ struct LevelSelectionView: View {
         GeometryReader { _ in
             ScrollView {
                 VStack(spacing: 12) {
-                    ForEach(viewModel.levels.reversed()) { level in
-                        NavigationLink(destination: NavigationLazyView(GamePlayerView(
-                            viewModel: GamePlayerViewModel(level: level)
-                        ))) {
-                            HStack {
-                                Text(level.title)
-                                    .font(.custom("Minecraft-Bold", size: 20)).bold()
-                                Spacer()
-                                HStack {
-                                    HStack {
-                                        Image("peg-blue").resizable().scaledToFit().frame(width: 24, height: 24)
-                                        Text("\(level.pegs.filter { $0.type == .blue }.count)")
-                                            .font(.custom("Minecraft-Regular", size: 16))
-                                            .frame(width: 32, alignment: .leading)
-                                    }
-                                    HStack {
-                                        Image("peg-red").resizable().scaledToFit().frame(width: 24, height: 24)
-                                        Text("\(level.pegs.filter { $0.type == .red }.count)")
-                                            .font(.custom("Minecraft-Regular", size: 16))
-                                            .frame(width: 32, alignment: .leading)
-                                    }
-                                    HStack {
-                                        Image("peg-green").resizable().scaledToFit().frame(width: 24, height: 24)
-                                        Text("\(level.pegs.filter { $0.type == .green }.count)")
-                                            .font(.custom("Minecraft-Regular", size: 16))
-                                            .frame(width: 32, alignment: .leading)
-                                    }
-                                }
-                            }
-                            .frame(maxWidth: .infinity)
-                        }
-                        .buttonStyle(GrayButton())
-                    }
-                    NavigationLink(destination: NavigationLazyView(GamePlayerView(
-                        viewModel: GamePlayerViewModel(level: Level.mockData)
-                    ))) {
-                        HStack {
-                            Text(Level.mockData.title)
-                                .font(.custom("Minecraft-Bold", size: 20)).bold()
-                            Spacer()
-                            HStack {
-                                HStack {
-                                    Image("peg-blue").resizable().scaledToFit().frame(width: 24, height: 24)
-                                    Text("\(Level.mockData.pegs.filter { $0.type == .blue }.count)")
-                                        .font(.custom("Minecraft-Regular", size: 16))
-                                        .frame(width: 32, alignment: .leading)
-                                }
-                                HStack {
-                                    Image("peg-red").resizable().scaledToFit().frame(width: 24, height: 24)
-                                    Text("\(Level.mockData.pegs.filter { $0.type == .red }.count)")
-                                        .font(.custom("Minecraft-Regular", size: 16))
-                                        .frame(width: 32, alignment: .leading)
-                                }
-                                HStack {
-                                    Image("peg-green").resizable().scaledToFit().frame(width: 24, height: 24)
-                                    Text("\(Level.mockData.pegs.filter { $0.type == .green }.count)")
-                                        .font(.custom("Minecraft-Regular", size: 16))
-                                        .frame(width: 32, alignment: .leading)
-                                }
-                            }
-                        }
-                        .frame(maxWidth: .infinity)
-                    }
-                    .buttonStyle(GrayButton())
+                    renderCreatedLevels()
+                    renderPresetLevels()
                 }
                 .padding(.vertical, 140)
                 .padding(.horizontal, 60)
@@ -90,7 +28,6 @@ struct LevelSelectionView: View {
                     do {
                         try await viewModel.loadData()
                     } catch {
-                        // TODO: proper error handling
                         print("Error loading levels.")
                     }
                 }
@@ -104,6 +41,55 @@ struct LevelSelectionView: View {
         .ignoresSafeArea(.all)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: BackButtonView())
+    }
+
+    private func renderCreatedLevels() -> some View {
+        ForEach(viewModel.levels.reversed()) { level in
+            NavigationLink(destination: NavigationLazyView(GamePlayerView(
+                viewModel: GamePlayerViewModel(level: level)
+            ))) {
+                HStack {
+                    Text(level.title)
+                        .font(.custom("Minecraft-Bold", size: 20)).bold()
+                    Spacer()
+                    HStack {
+                        renderPegLabel(imageName: "peg-blue", pegType: .blue, level: level)
+                        renderPegLabel(imageName: "peg-red", pegType: .red, level: level)
+                        renderPegLabel(imageName: "peg-green", pegType: .green, level: level)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(GrayButton())
+        }
+    }
+
+    private func renderPresetLevels() -> some View {
+        NavigationLink(destination: NavigationLazyView(GamePlayerView(
+            viewModel: GamePlayerViewModel(level: Level.mockData)
+        ))) {
+            HStack {
+                Text(Level.mockData.title)
+                    .font(.custom("Minecraft-Bold", size: 20)).bold()
+                Spacer()
+                HStack {
+                    renderPegLabel(imageName: "peg-blue", pegType: .blue, level: Level.mockData)
+                    renderPegLabel(imageName: "peg-red", pegType: .red, level: Level.mockData)
+                    renderPegLabel(imageName: "peg-green", pegType: .green, level: Level.mockData)
+                }
+            }
+            .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(GrayButton())
+    }
+
+    private func renderPegLabel(imageName: String, pegType: PegType, level: Level) -> some View {
+        HStack {
+            Image(imageName).resizable().scaledToFit().frame(width: 24, height: 24)
+            Text("\(level.pegs.filter { $0.type == pegType }.count)")
+                .font(.custom("Minecraft-Regular", size: 16))
+                .frame(width: 32, alignment: .leading)
+        }
     }
 }
 
