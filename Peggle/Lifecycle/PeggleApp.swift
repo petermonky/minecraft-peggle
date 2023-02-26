@@ -14,11 +14,15 @@ struct PeggleApp: App {
             NavigationStack {
                 GeometryReader { _ in
                     VStack(spacing: 20) {
-                        NavigationLink(destination: NavigationLazyView(LevelSelectionView(viewModel: LevelSelectionViewModel()))) {
+                        NavigationLink(destination:
+                            NavigationLazyView(LevelSelectionView(viewModel: LevelSelectionViewModel()))
+                        ) {
                             Text("Choose Level")
                         }
                         .buttonStyle(GrayButton(minWidth: 400, minHeight: 80))
-                        NavigationLink(destination: NavigationLazyView(LevelDesignerView(viewModel: LevelDesignerViewModel()))) {
+                        NavigationLink(destination:
+                            NavigationLazyView(LevelDesignerView(viewModel: LevelDesignerViewModel()))
+                        ) {
                             Text("Level Designer")
                         }
                         .buttonStyle(GrayButton(minWidth: 400, minHeight: 80))
