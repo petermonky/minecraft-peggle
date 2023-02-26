@@ -17,47 +17,87 @@
    some exceptions may be made as long as code quality is not compromised.
 3. Do not burn out. Have fun!
 
-## Ball Launch
-The ball can be launched by (1) holding down on the screen and dragging your finger
-across the game view and (2) releasing your finger to fire the ball towards the
-release position. The cannon follows the position of the finger when the finger
-is being dragged across the screen and thus provides a good visual indicator for
-where the ball will be fired towards.
-
 ## Dev Guide
 The developer guide is located at `Peggle/Documentation/DeveloperGuide.md`.
 The guide includes diagrams that are fetched from a remote origin, so it
 may take a brief moment to load all the images.
 
 ## Rules of the Game
-Please write the rules of your game here. This section should include the
-following sub-sections. You can keep the heading format here, and you can add
-more headings to explain the rules of your game in a structured manner.
-Alternatively, you can rewrite this section in your own style. You may also
-write this section in a new file entirely, if you wish.
 
-### Cannon Direction
-Please explain how the player moves the cannon.
+### Ball Launch & Cannon Direction
+The ball can be launched by (1) holding down on the screen and dragging your finger
+across the game view and (2) releasing your finger to fire the ball towards the
+release position. The cannon follows the position of the finger when the finger
+is being dragged across the screen and thus provides a good visual indicator for
+where the ball will be fired towards.
 
 ### Win and Lose Conditions
-Please explain how the player wins/loses the game.
+The win condition differs depending on which game mode the player chooses.
+
+#### Normal Mode
+The player must clear all red pegs on the board within 10 lives. The player wins
+once they clear all red pegs before the end of their last life. If the player exhausts
+their last life and has not yet cleared all red pegs, they lose.
+
+#### Beat the Score Mode
+The player must accrue points to the given target score before the timer runs out. The
+time limit and the target score varies depending on the number of pegs on the board;
+generally, more pegs equates to longer time limit and higher target score. If the player
+reaches the target score before the timer runs out, they win, and otherwise, they lose.
+
+#### Siam Left, Siam Right
+The player must make three bucket shoots without touching a single peg. The player starts
+off with three lives and, as with all other game modes, gains an extra life if they successfully
+shoot into the bucket. If either the player fails to make three bucket shots before exhausting
+their last life or touches a single peg with the ball, they lose, and otherwise, they win.
+
 
 ## Level Designer Additional Features
 
 ### Peg Rotation
-Please explain how the player rotates the triangular pegs.
+A peg must first be selected in order to be able to rotate it. This can be achieved by tapping
+on the peg on the game board. Once tapped, the rotation slider in the palette becomes enabled,
+allowing the player to rotate the peg.
 
 ### Peg Resizing
-Please explain how the player resizes the pegs.
+In the same vein as above, a peg must first be selected in order to be able to resize it. This can be achieved by tapping on the peg on the game board. Once tapped, the size slider in the palette
+becomes enabled, allowing the player to resize the peg.
 
 ## Bells and Whistles
-Please write all of the additional features that you have implemented so that
-your grader can award you credit.
+
+### Minecraft Theme
+Most notably, the theme of the application is Minecraft. It is rather cohesive and provides a
+pleasant user experience to the player. This styling spans across the menu, the font, the game items,
+and the game particle effects.
+
+### Score System
+A score system has been implemented following the one given in the problem set instructions. Each peg
+has a unique score and the total score is computed by adding up the score of each peg and multiplying
+it by the score multiplier value (which is determined by the number of red pegs remaining).
+
+### Displaying the number of pegs and blocks in the level designer
+The level designer shows an overview of the number of pegs and blocks that are currently placed in the
+board. This helps the player get a better understanding of the state of their game at a glance.
+
+### Displaying game statistics in the game player
+The game player shows an overview of the game statistics, such as number of pegs remaining, time
+remaining, total score, as well as the selected game mode. This provides a more immersive experience to
+the user as they become more aware of their game performance.
+
+### Timer that results in a game over
+If the timer runs out during a game, the game ends and the player loses. The player is greeted with a
+modal through which they are able to head to the main menu or back to the level designer.
+
+### Particle effects
+The game player displays particle effects upon certain events; specifically, the explosion particle
+effect of the Kaboom character and the spirit particle effect of the Spooky character. A particle effect
+can be initialised via `ParticleEffectGameObject`, which makes the implementation extensible as new
+particle effects can be added easily.
 
 ## Tests
 
 ### Unit Tests
-The XCode project includes unit tests for the models and view models of
+The XCode project includes unit tests for the models of
 the application. Refer to the project files for more information.
 
 ### Integration Tests
@@ -72,20 +112,37 @@ Below is an exposition on how integration tests will be performed on the applica
     - Blue peg button
         - Should be selected by default upon start up.
         - When tapped, a semi-transparent white overlay should appear over the button.
-    - Orange peg button
+    - Red peg button
         - When tapped, a semi-transparent white overlay should appear over the button.
-    - Delete peg button
+    - Green peg button
+        - When tapped, a semi-transparent white overlay should appear over the button.
+    - Block button
+        - When tapped, a semi-transparent white overlay should appear over the button.
+    - Delete button
         - When tapped, a semi-transparent white overlay should appear over the button.
 - Test board view
     - If a peg palette button is selected
-        - When tapped, if the tap position does not overlap with another peg and does not overflow the board, a peg of the selected type should be created at the tap position.
-        - When tapped, if the tap position does not overlap with another peg and does overflow the board, a peg of the selected type should not be created at the tap position.
-        - When tapped, if the tap position does overlap with another peg and does not overflow the board, a peg of the selected type should not be created at the tap position.
-        - When tapped, if the tap position does overlap with another peg and does overflow the board, a peg of the selected type should not be created at the tap position.
+        - When tapped, if the tap position does not overlap with another peg or block and does not overflow the board, a peg of the selected type should be created at the tap position.
+        - When tapped, if the tap position does not overlap with another peg or block and does overflow the board, a peg of the selected type should not be created at the tap position.
+        - When tapped, if the tap position does overlap with another peg or block and does not overflow the board, a peg of the selected type should not be created at the tap position.
+        - When tapped, if the tap position does overlap with another peg or block and does overflow the board, a peg of the selected type should not be created at the tap position.
+    - If a block palette button is selected
+        - When tapped, if the tap position does not overlap with another peg or block and does not overflow the board, a block of the selected type should be created at the tap position.
+        - When tapped, if the tap position does not overlap with another peg or block and does overflow the board, a block of the selected type should not be created at the tap position.
+        - When tapped, if the tap position does overlap with another peg or block and does not overflow the board, a block of the selected type should not be created at the tap position.
+        - When tapped, if the tap position does overlap with another peg or block and does overflow the board, a block of the selected type should not be created at the tap position.
+- Test palette sliders
+    - If a peg or block is currently selected, the sliders should be enabled and should not have a white overlay.
+    - Resize slider
+        - If a peg or block is currently selected, sliding the resize slider should resize the object
+        accordingly. The peg or block should not be resized such that it overlaps or overflows.
+    - Rotation slider
+        - If a peg or block is currently selected, sliding the rotation slider should rotate the object
+        accordingly. The peg or block should not be rotated such that it overlaps or overflows.
 - Test peg view
     - Tap gesture
         - If the delete peg palette button is selected, the tapped peg should be deleted.
-        - If the delete peg palette button is not selected, nothing should happen.
+        - If the delete peg palette button is not selected, the tapped peg should be selected and the sliders should be enabled.
     - Drag gesture
         - If the drag release position does not overlap with another peg and does not overflow the board, the peg should be translated to the release position.
         - If the drag release position does not overlap with another peg and does overflow the board, the peg should not be translated to the release position.
@@ -129,9 +186,10 @@ Below is an exposition on how integration tests will be performed on the applica
     - SHould turn back to its original colour once the game exits its active state to the idle state.
 - Test ball
     - Should be affected by gravity.
-    - Should display proper collision with pegs and bounce off in a reasonable manner (parabolic trajectory).
+    - Should display proper collision with pegs and blocks and bounce off in a reasonable manner (parabolic trajectory).
     - Should bounce off the top and the sides of the physics world.
-    - Should disappear once it collides with the bottom of the physics world (game over).
+    - Should disappear once it collides with the bottom of the physics world if the game mode if the ball is not in spooky mode.
+    - Should be affected by peg explosions.
 - Test peg
     - Should not be affected by gravity.
     - Should not move during collision with the ball.
@@ -139,31 +197,39 @@ Below is an exposition on how integration tests will be performed on the applica
     - Should disappear if in constant collision for too long with the ball.
     - Should disappear if the ball exits the physics world (game over) and if the peg is lit.
     - Should fade away and scale larger upon disappear.
-
+    - Spooky peg
+        - Should turn the ball into a spooky ball upon first collision
+        - SHould not turn the ball into a spooky ball upon subsequent collisions
+    - Kaboom peg
+        - Should explode and affect the trajectory of the ball upon collision
+        - Should be removed from the board and not remain in the physics world after explosion.
+        - Should destroy surrounding pegs.
+        - SHould propagate explosion to other Kaboom pegs after a short delay.
+- Test block
+    - Should not be affected by gravity.
+    - Should not move during collision with the ball.
+    - Should disappear if in constant collision for too long with the ball.
+    - Should fade away and scale larger upon disappear.
+- Test game mode
+    - Normal mode
+        - Should maintain number of lives in the game statistics view.
+        - Should lead to win condition if all red pegs are destroyed before all lives are exhausted.
+        - Should lead to lose condition if all red pegs are not destroyed before all lives are exhausted.
+    - Beat the score mode
+        - Should maintain timer in the game statistics view.
+        - Should lead to win condition if total score exceeds given target score before timer is exhausted.
+        - Should lead to lose condition if total score does not exceed given target score before timer is exhausted.
+    - Siam left, siam right mode
+        - Should maintain lives and bucket shoot count in the game statistics view.
+        - Should lead to win condition if bucket shoot count reaches three before all lives are exhausted.
+        - Should lead to lose condition if bucket shoot count does not reach three before all lives are exhausted.
 
 ## Written Answers
 
 ### Reflecting on your Design
-> Now that you have integrated the previous parts, comment on your architecture
-> in problem sets 2 and 3. Here are some guiding questions:
-> - do you think you have designed your code in the previous problem sets well
->   enough?
-> - is there any technical debt that you need to clean in this problem set?
-> - if you were to redo the entire application, is there anything you would
->   have done differently?
 
-#### Renderer as Delegate vs Game Engine as Delegate
+To be frank, I do not think I did not design my code well in my previous problem sets. I did not fully understand how to apply MVVM and ended up abusing it in a really poor way. Despite knowing that it would be extremely tedious, I took it upon myself to redo the architecture and redesign the level designer in such a way that it would be much easier to work with in PS4. I achieved this by creating one central view model for the level designer. This implementation was a huge improvement over the previous implementation as it centralised all the necessary information and operations within one entity, preventing the need to access multiple differentt view models.
 
-One software design tradeoff I made for the game player was for the game engine to handle the refreshing of the display and not the renderer; that is, the game engine would instantiate the `CADisplayLink` and, for every refresh, notify the renderer of a rerender. This also meant that the game engine would keep a weak reference to the renderer via the `GameEngineDelegate` protocol, and not the other way around with `RendererDelegate`.
+Some technical debt that remains in this problem set is how subclassing is currently handled. There are parts in the implementation that deduce the type of an object by checking their enum type or typecasting them, which is not very scalable. I had attempted to resolve this issue but had trouble doing so because it was a lot more layered than I had initially thought; I had traced the issue all the way down to how the data was being encoded and persisted. I also believe that I may have abused protocols throughout the implementation, as I was too focused on dependency inversion and ended up creating a lot of empty protocols. A better solution may have just been to use classic OOP inheritance.
 
-Using the game engine as a delegate via `RendererDelegate` would allow the renderer to, upon gesture input from the user, delegate any game related logic and operations to the game engine. However, this would make it difficult to synchronised game related events as they happen throughout the lifecycle of a game, as the flow would have to be (1) renderer refreshes, (2) renderer delegates logic operations to game engine, (3) game engine handles logic and returns game state, (4) renderer rerenders view with new game state.
-
-In order to avoid this back-and-forth between the two components, I have decided to use the renderer as a delegate via `GameEngineDelegate`. This way, to update the display, the flow would simply be (1) game engine refreshes, (2) game engine delegates logic operations to game engine, (3) renderer rerenders view with new game state. User gesture handling is also kept quite simple as, in this case, the renderer contains a strong reference to the game engine and therefore can directly operate on the game engine to trigger any necessary operations upon gesture input.
-
-#### Collision Controller vs Object Handles Collision
-
-Another design tradeoff I made for the game player was to implement collision detection and resolution between objects to the objects themselves and not use a collision controller that accepts two physics bodies and handles the collision behaviour.
-
-A collision controller would be give way for a clean implementation as all collision detection and resolution behaviour would be abstracted away behind a single entity. The collision controller would effectively check the types of the two objects that are passed in and, using their position and velocity data, compute the result of the collision. Although this implementation would abstract away the collision logic and keep the rest of the code legible, it would not be a very extensible implementation as it would not be possible to implement additional collision behaviour inside the method of the collision controller, should a client of the physics engine API want to introduce a new type of physics body.
-
-This is where the new implementation of delegating the collision handling responsibility to the objects themselves comes in. In my current implementation, the `DynamicCirclePhysicsBody` protocol implements default methods for handling collision with different types of physics bodies (although currently, they are only limited to circular physics bodies). Should a client of the physics engine API want to create a new type of dynamic physics body that extends the `DynamicPhysicsBody` protocol, they could very well do so and implement new collision handling behaviour; this implementation therefore better abides by the open-closed principle. However, one minor disadvantage of this method would be that the client must specify collision handling for every type of physics body that is introduced, though I believe that the benefits gained from the extensibility of this implementation greatly outweighs this disadvantage.
+If I could redo the entire application, I would not make the mistake of splitting up the view model, as I ended up spending a lot of time and effort in merely refactoring the application. I would also try to understand protocols better and use them more effectively, as currently, protocols are causing more problems than they are solving them. Another change I would possibly make is to better understand design patterns, especially anti-patterns. I initially did not know that the singleton design pattern was an anti-pattern and ended up abusing it in my initial design. Had I known better starting out, I would have avoided this implementation.

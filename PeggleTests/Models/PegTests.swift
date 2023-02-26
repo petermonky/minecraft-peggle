@@ -23,7 +23,7 @@ final class PegTests: XCTestCase {
         let peg = RedPeg(position: CGPoint.zero)
 
         XCTAssertNotNil(peg.id, "Peg id should be new UUID.")
-        XCTAssertEqual(peg.type, PegType.red, "Peg type should be orange.")
+        XCTAssertEqual(peg.type, PegType.red, "Peg type should be red.")
         XCTAssertEqual(peg.position, CGPoint.zero, "Peg position should be CGPoint.zero.")
         XCTAssertEqual(peg.normalImageName, "peg-red", "Peg imageName should be \"peg-red\".")
     }
@@ -141,7 +141,7 @@ final class PegTests: XCTestCase {
         XCTAssertEqual(peg.normalImageName, clone.normalImageName, "Peg imageName should be equal to clone position.")
     }
 
-    func testClone_orangePeg() {
+    func testClone_redPeg() {
         let peg = RedPeg(position: CGPoint.zero)
         let clone = peg.clone()
 
