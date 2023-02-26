@@ -13,6 +13,7 @@ class Renderer: ObservableObject, GameEngineDelegate {
     @Published private(set) var ballGameViews: [BallGameView]?
     @Published private(set) var pegGameViews: [PegGameView]?
     @Published private(set) var blockGameViews: [BlockGameView]?
+    @Published private(set) var particleEffectViews: [ParticleEffectView]?
     private var gameEngine: GameEngine
 
     init(gameEngine: GameEngine) {
@@ -42,16 +43,13 @@ extension Renderer {
         renderViews()
     }
 
-    func didUpdateGameState() {
-//        gameState = gameEngine.state
-    }
-
     func clearViews() {
         cannonGameView = nil
         bucketGameView = nil
         ballGameViews = []
         pegGameViews = []
         blockGameViews = []
+        particleEffectViews = []
     }
 
     func renderViews() {
@@ -60,6 +58,7 @@ extension Renderer {
         ballGameViews = gameEngine.ballGameObjects.map { BallGameView(gameObject: $0) }
         pegGameViews = gameEngine.pegGameObjects.map { PegGameView(gameObject: $0) }
         blockGameViews = gameEngine.blockGameObjects.map { BlockGameView(gameObject: $0) }
+        particleEffectViews = gameEngine.particleEffectGameObjects.map { ParticleEffectView(gameObject: $0) }
     }
 
     func updateCannonAngle(position: CGPoint) {

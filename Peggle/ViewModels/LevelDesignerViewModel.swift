@@ -235,6 +235,7 @@ extension LevelDesignerViewModel {
     func resetLevelObjects() {
         level.pegs = []
         level.blocks = []
+        deselectLevelObject()
     }
 
     func isOverlapping(_ levelObject: any LevelObject) -> Bool {

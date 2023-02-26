@@ -26,12 +26,13 @@ class SpookyCharacter: GameCharacter {
               !areGreenPegsNew else {
             return
         }
-        greenPegs.forEach { greenPeg in
-            gameEngine.ballGameObjects.forEach { ball in
-                if CollisionManager.hasCollisionBetween(greenPeg, and: ball) {
-                    ball.setSpooky()
-                }
-            }
+        gameEngine.ballGameObjects.forEach { ball in
+            gameEngine.addParticleEffect(ParticleEffectGameObject(
+                position: ball.position,
+                imageName: "spirit",
+                duration: 0.5
+            ))
+            ball.setSpooky()
         }
     }
 }

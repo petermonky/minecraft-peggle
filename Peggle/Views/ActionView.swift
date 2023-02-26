@@ -47,14 +47,6 @@ struct ActionView: View {
             }.simultaneousGesture(TapGesture().onEnded {
                 hideKeyboard()
             })
-
-//            NavigationLink(destination: GamePlayerView(
-//                viewModel: GamePlayerViewModel(level: levelDesigner.level)
-//            )) {
-//                Text("START")
-//            }.simultaneousGesture(TapGesture().onEnded {
-//                hideKeyboard()
-//            })
         }
         .font(.custom("Minecraft-Regular", size: 20))
     }

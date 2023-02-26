@@ -11,7 +11,7 @@ struct PaletteView: View {
     @EnvironmentObject var levelDesigner: LevelDesignerViewModel
 
     var body: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: 24) {
             VStack(alignment: .leading, spacing: 20) {
                 HStack(spacing: 20) {
                     ForEach(levelDesigner.normalPegPaletteButtons, id: \.type) {
@@ -23,13 +23,21 @@ struct PaletteView: View {
                 }
             }
             Spacer()
-            VStack {
-                Slider(value: $levelDesigner.resizeValue, in: 0.25...1.75)
-                    .onChange(of: levelDesigner.resizeValue, perform: sliderChanged )
-                    .disabled(!levelDesigner.isLevelObjectSelected)
-                Slider(value: $levelDesigner.rotateValue, in: -Double.pi...Double.pi)
-                    .onChange(of: levelDesigner.rotateValue, perform: sliderChanged )
-                    .disabled(!levelDesigner.isLevelObjectSelected)
+            VStack(spacing: 16) {
+                VStack {
+                    Text("Size")
+                        .font(.custom("Minecraft-Bold", size: 20))
+                    Slider(value: $levelDesigner.resizeValue, in: 0.25...1.75)
+                        .onChange(of: levelDesigner.resizeValue, perform: sliderChanged )
+                        .disabled(!levelDesigner.isLevelObjectSelected)
+                }
+                VStack {
+                    Text("Amgle")
+                        .font(.custom("Minecraft-Bold", size: 20))
+                    Slider(value: $levelDesigner.rotateValue, in: -Double.pi...Double.pi)
+                        .onChange(of: levelDesigner.rotateValue, perform: sliderChanged )
+                        .disabled(!levelDesigner.isLevelObjectSelected)
+                }
             }
             Spacer()
             PaletteButtonView(paletteButton: levelDesigner.deletePaletteButton)

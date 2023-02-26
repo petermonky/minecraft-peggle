@@ -17,7 +17,7 @@ struct BallGameView: View, Identifiable {
     }
 
     var body: some View {
-        Image(gameObject.isSpooky ? "peg-red-glow" : "ball") // TODO: spooky
+        Image(gameObject.isSpooky ? "ball-spirit" : "ball")
             .resizable()
             .frame(width: 2 * Constants.Ball.radius,
                    height: 2 * Constants.Ball.radius)

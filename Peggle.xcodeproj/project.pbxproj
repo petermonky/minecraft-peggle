@@ -32,6 +32,8 @@
 		D01143AA29AA728B00B3B53C /* View+Border.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01143A929AA728B00B3B53C /* View+Border.swift */; };
 		D01143AC29AA8A0100B3B53C /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01143AB29AA8A0100B3B53C /* BackButtonView.swift */; };
 		D01143AE29AA8AB900B3B53C /* GrayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01143AD29AA8AB900B3B53C /* GrayButton.swift */; };
+		D01143B029AB002B00B3B53C /* ParticleEffectGameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01143AF29AB002B00B3B53C /* ParticleEffectGameObject.swift */; };
+		D01143B229AB024C00B3B53C /* ParticleEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01143B129AB024C00B3B53C /* ParticleEffectView.swift */; };
 		D017DFA02986A6E3009125B3 /* DeveloperGuide.md in Resources */ = {isa = PBXBuildFile; fileRef = D017DF9F2986A6E3009125B3 /* DeveloperGuide.md */; };
 		D021AD8A29836B18001F63DD /* View+IsRendered.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021AD8929836B18001F63DD /* View+IsRendered.swift */; };
 		D021AD8E298397D2001F63DD /* LevelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D021AD8D298397D2001F63DD /* LevelTests.swift */; };
@@ -151,6 +153,8 @@
 		D01143A929AA728B00B3B53C /* View+Border.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Border.swift"; sourceTree = "<group>"; };
 		D01143AB29AA8A0100B3B53C /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
 		D01143AD29AA8AB900B3B53C /* GrayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrayButton.swift; sourceTree = "<group>"; };
+		D01143AF29AB002B00B3B53C /* ParticleEffectGameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleEffectGameObject.swift; sourceTree = "<group>"; };
+		D01143B129AB024C00B3B53C /* ParticleEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleEffectView.swift; sourceTree = "<group>"; };
 		D017DF9F2986A6E3009125B3 /* DeveloperGuide.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = DeveloperGuide.md; sourceTree = "<group>"; };
 		D021AD8929836B18001F63DD /* View+IsRendered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+IsRendered.swift"; sourceTree = "<group>"; };
 		D021AD8D298397D2001F63DD /* LevelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelTests.swift; sourceTree = "<group>"; };
@@ -508,6 +512,7 @@
 				D09BBCF72990C87B004340FF /* BallGameObject.swift */,
 				D0A4DB9B29936EC0003925BF /* CannonGameObject.swift */,
 				D0AEFBE229A50D6F00BCE15F /* BucketGameObject.swift */,
+				D01143AF29AB002B00B3B53C /* ParticleEffectGameObject.swift */,
 				D000EF8D29A7A0F8009BDBBB /* GameCharacter.swift */,
 				D000EF8F29A7A1C1009BDBBB /* KaboomCharacter.swift */,
 				D000EF9129A858E8009BDBBB /* SpookyCharacter.swift */,
@@ -530,6 +535,7 @@
 				D09BBCFB29910977004340FF /* BallGameView.swift */,
 				D0A4DB91299290D0003925BF /* CannonGameView.swift */,
 				D0AEFBE029A50D5200BCE15F /* BucketGameView.swift */,
+				D01143B129AB024C00B3B53C /* ParticleEffectView.swift */,
 				D0A4DB9D29937065003925BF /* SpriteView.swift */,
 			);
 			path = Renderer;
@@ -687,6 +693,7 @@
 				D0AEFBF729A609D500BCE15F /* CollisionManager.swift in Sources */,
 				D09BBCFA2990C9AD004340FF /* PhysicsShape.swift in Sources */,
 				D08AEB7B2979682E00EA1590 /* LevelDesignerViewModel.swift in Sources */,
+				D01143B229AB024C00B3B53C /* ParticleEffectView.swift in Sources */,
 				D0A4DB942992921E003925BF /* RendererView.swift in Sources */,
 				D09BBCE5298F8F35004340FF /* GameEngine.swift in Sources */,
 				D0AEFC1129A73B2200BCE15F /* BlockGameView.swift in Sources */,
@@ -697,6 +704,7 @@
 				D0AEFBF129A5FBF600BCE15F /* LevelObjectView.swift in Sources */,
 				D000EF8229A76643009BDBBB /* PaletteButton.swift in Sources */,
 				D0AEFBFB29A61AEB00BCE15F /* Segment.swift in Sources */,
+				D01143B029AB002B00B3B53C /* ParticleEffectGameObject.swift in Sources */,
 				D0853A7329A4E178000D0F20 /* LevelObject.swift in Sources */,
 				D000EF9229A858E8009BDBBB /* SpookyCharacter.swift in Sources */,
 				D000EF9029A7A1C1009BDBBB /* KaboomCharacter.swift in Sources */,

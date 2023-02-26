@@ -30,6 +30,7 @@ struct PeggleApp: App {
                     Image("background-dirt")
                         .resizable(resizingMode: .tile)
                 )
+                .preferredColorScheme(.dark)
                 .ignoresSafeArea(.container)
             }
         }

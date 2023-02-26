@@ -28,6 +28,7 @@ class KaboomCharacter: GameCharacter {
         guard let gameEngine = gameEngine else {
             return
         }
+        let pegs = pegs.filter { $0.isVisible }
         gameEngine.removeGameObjects(pegs)
         chainExplosion(around: pegs)
     }
@@ -37,6 +38,12 @@ class KaboomCharacter: GameCharacter {
             return
         }
         for peg in pegs {
+            gameEngine.addParticleEffect(ParticleEffectGameObject(
+                position: peg.position,
+                imageName: "explosion",
+                duration: 0.5
+            ))
+
             gameEngine.ballGameObjects.forEach { ball in
                 let distance = peg.position.distance(to: ball.position)
                 if distance <= 200 { // TODO: move to constants

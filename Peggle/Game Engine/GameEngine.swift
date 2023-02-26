@@ -21,6 +21,7 @@ class GameEngine: ObservableObject {
     private var displayLink: CADisplayLink?
     private(set) var cannonGameObject: CannonGameObject
     private(set) var bucketGameObject: BucketGameObject
+    private(set) var particleEffectGameObjects: [ParticleEffectGameObject]
     private(set) var level: Level
 
     let selectableCharacters: [GameCharacter] = [KaboomCharacter(), SpookyCharacter()]
@@ -47,6 +48,7 @@ class GameEngine: ObservableObject {
             x: level.frame.width / 2,
             y: level.frame.height + Constants.Cannon.height + Constants.Bucket.height / 2
         ))
+        self.particleEffectGameObjects = []
         let frame = level.frame
             .adjust(y: Constants.Cannon.height)
             .adjust(y: Constants.Bucket.height)
@@ -344,7 +346,6 @@ extension GameEngine {
 
     func updateGameState(_ state: GameState) {
         self.state = state
-        renderer?.didUpdateGameState()
     }
 
     private func handleBallGameObjectCollision() {
@@ -384,9 +385,20 @@ extension GameEngine {
         }
     }
 
+    func addParticleEffect(_ particleEffect: ParticleEffectGameObject) {
+        particleEffectGameObjects.append(particleEffect)
+        DispatchQueue.main.asyncAfter(deadline: .now() + particleEffect.duration) {
+            self.removeParticleEffect(particleEffect)
+        }
+    }
+
+    func removeParticleEffect(_ particleEffect: ParticleEffectGameObject) {
+        particleEffectGameObjects.removeAll(where: { $0 === particleEffect })
+    }
+
     func pegsSurrounding(_ peg: PegGameObject, within radius: Double) -> [PegGameObject] {
         var surroundingPegs: [PegGameObject] = []
-        for other in visiblePegs where other.peg.position.distance(to: peg.position) <= radius { // TODO: constant
+        for other in visiblePegs where other !== peg && other.peg.position.distance(to: peg.position) <= radius {
             surroundingPegs.append(other)
         }
         return surroundingPegs

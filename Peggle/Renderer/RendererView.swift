@@ -15,35 +15,38 @@ struct RendererView: View {
     }
 
     var body: some View {
-            ZStack {
-                renderer.cannonGameView
-                if let ballGameViews = renderer.ballGameViews {
-                    ForEach(ballGameViews) { $0 }
-                }
-                renderer.bucketGameView
-                if let pegGameViews = renderer.pegGameViews {
-                    ForEach(pegGameViews) { $0 }
-                }
-                if let blockGameViews = renderer.blockGameViews {
-                    ForEach(blockGameViews) { $0 }
-                }
+        ZStack {
+            renderer.cannonGameView
+            renderer.bucketGameView
+            if let ballGameViews = renderer.ballGameViews {
+                ForEach(ballGameViews) { $0 }
             }
-            .contentShape(Rectangle())
-            .gesture(
-                DragGesture()
-                    .onChanged { value in
-                        renderer.updateCannonAngle(position: value.location)
-                    }
-                    .onEnded { value in
-                        renderer.addBallTowards(position: value.location)
-                    }
-            )
-            .frame(width: renderer.frame.width, height: renderer.frame.height)
-            .background(
-                Image("background-ores")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-            )
+            if let pegGameViews = renderer.pegGameViews {
+                ForEach(pegGameViews) { $0 }
+            }
+            if let blockGameViews = renderer.blockGameViews {
+                ForEach(blockGameViews) { $0 }
+            }
+            if let particleEffectViews = renderer.particleEffectViews {
+                ForEach(particleEffectViews) { $0 }
+            }
+        }
+        .contentShape(Rectangle())
+        .gesture(
+            DragGesture()
+                .onChanged { value in
+                    renderer.updateCannonAngle(position: value.location)
+                }
+                .onEnded { value in
+                    renderer.addBallTowards(position: value.location)
+                }
+        )
+        .frame(width: renderer.frame.width, height: renderer.frame.height)
+        .background(
+            Image("background-ores")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+        )
         .ignoresSafeArea(edges: .all)
     }
 }

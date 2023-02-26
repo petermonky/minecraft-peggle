@@ -30,6 +30,7 @@ struct Popup<T: View>: ViewModifier {
                 .animation(Animation.spring(), value: isPresented)
                 .offset(x: 0, y: isPresented ? 0 : geometry.belowScreenEdge)
                 .frame(width: geometry.size.width, height: geometry.size.height, alignment: alignment)
+                .background(.black.opacity(isPresented ? 0.5 : 0.0))
                 .zIndex(Double.infinity)
         }
     }
