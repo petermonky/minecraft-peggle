@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Frame: Codable, FrameCollidable {
+struct Frame: Codable, Equatable, FrameCollidable {
     var width: CGFloat
     var height: CGFloat
 

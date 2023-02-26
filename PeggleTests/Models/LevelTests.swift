@@ -13,23 +13,29 @@ final class LevelTests: XCTestCase {
     func testConstruct_emptyParameters() {
         let level = Level()
 
-        XCTAssertNotNil(level.id, "Level id should be new UUID.")
-        XCTAssertEqual(level.title, "", "Level title should be empty string.")
-        XCTAssertNotNil(level.updatedAt, "Level updatedAt should be current date and time.")
-        XCTAssertEqual(level.pegs, [], "Level pegs should be empty set.")
+        XCTAssertNotNil(level.id)
+        XCTAssertEqual(level.frame, Frame())
+        XCTAssertEqual(level.title, "")
+        XCTAssertNotNil(level.updatedAt)
+        XCTAssertEqual(level.pegs, [])
+        XCTAssertEqual(level.blocks, [])
     }
 
     func testConstruct_filledParameters() {
         let id = UUID()
+        let frame = Frame(size: CGSize(width: 100, height: 100))
         let title = "Monkey level 🐵"
         let updatedAt = Date.now
         let pegs = Set<Peg>([BluePeg(), RedPeg()])
-        let level = Level(id: id, title: title, updatedAt: updatedAt, pegs: pegs)
+        let blocks = Set<Block>([NormalBlock(), NormalBlock()])
+        let level = Level(id: id, frame: frame, title: title, updatedAt: updatedAt, pegs: pegs, blocks: blocks)
 
-        XCTAssertEqual(level.id, id, "Level id should be equal to parameter value.")
-        XCTAssertEqual(level.title, title, "Level title should be equal to parameter value.")
-        XCTAssertEqual(level.updatedAt, updatedAt, "Level updatedAt should be equal to parameter value.")
-        XCTAssertEqual(level.pegs, pegs, "Level pegs should be equal to parameter value.")
+        XCTAssertEqual(level.id, id)
+        XCTAssertEqual(level.frame, frame)
+        XCTAssertEqual(level.title, title)
+        XCTAssertEqual(level.updatedAt, updatedAt)
+        XCTAssertEqual(level.blocks, blocks)
+        XCTAssertEqual(level.pegs, pegs)
     }
 
     func testEqual_sameIdAndSameParameters_isEqual() {

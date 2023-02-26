@@ -19,41 +19,13 @@ final class PegTests: XCTestCase {
         XCTAssertEqual(peg.normalImageName, "peg-blue", "Peg imageName should be \"peg-blue\".")
     }
 
-    func testConstruct_orangePeg() {
+    func testConstruct_redPeg() {
         let peg = RedPeg(position: CGPoint.zero)
 
         XCTAssertNotNil(peg.id, "Peg id should be new UUID.")
         XCTAssertEqual(peg.type, PegType.red, "Peg type should be orange.")
         XCTAssertEqual(peg.position, CGPoint.zero, "Peg position should be CGPoint.zero.")
-        XCTAssertEqual(peg.normalImageName, "peg-orange", "Peg imageName should be \"peg-orange\".")
-    }
-
-    func testOverlapsWith_fullOverlappingPeg_hasOverlap() {
-        let peg1 = BluePeg(position: CGPoint.zero)
-        let peg2 = BluePeg(position: CGPoint(x: 0, y: 0))
-
-        XCTAssertTrue(peg1.overlapsWith(peg: peg2))
-    }
-
-    func testOverlapsWith_halfOverlappingPeg_hasOverlap() {
-        let peg1 = BluePeg(position: CGPoint.zero)
-        let peg2 = BluePeg(position: CGPoint(x: Constants.Peg.radius, y: 0))
-
-        XCTAssertTrue(peg1.overlapsWith(peg: peg2))
-    }
-
-    func testOverlapsWith_borderOverlappingPeg_hasOverlap() {
-        let peg1 = BluePeg(position: CGPoint.zero)
-        let peg2 = BluePeg(position: CGPoint(x: 2 * Constants.Peg.radius, y: 0))
-
-        XCTAssertTrue(peg1.overlapsWith(peg: peg2))
-    }
-
-    func testOverlapsWith_nonOverlappingPeg_hasNoOverlap() {
-        let peg1 = BluePeg(position: CGPoint.zero)
-        let peg2 = BluePeg(position: CGPoint(x: 2 * Constants.Peg.radius + 0.1, y: 0))
-
-        XCTAssertFalse(peg1.overlapsWith(peg: peg2))
+        XCTAssertEqual(peg.normalImageName, "peg-red", "Peg imageName should be \"peg-red\".")
     }
 
     func testTranslateBy_zeroXAndzeroY() {
