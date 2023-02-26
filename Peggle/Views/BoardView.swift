@@ -31,7 +31,6 @@ struct BoardView: View {
                 levelDesigner.createObjectAtPosition(location)
             }
             .onAppear {
-                print(geometry.size)
                 levelDesigner.initialiseFrame(size: geometry.size)
             }
         }
