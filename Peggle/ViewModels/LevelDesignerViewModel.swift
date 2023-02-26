@@ -90,7 +90,7 @@ extension LevelDesignerViewModel {
 
     func saveLevel() async throws {
         levels = levels.filter { $0 != level }
-        levels.append(level.clone())
+        levels.append(level)
         try await saveData()
     }
 
