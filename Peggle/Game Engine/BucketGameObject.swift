@@ -29,9 +29,9 @@ final class BucketGameObject: ObservableObject, PolygonCollidable {
     func moveInDirection() {
         switch direction {
         case .left:
-            position.x -= 2 // TODO: move to constants
+            position.x -= Constants.Bucket.step
         case .right:
-            position.x += 2
+            position.x += Constants.Bucket.step
         }
     }
 

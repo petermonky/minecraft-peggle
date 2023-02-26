@@ -18,8 +18,8 @@ struct DataView: View {
                     .frame(width: 40, alignment: .leading)
             }
             HStack(spacing: 16) {
-                Image("peg-orange").resizable().scaledToFit().frame(width: 40, height: 40)
-                Text("\(levelDesigner.orangePegObjectsCount)")
+                Image("peg-red").resizable().scaledToFit().frame(width: 40, height: 40)
+                Text("\(levelDesigner.redPegObjectsCount)")
                     .frame(width: 40, alignment: .leading)
             }
             HStack(spacing: 16) {

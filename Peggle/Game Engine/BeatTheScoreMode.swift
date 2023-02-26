@@ -13,16 +13,21 @@ class BeatTheScoreMode: GameMode {
     var presetBucketShotCount: Int?
     let name: String = "Beat The Score"
     let description: String = "Tick tock, beat the clock! Score high and fast to win the game."
+    private let numberFormatter = NumberFormatter()
+
+    init() {
+        numberFormatter.numberStyle = .decimal
+    }
 
     var goalText: String {
-        "Reach target score of \(targetScore)!"
+        "Reach target score of \(numberFormatter.string(from: NSNumber(value: targetScore)) ?? "-")!"
     }
 
     var presetDuration: Double? {
         guard let gameEngine = gameEngine else {
             return 0
         }
-        return Double(10 * (gameEngine.level.pegs.count / 5) + 5) // TODO: constants
+        return Double(10 * (gameEngine.level.pegs.count / 5) + 10) // TODO: constants
     }
 
     private var targetScore: Int {
@@ -30,7 +35,7 @@ class BeatTheScoreMode: GameMode {
             return 0
         }
         let pegs = gameEngine.level.pegs
-        return 2_000 * (pegs.map { $0.score }.reduce(0, +) * pegs.count / 300) // TODO: fix score logic with orange pegs
+        return 75 * (pegs.map { $0.score }.reduce(0, +) * pegs.count)
     }
 
     func handleGameOver() {

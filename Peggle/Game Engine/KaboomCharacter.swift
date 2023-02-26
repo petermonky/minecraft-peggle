@@ -34,40 +34,50 @@ class KaboomCharacter: GameCharacter {
     }
 
     private func chainExplosion(around pegs: [PegGameObject]) {
+        for peg in pegs {
+            addExplosionEffect(at: peg)
+            explosionBoostBalls(around: peg)
+            cascadeExplosion(around: peg)
+        }
+    }
+
+    private func addExplosionEffect(at peg: PegGameObject) {
+        gameEngine?.addParticleEffect(ParticleEffectGameObject(
+            position: peg.position,
+            imageName: "explosion",
+            duration: 0.5
+        ))
+    }
+
+    private func explosionBoostBalls(around peg: PegGameObject) {
+        gameEngine?.ballGameObjects.forEach { ball in
+            let distance = peg.position.distance(to: ball.position)
+            if distance <= Constants.Kaboom.radius {
+                var explosionVector = CGVector(from: peg.position, to: ball.position)
+                explosionVector = explosionVector.normalise.scale(by: 5 * (Constants.Kaboom.radius - distance))
+                ball.explosionBoost(by: explosionVector)
+            }
+        }
+    }
+
+    private func cascadeExplosion(around peg: PegGameObject) {
         guard let gameEngine = gameEngine else {
             return
         }
-        for peg in pegs {
-            gameEngine.addParticleEffect(ParticleEffectGameObject(
-                position: peg.position,
-                imageName: "explosion",
-                duration: 0.5
-            ))
+        let surroundingPegs = gameEngine.pegsSurrounding(peg, within: Constants.Kaboom.radius)
+        var greenPegs: [PegGameObject] = []
+        var otherPegs: [PegGameObject] = []
 
-            gameEngine.ballGameObjects.forEach { ball in
-                let distance = peg.position.distance(to: ball.position)
-                if distance <= 200 { // TODO: move to constants
-                    var explosionVector = CGVector(from: peg.position, to: ball.position)
-                    explosionVector = explosionVector.normalise.scale(by: 400 - 2 * distance)
-                    ball.explosionBoost(by: explosionVector)
+        DispatchQueue.main.asyncAfter(deadline: .now() + Constants.Peg.explodeDelay) {
+            for other in surroundingPegs {
+                if other.peg.type == .green {
+                    greenPegs.append(other)
+                } else {
+                    otherPegs.append(other)
                 }
             }
-
-            let surroundingPegs = gameEngine.pegsSurrounding(peg, within: 200) // TODO: constants
-            var greenPegs: [PegGameObject] = []
-            var otherPegs: [PegGameObject] = []
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + Constants.Peg.explodeDelay) {
-                for other in surroundingPegs {
-                    if other.peg.type == .green {
-                        greenPegs.append(other)
-                    } else {
-                        otherPegs.append(other)
-                    }
-                }
-                self.explodePegs(greenPegs)
-                gameEngine.removeGameObjects(otherPegs)
-            }
+            self.explodePegs(greenPegs)
+            gameEngine.removeGameObjects(otherPegs)
         }
     }
 }

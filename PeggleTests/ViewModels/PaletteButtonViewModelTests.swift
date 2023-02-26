@@ -18,7 +18,7 @@ final class PaletteButtonViewModelTests: XCTestCase {
     }
 
     func testConstruct_filledParameters() {
-        let paletteButtonViewModel = PaletteButtonViewModel(paletteButton: OrangePegPaletteButton())
+        let paletteButtonViewModel = PaletteButtonViewModel(paletteButton: RedPegPaletteButton())
 
         XCTAssertEqual(paletteButtonViewModel.paletteButton.type, .orangePeg,
                        "Palette button view model should be initialised with orange peg button.")

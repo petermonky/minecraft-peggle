@@ -23,7 +23,7 @@ final class LevelTests: XCTestCase {
         let id = UUID()
         let title = "Monkey level 🐵"
         let updatedAt = Date.now
-        let pegs = Set<Peg>([BluePeg(), OrangePeg()])
+        let pegs = Set<Peg>([BluePeg(), RedPeg()])
         let level = Level(id: id, title: title, updatedAt: updatedAt, pegs: pegs)
 
         XCTAssertEqual(level.id, id, "Level id should be equal to parameter value.")
@@ -36,7 +36,7 @@ final class LevelTests: XCTestCase {
         let id = UUID()
         let title = "Monkey level 🐵"
         let updatedAt = Date.now
-        let pegs = Set<Peg>([BluePeg(), OrangePeg()])
+        let pegs = Set<Peg>([BluePeg(), RedPeg()])
         let level1 = Level(id: id, title: title, updatedAt: updatedAt, pegs: pegs)
         let level2 = Level(id: id, title: title, updatedAt: updatedAt, pegs: pegs)
 
@@ -47,7 +47,7 @@ final class LevelTests: XCTestCase {
         let id = UUID()
         let title1 = "Monkey level 🐵"
         let updatedAt1 = Date.now
-        let pegs1 = Set<Peg>([BluePeg(), OrangePeg()])
+        let pegs1 = Set<Peg>([BluePeg(), RedPeg()])
         let level1 = Level(id: id, title: title1, updatedAt: updatedAt1, pegs: pegs1)
         let title2 = "Cat level 🐱"
         let updatedAt2 = Date.now
@@ -62,7 +62,7 @@ final class LevelTests: XCTestCase {
         let id2 = UUID()
         let title = "Monkey level 🐵"
         let updatedAt = Date.now
-        let pegs = Set<Peg>([BluePeg(), OrangePeg()])
+        let pegs = Set<Peg>([BluePeg(), RedPeg()])
         let level1 = Level(id: id1, title: title, updatedAt: updatedAt, pegs: pegs)
         let level2 = Level(id: id2, title: title, updatedAt: updatedAt, pegs: pegs)
 
@@ -73,7 +73,7 @@ final class LevelTests: XCTestCase {
         let id1 = UUID()
         let title1 = "Monkey level 🐵"
         let updatedAt1 = Date.now
-        let pegs1 = Set<Peg>([BluePeg(), OrangePeg()])
+        let pegs1 = Set<Peg>([BluePeg(), RedPeg()])
         let level1 = Level(id: id1, title: title1, updatedAt: updatedAt1, pegs: pegs1)
         let id2 = UUID()
         let title2 = "Cat level 🐱"
@@ -88,7 +88,7 @@ final class LevelTests: XCTestCase {
         let id = UUID()
         let title = "Monkey level 🐵"
         let updatedAt = Date.now
-        let pegs = Set<Peg>([BluePeg(), OrangePeg()])
+        let pegs = Set<Peg>([BluePeg(), RedPeg()])
         let level1 = Level(id: id, title: title, updatedAt: updatedAt, pegs: pegs)
         let level2 = Level(id: id, title: title, updatedAt: updatedAt, pegs: pegs)
 
@@ -100,7 +100,7 @@ final class LevelTests: XCTestCase {
         let id = UUID()
         let title1 = "Monkey level 🐵"
         let updatedAt1 = Date.now
-        let pegs1 = Set<Peg>([BluePeg(), OrangePeg()])
+        let pegs1 = Set<Peg>([BluePeg(), RedPeg()])
         let level1 = Level(id: id, title: title1, updatedAt: updatedAt1, pegs: pegs1)
         let title2 = "Cat level 🐱"
         let updatedAt2 = Date.now
@@ -116,7 +116,7 @@ final class LevelTests: XCTestCase {
         let id2 = UUID()
         let title = "Monkey level 🐵"
         let updatedAt = Date.now
-        let pegs = Set<Peg>([BluePeg(), OrangePeg()])
+        let pegs = Set<Peg>([BluePeg(), RedPeg()])
         let level1 = Level(id: id1, title: title, updatedAt: updatedAt, pegs: pegs)
         let level2 = Level(id: id2, title: title, updatedAt: updatedAt, pegs: pegs)
 
@@ -128,7 +128,7 @@ final class LevelTests: XCTestCase {
         let id1 = UUID()
         let title1 = "Monkey level 🐵"
         let updatedAt1 = Date.now
-        let pegs1 = Set<Peg>([BluePeg(), OrangePeg()])
+        let pegs1 = Set<Peg>([BluePeg(), RedPeg()])
         let level1 = Level(id: id1, title: title1, updatedAt: updatedAt1, pegs: pegs1)
         let id2 = UUID()
         let title2 = "Cat level 🐱"

@@ -28,7 +28,7 @@ final class PegGameObjectTests: XCTestCase {
 
     func testConstruct_nonEmptyParameters() {
         let shape = CirclePhysicsShape(radius: Constants.Peg.radius)
-        let peg = OrangePeg()
+        let peg = RedPeg()
         let hasCollidedWithBall = true
         let pegGameObject = PegGameObject(peg: peg, hasCollidedWithBall: hasCollidedWithBall)
 
@@ -45,7 +45,7 @@ final class PegGameObjectTests: XCTestCase {
     }
 
     func testClone() {
-        let peg = OrangePeg()
+        let peg = RedPeg()
         let hasCollidedWithBall = true
         let originalPegGameObject = PegGameObject(peg: peg, hasCollidedWithBall: hasCollidedWithBall)
         let clonedPegGameObject = originalPegGameObject.clone()

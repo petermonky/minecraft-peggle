@@ -118,16 +118,16 @@ extension GameEngine {
     }
 
     private var scoreMultiplier: Int {
-        let visibleOrangePegsCount = visiblePegs.filter { $0.peg.type == .orange }.count
-        if visibleOrangePegsCount >= 16 {
+        let visibleRedPegsCount = visiblePegs.filter { $0.peg.type == .red }.count
+        if visibleRedPegsCount >= 16 {
             return 1
-        } else if visibleOrangePegsCount >= 11 {
+        } else if visibleRedPegsCount >= 11 {
             return 2
-        } else if visibleOrangePegsCount >= 8 {
+        } else if visibleRedPegsCount >= 8 {
             return 3
-        } else if visibleOrangePegsCount >= 4 {
+        } else if visibleRedPegsCount >= 4 {
             return 5
-        } else if visibleOrangePegsCount >= 1 {
+        } else if visibleRedPegsCount >= 1 {
             return 10
         } else {
             return 100
@@ -155,8 +155,8 @@ extension GameEngine {
         visiblePegs.filter { $0.peg.type == .blue }.count
     }
 
-    var orangePegsCount: Int {
-        visiblePegs.filter { $0.peg.type == .orange }.count
+    var redPegsCount: Int {
+        visiblePegs.filter { $0.peg.type == .red }.count
     }
 
     var greenPegsCount: Int {

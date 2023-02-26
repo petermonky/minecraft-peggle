@@ -34,8 +34,8 @@ struct LevelSelectionView: View {
                                             .frame(width: 32, alignment: .leading)
                                     }
                                     HStack {
-                                        Image("peg-orange").resizable().scaledToFit().frame(width: 24, height: 24)
-                                        Text("\(level.pegs.filter { $0.type == .orange }.count)")
+                                        Image("peg-red").resizable().scaledToFit().frame(width: 24, height: 24)
+                                        Text("\(level.pegs.filter { $0.type == .red }.count)")
                                             .font(.custom("Minecraft-Regular", size: 16))
                                             .frame(width: 32, alignment: .leading)
                                     }
@@ -66,8 +66,8 @@ struct LevelSelectionView: View {
                                         .frame(width: 32, alignment: .leading)
                                 }
                                 HStack {
-                                    Image("peg-orange").resizable().scaledToFit().frame(width: 24, height: 24)
-                                    Text("\(Level.mockData.pegs.filter { $0.type == .orange }.count)")
+                                    Image("peg-red").resizable().scaledToFit().frame(width: 24, height: 24)
+                                    Text("\(Level.mockData.pegs.filter { $0.type == .red }.count)")
                                         .font(.custom("Minecraft-Regular", size: 16))
                                         .frame(width: 32, alignment: .leading)
                                 }

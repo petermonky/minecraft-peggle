@@ -28,14 +28,17 @@ struct ParticleEffectView: View, Identifiable {
             .resizable()
             .scaledToFit()
             .rotationEffect(.radians(angle))
-            .frame(width: 400 * scale, height: 400 * scale) // TODO: change to particle size
+            .frame(
+                width: Constants.Particle.width * scale,
+                height: Constants.Particle.height * scale
+            )
             .position(gameObject.position)
             .opacity(opacity)
             .onChange(of: gameObject.isVisible) { isVisible in
                 withAnimation(.easeOut(duration: gameObject.duration)) {
                     if !isVisible {
                         opacity = 0
-                        scale = 1.25 // TODO: change
+                        scale = Constants.Particle.scale
                         angle = gameObject.angle
                     }
                 }

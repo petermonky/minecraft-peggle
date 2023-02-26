@@ -14,7 +14,7 @@ import SwiftUI
     @Published private(set) var pegFactory: PegFactory? = BluePegFactory()
     @Published private(set) var normalPegPaletteButtons: [PegPaletteButton] = [
         BluePegPaletteButton(),
-        OrangePegPaletteButton(),
+        RedPegPaletteButton(),
         GreenPegPaletteButton()
     ]
     @Published private(set) var blockPaletteButton: PaletteButton = BlockPaletteButton()
@@ -45,8 +45,8 @@ extension LevelDesignerViewModel {
         pegObjects.filter { $0.type == .blue }.count
     }
 
-    var orangePegObjectsCount: Int {
-        pegObjects.filter { $0.type == .orange }.count
+    var redPegObjectsCount: Int {
+        pegObjects.filter { $0.type == .red }.count
     }
 
     var greenPegObjectsCount: Int {

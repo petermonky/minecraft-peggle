@@ -41,7 +41,7 @@ extension Constants {
             static let score: Int = 50
         }
 
-        enum Orange {
+        enum Red {
             static let score: Int = 100
         }
     }
@@ -74,6 +74,7 @@ extension Constants {
     enum Bucket {
         static let width: CGFloat = 100.0
         static let height: CGFloat = 100.0
+        static let step: CGFloat = 2.0
     }
 }
 
@@ -81,5 +82,19 @@ extension Constants {
     enum Physics {
         static let restitution: CGFloat = 0.85
         static let gravity = CGVector(dx: 0, dy: 980)
+    }
+}
+
+extension Constants {
+    enum Particle {
+        static let width: CGFloat = 240
+        static let height: CGFloat = 240
+        static let scale: CGFloat = 1.5
+    }
+}
+
+extension Constants {
+    enum Kaboom {
+        static let radius: CGFloat = 200
     }
 }

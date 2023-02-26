@@ -24,7 +24,7 @@ final class PaletteViewModelTests: XCTestCase {
 
         XCTAssertTrue(paletteViewModel.pegButtonViewModels[0].paletteButton is BluePegPaletteButton,
                       "Palette view model should show blue peg palette button first.")
-        XCTAssertTrue(paletteViewModel.pegButtonViewModels[1].paletteButton is OrangePegPaletteButton,
+        XCTAssertTrue(paletteViewModel.pegButtonViewModels[1].paletteButton is RedPegPaletteButton,
                       "Palette view model should show orange peg palette button second.")
     }
 
@@ -38,10 +38,10 @@ final class PaletteViewModelTests: XCTestCase {
     func testOnPegButtonSelect() {
         let paletteViewModel = PaletteViewModel()
 
-        paletteViewModel.onPegButtonSelect(pegButton: OrangePegPaletteButton())
+        paletteViewModel.onPegButtonSelect(pegButton: RedPegPaletteButton())
         XCTAssertEqual(paletteViewModel.mode, .orangePeg,
                        "Palette view model should adopt orange peg palette button.")
-        XCTAssertTrue(paletteViewModel.pegFactory is OrangePegFactory,
+        XCTAssertTrue(paletteViewModel.pegFactory is RedPegFactory,
                       "Palette view model should adopt orange peg factory.")
     }
 

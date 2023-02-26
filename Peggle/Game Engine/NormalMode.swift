@@ -13,8 +13,8 @@ class NormalMode: GameMode {
     let presetDuration: Double? = nil
     var presetBucketShotCount: Int?
     let name: String = "Normal"
-    let description: String = "Got balls? Use them wisely to clear all orange pegs before you run out!"
-    let goalText: String = "Clear all orange pegs!"
+    let description: String = "Got balls? Use them wisely to clear all red pegs before you run out!"
+    let goalText: String = "Clear all red pegs!"
 
     func handleGameOver() {
         guard let gameEngine = gameEngine else {
@@ -22,7 +22,7 @@ class NormalMode: GameMode {
         }
         if gameEngine.noTime {
             gameEngine.updateGameState(.lose)
-        } else if !gameEngine.visiblePegs.contains(where: { $0.peg.type == .orange }) {
+        } else if !gameEngine.visiblePegs.contains(where: { $0.peg.type == .red }) {
             gameEngine.updateGameState(.win)
         } else if gameEngine.noLives && gameEngine.isInState(.idle) {
             gameEngine.updateGameState(.lose)

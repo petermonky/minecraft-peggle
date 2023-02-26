@@ -17,9 +17,9 @@ class BluePegFactory: PegFactory {
     }
 }
 
-class OrangePegFactory: PegFactory {
+class RedPegFactory: PegFactory {
     func createPegAtPosition(_ position: CGPoint) -> Peg {
-        OrangePeg(position: position)
+        RedPeg(position: position)
     }
 }
 

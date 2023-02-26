@@ -101,7 +101,7 @@ extension Level {
         var pegs = Set<Peg>()
         (1...10).forEach {
             pegs.insert(BluePeg(position: CGPoint(x: $0 * 150 - 75, y: 200)))
-            pegs.insert(OrangePeg(position: CGPoint(x: $0 * 120 - 60, y: 400)))
+            pegs.insert(RedPeg(position: CGPoint(x: $0 * 120 - 60, y: 400)))
         }
         var blocks = Set<Block>()
         (1...10).forEach {

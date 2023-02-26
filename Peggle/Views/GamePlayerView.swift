@@ -50,8 +50,8 @@
                                 .frame(width: 40, alignment: .leading)
                         }
                         HStack(spacing: 16) {
-                            Image("peg-orange").resizable().scaledToFit().frame(width: 40, height: 40)
-                            Text("\(viewModel.gameEngine.orangePegsCount)")
+                            Image("peg-red").resizable().scaledToFit().frame(width: 40, height: 40)
+                            Text("\(viewModel.gameEngine.redPegsCount)")
                                 .font(.custom("Minecraft-Regular", size: 20))
                                 .frame(width: 40, alignment: .leading)
                         }

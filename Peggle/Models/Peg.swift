@@ -10,7 +10,7 @@ import SwiftUI
 
 enum PegType: String, Codable {
     case blue
-    case orange
+    case red
     case green
 }
 
@@ -134,15 +134,15 @@ final class BluePeg: Peg {
     }
 }
 
-final class OrangePeg: Peg {
+final class RedPeg: Peg {
     init(position: CGPoint = CGPoint.zero) {
         super.init(
-            type: .orange,
+            type: .red,
             shape: CirclePhysicsShape(radius: Constants.Peg.radius),
             position: position,
-            normalImageName: "peg-orange",
-            glowImageName: "peg-orange-glow",
-            score: Constants.Peg.Orange.score
+            normalImageName: "peg-red",
+            glowImageName: "peg-red-glow",
+            score: Constants.Peg.Red.score
         )
     }
 

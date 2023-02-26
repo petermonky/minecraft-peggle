@@ -30,7 +30,7 @@ final class PegViewModelTests: XCTestCase {
     func testConstruct_nonEmptyParameters() {
         let pegPosition = CGPoint(x: 100, y: 100)
         let dragOffset = CGSize(width: 100, height: 100)
-        let pegViewModel = PegViewModel(peg: OrangePeg(position: pegPosition),
+        let pegViewModel = PegViewModel(peg: RedPeg(position: pegPosition),
                                         dragOffset: dragOffset)
 
         XCTAssertEqual(pegViewModel.dragOffset, dragOffset,
@@ -39,7 +39,7 @@ final class PegViewModelTests: XCTestCase {
                        "Peg view model zIndex should be zero.")
         XCTAssertNotNil(pegViewModel.peg.id,
                         "Peg view model peg id should be new UUID.")
-        XCTAssertEqual(pegViewModel.peg.type, PegType.orange,
+        XCTAssertEqual(pegViewModel.peg.type, PegType.red,
                        "Peg view model peg type should be orange.")
         XCTAssertEqual(pegViewModel.peg.position, pegPosition,
                        "Peg view model peg position should be (100, 100).")
@@ -192,7 +192,7 @@ final class PegViewModelTests: XCTestCase {
     }
 
     func testClone_orangePeg() {
-        let peg = OrangePeg(position: CGPoint.zero)
+        let peg = RedPeg(position: CGPoint.zero)
         let pegViewModel = PegViewModel(peg: peg)
         let clone = pegViewModel.clone()
 
