@@ -203,7 +203,7 @@ Below is an exposition on how integration tests will be performed on the applica
     - Blue peg button
         - Should be selected by default upon start up.
         - When tapped, a semi-transparent white overlay should appear over the button.
-    - Orange peg button
+    - Red peg button
         - When tapped, a semi-transparent white overlay should appear over the button.
     - Delete peg button
         - When tapped, a semi-transparent white overlay should appear over the button.
