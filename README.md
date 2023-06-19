@@ -1,21 +1,4 @@
-# CS3217 Problem Set 4
-
-**Name:** Peter Jung
-
-**Matric No:** A0220141E
-
-## Tips
-1. CS3217's docs is at https://cs3217.github.io/cs3217-docs. Do visit the docs often, as
-   it contains all things relevant to CS3217.
-2. A Swiftlint configuration file is provided for you. It is recommended for you
-   to use Swiftlint and follow this configuration. We opted in all rules and
-   then slowly removed some rules we found unwieldy; as such, if you discover
-   any rule that you think should be added/removed, do notify the teaching staff
-   and we will consider changing it!
-
-   In addition, keep in mind that, ultimately, this tool is only a guideline;
-   some exceptions may be made as long as code quality is not compromised.
-3. Do not burn out. Have fun!
+# Minecraft Peggle
 
 ## Dev Guide
 The developer guide is located at `Peggle/Documentation/DeveloperGuide.md`.
